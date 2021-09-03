@@ -56,4 +56,5 @@ INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Anna', 'MarieRogue');
 INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Hank', 'McCoy');
 INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Charles', 'Xavier');
 INSERT INTO "BOC_Sessions"(session_name, host_id, participants_id, restaurant_name, order_id, split_method) VALUES ('Dining with the X-Men', 8, 1, 'THe X Mansion', 1, 1);
+
 */
