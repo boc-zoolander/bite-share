@@ -1,0 +1,32 @@
+# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
+version: 2.1
+
+orbs:
+  node: circleci/node@4.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/node:15.1
+    steps:
+      - checkout
+      # Next, the node orb's install-packages step will install the dependencies from a package.json.
+      # The orb install-packages step will also automatically cache them for faster future runs.
+      - node/install-packages
+      # If you are using yarn instead npm, remove the line above and uncomment the two lines below.
+      # - node/install-packages:
+      #     pkg-manager: yarn
+
+      - run:
+          name: Run tests
+          command: npm test
+
+workflows:
+  sample:
+    jobs:
+      - build-and-test
+      # - node/test:
+      #     version: '15.1'
+          # This is the node version to use for the `cimg/node` tag
+          # Relevant tags can be found on the CircleCI Developer Hub
+          # https://circleci.com/developer/images/image/cimg/node
