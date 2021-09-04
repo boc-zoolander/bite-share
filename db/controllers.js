@@ -1,5 +1,22 @@
 const pool = require('./models.js');
 
+
+//DISABLED FOR NOW
+// const insertRestaurantRecord = function(obj_param, callback) {
+
+//   //let { restaurant_data } = obj_param;
+//   var queryStr = `INSERT INTO "BOC_restaurants" VALUES (2, 2, '${obj_param}')`;
+//   pool.query(queryStr, (err, res) => {
+//     if (err) {
+//       console.log('error occurred');
+//       callback(err, null);
+//     } else {
+//       callback(null, JSON.stringify(res.rows, null, 2));
+//     }
+//   });
+
+// }
+
 // database interaction to get all the answers for a particular question
 const getUsers = function(obj_param, callback) {
   let { page, count, example_query_data } = obj_param;
@@ -71,4 +88,5 @@ module.exports = {
   getSessions,
   getUserSession,
   createUserSession,
+  //insertRestaurantRecord,
 };

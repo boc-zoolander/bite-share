@@ -1,6 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db/controllers.js');
+const axios = require('axios');
+
+
+router.get('/getRestaurantData', (req, res) => {
+  axios.get('https://api.documenu.com/v2/restaurant/4072702673999819?key=2b62ef416cee7e4987bb65756c54e031')
+    .then((response) => {
+      //console.log(response.data);
+      res.header("Content-Type",'application/json');
+      // db.insertRestaurantRecord(JSON.parse(response.data), (err, res) => {
+      //   if (err) {
+      //     console.log('error in storing', err)
+      //   } else {
+      //     console.log('done: ', res);
+      //   }
+      // });
+      res.status(200).send(JSON.stringify(response.data, null, 2));
+    })
+    .catch((error) => {
+      res.header("Content-Type",'application/json');
+      res.status(400).send(error);
+    })
+})
 
 
 router.get('/getAllUsers', (req, res) => {
