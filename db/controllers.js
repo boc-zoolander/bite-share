@@ -17,75 +17,66 @@ const pool = require('./models.js');
 
 // }
 
-// database interaction to get all the answers for a particular question
-const getUsers = function(obj_param, callback) {
-  let { page, count, example_query_data } = obj_param;
+// database interaction to get all the users in the users table.
+const getUsers = function() {
   var queryStr = `SELECT * FROM "BOC_user"`;
-  pool.query(queryStr, (err, res) => {
-    if (err) {
-      console.log('error occurred');
-      callback(err, null);
-    } else {
-      callback(null, JSON.stringify(res.rows, null, 2));
-    }
-  });
+  
+  return pool.query(queryStr)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    })
 }
 
-const getSessions = function (obj_param, callback) {
+const getAllSessions = function () {
   var queryStr = `SELECT * FROM "BOC_Sessions"`;
-  pool.query(queryStr, (err, res) => {
-    if (err) {
-      console.log('error occurred');
-      callback(err, null);
-    } else {
-      callback(null, JSON.stringify(res.rows, null, 2));
-    }
-  });
+  
+  return pool.query(queryStr)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    })
 }
 
 
 
-const getUserSession = function (obj_param, callback) {
+const getUserSession = function (obj_param) {
   let { host_id } = obj_param;
   var queryStr = `SELECT * FROM "BOC_Sessions" WHERE "BOC_Sessions".host_id = ${host_id}`;
-  pool.query(queryStr, (err, res) => {
-    if (err) {
-      console.log('error occurred');
-      callback(err, null);
-    } else {
-      // success with pretty print
-
-      callback(null, JSON.stringify(res.rows, null, 2));
-    }
-  });
+  
+  return pool.query(queryStr)
+  .then(res => {
+    return JSON.stringify(res.rows, null, 2);
+  })
+  .catch(err => {
+    return err;
+  })
 }
 
 //this function creates a user session for the user and inserts it into the BOC session db
-const createUserSession = function (obj_param, callback) {
-
-  console.log('does it get into createUserSession');
+const createUserSession = function (obj_param) {
 
   let { session_name, restaurant_name, host_id } = obj_param;
 
   var queryStr = `INSERT INTO "BOC_Sessions"(session_name, host_id, participants_id, restaurant_name, order_id, split_method) VALUES ('${session_name}', ${host_id}, 2, '${restaurant_name}', 1, 1)`;
 
-  console.log(queryStr);
-  pool.query(queryStr, (err, res) => {
-    if (err) {
-      console.log('error occurred');
-      callback(err, null);
-    } else {
-      // success with pretty print
-
-      callback(null, JSON.stringify(res.rows, null, 2));
-    }
-  });
+  return pool.query(queryStr)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    })
 }
 
 
 module.exports = {
   getUsers,
-  getSessions,
+  getAllSessions,
   getUserSession,
   createUserSession,
   //insertRestaurantRecord,

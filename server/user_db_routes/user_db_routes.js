@@ -2,63 +2,77 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../db/controllers.js');
 const axios = require('axios');
+const testgetrestaurant_1 = require('./testgetrestaurant_1');
+const testmenu_1 = require('./testmenu_1');
+const testRestaurantsByZip = require('./testRestaurantsByZip_1');
 
 
-router.get('/getRestaurantData', (req, res) => {
-  axios.get('https://api.documenu.com/v2/restaurant/4072702673999819?key=2b62ef416cee7e4987bb65756c54e031')
-    .then((response) => {
-      //console.log(response.data);
-      res.header("Content-Type",'application/json');
-      // db.insertRestaurantRecord(JSON.parse(response.data), (err, res) => {
-      //   if (err) {
-      //     console.log('error in storing', err)
-      //   } else {
-      //     console.log('done: ', res);
-      //   }
-      // });
-      res.status(200).send(JSON.stringify(response.data, null, 2));
-    })
-    .catch((error) => {
-      res.header("Content-Type",'application/json');
-      res.status(400).send(error);
-    })
+// router.get('/getRestaurantData', (req, res) => {
+//   axios.get('https://api.documenu.com/v2/restaurant/4072702673999819?key=2b62ef416cee7e4987bb65756c54e031')
+//     .then((response) => {
+//       res.header("Content-Type",'application/json');
+//       res.status(200).send(JSON.stringify(response.data, null, 2));
+//     })
+//     .catch((err) => {
+//       res.status(400).send(err);
+//     })
+// })
+
+router.get('/testzip', (req, res) => {
+  res.header("Content-Type",'application/json');
+  res.status(200).send(JSON.stringify(testRestaurantsByZip, null, 2));
+})
+
+router.get('/testgetRestaurant_1', (req, res) => {
+  res.header("Content-Type",'application/json');
+  res.status(200).send(JSON.stringify(testgetrestaurant_1, null, 2));
+})
+
+router.get('/testmenu_1', (req, res) => {
+  res.header("Content-Type",'application/json');
+  res.status(200).send(JSON.stringify(testmenu_1, null, 2));
 })
 
 
-router.get('/getAllUsers', (req, res) => {
-  db.getUsers({}, (err, result) => {
-    if (err) {
-      res.send('error in database get');
-    }
 
-    res.header("Content-Type",'application/json');
-    res.status(200).send(result);
+router.get('/getUsers', (req, res) => {
 
-  });
+  db.getUsers()
+    .then(result => {
+      res.header("Content-Type",'application/json');
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    })
+
 });
 
 
 router.get('/getAllSessions', (req, res) => {
-  db.getSessions({}, (err, result) => {
-    if (err) {
-      res.send('error in database get');
-    }
 
+  db.getAllSessions()
+  .then(result => {
     res.header("Content-Type",'application/json');
     res.status(200).send(result);
+  })
+  .catch(err => {
+    res.status(400).send(err);
+  })
 
-  });
 });
 
 router.get('/getUserSession', (req, res) => {
 
-  db.getUserSession({host_id: 1}, (err, result) => {
-    if (err) {
-      res.send('error in database get');
-    }
+  db.getUserSession({host_id: 1})
+  .then(result => {
     res.header("Content-Type",'application/json');
     res.status(200).send(result);
-  });
+  })
+  .catch(err => {
+    res.status(400).send(err);
+  })
+
 });
 
 router.get('/createUserSession', (req, res) => {
@@ -69,21 +83,16 @@ router.get('/createUserSession', (req, res) => {
     restaurant_name: 'IHOP',
   };
 
-  console.log('does it call');
-  db.createUserSession(obj_param, (err, result) => {
-    if (err) {
-      res.send('error in database get');
-    }
-
+  db.createUserSession(obj_param)
+  .then(result => {
     res.header("Content-Type",'application/json');
     res.status(200).send(result);
+  })
+  .catch(err => {
+    res.status(400).send(err);
+  })
 
-  });
 });
-
-
-
-
 
 
 module.exports = router;

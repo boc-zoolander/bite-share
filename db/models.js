@@ -4,7 +4,6 @@ const pool = new Pool({
   user: 'postgres',
   // name of the EC2 server IP
   host: '18.218.160.4', 
-  //host: 'localhost',
   database: 'BOC',
   password: 'password',
   port: 6003,
