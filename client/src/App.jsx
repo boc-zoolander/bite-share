@@ -22,8 +22,11 @@ class App extends React.Component {
                 <Link to="/about">About</Link>
               </li>
               <li>
-                <Link to="/users">Users</Link>
+                <Link to="/users">
+                  <button type="button">Users</button>
+                </Link>
               </li>
+
             </ul>
           </nav>
 
