@@ -36,11 +36,11 @@ class Login extends React.Component {
         : <div>
             Login
             <form>
-              <label>Host Name:</label>
-              <input type="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} />
+              <label htmlFor="hostName">Host Name:</label>
+              <input type="text" inputMode="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} />
 
-              <label>Zip Code:</label>
-              <input type="text" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
+              <label htmlFor="zipCode">Zip Code:</label>
+              <input type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
 
               <input type="submit" value="Next" onClick={this.handlesubmit} />
             </form>

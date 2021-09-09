@@ -34,7 +34,7 @@ class Search extends React.Component {
         Search
         <form>
           <label>Search restaurants by name:</label>
-          <input type="text" value={this.state.searchQuery} onChange={this.handleChange} />
+          <input type="text" inputMode="search" value={this.state.searchQuery} onChange={this.handleChange} />
           <input type="submit" value="Search" onClick={this.getRestaurants} />
         </form>
       </div>
