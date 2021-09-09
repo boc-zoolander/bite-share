@@ -1,14 +1,65 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'USER NAME',
-  host: 'EXAMPLE IP ADDRESS',
-  //host: 'localhost',
-  database: 'NAME OF DATABASE TO BE ENTERED',
+  user: 'postgres',
+  // name of the EC2 server IP
+  host: '18.218.160.4', 
+  database: 'BOC',
   password: 'password',
-  port: 5432,
+  port: 6003,
 });
 
 pool.connect();
 
 module.exports = pool;
+
+
+/* asserted SQL statements
+
+
+CREATE TABLE "BOC_user" (
+	id SERIAL PRIMARY KEY,
+	first_name VARCHAR(55),
+	last_name VARCHAR(55)
+);
+
+CREATE TABLE "BOC_Friendship" (
+	friendship_id integer,
+	inviter_id integer,
+	invitee_id integer
+);
+
+CREATE TABLE "BOC_Sessions" (
+	session_pk SERIAL PRIMARY KEY,
+	session_name VARCHAR(75),
+	host_id integer,
+	participants_id integer,
+	restaurant_name VARCHAR(90),
+	order_id integer,
+	split_method integer
+);
+
+CREATE TABLE "BOC_Session_participants" (
+	session_fk integer,
+	user_id integer,
+	order_item integer,
+	item_price real
+);
+
+INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Scott', 'Summers');
+INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Jean', 'Grey');
+INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Jubilation', 'Lee');
+INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Logan', 'James Howlett');
+INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Remy', 'Etienne LeBeau');
+INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Anna', 'MarieRogue');
+INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Hank', 'McCoy');
+INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Charles', 'Xavier');
+INSERT INTO "BOC_Sessions"(session_name, host_id, participants_id, restaurant_name, order_id, split_method) VALUES ('Dining with the X-Men', 8, 1, 'THe X Mansion', 1, 1);
+
+Create TABLE "BOC_restaurants" (
+	id SERIAL,
+	restaurant_record_id integer,
+	data jsonb
+);
+
+*/
