@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import GuestList from './GuestList.jsx';
 
-const AddGuests = ({ addGuest, guests }) => {
+const AddGuests = ({ addGuest, guests, changeGuestPage }) => {
   const [name, setName] = useState('');
 
   // handleChange
@@ -10,7 +10,7 @@ const AddGuests = ({ addGuest, guests }) => {
     setName(event.target.value);
   };
 
-  // hanldeSubmit
+  // handle submit to add guest to list
   const onSubmit = (event) => {
     if (!name) {
       alert('Please enter a guest name');
@@ -22,16 +22,25 @@ const AddGuests = ({ addGuest, guests }) => {
     event.preventDefault();
   };
 
+  const changePage = (event) => {
+    changeGuestPage('selectGuest');
+    event.preventDefault();
+  }
+
+
   return (
     <div>
       <h3> Create your guest list </h3>
       <p> Type the names of your guests below and press the plus icon to add them to the guest list. </p>
-      <form onSubmit = {onSubmit}>
+      <form onSubmit={onSubmit}>
         <label> Add Guests </label>
         <input type="text" value={name} onChange={onChange}/>
         <input type="submit" value="Submit"/>
       </form>
       <GuestList guests={guests}/>
+      <form onSubmit={changePage}>
+        <input type='submit' value='Next Page'/>
+      </form>
     </div>
   );
 };
