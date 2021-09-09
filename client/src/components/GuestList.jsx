@@ -8,11 +8,13 @@ import PropTypes from 'prop-types';
 
 const GuestList = ({ guests }) => {
   const list = guests.map((item, i) => {
-    return (<tr key={i}>
-      <th>
-        {item.guestName}
-      </th>
-    </tr>);
+    return (
+      <tr key={i}>
+        <th>
+          {item.guestName}
+        </th>
+      </tr>
+    );
   });
   return (
     <table>

@@ -20,6 +20,8 @@ const AddGuests = ({ addGuest, guests }) => {
 
   return (
     <div>
+      <h3> Create your guest list </h3>
+      <p> Type the names of your guests below and press the plus icon to add them to the guest list. </p>
       <form onSubmit = {onSubmit}>
         <label> Add Guests </label>
         <input type="text" value={name} onChange={onChange}/>
@@ -47,12 +49,5 @@ export default AddGuests;
 // - Should add guest to guest list upon filled field and pressed button
 // - Should do nothing if field is empty and button is pressed
 // - (Stretch Goal?) Should start a timer for X minutes to allow user to add
-
-// Should be stateful
-
-// need a title for the page
-// instructions for the user
-// text entry form + button to submit the guest
-// render guest list
 
 // bottom of page "next" button
