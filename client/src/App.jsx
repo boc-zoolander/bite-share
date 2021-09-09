@@ -10,15 +10,12 @@ class App extends React.Component {
     this.addGuest = this.addGuest.bind(this);
   }
 
-  addGuest(guestName) {
-    console.log('this is name passed ', guestName);
+  addGuest (guestName) {
     const guestArray = [...this.state.guests];
     guestArray.push(guestName);
-    console.log('thsi is the guestArray after Push: ', guestArray);
     this.setState({
       guests: guestArray
-    }, () => {console.log('Guest name lifted state', this.state.guests)});
-
+    });
   }
 
   render () {

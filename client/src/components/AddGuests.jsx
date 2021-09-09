@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const AddGuests = ({ addGuest }) => {
   const [name, setName] = useState('');
@@ -6,8 +7,6 @@ const AddGuests = ({ addGuest }) => {
   // handleChange
   const onChange = (event) => {
     setName(event.target.value);
-    console.log('this is the event', event.target.value)
-    console.log('this is the NAME', name)
   };
 
   // hanldeSubmit
@@ -25,9 +24,11 @@ const AddGuests = ({ addGuest }) => {
         <input type="submit" value="Submit"/>
       </form>
     </div>
-
-
   );
+};
+
+AddGuests.propTypes = {
+  addGuest: PropTypes.function.isRequired
 };
 
 export default AddGuests;
