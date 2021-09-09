@@ -6,14 +6,23 @@ import PropTypes from 'prop-types';
 // create variable to store props/context with guest objects
 // map variable to li items or tr/td
 
-const GuestList = ({ guests }) => {
+const GuestList = ({ guests, deleteGuest }) => {
+  const deleteName = (name) => {
+    deleteGuest(name);
+    event.preventDefault();
+  };
+
   const list = guests.map((item, i) => {
     return (
-      <tr key={i}>
-        <th>
-          {item.guestName}
-        </th>
-      </tr>
+      <div key={i}>
+        {item.guestName}
+        <input type='submit' value='Delete' onClick={() => deleteName(item.guestName)} />
+      </div>
+      // <tr key={i}>
+      //   <th>
+      //   {item.guestName}
+      //   </th>
+      // </tr>
     );
   });
   return (
@@ -24,7 +33,8 @@ const GuestList = ({ guests }) => {
 };
 
 GuestList.propTypes = {
-  guests: PropTypes.array.isRequired
+  guests: PropTypes.array.isRequired,
+  deleteGuest: PropTypes.func.isRequired
 };
 
 export default GuestList;

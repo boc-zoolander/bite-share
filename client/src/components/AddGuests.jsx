@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import GuestList from './GuestList.jsx';
 
-const AddGuests = ({ addGuest, guests, changeGuestPage }) => {
+const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
   const [name, setName] = useState('');
 
   // handleChange
@@ -40,7 +40,7 @@ const AddGuests = ({ addGuest, guests, changeGuestPage }) => {
         <input type="text" value={name} onChange={onChange}/>
         <input type="submit" value="Submit"/>
       </form>
-      <GuestList guests={guests}/>
+      <GuestList guests={guests} deleteGuest={deleteGuest} />
       <form onSubmit={changePage}>
         <input type='submit' value='Next Page'/>
       </form>
@@ -51,7 +51,8 @@ const AddGuests = ({ addGuest, guests, changeGuestPage }) => {
 AddGuests.propTypes = {
   addGuest: PropTypes.func.isRequired,
   guests: PropTypes.array.isRequired,
-  changeGuestPage: PropTypes.func.isRequired
+  changeGuestPage: PropTypes.func.isRequired,
+  deleteGuest: PropTypes.func.isRequired
 };
 
 export default AddGuests;
