@@ -13,10 +13,20 @@ class App extends React.Component {
 
   addGuest (guestName) {
     const guestArray = [...this.state.guests];
-    guestArray.push({ guestName, order: [] });
-    this.setState({
-      guests: guestArray
+    let guestExists = false;
+    guestArray.forEach(guestObj => {
+      if (guestObj.guestName === guestName) {
+        guestExists = true;
+      }
     });
+    if (!guestExists) {
+      guestArray.push({ guestName, order: [] });
+      this.setState({
+        guests: guestArray
+      });
+    } else {
+      alert('This guest is already present in your list.');
+    }
   }
 
   render () {
