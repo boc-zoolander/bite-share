@@ -14,6 +14,7 @@ const AddGuests = ({ addGuest, guests }) => {
   const onSubmit = (event) => {
     // passed down function
     addGuest(name);
+    setName('');
     event.preventDefault();
   };
 

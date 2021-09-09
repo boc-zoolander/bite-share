@@ -13,7 +13,7 @@ class App extends React.Component {
 
   addGuest (guestName) {
     const guestArray = [...this.state.guests];
-    guestArray.push({ guestName });
+    guestArray.push({ guestName, order: [] });
     this.setState({
       guests: guestArray
     });
