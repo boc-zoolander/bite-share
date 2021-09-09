@@ -12,6 +12,10 @@ const AddGuests = ({ addGuest, guests }) => {
 
   // hanldeSubmit
   const onSubmit = (event) => {
+    if (!name) {
+      alert('Please enter a guest name');
+      return;
+    }
     // passed down function
     addGuest(name);
     setName('');
@@ -48,6 +52,8 @@ export default AddGuests;
 // - Should be an 'add' button.
 // - Should add guest to guest list upon filled field and pressed button
 // - Should do nothing if field is empty and button is pressed
+// - Should have a button to take user to guest selection page (to add menu items for that guest)
+// - Should alert user if next page button is pressed but no guests have been added.
 // - (Stretch Goal?) Should start a timer for X minutes to allow user to add
 
 // bottom of page "next" button
