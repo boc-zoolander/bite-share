@@ -5,6 +5,7 @@ const axios = require('axios');
 const testgetrestaurant_1 = require('./testgetrestaurant_1');
 const testmenu_1 = require('./testmenu_1');
 const testRestaurantsByZip = require('./testRestaurantsByZip_1');
+const testSession = require('./getSession');
 
 
 // router.get('/getRestaurantData', (req, res) => {
@@ -17,6 +18,12 @@ const testRestaurantsByZip = require('./testRestaurantsByZip_1');
 //       res.status(400).send(err);
 //     })
 // })
+
+router.get('/getSession', (req, res) => {
+  res.header("Content-Type",'application/json');
+  res.status(200).send(JSON.stringify(testSession, null, 2));
+})
+
 
 router.get('/testzip', (req, res) => {
   res.header("Content-Type",'application/json');
