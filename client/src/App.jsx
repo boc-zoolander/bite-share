@@ -1,6 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
-
+import Example from './components/Example.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -26,26 +26,21 @@ class App extends React.Component {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/users">
-                  <button type="button">Users</button>
-                </Link>
-              </li>
             </ul>
           </nav>
+
+          <Link to="/example">
+            <button type="button">Example</button>
+          </Link>
 
           {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/about" component={About} />
-            <Route path="/users">
-              <Users />
+            <Route path="/example">
+              <Example number = {this.state.guests.length} />
             </Route>
-            <Route path="/">
-              <Home />
+            <Route exact path="/">
+              <h2>Home</h2>
             </Route>
           </Switch>
         </div>
@@ -53,17 +48,5 @@ class App extends React.Component {
     );
   }
 }
-
-const Home = () => {
-  return <h2>Home</h2>;
-};
-
-const About = () => {
-  return <h2>About</h2>;
-};
-
-const Users = () => {
-  return <h2>Users</h2>;
-};
 
 export default App;
