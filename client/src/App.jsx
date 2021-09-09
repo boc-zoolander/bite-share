@@ -9,7 +9,6 @@ class App extends React.Component {
     this.state = {
       restaurant: {},
       menu: [],
-      newGuestName: '',
       guests: [],
       totalCost: 0,
       sessionComplete: false,
