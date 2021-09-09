@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import GuestList from './GuestList.jsx';
 
-const AddGuests = ({ addGuest }) => {
+const AddGuests = ({ addGuest, guests }) => {
   const [name, setName] = useState('');
 
   // handleChange
@@ -23,12 +24,14 @@ const AddGuests = ({ addGuest }) => {
         <input type="text" value={name} onChange={onChange}/>
         <input type="submit" value="Submit"/>
       </form>
+      <GuestList guests={guests}/>
     </div>
   );
 };
 
 AddGuests.propTypes = {
-  addGuest: PropTypes.function.isRequired
+  addGuest: PropTypes.func.isRequired,
+  guests: PropTypes.object.isRequired
 };
 
 export default AddGuests;

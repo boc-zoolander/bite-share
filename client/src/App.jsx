@@ -1,5 +1,6 @@
 import React from 'react';
 import AddGuests from './components/AddGuests.jsx';
+
 class App extends React.Component {
   constructor (props) {
     super(props);
@@ -12,7 +13,7 @@ class App extends React.Component {
 
   addGuest (guestName) {
     const guestArray = [...this.state.guests];
-    guestArray.push(guestName);
+    guestArray.push({ guestName });
     this.setState({
       guests: guestArray
     });
@@ -22,7 +23,7 @@ class App extends React.Component {
     return (
       <div>
         Bite Share Nom Nom
-        <AddGuests addGuest={this.addGuest}/>
+        <AddGuests addGuest={this.addGuest} guests={this.state.guests} />
       </div>
     );
   }
