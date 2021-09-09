@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
+
 class App extends React.Component {
   constructor (props) {
     super(props);
@@ -29,9 +30,7 @@ class App extends React.Component {
           {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
+            <Route path="/about" component={About} />
             <Route path="/users">
               <Users />
             </Route>
