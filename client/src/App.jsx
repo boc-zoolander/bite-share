@@ -6,7 +6,15 @@ class App extends React.Component {
   constructor (props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      restaurant: {},
+      menu: [],
+      newGuestName: '',
+      guests: [],
+      totalCost: 0,
+      sessionComplete: false,
+      splitMechanism: ''
+    };
   }
 
   render () {
@@ -26,7 +34,6 @@ class App extends React.Component {
                   <button type="button">Users</button>
                 </Link>
               </li>
-
             </ul>
           </nav>
 
