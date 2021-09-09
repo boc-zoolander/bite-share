@@ -1,26 +1,38 @@
 import React from 'react';
-import individualOwes from './individualOwes.jsx'
+import individualOwes from './individualOwes.jsx';
 
 const splitList = (props) => {
   const numberOfGuests = props.guests.length;
   const billTotal = props.totalCost;
 
+  let paymentOwed;
+
+  const getGuestTotal = (guestArray) => {
+    let total = 0;
+    for (let i = 0; i <= guestArray.length; i++) {
+      const currentGuestOrders = guestArray[i].order;
+      for (let j = 0; j <= currentGuestOrders.length; j++) {
+        const orderItemCost = currentGuestOrders[j].price;
+        const howManyOrdered = currentGuestOrders[j].qty;
+        total += (orderItemCost * howManyOrdered);
+      }
+    };
+    return total;
+  };
+
   if (props.split === 'byItem') {
-    let paymentOwed = "????"
+    paymentOwed = getGuestTotal(props);
   } else {
-    let paymentOwed = (billTotal/numberOfGuests).toFixed(2); //cut to two decimal places
+    paymentOwed = (billTotal / numberOfGuests).toFixed(2); // cut to two decimal places
   }
+
   return (
   <div>
-    {props.split === 'byItem'
-     ? {props.guests.map(guest =>
-         <individualOwes key = {guest.guest_id} firstName = {guest.first_name} lastName = {guest.last_name}  />
-       }
-     : <individualOwes />
-    }
+    {props.guests.map(guest =>
+      <individualOwes key = {guest.guest_id} firstName = {guest.first_name} lastName = {guest.last_name} paymentOwed = {paymentOwed} />
+    )}
   </div>
-  )
+  );
 };
 
 export default splitList;
-
