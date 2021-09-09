@@ -1,4 +1,5 @@
 node_modules/
 coverage
 .env
-client/dist/
+client/dist/bundle.js
+client/dist/bundle.js.LICENSE.txt
