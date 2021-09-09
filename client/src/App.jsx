@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './components/Login.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -11,6 +12,7 @@ class App extends React.Component {
     return (
       <div>
         Bite Share Nom Nom
+        <Login />
       </div>
     );
   }
