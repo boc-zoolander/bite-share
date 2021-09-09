@@ -1,12 +1,15 @@
 import React from 'react';
 import AddGuests from './components/AddGuests.jsx';
+import SelectGuest from './components/SelectGuest.jsx';
+import Menu from './components/Menu.jsx';
 
 class App extends React.Component {
   constructor (props) {
     super(props);
 
     this.state = {
-      guests: []
+      guests: [],
+      page: 'add'
     };
     this.addGuest = this.addGuest.bind(this);
   }
@@ -29,11 +32,17 @@ class App extends React.Component {
     }
   }
 
+  // ADDING A TEMPORARY EVENT HANDLER TO CHANGE PAGE
+  changeGuestPage (page) {
+
+  }
+
   render () {
     return (
       <div>
         Bite Share Nom Nom
-        <AddGuests addGuest={this.addGuest} guests={this.state.guests} />
+        {this.state.page === 'add' ? <AddGuests addGuest={this.addGuest} guests={this.state.guests} /> :
+                  this.state.page === 'selectGuest' ? <}
       </div>
     );
   }
