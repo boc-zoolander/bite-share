@@ -23,10 +23,13 @@ const AddGuests = ({ addGuest, guests, changeGuestPage }) => {
   };
 
   const changePage = (event) => {
+    if (guests.length === 0) {
+      alert('Please add a guest');
+      return;
+    }
     changeGuestPage('selectGuest');
     event.preventDefault();
-  }
-
+  };
 
   return (
     <div>
@@ -47,7 +50,8 @@ const AddGuests = ({ addGuest, guests, changeGuestPage }) => {
 
 AddGuests.propTypes = {
   addGuest: PropTypes.func.isRequired,
-  guests: PropTypes.array.isRequired
+  guests: PropTypes.array.isRequired,
+  changeGuestPage: PropTypes.func.isRequired
 };
 
 export default AddGuests;
