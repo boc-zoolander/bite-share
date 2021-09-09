@@ -8,7 +8,12 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      restaurant: {},
+      menu: [],
       guests: [],
+      totalCost: 0,
+      sessionComplete: false,
+      splitMechanism: '',
       page: 'add'
     };
     this.addGuest = this.addGuest.bind(this);
