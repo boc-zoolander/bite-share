@@ -31,7 +31,7 @@ const AddGuests = ({ addGuest, guests }) => {
 
 AddGuests.propTypes = {
   addGuest: PropTypes.func.isRequired,
-  guests: PropTypes.object.isRequired
+  guests: PropTypes.array.isRequired
 };
 
 export default AddGuests;

@@ -22,7 +22,7 @@ const GuestList = ({ guests }) => {
 };
 
 GuestList.propTypes = {
-  guests: PropTypes.object.isRequired
+  guests: PropTypes.array.isRequired
 };
 
 export default GuestList;
