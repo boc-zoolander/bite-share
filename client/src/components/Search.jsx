@@ -1,22 +1,31 @@
 import React from 'react';
+const axios = require('axios');
 
 class Search extends React.Component {
   constructor (props) {
     super(props);
 
     this.state = {
-      searchQuery: ''
+      searchQuery: null,
+      restaurants: []
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.getRestaurants = this.getRestaurants.bind(this);
   }
 
   handleChange (e) {
     const searchQuery = e.target.value;
-
     this.setState({
       searchQuery
     });
+  }
+
+  async getRestaurants (e) {
+    e.preventDefault();
+    const response = await axios('http://localhost:8080/users/testzip');
+    const restaurants = response.data.data;
+    this.setState({ restaurants });
   }
 
   render () {
@@ -26,7 +35,7 @@ class Search extends React.Component {
         <form>
           <label>Search restaurants by name:</label>
           <input type="text" value={this.state.searchQuery} onChange={this.handleChange} />
-          <button>Search</button>
+          <input type="submit" value="Search" onClick={this.getRestaurants} />
         </form>
       </div>
     );

@@ -1,10 +1,4 @@
 import React from 'react';
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Link
-// } from 'react-router-dom';
 import Search from './Search.jsx';
 
 class Login extends React.Component {
@@ -14,6 +8,7 @@ class Login extends React.Component {
     this.state = {
       hostName: null,
       zipCode: null,
+      // Temporary state to show Search component until routing is implemented
       showSearch: false
     };
 
@@ -24,28 +19,18 @@ class Login extends React.Component {
   handleChange (e) {
     const value = e.target.value;
     const name = e.target.name;
-
-    this.setState({
-      [name]: value
-    });
+    this.setState({ [name]: value });
   }
 
   handleSubmit (e) {
     e.preventDefault();
-    this.setState({
-      showSearch: true
-    });
+    // Temporary setState to show Search component until routing is implemented
+    this.setState({ showSearch: true });
   }
 
   render () {
     return (
-    // <Router>
-    //   <Switch>
-    //     <Route path="/search">
-    //       <Search />
-    //     </Route>
-
-    //     <Route path="/">
+      // Temporary ternary expression to show Search component until routing is implemented
       this.state.showSearch
         ? <Search />
         : <div>
@@ -57,17 +42,9 @@ class Login extends React.Component {
               <label>Zip Code:</label>
               <input type="text" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
 
-              {/* <Link to="/search"> */}
               <input type="submit" value="Next" onClick={this.handlesubmit} />
             </form>
           </div>
-    // {/* <button>Next</button> */}
-    //           {/* </Link>
-    //         </form>
-    //       </div>
-    //     </Route>
-    //   </Switch>
-    // </Router> */}
     );
   }
 };

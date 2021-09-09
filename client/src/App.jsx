@@ -1,5 +1,4 @@
 import React from 'react';
-import Login from './components/Login.jsx';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
