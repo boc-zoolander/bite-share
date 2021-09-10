@@ -36,14 +36,12 @@ const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
       <h3> Create your guest list </h3>
       <p> Type the names of your guests below and press the plus icon to add them to the guest list. </p>
       <form onSubmit={onSubmit}>
-        <label> Add Guests </label>
-        <input type="text" value={name} onChange={onChange}/>
-        <input type="submit" value="Submit"/>
+        <label htmlFor='guest' > Add Guests </label>
+        <input name='guest' type='text' value={name} onChange={onChange}/>
+        <input type='submit' value='Submit'/>
       </form>
       <GuestList guests={guests} deleteGuest={deleteGuest} />
-      <form onSubmit={changePage}>
-        <input type='submit' value='Next Page'/>
-      </form>
+      <button type='button' onClick={changePage}> Next Page </button>
     </div>
   );
 };
