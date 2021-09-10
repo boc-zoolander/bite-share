@@ -14,15 +14,12 @@ const GuestList = ({ guests, deleteGuest }) => {
 
   const list = guests.map((item, i) => {
     return (
-      <div key={i}>
+      <tr key={i}>
+        <th>
         {item.guestName}
         <input type='submit' value='Delete' onClick={() => deleteName(item.guestName)} />
-      </div>
-      // <tr key={i}>
-      //   <th>
-      //   {item.guestName}
-      //   </th>
-      // </tr>
+        </th>
+      </tr>
     );
   });
   return (
