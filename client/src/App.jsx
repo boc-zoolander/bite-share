@@ -1,8 +1,9 @@
 import React from 'react';
 import AddGuests from './components/AddGuests.jsx';
-import SelectGuest from './components/SelectGuest.jsx';
-import Menu from './components/Menu.jsx';
+// import SelectGuest from './components/SelectGuest.jsx';
+import SelectFood from './components/SelectFood.jsx';
 import _ from 'lodash';
+import Menu from '../../server/user_db_routes/testgetrestaurant_1.js';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
@@ -11,12 +12,13 @@ class App extends React.Component {
 
     this.state = {
       restaurant: {},
-      menu: [],
+      menu: Menu.result.menus[0],
       guests: [],
       totalCost: 0,
       sessionComplete: false,
       splitMechanism: '',
-      page: 'add'
+      page: 'add',
+      host: { name: 'host', order: [] }
     };
     this.addGuest = this.addGuest.bind(this);
     this.deleteGuest = this.deleteGuest.bind(this);
@@ -47,6 +49,16 @@ class App extends React.Component {
       return obj.guestName !== guestName;
     });
     this.setState({ guests: updated });
+  }
+
+  addToOrder (guestName, order) {
+    // loop over guests property
+    const guestOrders = [...this.state.guests];
+    // iterate over guestorders array
+      // if current name equals guestName from function
+        // set guests order array to input order
+        // setState with guestOrders
+        // return
   }
 
   // ADDING A TEMPORARY EVENT HANDLER TO CHANGE PAGE
@@ -90,7 +102,8 @@ class App extends React.Component {
         </div>
       </Router>
       Bite Share Nom Nom
-      {this.state.page === 'add' ? <AddGuests addGuest={this.addGuest} guests={this.state.guests} changeGuestPage={this.changeGuestPage} deleteGuest={this.deleteGuest} /> : this.state.page === 'selectGuest' ? <SelectGuest /> : this.state.page === 'menu' ? <Menu /> : ''}
+      <AddGuests addGuest={this.addGuest} guests={this.state.guests} changeGuestPage={this.changeGuestPage} deleteGuest={this.deleteGuest} />
+      <SelectFood guests={this.state.guests} host={this.state.host} menu={this.state.menu}/>
     </div>
     );
   }
