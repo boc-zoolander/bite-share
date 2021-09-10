@@ -43,7 +43,7 @@ class BillSummaryPage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      split: 'evenly',
+      split: 'byItem',
       // BELOW DELETE will not hold in state but will be passed as props
       guests: [
         {
