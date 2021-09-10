@@ -1,5 +1,5 @@
 import React from 'react';
-import IndividualOwes from './IndividualOwes.jsx';
+import IndividualOwes from './individualOwes.jsx';
 
 const SplitList = (props) => {
   const numberOfGuests = props.guests.length;
