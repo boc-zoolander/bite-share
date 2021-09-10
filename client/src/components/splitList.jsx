@@ -2,7 +2,6 @@ import React from 'react';
 import IndividualOwes from './IndividualOwes.jsx';
 
 const SplitList = (props) => {
-  // console.log(props)
   const numberOfGuests = props.guests.length;
   const billTotal = props.totalCost;
 
@@ -12,13 +11,13 @@ const SplitList = (props) => {
     const totals = {};
     const guestArray = guestObj.guests;
     for (let i = 0; i < guestArray.length; i++) {
-      const currentGuestFirstName = guestArray[i].first_name;
-      totals[currentGuestFirstName] = 0;
+      const currentGuestID = guestArray[i].guest_id;
+      totals[currentGuestID] = 0;
       const currentGuestOrders = guestArray[i].order;
       for (let j = 0; j < currentGuestOrders.length; j++) {
         const orderItemCost = currentGuestOrders[j].price;
         const howManyOrdered = currentGuestOrders[j].qty;
-        totals[currentGuestFirstName] += (orderItemCost * howManyOrdered);
+        totals[currentGuestID] += (orderItemCost * howManyOrdered);
       }
     };
     return totals;
@@ -27,48 +26,39 @@ const SplitList = (props) => {
   const getEvenTotals = (guestObj) => {
     const totals = {};
     const guestArray = guestObj.guests;
-    const guestNames = [];
+    const guestIDs = [];
     for (let i = 0; i < guestArray.length; i++) {
-      const currentGuestFirstName = guestArray[i].first_name;
-      guestNames.push(currentGuestFirstName);
+      const currentGuestID = guestArray[i].guest_id;
+      guestIDs.push(currentGuestID);
       const evenTotal = Math.floor((billTotal / numberOfGuests) * 100) / 100;
-      totals[currentGuestFirstName] = evenTotal;
+      totals[currentGuestID] = evenTotal;
     };
     let splitEvenTotal = 0;
-    for (const guestName in totals) {
-      splitEvenTotal += totals[guestName];
+    for (const guestID in totals) {
+      splitEvenTotal += totals[guestID];
     }
     let remainder = Math.floor((billTotal - splitEvenTotal) * 100) / 100;
     while (remainder > 0) {
-      // splice random guest from guestNames (this will remove them from array and output the selected name as return)
-      const thisGuest = guestNames.splice(Math.floor(Math.random() * guestNames.length), 1)[0];
-      // add one penny to their bill in the *actual* guests array
+      const thisGuest = guestIDs.splice(Math.floor(Math.random() * guestIDs.length), 1)[0];
       totals[thisGuest] += 0.01;
-      // reduce difference by .01
       remainder -= 0.01;
     }
     return totals;
   };
 
   if (props.split === 'byItem') {
-    // console.log('byitem');
-    // console.log('inside props', props)
-    paymentsOwed = getGuestTotals(props); // object with individual numbers owed
+    paymentsOwed = getGuestTotals(props);
   } else {
-    // console.log('evenly');
-    // paymentOwed = (billTotal / numberOfGuests).toFixed(2); // cut to two decimal places
     paymentsOwed = getEvenTotals(props);
   }
 
-  console.log('PAYMENT OWED', paymentsOwed);
-
   return (
-  <div>
+  <ul>
     {props.guests.map(guest =>
-      <IndividualOwes key = {guest.guest_id} firstName = {guest.first_name} lastName = {guest.last_name} paymentOwed = {paymentsOwed[guest.first_name]} />
+      <IndividualOwes key = {guest.guest_id} firstName = {guest.first_name} lastName = {guest.last_name} paymentOwed = {paymentsOwed[guest.guest_id]} />
     )}
     Total: {billTotal}
-  </div>
+  </ul>
   );
 };
 
