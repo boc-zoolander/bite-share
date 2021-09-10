@@ -2,7 +2,6 @@ import React from 'react';
 import AddGuests from './components/AddGuests.jsx';
 import SelectGuest from './components/SelectGuest.jsx';
 import Menu from './components/Menu.jsx';
-import _ from 'lodash';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
@@ -43,9 +42,7 @@ class App extends React.Component {
 
   deleteGuest (guestName) {
     const guestArray = [...this.state.guests];
-    const updated = _.remove(guestArray, (obj) => {
-      return obj.guestName !== guestName;
-    });
+    const updated = guestArray.filter(guest => guest.guestName !== guestName);
     this.setState({ guests: updated });
   }
 
