@@ -138,4 +138,4 @@ var restaurantsByZip = {
   "numResults": 5
 }
 
-module.exports =  restaurantsByZip;
+module.exports = restaurantsByZip;
