@@ -54,18 +54,3 @@ AddGuests.propTypes = {
 };
 
 export default AddGuests;
-// Adding guests to a session
-
-// Description:
-// As a host, I want to add guests to my session, so I can track what everyone orders.
-
-// Acceptance Criteria:
-// - Should be a field allowing text
-// - Should be an 'add' button.
-// - Should add guest to guest list upon filled field and pressed button
-// - Should do nothing if field is empty and button is pressed
-// - Should have a button to take user to guest selection page (to add menu items for that guest)
-// - Should alert user if next page button is pressed but no guests have been added.
-// - (Stretch Goal?) Should start a timer for X minutes to allow user to add
-
-// bottom of page "next" button

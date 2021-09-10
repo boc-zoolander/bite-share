@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// stateless component to be included in AddGuests
-// pass in  props/context from App.
-// create variable to store props/context with guest objects
-// map variable to li items or tr/td
-
 const GuestList = ({ guests, deleteGuest }) => {
   const deleteName = (name) => {
     deleteGuest(name);
