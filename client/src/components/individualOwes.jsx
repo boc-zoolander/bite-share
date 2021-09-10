@@ -1,12 +1,11 @@
 import React from 'react';
 
-const individualOwes = (props) => {
-  <div className = 'guestListRow'>
-     {/* guest name and what they owe */}
-  </div>
-}
+const IndividualOwes = (props) => {
+  return (
+    <div className = 'guestListRow'>
+      {props.first_name} {props.last_name}    {props.paymentOwed}
+    </div>
+  );
+};
 
-
-export default individualOwes;
-
-//
+export default IndividualOwes;

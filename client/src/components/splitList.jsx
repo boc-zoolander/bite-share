@@ -1,7 +1,8 @@
 import React from 'react';
-import individualOwes from './individualOwes.jsx';
+import IndividualOwes from './IndividualOwes.jsx';
 
-const splitList = (props) => {
+const SplitList = (props) => {
+  console.log(props);
   const numberOfGuests = props.guests.length;
   const billTotal = props.totalCost;
 
@@ -29,10 +30,11 @@ const splitList = (props) => {
   return (
   <div>
     {props.guests.map(guest =>
-      <individualOwes key = {guest.guest_id} firstName = {guest.first_name} lastName = {guest.last_name} paymentOwed = {paymentOwed} />
+      <IndividualOwes key = {guest.guest_id} firstName = {guest.first_name} lastName = {guest.last_name} paymentOwed = {paymentOwed} />
     )}
+    Total: {billTotal}
   </div>
   );
 };
 
-export default splitList;
+export default SplitList;
