@@ -57,9 +57,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        Bite Share Nom Nom
-        {this.state.page === 'add' ? <AddGuests addGuest={this.addGuest} guests={this.state.guests} changeGuestPage={this.changeGuestPage} deleteGuest={this.deleteGuest} /> : this.state.page === 'selectGuest' ? <SelectGuest /> : this.state.page === 'menu' ? <Menu /> : ''}
-      </div>
+
       <Router>
         <div>
           <nav>
@@ -91,6 +89,9 @@ class App extends React.Component {
           </Switch>
         </div>
       </Router>
+      Bite Share Nom Nom
+      {this.state.page === 'add' ? <AddGuests addGuest={this.addGuest} guests={this.state.guests} changeGuestPage={this.changeGuestPage} deleteGuest={this.deleteGuest} /> : this.state.page === 'selectGuest' ? <SelectGuest /> : this.state.page === 'menu' ? <Menu /> : ''}
+    </div>
     );
   }
 }
