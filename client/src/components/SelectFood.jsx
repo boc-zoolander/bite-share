@@ -17,6 +17,8 @@ const SelectFood = ({ guests, host, menu }) => {
   const [currentName, setCurrentName] = useState('');
   const [currentOrder, setCurrentOrder] = useState([]);
 
+  // ADD USEEFFECT TO DISPLAY CURRENT ORDER (IN CASE USER RETURNS TO PERSON)
+
   // MAP guest names, menu, and current order
   const guestNames = guests.map((item, i) => {
     return (
