@@ -6,7 +6,6 @@ const SelectFood = ({ guests, host, menu, addToOrder }) => {
 
   // EVENT HANDLERS
   const onChange = (event) => {
-    console.log('firing onChange');
     setCurrentName(event.target.value);
     onCloseClick();
     event.preventDefault();

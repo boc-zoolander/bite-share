@@ -20,15 +20,6 @@ const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
     event.preventDefault();
   };
 
-  const changePage = (event) => {
-    if (guests.length === 0) {
-      alert('Please add a guest');
-      return;
-    }
-    changeGuestPage('selectGuest');
-    event.preventDefault();
-  };
-
   return (
     <div>
       <h3> Create your guest list </h3>
@@ -40,7 +31,7 @@ const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
       </form>
       <GuestList guests={guests} deleteGuest={deleteGuest} />
       <Link to='/select-food' >
-        <button type='button' onClick={changePage}> Next Page </button>
+        <button type='button'> Next Page </button>
       </Link>
     </div>
   );
