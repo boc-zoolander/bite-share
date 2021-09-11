@@ -13,7 +13,7 @@ import React, { useState } from 'react';
  * onChange handler  to set hook/state name
  */
 
-const SelectFood = ({ guests, host, menu }) => {
+const SelectFood = ({ guests, host, menu, addToOrder }) => {
   const [currentName, setCurrentName] = useState('');
   const [currentOrder, setCurrentOrder] = useState([]);
 
@@ -63,11 +63,12 @@ const SelectFood = ({ guests, host, menu }) => {
 
   const addOrder = () => {
     //pass down function from APP
-
+    addToOrder(currentName, currentOrder);
   };
 
   return (
     <div>
+      <button type='button' onClick={addOrder}>Done</button>
       <label htmlFor='guestName' > Add items for </label>
       <select name='guestName' onChange={onChange}>
         <option value='' selected disabled hidden > Choose Guest </option>

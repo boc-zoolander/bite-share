@@ -23,6 +23,7 @@ class App extends React.Component {
     this.addGuest = this.addGuest.bind(this);
     this.deleteGuest = this.deleteGuest.bind(this);
     this.changeGuestPage = this.changeGuestPage.bind(this);
+    this.addToOrder = this.addToOrder.bind(this);
   }
 
   addGuest (guestName) {
@@ -53,12 +54,21 @@ class App extends React.Component {
 
   addToOrder (guestName, order) {
     // loop over guests property
-    const guestOrders = [...this.state.guests];
+    let guestArray = [...this.state.guests];
     // iterate over guestorders array
+    for (let i = 0; i < guestArray.length; i++) {
       // if current name equals guestName from function
-        // set guests order array to input order
+      if (guestArray[i].guestName === guestName) {
+        // set guestsOrder array to input order
+        guestArray[i].order = order;
         // setState with guestOrders
+        this.setState({
+          guests: guestArray
+        }, () => { console.log('this is the guest state after order: ', this.state.guests) });
         // return
+        return;
+      }
+    }
   }
 
   // ADDING A TEMPORARY EVENT HANDLER TO CHANGE PAGE
@@ -103,7 +113,7 @@ class App extends React.Component {
       </Router>
       Bite Share Nom Nom
       <AddGuests addGuest={this.addGuest} guests={this.state.guests} changeGuestPage={this.changeGuestPage} deleteGuest={this.deleteGuest} />
-      <SelectFood guests={this.state.guests} host={this.state.host} menu={this.state.menu}/>
+      <SelectFood guests={this.state.guests} host={this.state.host} menu={this.state.menu} addToOrder={this.addToOrder}/>
     </div>
     );
   }
