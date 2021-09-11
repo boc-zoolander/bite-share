@@ -21,7 +21,6 @@ class App extends React.Component {
     };
     this.addGuest = this.addGuest.bind(this);
     this.deleteGuest = this.deleteGuest.bind(this);
-    this.changeGuestPage = this.changeGuestPage.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
   }
 
@@ -93,7 +92,7 @@ class App extends React.Component {
         </div>
       </Router>
       Bite Share Nom Nom
-      <AddGuests addGuest={this.addGuest} guests={this.state.guests} changeGuestPage={this.changeGuestPage} deleteGuest={this.deleteGuest} />
+      <AddGuests addGuest={this.addGuest} guests={this.state.guests} deleteGuest={this.deleteGuest} />
       <SelectFood guests={this.state.guests} host={this.state.host} menu={this.state.menu} addToOrder={this.addToOrder}/>
     </div>
     );
