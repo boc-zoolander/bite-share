@@ -15,6 +15,12 @@ class App extends React.Component {
       sessionComplete: false,
       splitMechanism: ''
     };
+
+    this.setTopLevelState = this.setTopLevelState.bind(this);
+  }
+
+  setTopLevelState (name, value) {
+    this.setState({ [name]: value });
   }
 
   render () {
@@ -22,10 +28,10 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path="/find-restaurant">
-            <Search />
+            <Search setTopLevelState={this.setTopLevelState} />
           </Route>
           <Route exact path="/">
-            <Login />
+            <Login setTopLevelState={this.setTopLevelState} />
           </Route>
         </Switch>
       </Router>
