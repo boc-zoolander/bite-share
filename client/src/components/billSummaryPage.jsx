@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import SplitList from './splitList.jsx';
 
 class BillSummaryPage extends React.Component {
@@ -49,7 +50,9 @@ class BillSummaryPage extends React.Component {
         <SplitList guests={this.state.guests} totalCost={this.getBillTotal(this.state.guests)} split={this.state.split}/>
         <button onClick={this.splitEvenly}>Split Evenly</button>
         <button onClick={this.splitByItem}>Split by Item</button>
-        <button>Complete Session</button>
+        <Link to = "/">
+          <button>Complete Session</button>
+        </Link>
       </div>
     );
   }
