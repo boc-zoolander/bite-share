@@ -6,17 +6,20 @@ const SplitList = (props) => {
   const billTotal = props.totalCost;
 
   let paymentsOwed;
+  console.log('splitlist props', props);
 
-  const getGuestTotals = (guestObj) => {
+  const getGuestTotals = (guests) => {
     const totals = {};
-    const guestArray = guestObj.guests;
+    const guestArray = guests;
     for (let i = 0; i < guestArray.length; i++) {
-      const currentGuestID = guestArray[i].guest_id;
+      const currentGuestID = guestArray[i].guestName;
+      // const currentGuestID = guestArray[i].guest_id;
       totals[currentGuestID] = 0;
       const currentGuestOrders = guestArray[i].order;
       for (let j = 0; j < currentGuestOrders.length; j++) {
         const orderItemCost = currentGuestOrders[j].price;
-        const howManyOrdered = currentGuestOrders[j].qty;
+        const howManyOrdered = 1;
+        // const howManyOrdered = currentGuestOrders[j].qty;
         const itemTotal = Math.round(orderItemCost * howManyOrdered * 100) / 100;
         totals[currentGuestID] += Math.round(itemTotal * 100) / 100;
       }
@@ -29,12 +32,13 @@ const SplitList = (props) => {
     return totals;
   };
 
-  const getEvenTotals = (guestObj) => {
+  const getEvenTotals = (guests) => {
     const totals = {};
-    const guestArray = guestObj.guests;
+    const guestArray = guests;
     const guestIDs = [];
     for (let i = 0; i < guestArray.length; i++) {
-      const currentGuestID = guestArray[i].guest_id;
+      const currentGuestID = guestArray[i].guestName;
+      // const currentGuestID = guestArray[i].guest_id;
       guestIDs.push(currentGuestID);
       const evenTotal = Math.floor((billTotal / numberOfGuests) * 100) / 100;
       totals[currentGuestID] = evenTotal;
@@ -53,15 +57,15 @@ const SplitList = (props) => {
   };
 
   if (props.split === 'by Item') {
-    paymentsOwed = getGuestTotals(props);
+    paymentsOwed = getGuestTotals(props.guests);
   } else {
-    paymentsOwed = getEvenTotals(props);
+    paymentsOwed = getEvenTotals(props.guests);
   }
 
   return (
   <ul>
-    {props.guests.map(guest =>
-      <IndividualOwes key = {guest.guest_id} firstName = {guest.first_name} lastName = {guest.last_name} paymentOwed = {paymentsOwed[guest.guest_id]} />
+    {props.guests.map((guest, i) =>
+      <IndividualOwes key = {i} firstName = {guest.guestName} paymentOwed = {paymentsOwed[guest.guestName]} />
     )}
     Total: {billTotal}
   </ul>

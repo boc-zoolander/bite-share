@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 const SelectFood = ({ guests, host, menu, addToOrder }) => {
@@ -70,6 +71,9 @@ const SelectFood = ({ guests, host, menu, addToOrder }) => {
       <div>
         {menuItems}
       </div>
+      <Link to="/split-bill">
+        <input type="submit" value="Next" />
+      </Link>
     </div>
   );
 };
