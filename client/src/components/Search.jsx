@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 const axios = require('axios');
+
 // Commented out for now due to webpack errors
 // require('dotenv').config();
 
@@ -63,7 +65,9 @@ class Search extends React.Component {
               {this.state.restaurants.map(restaurant =>
                 <li key={restaurant.restaurant_id}>
                   <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
-                  <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
+                  <Link to='/add-guests' >
+                    <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
+                  </Link>
                 </li>
               )}
             </ul>
