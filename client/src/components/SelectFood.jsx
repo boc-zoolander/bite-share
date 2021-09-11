@@ -15,7 +15,7 @@ import React, { useState } from 'react';
 
 const SelectFood = ({ guests, host, menu, addToOrder }) => {
   const [currentName, setCurrentName] = useState('');
-  const [currentOrder, setCurrentOrder] = useState([]);
+  // const [currentOrder, setCurrentOrder] = useState([]);
 
   // ADD USEEFFECT TO DISPLAY CURRENT ORDER (IN CASE USER RETURNS TO PERSON)
 
@@ -45,9 +45,10 @@ const SelectFood = ({ guests, host, menu, addToOrder }) => {
     );
   });
 
-  const currentItems = currentOrder.map((item, i) => {
+  const currentObj = guests.find(element => element.guestName === currentName) || { order: [] } ;
+  const currentItems = currentObj.order.map((item, i) => {
     return <span key={i}> {item.name} </span>;
-  });
+  }) || '';
 
   // EVENT HANDLERS
   const onChange = (event) => {
@@ -56,19 +57,15 @@ const SelectFood = ({ guests, host, menu, addToOrder }) => {
   };
 
   const addItem = (item) => {
-    const order = [...currentOrder];
-    order.push(item);
-    setCurrentOrder(order);
-  };
-
-  const addOrder = () => {
-    //pass down function from APP
-    addToOrder(currentName, currentOrder);
+    // const order = [...currentOrder];
+    // order.push(item);
+    // setCurrentOrder(order);
+    addToOrder(currentName, item);
   };
 
   return (
     <div>
-      <button type='button' onClick={addOrder}>Done</button>
+      {/* <button type='button' onClick={addOrder}>Done</button> */}
       <label htmlFor='guestName' > Add items for </label>
       <select name='guestName' onChange={onChange}>
         <option value='' selected disabled hidden > Choose Guest </option>

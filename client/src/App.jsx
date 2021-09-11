@@ -52,7 +52,7 @@ class App extends React.Component {
     this.setState({ guests: updated });
   }
 
-  addToOrder (guestName, order) {
+  addToOrder (guestName, item) {
     // loop over guests property
     let guestArray = [...this.state.guests];
     // iterate over guestorders array
@@ -60,11 +60,11 @@ class App extends React.Component {
       // if current name equals guestName from function
       if (guestArray[i].guestName === guestName) {
         // set guestsOrder array to input order
-        guestArray[i].order = order;
+        guestArray[i].order.push(item);
         // setState with guestOrders
         this.setState({
           guests: guestArray
-        }, () => { console.log('this is the guest state after order: ', this.state.guests) });
+        }, () => { console.log('this is the guest state after order: ', this.state.guests); });
         // return
         return;
       }
