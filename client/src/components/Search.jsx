@@ -40,8 +40,11 @@ class Search extends React.Component {
     this.setState({ restaurants });
   }
 
-  selectRestaurant (restaurant) {
+  async selectRestaurant (restaurant) {
     this.props.setTopLevelState('restaurant', restaurant);
+    const response = await axios('http://localhost:8080/users/testgetRestaurant_1');
+    const menu = response.data.result.menus[0];
+    this.props.setTopLevelState('menu', menu);
   };
 
   render () {
