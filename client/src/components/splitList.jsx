@@ -6,7 +6,6 @@ const SplitList = (props) => {
   const billTotal = props.totalCost;
 
   let paymentsOwed;
-  console.log('splitlist props', props);
 
   const getGuestTotals = (guests) => {
     const totals = {};

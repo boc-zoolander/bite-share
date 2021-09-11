@@ -5,7 +5,6 @@ import SplitList from './splitList.jsx';
 class BillSummaryPage extends React.Component {
   constructor (props) {
     super(props);
-    console.log(props.guests);
     this.state = {
       split: 'by Item',
       guests: this.props.guests
