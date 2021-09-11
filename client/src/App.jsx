@@ -54,7 +54,7 @@ class App extends React.Component {
 
   addToOrder (guestName, item) {
     // loop over guests property
-    let guestArray = [...this.state.guests];
+    const guestArray = [...this.state.guests];
     // iterate over guestorders array
     for (let i = 0; i < guestArray.length; i++) {
       // if current name equals guestName from function
