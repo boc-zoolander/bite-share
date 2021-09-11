@@ -35,7 +35,7 @@ class App extends React.Component {
       }
     });
     if (!guestExists) {
-      guestArray.push({ guestName, order: [] });
+      guestArray.push({ id: null, guestName, order: [] });
       this.setState({
         guests: guestArray
       });

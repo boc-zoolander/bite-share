@@ -30,22 +30,25 @@ const SelectFood = ({ guests, host, menu, addToOrder }) => {
     return (
       <details key={i}>
         <summary> {section.section_name} </summary>
+        <ul>
         {section.menu_items.map((item, j) => {
           return (
-            <div key={j}>
+            <li key={j}>
               {item.name}
               {item.price}
               <button type='button' onClick={() => { addItem(item); }}> + </button>
-            </div>
+            </li>
             // price
             // add to order button
           );
         })}
+        </ul>
       </details>
     );
   });
 
-  const currentObj = guests.find(element => element.guestName === currentName) || { order: [] } ;
+  // USE ID!
+  const currentObj = guests.find(element => element.guestName === currentName) || { order: [] };
   const currentItems = currentObj.order.map((item, i) => {
     return <span key={i}> {item.name} </span>;
   }) || '';
