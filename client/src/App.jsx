@@ -54,7 +54,7 @@ class App extends React.Component {
         // setState with guestOrders
         this.setState({
           guests: guestArray
-        }, () => { console.log('this is the guest state after order: ', this.state.guests); });
+        });
         // return
         return;
       }
