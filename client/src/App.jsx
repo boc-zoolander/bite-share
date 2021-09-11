@@ -1,7 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import Example from './components/Example.jsx';
-import BillSummaryPage from './components/BillSummaryPage.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -44,7 +43,6 @@ class App extends React.Component {
             </Route>
           </Switch>
         </div>
-        <BillSummaryPage />
       </Router>
     );
   }
