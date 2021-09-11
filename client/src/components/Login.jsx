@@ -24,6 +24,10 @@ class Login extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault();
+    this.props.addHost({
+      hostName: this.state.hostName,
+      zipCode: this.state.zipCode
+    });
     // Temporary setState to show Search component until routing is implemented
     this.setState({ showSearch: true });
   }
@@ -32,7 +36,7 @@ class Login extends React.Component {
     return (
       // Temporary ternary expression to show Search component until routing is implemented
       this.state.showSearch
-        ? <Search />
+        ? <Search saveRestaurant={this.props.saveRestaurant} />
         : <div>
             Login
             <form>
@@ -42,7 +46,7 @@ class Login extends React.Component {
               <label htmlFor="zipCode">Zip Code:</label>
               <input type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
 
-              <input type="submit" value="Next" onClick={this.handlesubmit} />
+              <input type="submit" value="Next" onClick={(e) => this.handleSubmit(e)} />
             </form>
           </div>
     );

@@ -54,8 +54,7 @@ class Search extends React.Component {
             <ul>
               {this.state.restaurants.map(restaurant =>
                 <li key={restaurant.restaurant_id}>
-                  {restaurant.restaurant_name}-
-                  {restaurant.address.formatted}
+                  {restaurant.restaurant_name}-{restaurant.address.formatted}
                   <button>Select</button>
                 </li>
               )}
