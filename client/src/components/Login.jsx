@@ -11,7 +11,7 @@ class Login extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handlesubmit = this.handleSubmit.bind(this);
+    this.saveHost = this.saveHost.bind(this);
   }
 
   handleChange (e) {
@@ -20,8 +20,13 @@ class Login extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit (e) {
-
+  saveHost () {
+    const hostDetails = {
+      id: 0,
+      guestName: this.state.hostName,
+      order: []
+    };
+    this.props.setTopLevelState('guests', [hostDetails]);
   }
 
   render () {
@@ -35,7 +40,7 @@ class Login extends React.Component {
           <label htmlFor="zipCode">Zip Code:</label>
           <input type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
 
-          <Link to="/find-restaurant" onClick={this.handlesubmit}>
+          <Link to="/find-restaurant" onClick={this.saveHost}>
             <input type="submit" value="Next" />
           </Link>
         </form>
