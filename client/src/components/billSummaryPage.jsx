@@ -64,12 +64,27 @@ class BillSummaryPage extends React.Component {
             }
           ]
         }
-      ],
-      totalCost: 295.78
+      ]
     };
 
+    this.getBillTotal = this.getBillTotal.bind(this);
     this.splitEvenly = this.splitEvenly.bind(this);
     this.splitByItem = this.splitByItem.bind(this);
+  }
+
+  getBillTotal (guestArray) {
+    let billTotal = 0;
+    for (let i = 0; i < guestArray.length; i++) {
+      const currentGuestID = guestArray[i].guest_id;
+      const currentGuestOrders = guestArray[i].order;
+      for (let j = 0; j < currentGuestOrders.length; j++) {
+        const orderItemCost = currentGuestOrders[j].price;
+        const howManyOrdered = currentGuestOrders[j].qty;
+        const itemTotal = Math.round(orderItemCost * howManyOrdered * 100) / 100;
+        billTotal += Math.round(itemTotal * 100) / 100;
+      }
+    };
+    return billTotal;
   }
 
   splitEvenly () {
@@ -88,7 +103,7 @@ class BillSummaryPage extends React.Component {
     return (
       <div>
         <h3>Final Bill Split {this.state.split}</h3>
-        <SplitList guests={this.state.guests} totalCost={this.state.totalCost} split={this.state.split}/>
+        <SplitList guests={this.state.guests} totalCost={this.getBillTotal(this.state.guests)} split={this.state.split}/>
         <button onClick={this.splitEvenly}>Split Evenly</button>
         <button onClick={this.splitByItem}>Split by Item</button>
         <button>Complete Session</button>
