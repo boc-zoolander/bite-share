@@ -5,7 +5,7 @@ class BillSummaryPage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      split: 'byItem',
+      split: 'by Item',
       guests: [
         {
           guest_id: 34556,
