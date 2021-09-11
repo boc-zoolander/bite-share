@@ -38,9 +38,9 @@ const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
 };
 
 AddGuests.propTypes = {
+  setTopLevelState: PropTypes.func.isRequired,
   addGuest: PropTypes.func.isRequired,
   guests: PropTypes.array.isRequired,
-  changeGuestPage: PropTypes.func.isRequired,
   deleteGuest: PropTypes.func.isRequired
 };
 

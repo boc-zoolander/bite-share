@@ -1,6 +1,7 @@
 import React from 'react';
 import AddGuests from './components/AddGuests.jsx';
 import SelectFood from './components/SelectFood.jsx';
+import BillSummaryPage from './components/billSummaryPage.jsx';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login.jsx';
 import Search from './components/Search.jsx';
@@ -72,6 +73,9 @@ class App extends React.Component {
           </Route>
           <Route path="/select-food">
             <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} host={this.state.host} menu={this.state.menu} addToOrder={this.addToOrder}/>
+          </Route>
+          <Route path="/split-bill">
+            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
           </Route>
           <Route path="/">
             <Login setTopLevelState={this.setTopLevelState} />

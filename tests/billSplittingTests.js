@@ -20,19 +20,19 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
   afterEach(() => {
   });
 
-  test('Unit Test 1:  Does the component <BillSummaryPage /> render?', () => {
-    render(<BillSummaryPage />);
-  });
+  // test('Unit Test 1:  Does the component <BillSummaryPage /> render?', () => {
+  //   render(<BillSummaryPage />);
+  // });
 
-  test('Unit Test 2:  Does the component <BillSummaryPage /> contain the header Final Bill?', () => {
-    render(<BillSummaryPage />);
-    expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
-  });
+  // test('Unit Test 2:  Does the component <BillSummaryPage /> contain the header Final Bill?', () => {
+  //   render(<BillSummaryPage />);
+  //   expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
+  // });
 
-  test('Unit Test 3:  Does the component <BillSummaryPage /> contain the Total', () => {
-    render(<BillSummaryPage />);
-    expect(screen.getByText(/Total/)).toBeInTheDocument();
-  });
+  // test('Unit Test 3:  Does the component <BillSummaryPage /> contain the Total', () => {
+  //   render(<BillSummaryPage />);
+  //   expect(screen.getByText(/Total/)).toBeInTheDocument();
+  // });
 
   // test('Unit Test 4:  Does the component <BillSummaryPage /> allow user to change split method to Split evenly', () => {
   //   render(<BillSummaryPage />);
