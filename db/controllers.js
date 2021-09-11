@@ -68,7 +68,7 @@ const updateRestaurant = function (obj_param) {
     });
 };
 
-// adds a guest to a given session
+// adds a guest to a given session (guest must already be in users table)
 const addGuest = function (obj_param) {
   let { session_id, user_id } = obj_param;
 
@@ -100,7 +100,7 @@ const removeGuest = function (obj_param) {
     });
 };
 
-// adds an order for a given session
+// adds an order for a given session for a given user, returning the order_id
 const addOrder = function (obj_param) {
   let {orderer_id, order_session_id, food_id_api, food_name_api, price, qty, restaurant_id_api, restaurant_name_api} = obj_param;
 
@@ -119,6 +119,7 @@ const addOrder = function (obj_param) {
     });
 };
 
+// removes the order (removing it from session and user_id associations)
 const removeOrder = function (obj_param) {
   let { order_id } = obj_param;
 
@@ -154,10 +155,11 @@ module.exports = {
   getAllSessions,
   getUserSession,
   createNewSession,
+  updateRestaurant,
   addGuest,
   removeGuest,
   addOrder,
   updateOrder,
   removeOrder,
-  updateRestaurant,
+
 };
