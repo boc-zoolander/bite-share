@@ -2,6 +2,7 @@ import React from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login.jsx';
 import Search from './components/Search.jsx';
+import BillSummaryPage from './components/billSummaryPage.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -34,6 +35,7 @@ class App extends React.Component {
             <Login setTopLevelState={this.setTopLevelState} />
           </Route>
         </Switch>
+        <BillSummaryPage />
       </Router>
     );
   }
