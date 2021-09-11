@@ -68,13 +68,12 @@ const updateRestaurant = function (obj_param) {
     });
 };
 
-
 // adds a guest to a given session
 const addGuest = function (obj_param) {
-  let {session_id, user_id, user_done_ordering} = obj_param;
+  let { session_id, user_id } = obj_param;
 
   let queryStr = `INSERT INTO "BOC_User-Session-jt"(session_id, user_id, user_done_ordering) 
-                  VALUES ('${session_id}', '${user_id}', '${user_done_ordering}') `;
+                  VALUES ('${ session_id }', '${ user_id }', '0') `;
 
   return pool.query(queryStr)
     .then(res => {
@@ -94,7 +93,7 @@ const removeGuest = function (obj_param) {
 
   return pool.query(queryStr)
     .then(res => {
-      return 'success';
+      return JSON.stringify(res.rows, null, 2);
     })
     .catch(err => {
       return err;
@@ -134,11 +133,12 @@ const removeOrder = function (obj_param) {
     });
 };
 
-// updates or removes an order from the database
+// updates qty of an order
 const updateOrder = function (obj_param) {
-  let {} = obj_param;
+  let { qty, order_id } = obj_param;
 
-  var queryStr = `stuff`;
+  let queryStr = `UPDATE "BOC_Orders" SET qty = '${qty}'
+  WHERE (order_pk = '${ order_id }');`;
 
   return pool.query(queryStr)
     .then(res => {

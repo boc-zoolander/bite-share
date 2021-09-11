@@ -76,14 +76,32 @@ router.get('/getUserSession', (req, res) => {
     });
 });
 
-// FOR FRONT END UDSAGE
+// FOR FRONT END USAGE
+
+router.get('/getSession2', (req, res) => {
+
+  // TO DO:  CREATE an index from "BOC_User-Session-jt"
+  // we want to get all the users for a particular session
+  // then we want to get all the orders for a particular session.
+  // however the order session information contains the relevant users as well.
+
+  // select JOIN session_id on the join table
+  // JOIN session and users
+
+  // sort
+  // format
+  // return data
+
+  // res.header('Content-Type', 'application/json');
+  // res.status(200).send(JSON.stringify(stuff, null, 2));
+});
 
 // creates a new Session for a given Schema
 router.get('/createNewSession', (req, res) => {
-  // extract the proper parameters here
   let obj_params = {
     session_name: 'Session Name #4',
-    restaurant_name: 'Restaurant #4',
+    restaurant_name: 'Restaurant #4', 
+    restaurant_id_api: '234234324324234',
     host_id: 9
   };
 
@@ -98,13 +116,30 @@ router.get('/createNewSession', (req, res) => {
     });
 });
 
+// updates the restaurant for a particular session
+router.put('/updateRestaurant', (req, res) => {
+  let obj_params = {
+    session_id: 7,
+    restaurant_name_api: 'Restaurant #4',
+    restaurant_id_api: '234234324324234'
+  };
+
+  db.updateRestaurant(obj_params)
+    .then(result => {
+      res.header('Content-Type', 'application/json');
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    });
+});
+
 // adds a guest to a particular session
-router.get('/addGuest', (req, res) => {
+router.post('/addGuest', (req, res) => {
   // extract the proper parameters here
   let obj_params = {
     session_id: 7,
     user_id: 10,
-    user_done_ordering: false,
     // first_name: req.params.first_name,
     // last_name: req.params.last_name
   };
@@ -120,7 +155,7 @@ router.get('/addGuest', (req, res) => {
 });
 
 // removes a guest from the session
-router.put('/removeGuest', (req, res) => {
+router.post('/removeGuest', (req, res) => {
   // extract the proper parameters here
   let obj_params = {
     session_id: req.params.session_id,
@@ -138,11 +173,17 @@ router.put('/removeGuest', (req, res) => {
 });
 
 // adds an order with respect to a guest to a particular session
-router.get('/addOrder', (req, res) => {
+router.post('/addOrder', (req, res) => {
   // extract the proper parameters here
   let obj_params = {
-    session_id: req.params.session_id,
-    user_id: req.params.user_id,
+    order_session_id: req.params.session_id,
+    orderer_id: req.params.user_id,
+    food_id_api: req.params.food_id_api,
+    food_name_api: req.params.food_name_api,
+    price: req.params.price,
+    qty: req.params.qty,
+    restaurant_id_api: req.params.restaurant_id_api,
+    restaurant_name_api: req.params.restaurant_name_api,
   };
 
   db.addOrder(obj_params)
@@ -156,16 +197,30 @@ router.get('/addOrder', (req, res) => {
 });
 
 // updates an order with respect to a guest to a particular session
-// to remote an order, change qty to 0.
 router.put('/updateOrder', (req, res) => {
   // extract the proper parameters here
   let obj_params = {
-    session_id: req.params.session_id,
-    first_name: req.params.first_name,
-    last_name: req.params.last_name
+    order_id: req.params.order_id,
+    qty: req.params.qty,
   };
 
   db.updateOrder(obj_params)
+    .then(result => {
+      res.header('Content-Type', 'application/json');
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    });
+});
+
+// removes an order
+router.put('/removeOrder', (req, res) => {
+  let obj_params = {
+    order_id: req.params.order_id,
+  };
+
+  db.removeOrder(obj_params)
     .then(result => {
       res.header('Content-Type', 'application/json');
       res.status(200).send(result);
