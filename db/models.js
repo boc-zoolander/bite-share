@@ -14,6 +14,33 @@ pool.connect();
 module.exports = pool;
 
 
+/* new SQL statements
+
+CREATE TABLE "BOC_User-Session-jt" (
+id SERIAL PRIMARY KEY,
+session_id INTEGER,
+user_id INTEGER,
+user_done_ordering BOOLEAN
+);
+
+CREATE TABLE "BOC_Orders" (
+  order_pk SERIAL,
+  orderer_id INTEGER NOT NULL DEFAULT NULL,
+  order_session_id INTEGER NOT NULL DEFAULT NULL,
+  food_id_api INTEGER NOT NULL DEFAULT NULL,
+  food_name_api VARCHAR(100) NULL DEFAULT NULL,
+  price DECIMAL NOT NULL DEFAULT NULL,
+  qty INTEGER NOT NULL DEFAULT 1,
+  restaurant_id_api BIGINT NULL DEFAULT NULL,
+  restaurant_name_api VARCHAR(75) NOT NULL DEFAULT 'NULL',
+  currency VARCHAR(7) NULL DEFAULT 'usd',
+  PRIMARY KEY (order_pk)
+);
+
+*/
+
+
+
 /* asserted SQL statements
 
 

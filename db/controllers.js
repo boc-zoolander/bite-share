@@ -1,68 +1,46 @@
 const pool = require('./models.js');
 
-
-//DISABLED FOR NOW
-// const insertRestaurantRecord = function(obj_param, callback) {
-
-//   //let { restaurant_data } = obj_param;
-//   var queryStr = `INSERT INTO "BOC_restaurants" VALUES (2, 2, '${obj_param}')`;
-//   pool.query(queryStr, (err, res) => {
-//     if (err) {
-//       console.log('error occurred');
-//       callback(err, null);
-//     } else {
-//       callback(null, JSON.stringify(res.rows, null, 2));
-//     }
-//   });
-
-// }
-
 // database interaction to get all the users in the users table.
 const getUsers = function() {
-  var queryStr = `SELECT * FROM "BOC_user"`;
-  
+  let queryStr = `SELECT * FROM "BOC_user"`;
   return pool.query(queryStr)
     .then(res => {
       return JSON.stringify(res.rows, null, 2);
     })
     .catch(err => {
       return err;
-    })
-}
+    });
+};
 
 const getAllSessions = function () {
-  var queryStr = `SELECT * FROM "BOC_Sessions"`;
-  
+  let queryStr = `SELECT * FROM "BOC_Sessions"`;
   return pool.query(queryStr)
     .then(res => {
       return JSON.stringify(res.rows, null, 2);
     })
     .catch(err => {
       return err;
-    })
-}
-
-
+    });
+};
 
 const getUserSession = function (obj_param) {
   let { host_id } = obj_param;
-  var queryStr = `SELECT * FROM "BOC_Sessions" WHERE "BOC_Sessions".host_id = ${host_id}`;
+  let queryStr = `SELECT * FROM "BOC_Sessions" WHERE "BOC_Sessions".host_id = ${host_id}`;
   
   return pool.query(queryStr)
-  .then(res => {
-    return JSON.stringify(res.rows, null, 2);
-  })
-  .catch(err => {
-    return err;
-  })
-}
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    });
+};
 
-//this function creates a user session for the user and inserts it into the BOC session db
-const createUserSession = function (obj_param) {
-
+// this function creates a user session for the user and inserts it into the BOC session db
+const createNewSession = function (obj_param) {
   let { session_name, restaurant_name, host_id } = obj_param;
 
-  var queryStr = `INSERT INTO "BOC_Sessions"(session_name, host_id, participants_id, restaurant_name, order_id, split_method) VALUES ('${session_name}', ${host_id}, 2, '${restaurant_name}', 1, 1)`;
+  let queryStr = `INSERT INTO "BOC_Sessions"(session_name, host_id, participants_id, restaurant_name, order_id, split_method) VALUES ('${session_name}', ${host_id}, 2, '${restaurant_name}', 1, 1) RETURNING "session_pk"`;
 
   return pool.query(queryStr)
     .then(res => {
@@ -70,14 +48,116 @@ const createUserSession = function (obj_param) {
     })
     .catch(err => {
       return err;
-    })
-}
+    });
+};
 
+// adds a guest to a given session UNTESTED
+const updateRestaurant = function (obj_param) {
+  let {restaurant_id_api, restaurant_name_api, session_id} = obj_param;
+
+  let queryStr = `UPDATE "BOC_Sessions" SET (restaurant_id = '${restaurant_id_api}', 
+                  restaurant_name = '${restaurant_name_api}'
+                  WHERE (session_pk = '${session_id}');`;
+
+  return pool.query(queryStr)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+
+// adds a guest to a given session
+const addGuest = function (obj_param) {
+  let {session_id, user_id, user_done_ordering} = obj_param;
+
+  let queryStr = `INSERT INTO "BOC_User-Session-jt"(session_id, user_id, user_done_ordering) 
+                  VALUES ('${session_id}', '${user_id}', '${user_done_ordering}') `;
+
+  return pool.query(queryStr)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+// removes a guest from a given session
+const removeGuest = function (obj_param) {
+  let {session_id, user_id} = obj_param;
+
+  let queryStr = `DELETE FROM "BOC_User-Session-jt" WHERE (session_id = ${session_id} 
+                  AND user_id = ${user_id})`;
+
+  return pool.query(queryStr)
+    .then(res => {
+      return 'success';
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+// adds an order for a given session
+const addOrder = function (obj_param) {
+  let {orderer_id, order_session_id, food_id_api, food_name_api, price, qty, restaurant_id_api, restaurant_name_api} = obj_param;
+
+  let queryStr = `INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_id_api, 
+                  food_name_api, price, qty, restaurant_id_api, restaurant_name_api) VALUES 
+                  ('${orderer_id}', '${order_session_id}', '${food_id_api}', '${food_name_api}',
+                   '${price}', '${qty}', '${restaurant_id_api}', '${restaurant_name_api}') 
+                   RETURNING "order_pk"`;
+
+  return pool.query(queryStr)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+const removeOrder = function (obj_param) {
+  let { order_id } = obj_param;
+
+  let queryStr = `DELETE FROM "BOC_Orders" WHERE (order_pk = ${order_id})`;
+
+  return pool.query(queryStr)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+// updates or removes an order from the database
+const updateOrder = function (obj_param) {
+  let {} = obj_param;
+
+  var queryStr = `stuff`;
+
+  return pool.query(queryStr)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    });
+};
 
 module.exports = {
   getUsers,
   getAllSessions,
   getUserSession,
-  createUserSession,
-  //insertRestaurantRecord,
+  createNewSession,
+  addGuest,
+  removeGuest,
+  addOrder,
+  updateOrder,
+  removeOrder,
+  updateRestaurant,
 };
