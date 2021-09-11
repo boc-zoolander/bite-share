@@ -52,7 +52,7 @@ const SplitList = (props) => {
     return totals;
   };
 
-  if (props.split === 'byItem') {
+  if (props.split === 'by Item') {
     paymentsOwed = getGuestTotals(props);
   } else {
     paymentsOwed = getEvenTotals(props);

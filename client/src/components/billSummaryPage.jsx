@@ -74,20 +74,20 @@ class BillSummaryPage extends React.Component {
 
   splitEvenly () {
     this.setState({
-      split: 'evenly'
+      split: 'Evenly'
     });
   }
 
   splitByItem () {
     this.setState({
-      split: 'byItem'
+      split: 'by Item'
     });
   }
 
   render () {
     return (
       <div>
-        <h3>Final Bill</h3>
+        <h3>Final Bill Split {this.state.split}</h3>
         <SplitList guests={this.state.guests} totalCost={this.state.totalCost} split={this.state.split}/>
         <button onClick={this.splitEvenly}>Split Evenly</button>
         <button onClick={this.splitByItem}>Split by Item</button>
