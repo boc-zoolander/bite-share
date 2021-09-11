@@ -17,14 +17,12 @@ const SelectFood = ({ guests, host, menu, addToOrder }) => {
   };
 
   const onModalClick = (event) => {
-    // Set CSS for modal div id myModal to block
     const modal = document.getElementById('myModal');
     modal.style.display = 'block';
     event.preventDefault();
   };
 
   const onCloseClick = () => {
-    // const span = document.getElementsByClassName("close")[0];
     const modal = document.getElementById('myModal');
     modal.style.display = 'none';
   };
@@ -48,9 +46,6 @@ const SelectFood = ({ guests, host, menu, addToOrder }) => {
     );
   });
 
-  // button to replace drop-down
-
-  // USE ID!
   const currentObj = guests.find(element => element.guestName === currentName) || { order: [] };
   const currentItems = currentObj.order.map((item, i) => {
     return <span key={i}> {item.name} </span>;
@@ -71,12 +66,6 @@ const SelectFood = ({ guests, host, menu, addToOrder }) => {
           {guestNames}
         </div>
       </div>
-      {/* <label htmlFor='guestName' > Add items for </label>
-      <select name='guestName' onChange={onChange}>
-        <option value='' selected disabled hidden > Choose Guest </option>
-        <option value={host.name}> {host.name} </option>
-        {guestNames}
-      </select> */}
       <h4> Current Items for {currentName} </h4>
         {currentItems}
       <div>

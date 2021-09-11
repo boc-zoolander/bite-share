@@ -9,12 +9,6 @@ const GuestList = ({ guests, deleteGuest }) => {
 
   const list = guests.map((item, i) => {
     return (
-      // <tr key={i}>
-      //   <th>
-      //   {item.guestName}
-      //   <input type='submit' value='Delete' onClick={() => deleteName(item.guestName)} />
-      //   </th>
-      // </tr>
       <li key={i}>
         <span>{item.guestName}</span>
         <input type='submit' value='Delete' onClick={() => deleteName(item.guestName)} />

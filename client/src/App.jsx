@@ -1,6 +1,7 @@
 import React from 'react';
 import AddGuests from './components/AddGuests.jsx';
 import SelectFood from './components/SelectFood.jsx';
+// Example menu data
 import Menu from '../../server/user_db_routes/testgetrestaurant_1.js';
 import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import Example from './components/Example.jsx';
@@ -43,19 +44,13 @@ class App extends React.Component {
   }
 
   addToOrder (guestName, item) {
-    // loop over guests property
     const guestArray = [...this.state.guests];
-    // iterate over guestorders array
     for (let i = 0; i < guestArray.length; i++) {
-      // if current name equals guestName from function
       if (guestArray[i].guestName === guestName) {
-        // set guestsOrder array to input order
         guestArray[i].order.push(item);
-        // setState with guestOrders
         this.setState({
           guests: guestArray
         });
-        // return
         return;
       }
     }

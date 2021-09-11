@@ -5,18 +5,15 @@ import GuestList from './GuestList.jsx';
 const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
   const [name, setName] = useState('');
 
-  // handleChange
   const onChange = (event) => {
     setName(event.target.value);
   };
 
-  // handle submit to add guest to list
   const onSubmit = (event) => {
     if (!name) {
       alert('Please enter a guest name');
       return;
     }
-    // passed down function
     addGuest(name);
     setName('');
     event.preventDefault();
