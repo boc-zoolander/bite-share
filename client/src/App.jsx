@@ -1,8 +1,6 @@
 import React from 'react';
 import AddGuests from './components/AddGuests.jsx';
 import SelectFood from './components/SelectFood.jsx';
-// Example menu data
-import Menu from '../../server/user_db_routes/testgetrestaurant_1.js';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login.jsx';
 import Search from './components/Search.jsx';
@@ -13,7 +11,7 @@ class App extends React.Component {
 
     this.state = {
       restaurant: {},
-      menu: Menu.result.menus[0],
+      menu: [],
       guests: [],
       totalCost: 0,
       sessionComplete: false,
