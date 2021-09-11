@@ -5,7 +5,7 @@ class BillSummaryPage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      split: 'evenly',
+      split: 'byItem',
       guests: [
         {
           guest_id: 34556,
@@ -44,9 +44,28 @@ class BillSummaryPage extends React.Component {
               qty: 1
             }
           ]
+        },
+        {
+          guest_id: 34550,
+          first_name: 'Sara',
+          last_name: 'Landis',
+          order: [
+            {
+              order_id: 7777,
+              item_name: 'Foamy Latte',
+              price: 8.99,
+              qty: 5
+            },
+            {
+              order_id: 5555,
+              item: 'Basic Avocado Toast',
+              price: 15.99,
+              qty: 12
+            }
+          ]
         }
       ],
-      totalCost: 58.95
+      totalCost: 295.78
     };
 
     this.splitEvenly = this.splitEvenly.bind(this);

@@ -17,9 +17,15 @@ const SplitList = (props) => {
       for (let j = 0; j < currentGuestOrders.length; j++) {
         const orderItemCost = currentGuestOrders[j].price;
         const howManyOrdered = currentGuestOrders[j].qty;
-        totals[currentGuestID] += (orderItemCost * howManyOrdered);
+        const itemTotal = Math.round(orderItemCost * howManyOrdered * 100) / 100;
+        totals[currentGuestID] += Math.round(itemTotal * 100) / 100;
       }
     };
+
+    for (const guestID in totals) {
+      totals[guestID] = Math.round(totals[guestID] * 100) / 100;
+    }
+
     return totals;
   };
 

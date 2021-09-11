@@ -1,9 +1,10 @@
 import React from 'react';
 
 const IndividualOwes = (props) => {
+  // console.log(props);
   return (
     <li className = 'guestListRow'>
-      {props.first_name} {props.last_name}    {props.paymentOwed}
+      {props.firstName} {props.lastName}    {props.paymentOwed}
     </li>
   );
 };
