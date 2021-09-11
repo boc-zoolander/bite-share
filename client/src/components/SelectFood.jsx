@@ -4,11 +4,30 @@ import React, { useState } from 'react';
 const SelectFood = ({ guests, host, menu, addToOrder }) => {
   const [currentName, setCurrentName] = useState('');
 
-  const guestNames = guests.map((item, i) => {
-    return (
-      <option key={i} value={item.guestName} > {item.guestName} </option>
-    );
-  });
+  // EVENT HANDLERS
+  const onChange = (event) => {
+    console.log('firing onChange');
+    setCurrentName(event.target.value);
+    onCloseClick();
+    event.preventDefault();
+  };
+
+  const addItem = (item) => {
+    addToOrder(currentName, item);
+  };
+
+  const onModalClick = (event) => {
+    // Set CSS for modal div id myModal to block
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'block';
+    event.preventDefault();
+  };
+
+  const onCloseClick = () => {
+    // const span = document.getElementsByClassName("close")[0];
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+  };
 
   const menuItems = menu.menu_sections.map((section, i) => {
     return (
@@ -29,30 +48,35 @@ const SelectFood = ({ guests, host, menu, addToOrder }) => {
     );
   });
 
+  // button to replace drop-down
+
   // USE ID!
   const currentObj = guests.find(element => element.guestName === currentName) || { order: [] };
   const currentItems = currentObj.order.map((item, i) => {
     return <span key={i}> {item.name} </span>;
   }) || '';
 
-  // EVENT HANDLERS
-  const onChange = (event) => {
-    setCurrentName(event.target.value);
-    event.preventDefault();
-  };
-
-  const addItem = (item) => {
-    addToOrder(currentName, item);
-  };
+  const guestNames = guests.map((item, i) => {
+    return (
+      <button key={i} type='button' className='link' value={item.guestName} onClick={onChange}> {item.guestName} </button>
+    );
+  });
 
   return (
     <div>
-      <label htmlFor='guestName' > Add items for </label>
+      <button id='selectGuestButton' onClick={onModalClick}> Select a guest and add item </button>
+      <div id='myModal' className='modal'>
+        <div className='modal-content'>
+          <span className='close' onClick={onCloseClick}>&times;</span>
+          {guestNames}
+        </div>
+      </div>
+      {/* <label htmlFor='guestName' > Add items for </label>
       <select name='guestName' onChange={onChange}>
         <option value='' selected disabled hidden > Choose Guest </option>
         <option value={host.name}> {host.name} </option>
         {guestNames}
-      </select>
+      </select> */}
       <h4> Current Items for {currentName} </h4>
         {currentItems}
       <div>
