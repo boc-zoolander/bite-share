@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import GuestList from './GuestList.jsx';
 
@@ -38,7 +39,9 @@ const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
         <input type='submit' value='Submit'/>
       </form>
       <GuestList guests={guests} deleteGuest={deleteGuest} />
-      <button type='button' onClick={changePage}> Next Page </button>
+      <Link to='/select-food' >
+        <button type='button' onClick={changePage}> Next Page </button>
+      </Link>
     </div>
   );
 };

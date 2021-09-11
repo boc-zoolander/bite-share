@@ -18,12 +18,12 @@ class App extends React.Component {
       totalCost: 0,
       sessionComplete: false,
       splitMechanism: '',
-      page: 'add',
       host: { name: 'host', order: [] }
     };
     this.addGuest = this.addGuest.bind(this);
     this.deleteGuest = this.deleteGuest.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
+    this.setTopLevelState = this.setTopLevelState.bind(this);
   }
 
   addGuest (guestName) {
@@ -55,8 +55,6 @@ class App extends React.Component {
         return;
       }
     }
-
-    this.setTopLevelState = this.setTopLevelState.bind(this);
   }
 
   setTopLevelState (name, value) {
@@ -66,20 +64,22 @@ class App extends React.Component {
   render () {
     return (
       <div>
-
       <Router>
         <Switch>
           <Route path="/find-restaurant">
             <Search setTopLevelState={this.setTopLevelState} />
+          </Route>
+          <Route path="/add-guests">
+            <AddGuests setTopLevelState={this.setTopLevelState} addGuest={this.addGuest} guests={this.state.guests} deleteGuest={this.deleteGuest} />
+          </Route>
+          <Route path="/select-food">
+            <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} host={this.state.host} menu={this.state.menu} addToOrder={this.addToOrder}/>
           </Route>
           <Route path="/">
             <Login setTopLevelState={this.setTopLevelState} />
           </Route>
         </Switch>
       </Router>
-      Bite Share Nom Nom
-      <AddGuests addGuest={this.addGuest} guests={this.state.guests} deleteGuest={this.deleteGuest} />
-      <SelectFood guests={this.state.guests} host={this.state.host} menu={this.state.menu} addToOrder={this.addToOrder}/>
     </div>
     );
   }
