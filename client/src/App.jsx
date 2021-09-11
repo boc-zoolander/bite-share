@@ -30,7 +30,7 @@ class App extends React.Component {
           <Route path="/find-restaurant">
             <Search setTopLevelState={this.setTopLevelState} />
           </Route>
-          <Route exact path="/">
+          <Route path="/">
             <Login setTopLevelState={this.setTopLevelState} />
           </Route>
         </Switch>
