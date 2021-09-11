@@ -14,6 +14,7 @@ class Search extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.getRestaurants = this.getRestaurants.bind(this);
+    this.selectRestaurant = this.selectRestaurant.bind(this);
   }
 
   handleChange (e) {
@@ -39,6 +40,10 @@ class Search extends React.Component {
     this.setState({ restaurants });
   }
 
+  selectRestaurant (restaurant) {
+    this.props.setTopLevelState('restaurant', restaurant);
+  };
+
   render () {
     return (
       <div>
@@ -54,8 +59,8 @@ class Search extends React.Component {
             <ul>
               {this.state.restaurants.map(restaurant =>
                 <li key={restaurant.restaurant_id}>
-                  {restaurant.restaurant_name}-{restaurant.address.formatted}
-                  <button>Select</button>
+                  <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
+                  <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
                 </li>
               )}
             </ul>
