@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import GuestList from './GuestList.jsx';
 
-const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
+const AddGuests = ({ setTopLevelState, guests, changeGuestPage, deleteGuest }) => {
   const [name, setName] = useState('');
 
   const onChange = (event) => {
@@ -15,7 +15,22 @@ const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
       alert('Please enter a guest name');
       return;
     }
-    addGuest(name);
+    // addGuest(name);
+    // store prop guests array in local var
+    const guestArray = [...guests];
+    // if hook name is present in any of the guests object
+    if (guestArray.find(element => element.guestName === name)) {
+      //    throw some kind of error
+      alert('This guest is already present in your list.');
+      //    return
+      return;
+    }
+    // construct new guest object
+    // push new guest object to  local var
+    guestArray.push({ guestName: name, order: [] });
+    // call setTopState to reset guests with local var
+    setTopLevelState('guests', guestArray);
+
     setName('');
     event.preventDefault();
   };
