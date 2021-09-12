@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GuestList = ({ guests, deleteGuest }) => {
+const GuestList = ({ guests, setTopLevelState }) => {
   const deleteName = (name) => {
-    deleteGuest(name);
+    const guestArray = [...guests];
+    const updated = guestArray.filter(guest => guest.guestName !== name);
+    setTopLevelState('guests', updated);
+
     event.preventDefault();
   };
 
@@ -24,7 +27,7 @@ const GuestList = ({ guests, deleteGuest }) => {
 
 GuestList.propTypes = {
   guests: PropTypes.array.isRequired,
-  deleteGuest: PropTypes.func.isRequired
+  setTopLevelState: PropTypes.func.isRequired
 };
 
 export default GuestList;

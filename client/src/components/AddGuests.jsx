@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import GuestList from './GuestList.jsx';
 
-const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
+const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
   const [name, setName] = useState('');
 
   const onChange = (event) => {
@@ -15,7 +15,13 @@ const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
       alert('Please enter a guest name');
       return;
     }
-    addGuest(name);
+    const guestArray = [...guests];
+    if (guestArray.find(element => element.guestName === name)) {
+      alert('This guest is already present in your list.');
+      return;
+    }
+    guestArray.push({ guestName: name, order: [] });
+    setTopLevelState('guests', guestArray);
     setName('');
     event.preventDefault();
   };
@@ -29,7 +35,7 @@ const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
         <input name='guest' type='text' value={name} onChange={onChange}/>
         <input type='submit' value='Submit'/>
       </form>
-      <GuestList guests={guests} deleteGuest={deleteGuest} />
+      <GuestList guests={guests} setTopLevelState={setTopLevelState} />
       <Link to='/select-food' >
         <button type='button'> Next Page </button>
       </Link>
@@ -39,9 +45,7 @@ const AddGuests = ({ addGuest, guests, changeGuestPage, deleteGuest }) => {
 
 AddGuests.propTypes = {
   setTopLevelState: PropTypes.func.isRequired,
-  addGuest: PropTypes.func.isRequired,
-  guests: PropTypes.array.isRequired,
-  deleteGuest: PropTypes.func.isRequired
+  guests: PropTypes.array.isRequired
 };
 
 export default AddGuests;
