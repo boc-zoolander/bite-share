@@ -15,6 +15,10 @@ const SelectFood = ({ guests, menu, setTopLevelState }) => {
     const guestArray = [...guests];
     for (let i = 0; i < guestArray.length; i++) {
       if (guestArray[i].guestName === currentName) {
+        if (guestArray[i].order.find(menuItem => menuItem.name === item.name)) {
+          alert('Item already added');
+          return;
+        }
         guestArray[i].order.push(item);
         setTopLevelState('guests', guestArray);
         return;
@@ -41,8 +45,7 @@ const SelectFood = ({ guests, menu, setTopLevelState }) => {
         {section.menu_items.map((item, j) => {
           return (
             <li key={j}>
-              {item.name}
-              {item.price}
+              {item.name} ${item.price}
               <button type='button' onClick={() => { addItem(item); }}> + </button>
             </li>
           );
