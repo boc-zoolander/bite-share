@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const SelectFood = ({ guests, menu, setTopLevelState }) => {
   const [currentName, setCurrentName] = useState('');
@@ -80,6 +81,9 @@ const SelectFood = ({ guests, menu, setTopLevelState }) => {
       <div>
         {menuItems}
       </div>
+      <Link to="/split-bill">
+        <input type="submit" value="Next" />
+      </Link>
     </div>
   );
 };
