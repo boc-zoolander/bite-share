@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-const SelectFood = ({ guests, host, menu, addToOrder }) => {
+const SelectFood = ({ guests, menu, setTopLevelState }) => {
   const [currentName, setCurrentName] = useState('');
 
   // EVENT HANDLERS
@@ -12,7 +12,14 @@ const SelectFood = ({ guests, host, menu, addToOrder }) => {
   };
 
   const addItem = (item) => {
-    addToOrder(currentName, item);
+    const guestArray = [...guests];
+    for (let i = 0; i < guestArray.length; i++) {
+      if (guestArray[i].guestName === currentName) {
+        guestArray[i].order.push(item);
+        setTopLevelState('guests', guestArray);
+        return;
+      }
+    }
   };
 
   const onModalClick = (event) => {
@@ -72,6 +79,12 @@ const SelectFood = ({ guests, host, menu, addToOrder }) => {
       </div>
     </div>
   );
+};
+
+SelectFood.propTypes = {
+  setTopLevelState: PropTypes.func.isRequired,
+  guests: PropTypes.array.isRequired,
+  menu: PropTypes.array.isRequired
 };
 
 export default SelectFood;
