@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from './Search.jsx';
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor (props) {
@@ -7,13 +7,11 @@ class Login extends React.Component {
 
     this.state = {
       hostName: null,
-      zipCode: null,
-      // Temporary state to show Search component until routing is implemented
-      showSearch: false
+      zipCode: null
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handlesubmit = this.handleSubmit.bind(this);
+    this.saveHost = this.saveHost.bind(this);
   }
 
   handleChange (e) {
@@ -22,29 +20,31 @@ class Login extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit (e) {
-    e.preventDefault();
-    // Temporary setState to show Search component until routing is implemented
-    this.setState({ showSearch: true });
+  saveHost () {
+    const hostDetails = {
+      id: 0,
+      guestName: this.state.hostName,
+      order: []
+    };
+    this.props.setTopLevelState('guests', [hostDetails]);
   }
 
   render () {
     return (
-      // Temporary ternary expression to show Search component until routing is implemented
-      this.state.showSearch
-        ? <Search />
-        : <div>
-            Login
-            <form>
-              <label htmlFor="hostName">Host Name:</label>
-              <input type="text" inputMode="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} />
+      <div>
+        <h2>Login</h2>
+        <form>
+          <label htmlFor="hostName">Host Name:</label>
+          <input type="text" inputMode="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} />
 
-              <label htmlFor="zipCode">Zip Code:</label>
-              <input type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
+          <label htmlFor="zipCode">Zip Code:</label>
+          <input type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
 
-              <input type="submit" value="Next" onClick={this.handlesubmit} />
-            </form>
-          </div>
+          <Link to="/find-restaurant" onClick={this.saveHost}>
+            <input type="submit" value="Next" />
+          </Link>
+        </form>
+      </div>
     );
   }
 };

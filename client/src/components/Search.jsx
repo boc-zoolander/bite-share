@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 const axios = require('axios');
+
 // Commented out for now due to webpack errors
 // require('dotenv').config();
 
@@ -14,6 +16,7 @@ class Search extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.getRestaurants = this.getRestaurants.bind(this);
+    this.selectRestaurant = this.selectRestaurant.bind(this);
   }
 
   handleChange (e) {
@@ -39,6 +42,13 @@ class Search extends React.Component {
     this.setState({ restaurants });
   }
 
+  async selectRestaurant (restaurant) {
+    this.props.setTopLevelState('restaurant', restaurant);
+    const response = await axios('http://localhost:8080/users/testgetRestaurant_1');
+    const menu = response.data.result.menus[0];
+    this.props.setTopLevelState('menu', menu);
+  };
+
   render () {
     return (
       <div>
@@ -54,9 +64,10 @@ class Search extends React.Component {
             <ul>
               {this.state.restaurants.map(restaurant =>
                 <li key={restaurant.restaurant_id}>
-                  {restaurant.restaurant_name}-
-                  {restaurant.address.formatted}
-                  <button>Select</button>
+                  <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
+                  <Link to='/add-guests' >
+                    <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
+                  </Link>
                 </li>
               )}
             </ul>
