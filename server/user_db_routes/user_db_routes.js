@@ -144,6 +144,29 @@ router.put('/updateRestaurant', (req, res) => {
     });
 });
 
+
+// updates the restaurant for a particular session
+router.get('/createNewUser', (req, res) => {
+  let obj_params = {
+    first_name: req.query.first_name,
+    last_name: req.query.last_name,
+    email: req.query.email,
+    password: req.query.password,
+  };
+
+  db.createNewUser(obj_params)
+    .then(result => {
+      res.header('Content-Type', 'application/json');
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    });
+});
+
+
+
+
 // adds a guest to a particular session
 router.post('/addGuest', (req, res) => {
   // extract the proper parameters here

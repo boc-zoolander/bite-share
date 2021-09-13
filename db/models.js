@@ -1,12 +1,14 @@
 const { Pool } = require('pg');
+const ENV = require('./env');
+
 
 const pool = new Pool({
-  user: 'postgres',
+  user: ENV.USER,
   // name of the EC2 server IP
-  host: '18.218.160.4', 
-  database: 'BOC',
-  password: 'password',
-  port: 6003,
+  host: ENV.HOST, 
+  database: ENV.DATABASE_NAME,
+  password: ENV.PASSWORD,
+  port: ENV.PORT,
 });
 
 pool.connect();
@@ -73,14 +75,14 @@ CREATE TABLE "BOC_Session_participants" (
 	item_price real
 );
 
-INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Scott', 'Summers');
-INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Jean', 'Grey');
-INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Jubilation', 'Lee');
-INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Logan', 'James Howlett');
-INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Remy', 'Etienne LeBeau');
-INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Anna', 'MarieRogue');
-INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Hank', 'McCoy');
-INSERT INTO "BOC_user"(first_name, last_name) VALUES ('Charles', 'Xavier');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Scott', 'Summers', 'iheartjeangrey@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Jean', 'Grey', 'iheartlogan@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Jubilation', 'Lee', 'ijoinedgenx@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Logan', 'James Howlett', 'jeangreyisok@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Remy', 'Etienne LeBeau', 'iheartrogue@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Anna', 'MarieRogue', 'iheartgambit@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Hank', 'McCoy', 'iheartscience@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Charles', 'Xavier', 'iheartmutantkind@gmail.com', '1234');
 INSERT INTO "BOC_Sessions"(session_name, host_id, participants_id, restaurant_name, order_id, split_method) VALUES ('Dining with the X-Men', 8, 1, 'THe X Mansion', 1, 1);
 
 Create TABLE "BOC_restaurants" (

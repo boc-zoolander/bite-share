@@ -77,9 +77,7 @@ const updateRestaurant = function (obj_param) {
 const createNewUser = function (obj_param) {
   let { first_name, last_name, email, password } = obj_param;
 
-  let queryStr = `INSERT INTO "BOC_Users"(first_name, last_name, email, join_date, password) 
-                  VALUES ('${first_name}', ${last_name}, '${email}', '${ Date.getTime() }', '${password}', 1) 
-                  RETURNING "user_id"`;
+  let queryStr = `INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('${first_name}', '${last_name}', '${email}', '${password}') RETURNING "user_id";`;
 
   return pool.query(queryStr)
     .then(res => {
