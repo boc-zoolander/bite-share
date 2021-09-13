@@ -97,13 +97,23 @@ router.get('/getSession2', (req, res) => {
 });
 
 // creates a new Session for a given Schema
-router.get('/createNewSession', (req, res) => {
+router.post('/createNewSession', (req, res) => {
+
   let obj_params = {
-    session_name: 'Session Name #4',
-    restaurant_name: 'Restaurant #4', 
-    restaurant_id_api: '234234324324234',
-    host_id: 9
+    session_name: req.query.session_name,
+    restaurant_name: req.query.restaurant_name,
+    restaurant_id_api: req.query.restaurant_id_api,
+    host_id: req.query.host_id,
   };
+
+  console.log(obj_params);
+
+  // let obj_params = {
+  //   session_name: 'Session Name #4',
+  //   restaurant_name: 'Restaurant #4', 
+  //   restaurant_id_api: '234234324324234',
+  //   host_id: 9
+  // };
 
   db.createNewSession(obj_params)
     .then(result => {
@@ -119,9 +129,9 @@ router.get('/createNewSession', (req, res) => {
 // updates the restaurant for a particular session
 router.put('/updateRestaurant', (req, res) => {
   let obj_params = {
-    session_id: 7,
-    restaurant_name_api: 'Restaurant #4',
-    restaurant_id_api: '234234324324234'
+    session_id: req.query.session_id,
+    restaurant_name: req.query.restaurant_name,
+    restaurant_id_api: req.query.restaurant_name_api,
   };
 
   db.updateRestaurant(obj_params)
@@ -138,10 +148,8 @@ router.put('/updateRestaurant', (req, res) => {
 router.post('/addGuest', (req, res) => {
   // extract the proper parameters here
   let obj_params = {
-    session_id: 7,
-    user_id: 10,
-    // first_name: req.params.first_name,
-    // last_name: req.params.last_name
+    session_id: req.query.session_id,
+    user_id: req.query.user_id,
   };
 
   db.addGuest(obj_params)
@@ -158,8 +166,8 @@ router.post('/addGuest', (req, res) => {
 router.post('/removeGuest', (req, res) => {
   // extract the proper parameters here
   let obj_params = {
-    session_id: req.params.session_id,
-    user_id: 9,
+    session_id: req.query.session_id,
+    user_id: req.query.user_id,
   };
 
   db.removeGuest(obj_params)
@@ -173,17 +181,41 @@ router.post('/removeGuest', (req, res) => {
 });
 
 // adds an order with respect to a guest to a particular session
+router.get('/addOrder', (req, res) => {
+  // extract the proper parameters here
+  let obj_params = {
+    order_session_id: req.query.session_id,
+    orderer_id: req.query.user_id,
+    food_id_api: req.query.food_id_api,
+    food_name_api: req.query.food_name_api,
+    price: req.query.price,
+    qty: req.query.qty,
+    restaurant_id_api: req.query.restaurant_id_api,
+    restaurant_name_api: req.query.restaurant_name_api,
+  };
+
+  db.addOrder(obj_params)
+    .then(result => {
+      res.header('Content-Type', 'application/json');
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    });
+});
+
+// adds an order with respect to a guest to a particular session
 router.post('/addOrder', (req, res) => {
   // extract the proper parameters here
   let obj_params = {
-    order_session_id: req.params.session_id,
-    orderer_id: req.params.user_id,
-    food_id_api: req.params.food_id_api,
-    food_name_api: req.params.food_name_api,
-    price: req.params.price,
-    qty: req.params.qty,
-    restaurant_id_api: req.params.restaurant_id_api,
-    restaurant_name_api: req.params.restaurant_name_api,
+    order_session_id: req.query.session_id,
+    orderer_id: req.query.user_id,
+    food_id_api: req.query.food_id_api,
+    food_name_api: req.query.food_name_api,
+    price: req.query.price,
+    qty: req.query.qty,
+    restaurant_id_api: req.query.restaurant_id_api,
+    restaurant_name_api: req.query.restaurant_name_api,
   };
 
   db.addOrder(obj_params)
@@ -197,11 +229,11 @@ router.post('/addOrder', (req, res) => {
 });
 
 // updates an order with respect to a guest to a particular session
-router.put('/updateOrder', (req, res) => {
+router.get('/updateOrder', (req, res) => {
   // extract the proper parameters here
   let obj_params = {
-    order_id: req.params.order_id,
-    qty: req.params.qty,
+    order_id: req.query.order_id,
+    qty: req.query.qty,
   };
 
   db.updateOrder(obj_params)
@@ -215,9 +247,9 @@ router.put('/updateOrder', (req, res) => {
 });
 
 // removes an order
-router.put('/removeOrder', (req, res) => {
+router.get('/removeOrder', (req, res) => {
   let obj_params = {
-    order_id: req.params.order_id,
+    order_id: req.query.order_id,
   };
 
   db.removeOrder(obj_params)

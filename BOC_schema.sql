@@ -10,7 +10,7 @@
 -- 
 -- ---
 
-DROP TABLE IF EXISTS "BOC_User-Session-jt";
+DROP TABLE IF EXISTS "BOC_User-Session-jt" CASCADE;
 		
 CREATE TABLE "BOC_User-Session-jt" (
   id SERIAL,
@@ -25,7 +25,7 @@ CREATE TABLE "BOC_User-Session-jt" (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS "BOC_Users";
+DROP TABLE IF EXISTS "BOC_Users" CASCADE;
 		
 CREATE TABLE "BOC_Users" (
   user_id SERIAL,
@@ -41,7 +41,7 @@ CREATE TABLE "BOC_Users" (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS "BOC_Sessions";
+DROP TABLE IF EXISTS "BOC_Sessions" CASCADE;
 		
 CREATE TABLE "BOC_Sessions" (
   session_id SERIAL,
@@ -61,7 +61,7 @@ CREATE TABLE "BOC_Sessions" (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS "BOC_Orders";
+DROP TABLE IF EXISTS "BOC_Orders" CASCADE;
 		
 CREATE TABLE "BOC_Orders" (
   order_pk SERIAL,
@@ -82,7 +82,7 @@ CREATE TABLE "BOC_Orders" (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS "BOC_User-Friend-jt";
+DROP TABLE IF EXISTS "BOC_User-Friend-jt" CASCADE;
 		
 CREATE TABLE "BOC_User-Friend-jt" (
   user_friend_pk SERIAL,
@@ -96,7 +96,7 @@ CREATE TABLE "BOC_User-Friend-jt" (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS "BOC_Session-Chat";
+DROP TABLE IF EXISTS "BOC_Session-Chat" CASCADE;
 		
 CREATE TABLE "BOC_Session-Chat" (
   session_chat_id SERIAL,
@@ -111,7 +111,7 @@ CREATE TABLE "BOC_Session-Chat" (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS "BOC_Rollover-Sessions";
+DROP TABLE IF EXISTS "BOC_Rollover-Sessions" CASCADE;
 		
 CREATE TABLE "BOC_Rollover-Sessions" (
   rollover_pk SERIAL,
@@ -124,7 +124,7 @@ CREATE TABLE "BOC_Rollover-Sessions" (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS "BOC_Restaurants";
+DROP TABLE IF EXISTS "BOC_Restaurants" CASCADE;
 		
 CREATE TABLE "BOC_Restaurants" (
   restaurant_id_pk SERIAL,
@@ -146,7 +146,7 @@ CREATE TABLE "BOC_Restaurants" (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS "BOC_Menu-Items";
+DROP TABLE IF EXISTS "BOC_Menu-Items" CASCADE;
 		
 CREATE TABLE "BOC_Menu-Items" (
   id SERIAL,
@@ -163,13 +163,13 @@ CREATE TABLE "BOC_Menu-Items" (
 -- Foreign Keys 
 -- ---
 
-ALTER TABLE "BOC_User-Session-jt" ADD FOREIGN KEY (session_id) REFERENCES "BOC_Sessions" (session_id);
-ALTER TABLE "BOC_User-Session-jt" ADD FOREIGN KEY (user_id) REFERENCES "BOC_Users" (user_id);
-ALTER TABLE "BOC_Sessions" ADD FOREIGN KEY (session_id) REFERENCES "BOC_Session-Chat" (session_chat_id);
-ALTER TABLE "BOC_Sessions" ADD FOREIGN KEY (rollover_session_id) REFERENCES "BOC_Rollover-Sessions" (rollover_pk);
-ALTER TABLE "BOC_Orders" ADD FOREIGN KEY (orderer_id) REFERENCES "BOC_Users" (user_id);
-ALTER TABLE "BOC_Orders" ADD FOREIGN KEY (order_session_id) REFERENCES "BOC_Sessions" (session_id);
-ALTER TABLE "BOC_Session-Chat" ADD FOREIGN KEY (speaker_id) REFERENCES "BOC_Users" (user_id);
+-- ALTER TABLE "BOC_User-Session-jt" ADD FOREIGN KEY (session_id) REFERENCES "BOC_Sessions" (session_id);
+-- ALTER TABLE "BOC_User-Session-jt" ADD FOREIGN KEY (user_id) REFERENCES "BOC_Users" (user_id);
+-- ALTER TABLE "BOC_Sessions" ADD FOREIGN KEY (session_id) REFERENCES "BOC_Session-Chat" (session_chat_id);
+-- ALTER TABLE "BOC_Sessions" ADD FOREIGN KEY (rollover_session_id) REFERENCES "BOC_Rollover-Sessions" (rollover_pk);
+-- ALTER TABLE "BOC_Orders" ADD FOREIGN KEY (orderer_id) REFERENCES "BOC_Users" (user_id);
+-- ALTER TABLE "BOC_Orders" ADD FOREIGN KEY (order_session_id) REFERENCES "BOC_Sessions" (session_id);
+-- ALTER TABLE "BOC_Session-Chat" ADD FOREIGN KEY (speaker_id) REFERENCES "BOC_Users" (user_id);
 
 -- ---
 -- Table Properties
@@ -207,3 +207,12 @@ ALTER TABLE "BOC_Session-Chat" ADD FOREIGN KEY (speaker_id) REFERENCES "BOC_User
 -- ('','','','','','','','','','','');
 -- INSERT INTO `BOC_Menu-Items` (`id`,`menu_item_name`,`menu_item_description`,`menu_item_price`,`subsection`,`subsection_description`,`item_id_api`) VALUES
 -- ('','','','','','','');
+
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Scott', 'Summers', 'iheartjeangrey@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Jean', 'Grey', 'iheartlogan@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Jubilation', 'Lee', 'ijoinedgenx@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Logan', 'James Howlett', 'jeangreyisok@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Remy', 'Etienne LeBeau', 'iheartrogue@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Anna', 'MarieRogue', 'iheartgambit@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Hank', 'McCoy', 'iheartscience@gmail.com', '1234');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Charles', 'Xavier', 'iheartmutantkind@gmail.com', '1234');
