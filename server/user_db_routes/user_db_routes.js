@@ -252,7 +252,7 @@ router.post('/addOrder', (req, res) => {
 });
 
 // updates an order with respect to a guest to a particular session
-router.get('/updateOrder', (req, res) => {
+router.put('/updateOrder', (req, res) => {
   // extract the proper parameters here
   let obj_params = {
     order_id: req.query.order_id,
@@ -270,7 +270,7 @@ router.get('/updateOrder', (req, res) => {
 });
 
 // removes an order
-router.get('/removeOrder', (req, res) => {
+router.post('/removeOrder', (req, res) => {
   let obj_params = {
     order_id: req.query.order_id,
   };
