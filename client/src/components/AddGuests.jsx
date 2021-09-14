@@ -13,22 +13,22 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
   };
 
   const onSubmit = (event) => {
+    const guestArray = [...guests];
+
     if (!name) {
       setMissingName(true);
       setDuplicateName(false);
+    } else if (guestArray.find(element => element.guestName === name)) {
+      setDuplicateName(true);
+      setMissingName(false);
     } else {
-      const guestArray = [...guests];
-      if (guestArray.find(element => element.guestName === name)) {
-        setDuplicateName(true);
-        setMissingName(false);
-      } else {
-        guestArray.push({ guestName: name, order: [] });
-        setTopLevelState('guests', guestArray);
-        setName('');
-        setDuplicateName(false);
-        setMissingName(false);
-      }
+      guestArray.push({ guestName: name, order: [] });
+      setTopLevelState('guests', guestArray);
+      setName('');
+      setDuplicateName(false);
+      setMissingName(false);
     }
+
     event.preventDefault();
   };
 
