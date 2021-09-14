@@ -66,7 +66,7 @@ const SplitList = (props) => {
     {props.guests.map((guest, i) =>
       <IndividualOwes key = {i} firstName = {guest.guestName} paymentOwed = {paymentsOwed[guest.guestName]} />
     )}
-    Total: {billTotal}
+    Total: ${billTotal}
   </ul>
   );
 };
