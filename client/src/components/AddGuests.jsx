@@ -15,8 +15,7 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
     const guestArray = [...guests];
 
     if (!name) {
-      setMissingName(true);
-      setDuplicateName(false);
+      setNameError('Please enter a guest name.');
     } else if (guestArray.find(element => element.guestName === name)) {
       setDuplicateName(true);
       setMissingName(false);
