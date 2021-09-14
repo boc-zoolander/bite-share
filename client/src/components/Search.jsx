@@ -52,7 +52,7 @@ class Search extends React.Component {
   render () {
     return (
       <div>
-        Search
+        <h2>Search</h2>
         <form>
           <label htmlFor="searchRestaurants">Search restaurants by name:</label>
           <input type="text" inputMode="search" name="searchRestaurants" value={this.state.searchQuery} onChange={this.handleChange} />
