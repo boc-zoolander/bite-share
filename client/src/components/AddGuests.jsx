@@ -35,8 +35,7 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
       <form onSubmit={onSubmit}>
         <label htmlFor='guest' > Add Guests </label>
         <input name='guest' type='text' value={name} onChange={onChange}/>
-        {duplicateName && <div>This guest is already present in your list.</div>}
-        {missingName && <div>Please enter a guest name.</div>}
+        {nameError && <p class="error">This guest is already present in your list.</p>}
         <input type='submit' value='Submit'/>
       </form>
       <GuestList guests={guests} setTopLevelState={setTopLevelState} />
