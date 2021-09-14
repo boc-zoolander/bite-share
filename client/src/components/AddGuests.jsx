@@ -5,8 +5,7 @@ import GuestList from './GuestList.jsx';
 
 const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
   const [name, setName] = useState('');
-  const [duplicateName, setDuplicateName] = useState(false);
-  const [missingName, setMissingName] = useState(false);
+  const [nameError, setNameError] = useState('');
 
   const onChange = (event) => {
     setName(event.target.value);
