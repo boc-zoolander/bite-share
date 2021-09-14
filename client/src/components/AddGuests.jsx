@@ -17,8 +17,7 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
     if (!name) {
       setNameError('Please enter a guest name.');
     } else if (guestArray.find(element => element.guestName === name)) {
-      setDuplicateName(true);
-      setMissingName(false);
+      setnameError('This guest is already present in your list.');
     } else {
       guestArray.push({ guestName: name, order: [] });
       setTopLevelState('guests', guestArray);
