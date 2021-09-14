@@ -5,24 +5,26 @@ import GuestList from './GuestList.jsx';
 
 const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
   const [name, setName] = useState('');
+  const [nameError, setNameError] = useState('');
 
   const onChange = (event) => {
     setName(event.target.value);
   };
 
   const onSubmit = (event) => {
-    if (!name) {
-      alert('Please enter a guest name');
-      return;
-    }
     const guestArray = [...guests];
-    if (guestArray.find(element => element.guestName === name)) {
-      alert('This guest is already present in your list.');
-      return;
+
+    if (!name) {
+      setNameError('Please enter a guest name.');
+    } else if (guestArray.find(element => element.guestName === name)) {
+      setnameError('This guest is already present in your list.');
+    } else {
+      guestArray.push({ guestName: name, order: [] });
+      setTopLevelState('guests', guestArray);
+      setName('');
+      setNameError('');
     }
-    guestArray.push({ guestName: name, order: [] });
-    setTopLevelState('guests', guestArray);
-    setName('');
+
     event.preventDefault();
   };
 
@@ -33,6 +35,7 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
       <form onSubmit={onSubmit}>
         <label htmlFor='guest' > Add Guests </label>
         <input name='guest' type='text' value={name} onChange={onChange}/>
+        {nameError && <p className='error'>{nameError}</p>}
         <input type='submit' value='Submit'/>
       </form>
       <GuestList guests={guests} setTopLevelState={setTopLevelState} />
