@@ -3,7 +3,7 @@ import IndividualOwes from './individualOwes.jsx';
 
 const SplitList = (props) => {
   const numberOfGuests = props.guests.length;
-  const billTotal = props.totalCost;
+  const billTotal = props.totalCost.toFixed(2);
 
   let paymentsOwed;
 
