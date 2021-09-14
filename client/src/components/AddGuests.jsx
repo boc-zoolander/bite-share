@@ -22,8 +22,7 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
       guestArray.push({ guestName: name, order: [] });
       setTopLevelState('guests', guestArray);
       setName('');
-      setDuplicateName(false);
-      setMissingName(false);
+      setNameError('');
     }
 
     event.preventDefault();
