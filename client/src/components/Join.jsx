@@ -20,7 +20,7 @@ const Join = () => {
       <label forHtml='login'>Add your name</label>
       <input type='text' name='login' value={userName} onChange={onChange}/>
       <Link to='/guest-menu' >
-        <button type='submit'> Join [host]s session </button>
+        <button type='submit' onClick={joinSesson}> Join [host]s session </button>
       </Link>
     </form>
   );
