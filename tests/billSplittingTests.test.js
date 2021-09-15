@@ -88,7 +88,7 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
     expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
   });
 
-  test('Unit Test 3:  Does the component <BillSummaryPage /> contain the Total', () => {
+  test('Unit Test 3:  Does the component <BillSummaryPage /> contain the Preliminary Total, Tip Amount, Tax, and Final Total', () => {
     const guestsProps = [
       {
         id: 0,
@@ -117,6 +117,9 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
       }
     ];
     render(<BrowserRouter><BillSummaryPage guests = {guestsProps}/></BrowserRouter>);
-    expect(screen.getByText(/Total/)).toBeInTheDocument();
+    expect(screen.getByText(/Preliminary Total/)).toBeInTheDocument();
+    expect(screen.getByText(/Tip Amount/)).toBeInTheDocument();
+    expect(screen.getByText(/Tax/)).toBeInTheDocument();
+    expect(screen.getByText(/Final Total/)).toBeInTheDocument();
   });
 });
