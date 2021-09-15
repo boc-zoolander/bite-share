@@ -7,6 +7,7 @@ import Login from './components/Login.jsx';
 import Search from './components/Search.jsx';
 import Join from './components/Join.jsx';
 import GuestMenu from './components/GuestMenu.jsx';
+import HostMenu from './components/HostMenu.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -16,6 +17,7 @@ class App extends React.Component {
       restaurant: {},
       menu: [],
       guests: [],
+      joinName: '',
       totalCost: 0,
       sessionComplete: false,
       splitMechanism: '',
@@ -40,10 +42,13 @@ class App extends React.Component {
             <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
           </Route>
           <Route path="/join">
-            <Join />
+            <Join setTopLevelState={this.setTopLevelState}/>
           </Route>
           <Route path="/guest-menu">
-            <GuestMenu />
+            <GuestMenu joinName={this.state.joinName}/>
+          </Route>
+          <Route path="/host-menu">
+            <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
           </Route>
           <Route path="/select-food">
             <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />

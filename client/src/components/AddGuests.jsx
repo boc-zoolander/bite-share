@@ -39,7 +39,7 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
         <input type='submit' value='Submit'/>
       </form>
       <GuestList guests={guests} setTopLevelState={setTopLevelState} />
-      <Link to='/select-food' >
+      <Link to='/host-menu' >
         <button type='button'> Next Page </button>
       </Link>
     </div>
