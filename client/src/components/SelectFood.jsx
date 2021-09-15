@@ -76,7 +76,7 @@ const SelectFood = ({ guests, menu, setTopLevelState }) => {
           {guestNames}
         </div>
       </div>
-      <h4> Current Items for {currentName} </h4>
+      <h2>Current Items for {currentName}</h2>
         {currentItems}
       <div>
         {menuItems}
