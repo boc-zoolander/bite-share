@@ -55,7 +55,7 @@ const GuestMenu = ({ joinName }) => {
   };
 
   const submitOrder = () => {
-    socket.emit('orderSubmitted', { joinName, currentOrder });
+    socket.emit('orderSubmitted', { guestName: joinName, order: currentOrder });
   };
 
   return (

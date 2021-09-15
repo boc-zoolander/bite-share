@@ -15,8 +15,10 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
     socket.on('orderSubmitted', payload => {
       console.log('Orders: ', payload);
       // define current guests as var
-      // Add guest object with order and name from payload to variable (use same duplicate check as below)
+      // Add guest object with order and name from payload to variable (check for duplicates once ID is part of this)
+      const guestArray = [...guests, payload];
       // set top level guests state
+      setTopLevelState('guests', guestArray);
     });
   });
 

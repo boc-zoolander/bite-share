@@ -13,16 +13,6 @@ app.use(express.static(path.join(__dirname, '/../client/dist')));
 io.on('connection', socket => {
   console.log('connection made yo!');
 
-  // All of the different event listeners will live here
-
-  // socket.on('message', payload => {
-  //   // write to database and do everything helpfuntion
-  //   // return the product the functio
-  //   console.log('Message recieved on server: ', payload);
-  //   const guestStatus = 'returned from helper function';
-  //   io.emit('message', guestStatus);
-  // });
-
   socket.on('orderSubmitted', payload => {
     console.log('name and order received on server: ', payload);
     io.emit('orderSubmitted', payload);
@@ -30,9 +20,9 @@ io.on('connection', socket => {
 });
 
 // the router for the users API
-
 app.use('/users', users);
 
+// OLD LISTEN
 // app.listen(PORT, () => {
 //   console.log(`listening on port ${PORT}`);
 // });
