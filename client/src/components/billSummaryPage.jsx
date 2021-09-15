@@ -8,6 +8,7 @@ class BillSummaryPage extends React.Component {
     this.state = {
       split: 'by Item',
       tipPercentage: 0,
+      //???? does it need to be a number
       zipCode: Number(this.props.zipCode),
       guests: this.props.guests
     };
@@ -26,8 +27,8 @@ class BillSummaryPage extends React.Component {
         const orderItemCost = currentGuestOrders[j].price;
         const howManyOrdered = 1;
         // const howManyOrdered = currentGuestOrders[j].qty;
-        const itemTotal = Math.round(orderItemCost * howManyOrdered * 100) / 100;
-        billTotal += Math.round(itemTotal * 100) / 100;
+        const itemTotal = orderItemCost * howManyOrdered;
+        billTotal += itemTotal;
       }
     };
     return billTotal;
@@ -66,7 +67,10 @@ class BillSummaryPage extends React.Component {
         <Link to = "/select-food">
           <button>Back</button>
         </Link>
-        <button onClick={this.splitEvenly}>Split Evenly</button>
+        {this.state.guests.length > 1
+          ? <button onClick={this.splitEvenly}>Split Evenly</button>
+          : <div/>
+        }
         <button onClick={this.splitByItem}>Split by Item</button>
         <Link to = "/">
           <button>Complete Session</button>
