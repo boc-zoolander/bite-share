@@ -17,7 +17,8 @@ class App extends React.Component {
       totalCost: 0,
       sessionComplete: false,
       splitMechanism: '',
-      host: { name: 'host', order: [] }
+      hostZipCode: null,
+      hostLatLon: null
     };
     this.setTopLevelState = this.setTopLevelState.bind(this);
   }
@@ -44,7 +45,7 @@ class App extends React.Component {
             <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
           </Route>
           <Route path="/">
-            <Login setTopLevelState={this.setTopLevelState} />
+            <Login setTopLevelState={this.setTopLevelState} hostLatLon={this.state.hostLatLon} />
           </Route>
         </Switch>
       </Router>
