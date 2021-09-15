@@ -119,45 +119,4 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
     render(<BrowserRouter><BillSummaryPage guests = {guestsProps}/></BrowserRouter>);
     expect(screen.getByText(/Total/)).toBeInTheDocument();
   });
-
-  // test('Unit Test 4:  Does the component <BillSummaryPage /> allow user to change split method to Split evenly', () => {
-  //   render(<BillSummaryPage />);
-  //   const btnSplitEvenly = screen.getByT
-  //   expect(screen.getByText(/Total/)).toBeInTheDocument();
-  // });
 });
-
-// describe('Unit Test Section: <SplitList />', () => {
-//   // set up for each test
-//   beforeEach(() => {
-//   });
-
-//   // clean up for each test
-//   afterEach(() => {
-//   });
-
-//   // test('Unit Test 1:  Does the component <SplitList /> properly computes byItem totals?', () => {
-//   //   const { getGuestTotals } = render(<SplitList />);
-//   //   const SplitLis
-//   // });
-
-// test('Unit Test 2:  Does the component <SplitList /> properly computes even split totals?', () => {
-//   const { getEvenTotals }
-//   // expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
-//   // expect(screen.getByText(/Total/)).toBeInTheDocument();
-// });
-// });
-
-// describe('Unit Test Section: <IndividualOwes />', () => {
-//   // set up for each test
-//   beforeEach(() => {
-//   });
-
-//   // clean up for each test
-//   afterEach(() => {
-//   });
-
-//   test('Unit Test 1:  Does the component <IndividualOwes /> render?', () => {
-//     render(<IndividualOwes />);
-//   });
-// });

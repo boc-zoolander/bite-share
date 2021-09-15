@@ -27,6 +27,7 @@ class Login extends React.Component {
       order: []
     };
     this.props.setTopLevelState('guests', [hostDetails]);
+    this.props.setTopLevelState('zipCode', this.state.zipCode);
   }
 
   render () {
