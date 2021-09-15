@@ -58,9 +58,7 @@ const SplitList = (props) => {
     for (const guestID in totals) {
       splitEvenTotal += Number(totals[guestID]);
     }
-    console.log('splitEvenTotal', splitEvenTotal);
     let remainder = Math.floor((billWithTipAndTax - splitEvenTotal) * 100) / 100;
-    console.log('remainder', remainder);
     if (remainder > 0) {
       while (remainder > 0) {
         const thisGuest = guestIDs.splice(Math.floor(Math.random() * guestIDs.length), 1)[0];
