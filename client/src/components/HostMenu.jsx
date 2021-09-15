@@ -22,13 +22,6 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
     });
   });
 
-  const sendPaid = (event) => {
-    event.preventDefault();
-    // this is where we will send on socket
-    socket.emit('paid', { ready });
-    setMessage('');
-  };
-
   // EVENT HANDLERS
   const onChange = (event) => {
     setCurrentName(event.target.value);
@@ -69,6 +62,17 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
     );
   });
 
+  const onModalClick = (event) => {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'block';
+    event.preventDefault();
+  };
+
+  const onCloseClick = () => {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+  };
+
   const currentObj = guests.find(element => element.guestName === currentName) || { order: [] };
   const currentItems = currentObj.order.map((item, i) => {
     return <span key={i}> {item.name} </span>;
@@ -82,7 +86,13 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
 
   return (
     <div>
-
+      <button id='selectGuestButton' onClick={onModalClick}> Select a guest and add item </button>
+      <div id='myModal' className='modal'>
+        <div className='modal-content'>
+          <span className='close' onClick={onCloseClick}>&times;</span>
+          {guestNames}
+        </div>
+      </div>
       <h2> Dashboard </h2>
       {/* RENDER GUESTS WHO HAVE JOINED AND STATUS */}
 
