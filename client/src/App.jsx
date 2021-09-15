@@ -16,7 +16,7 @@ class App extends React.Component {
       guests: [],
       totalCost: 0,
       sessionComplete: false,
-      splitMechanism: '',
+      splitMechanism: 'by Item',
       restaurantZipCode: null,
       host: { name: 'host', order: [] }
     };
