@@ -67,11 +67,13 @@ class BillSummaryPage extends React.Component {
         <Link to = "/select-food">
           <button>Back</button>
         </Link>
-        {this.state.guests.length > 1
-          ? <button onClick={this.splitEvenly}>Split Evenly</button>
+        {this.state.guests.length <= 1
+          ? <div>
+            <button onClick={this.splitEvenly}>Split Evenly</button>
+            <button onClick={this.splitByItem}>Split by Item</button>
+            </div>
           : <div/>
         }
-        <button onClick={this.splitByItem}>Split by Item</button>
         <Link to = "/">
           <button>Complete Session</button>
         </Link>
