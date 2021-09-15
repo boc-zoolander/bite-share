@@ -32,7 +32,6 @@ class BillSummaryPage extends React.Component {
     return billTotal;
   }
 
-
   addTip (event) {
     const value = event.target.value
     this.setState({
