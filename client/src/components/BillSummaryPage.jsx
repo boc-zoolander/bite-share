@@ -1,16 +1,18 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import SplitList from './splitList.jsx';
+import SplitList from './SplitList.jsx';
 
 class BillSummaryPage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       split: 'by Item',
+      tipPercentage: 0,
       guests: this.props.guests
     };
 
     this.getBillTotal = this.getBillTotal.bind(this);
+    this.addTip = this.addTip.bind(this);
     this.splitEvenly = this.splitEvenly.bind(this);
     this.splitByItem = this.splitByItem.bind(this);
   }
@@ -30,6 +32,13 @@ class BillSummaryPage extends React.Component {
     return billTotal;
   }
 
+  addTip (event) {
+    const value = event.target.value
+    this.setState({
+      tipPercentage : value
+    })
+  }
+
   splitEvenly () {
     this.setState({
       split: 'Evenly'
@@ -45,8 +54,12 @@ class BillSummaryPage extends React.Component {
   render () {
     return (
       <div>
-        <h2>Final Bill Split {this.state.split}</h2>
-        <SplitList guests={this.state.guests} totalCost={this.getBillTotal(this.state.guests)} split={this.state.split}/>
+        <h3>Final Bill Split {this.state.split}</h3>
+        <SplitList guests={this.state.guests} totalCost={this.getBillTotal(this.state.guests)} tipPercentage = {this.state.tipPercentage} split={this.state.split}/>
+        <form>
+          Tip Percentage (%):
+          <input type="number" id="tipPercentage" name="tipPercentage" min="0" max="1000" value={this.state.tipPercentage} onChange={this.addTip}/><br/>
+        </form>
         <button onClick={this.splitEvenly}>Split Evenly</button>
         <button onClick={this.splitByItem}>Split by Item</button>
         <Link to = "/">

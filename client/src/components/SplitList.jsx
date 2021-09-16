@@ -1,9 +1,11 @@
 import React from 'react';
-import IndividualOwes from './individualOwes.jsx';
+import IndividualOwes from './IndividualOwes.jsx';
 
 const SplitList = (props) => {
   const numberOfGuests = props.guests.length;
   const billTotal = props.totalCost;
+  const tipAmount = Math.round(billTotal * (props.tipPercentage / 100) * 100) / 100;
+  const billWithTip = billTotal + tipAmount;
 
   let paymentsOwed;
 
@@ -20,12 +22,13 @@ const SplitList = (props) => {
         const howManyOrdered = 1;
         // const howManyOrdered = currentGuestOrders[j].qty;
         const itemTotal = Math.round(orderItemCost * howManyOrdered * 100) / 100;
-        totals[currentGuestID] += Math.round(itemTotal * 100) / 100;
+        totals[currentGuestID] += (Math.round(itemTotal * 100) / 100);
       }
     };
 
     for (const guestID in totals) {
-      totals[guestID] = Math.round(totals[guestID] * 100) / 100;
+      const tip = totals[guestID] * (props.tipPercentage / 100);
+      totals[guestID] = Math.round((totals[guestID] + tip) * 100) / 100;
     }
 
     return totals;
@@ -39,14 +42,14 @@ const SplitList = (props) => {
       const currentGuestID = guestArray[i].guestName;
       // const currentGuestID = guestArray[i].guest_id;
       guestIDs.push(currentGuestID);
-      const evenTotal = Math.floor((billTotal / numberOfGuests) * 100) / 100;
+      const evenTotal = Math.floor((billWithTip / numberOfGuests) * 100) / 100;
       totals[currentGuestID] = evenTotal;
     };
     let splitEvenTotal = 0;
     for (const guestID in totals) {
       splitEvenTotal += totals[guestID];
     }
-    let remainder = Math.floor((billTotal - splitEvenTotal) * 100) / 100;
+    let remainder = Math.floor((billWithTip - splitEvenTotal) * 100) / 100;
     while (remainder > 0) {
       const thisGuest = guestIDs.splice(Math.floor(Math.random() * guestIDs.length), 1)[0];
       totals[thisGuest] += 0.01;
@@ -66,7 +69,7 @@ const SplitList = (props) => {
     {props.guests.map((guest, i) =>
       <IndividualOwes key = {i} firstName = {guest.guestName} paymentOwed = {paymentsOwed[guest.guestName]} />
     )}
-    Total: {billTotal}
+    Total: ${billWithTip.toFixed(2)}
   </ul>
   );
 };
