@@ -1,7 +1,7 @@
 import React from 'react';
 import AddGuests from './components/AddGuests.jsx';
 import SelectFood from './components/SelectFood.jsx';
-import BillSummaryPage from './components/billSummaryPage.jsx';
+import BillSummaryPage from './components/BillSummaryPage.jsx';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login.jsx';
 import Search from './components/Search.jsx';

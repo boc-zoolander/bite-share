@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import SplitList from './splitList.jsx';
+import SplitList from './SplitList.jsx';
 
 class BillSummaryPage extends React.Component {
   constructor (props) {
