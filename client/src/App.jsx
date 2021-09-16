@@ -16,8 +16,7 @@ class App extends React.Component {
       guests: [],
       totalCost: 0,
       sessionComplete: false,
-      splitMechanism: '',
-      host: { name: 'host', order: [] },
+      splitMechanism: ''
     };
 
     this.setTopLevelState = this.setTopLevelState.bind(this);
