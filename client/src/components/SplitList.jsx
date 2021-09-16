@@ -88,7 +88,7 @@ const SplitList = (props) => {
     )}
     <div>
       <hr />
-      </div> Preliminary Total: ${billTotalWithoutTipOrTax.toFixed(2)} <div>
+      <div> Preliminary Total: ${billTotalWithoutTipOrTax.toFixed(2)} </div>
       <div> Tip Amount: ${tipAmount.toFixed(2)} </div>
       <div> Tax: ${taxAmount.toFixed(2)} </div>
       <div> Final Total: ${billWithTipAndTax.toFixed(2)} </div>
