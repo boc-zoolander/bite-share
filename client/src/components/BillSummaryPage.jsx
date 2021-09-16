@@ -62,6 +62,10 @@ class BillSummaryPage extends React.Component {
         </form>
         <button onClick={this.splitEvenly}>Split Evenly</button>
         <button onClick={this.splitByItem}>Split by Item</button>
+        <br/>
+        <Link to = "/select-food">
+          <button>Modify Order</button>
+        </Link>
         <Link to = "/">
           <button>Complete Session</button>
         </Link>

@@ -72,6 +72,9 @@ class Search extends React.Component {
               )}
             </ul>
         </div>
+        <Link to="/">
+          <button type="button">Start Over</button>
+        </Link>
       </div>
     );
   }

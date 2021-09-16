@@ -17,8 +17,9 @@ class App extends React.Component {
       totalCost: 0,
       sessionComplete: false,
       splitMechanism: '',
-      host: { name: 'host', order: [] }
+      host: { name: 'host', order: [] },
     };
+
     this.setTopLevelState = this.setTopLevelState.bind(this);
   }
 
