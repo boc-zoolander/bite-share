@@ -32,7 +32,7 @@ const Dashboard = () => {
   // maping function
   const whoJoined = joinedNames.map((item, index) => {
     return (
-      item.submitted ? <li key={index}>{item.name} Completed Order </li> : <li key={index}>{item.name} joined the session </li>
+      item.submitted ? <li key={index}>{item.name} Completed Order </li> : <li key={index}>{item.name} joined the session and is ordering food </li>
     );
   });
   return (

@@ -39,6 +39,8 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
         <input type='submit' value='Submit'/>
       </form>
       <GuestList guests={guests} setTopLevelState={setTopLevelState} />
+      <p>Send this link to friends to join</p>
+      <p>http://localhost:8080/#/join</p>
       <Link to='/host-menu' >
         <button type='button'> Next Page </button>
       </Link>
