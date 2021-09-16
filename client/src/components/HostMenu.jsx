@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import io from 'socket.io-client';
+import Dashboard from './Dashboard.jsx';
 
 const url = 'http://localhost:8080';
 const socket = io(url);
@@ -95,6 +96,7 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
       </div>
       <h2> Dashboard </h2>
       {/* RENDER GUESTS WHO HAVE JOINED AND STATUS */}
+      <Dashboard />
 
       <h2>Current Items for {currentName}</h2>
         {currentItems}

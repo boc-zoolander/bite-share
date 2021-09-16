@@ -17,6 +17,11 @@ io.on('connection', socket => {
     console.log('name and order received on server: ', payload);
     io.emit('orderSubmitted', payload);
   });
+
+  socket.on('onJoin', payload => {
+    console.log('Remote Name received on server: ', payload);
+    io.emit('onJoin', payload);
+  });
 });
 
 // the router for the users API
