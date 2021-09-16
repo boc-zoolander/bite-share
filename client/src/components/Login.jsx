@@ -6,8 +6,8 @@ class Login extends React.Component {
     super(props);
 
     this.state = {
-      hostName: null,
-      zipCode: null
+      hostName: '',
+      zipCode: ''
     };
 
     this.handleChange = this.handleChange.bind(this);

@@ -1,7 +1,9 @@
+
 const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = 8080;
+require("dotenv").config();
 const users = require('./user_db_routes/user_db_routes');
 
 app.use(express.json());

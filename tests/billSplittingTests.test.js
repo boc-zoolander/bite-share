@@ -8,8 +8,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { configure, shallow, mount } from 'enzyme';
 // eslint-disable-next-line no-unused-vars
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import BillSummaryPage from '../client/src/components/billSummaryPage.jsx';
-// import SplitList from '../client/src/components/splitList.jsx';
+import BillSummaryPage from '../client/src/components/BillSummaryPage.jsx';
+// import SplitList from '../client/src/components/SplitList.jsx';
 // import IndividualOwes from '../client/src/components/individualOwes.jsx';
 
 describe('Unit Test Section: <BillSummaryPage />', () => {
