@@ -106,14 +106,26 @@ router.post('/createNewSession', (req, res) => {
     host_id: req.query.host_id,
   };
 
-  console.log(obj_params);
+  db.createNewSession(obj_params)
+    .then(result => {
+      res.header('Content-Type', 'application/json');
+      // the result of this should return the created session id.
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    });
+});
 
-  // let obj_params = {
-  //   session_name: 'Session Name #4',
-  //   restaurant_name: 'Restaurant #4', 
-  //   restaurant_id_api: '234234324324234',
-  //   host_id: 9
-  // };
+// creates a new Session for a given Schema
+router.get('/createNewSession', (req, res) => {
+
+  let obj_params = {
+    session_name: req.query.session_name,
+    restaurant_name: req.query.restaurant_name,
+    restaurant_id_api: req.query.restaurant_id_api,
+    host_id: req.query.host_id,
+  };
 
   db.createNewSession(obj_params)
     .then(result => {
@@ -131,7 +143,7 @@ router.put('/updateRestaurant', (req, res) => {
   let obj_params = {
     session_id: req.query.session_id,
     restaurant_name: req.query.restaurant_name,
-    restaurant_id_api: req.query.restaurant_name_api,
+    restaurant_id_api: req.query.restaurant_id_api,
   };
 
   db.updateRestaurant(obj_params)
@@ -143,7 +155,6 @@ router.put('/updateRestaurant', (req, res) => {
       res.status(400).send(err);
     });
 });
-
 
 // updates the restaurant for a particular session
 router.get('/createNewUser', (req, res) => {
@@ -163,9 +174,6 @@ router.get('/createNewUser', (req, res) => {
       res.status(400).send(err);
     });
 });
-
-
-
 
 // adds a guest to a particular session
 router.post('/addGuest', (req, res) => {

@@ -1,9 +1,11 @@
 const pool = require('./models.js');
+var format = require('pg-format');
 
 // database interaction to get all the users in the users table.
 const getUsers = function() {
-  let queryStr = `SELECT * FROM "BOC_Users"`;
-  return pool.query(queryStr)
+  let sql = format('SELECT * FROM %I ', "BOC_Users");
+
+  return pool.query(sql)
     .then(res => {
       return JSON.stringify(res.rows, null, 2);
     })
@@ -12,40 +14,17 @@ const getUsers = function() {
     });
 };
 
-// DEPRECATED
-// const getAllSessions = function () {
-//   let queryStr = `SELECT * FROM "BOC_Sessions"`;
-//   return pool.query(queryStr)
-//     .then(res => {
-//       return JSON.stringify(res.rows, null, 2);
-//     })
-//     .catch(err => {
-//       return err;
-//     });
-// };
-
-// DEPRECATED
-// const getUserSession = function (obj_param) {
-//   let { host_id } = obj_param;
-//   let queryStr = `SELECT * FROM "BOC_Sessions" WHERE "BOC_Sessions".host_id = ${host_id}`;
-  
-//   return pool.query(queryStr)
-//     .then(res => {
-//       return JSON.stringify(res.rows, null, 2);
-//     })
-//     .catch(err => {
-//       return err;
-//     });
-// };
-
 // this function creates a user session for the user and inserts it into the BOC session db
 const createNewSession = function (obj_param) {
   let { session_name, restaurant_name, restaurant_id_api, host_id } = obj_param;
   let split_method = 0;
 
-  let queryStr = `INSERT INTO "BOC_Sessions"(session_name, host_id, restaurant_name, restaurant_id_api, split_method) VALUES ('${session_name}', ${host_id}, '${restaurant_name}', '${restaurant_id_api}', ${split_method}) RETURNING "session_id"`;
+  let sql = format(`INSERT INTO %I(%s, %s, %s, %s, %s) VALUES ('${session_name}', ${host_id}, \
+                   '${restaurant_name}', '${restaurant_id_api}', ${split_method}) \
+                   RETURNING "session_id"`, "BOC_Sessions", 'session_name', 'host_id', 
+                   'restaurant_name', 'restaurant_id_api', 'split_method');
 
-  return pool.query(queryStr)
+  return pool.query(sql)
     .then(res => {
       return JSON.stringify(res.rows, null, 2);
     })
@@ -58,14 +37,12 @@ const createNewSession = function (obj_param) {
 const updateRestaurant = function (obj_param) {
   let {restaurant_id_api, restaurant_name, session_id} = obj_param;
 
-  let queryStr = `UPDATE "BOC_Sessions" SET restaurant_id_api = '${restaurant_id_api}', restaurant_name = '${restaurant_name}'
-                  WHERE (session_id = '${session_id}');`;
+  let sql = format(`UPDATE %I SET %s = '${restaurant_id_api}', %s = '${restaurant_name}' \
+                    WHERE (%s = '${session_id}')`, "BOC_Sessions", 'restaurant_id_api', 
+                    'restaurant_name', 'session_id');
 
-  console.log(queryStr);
-
-  return pool.query(queryStr)
+  return pool.query(sql)
     .then(res => {
-      //return JSON.stringify(res.rows, null, 2);
       return 'success';
     })
     .catch(err => {
@@ -77,9 +54,11 @@ const updateRestaurant = function (obj_param) {
 const createNewUser = function (obj_param) {
   let { first_name, last_name, email, password } = obj_param;
 
-  let queryStr = `INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('${first_name}', '${last_name}', '${email}', '${password}') RETURNING "user_id";`;
+  let sql = format(`INSERT INTO %I(%s, %s, %s, %s) VALUES ('${first_name}', '${last_name}', \
+                    '${email}', '${password}') RETURNING "user_id"`, "BOC_Users", 'first_name', 
+                    'last_name', 'email', 'password');
 
-  return pool.query(queryStr)
+  return pool.query(sql)
     .then(res => {
       return JSON.stringify(res.rows, null, 2);
     })
@@ -89,14 +68,13 @@ const createNewUser = function (obj_param) {
 };
 
 // adds a guest to a given session (guest must already be in users table)
-// SHOULD RETURN LIST OF CURRENT PEOPLE IN THE SESSION.
 const addGuest = function (obj_param) {
   let { session_id, user_id } = obj_param;
 
-  let queryStr = `INSERT INTO "BOC_User-Session-jt"(session_id, user_id, user_done_ordering) 
-                  VALUES ('${ session_id }', '${ user_id }', '0') `;
+  let sql = format(`INSERT INTO %I(%s, %s, %s) VALUES ('${session_id}', '${user_id}', '0') \
+                    RETURNING "user_id"`, "BOC_User-Session-jt", 'session_id', 'user_id', 'user_done_ordering');
 
-  return pool.query(queryStr)
+  return pool.query(sql)
     .then(res => {
       return 'success';
     })
@@ -109,10 +87,10 @@ const addGuest = function (obj_param) {
 const removeGuest = function (obj_param) {
   let {session_id, user_id} = obj_param;
 
-  let queryStr = `DELETE FROM "BOC_User-Session-jt" WHERE (session_id = ${session_id} 
-                  AND user_id = ${user_id})`;
+  let sql = format(`DELETE FROM %I WHERE (%s = '${session_id}' AND %s = '${user_id}')`, 
+                   "BOC_User-Session-jt", 'session_id', 'user_id');
 
-  return pool.query(queryStr)
+  return pool.query(sql)
     .then(res => {
       return 'success';
     })
@@ -125,13 +103,13 @@ const removeGuest = function (obj_param) {
 const addOrder = function (obj_param) {
   let {orderer_id, order_session_id, food_id_api, food_name_api, price, qty, restaurant_id_api, restaurant_name_api} = obj_param;
 
-  let queryStr = `INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_id_api, 
-                  food_name_api, price, qty, restaurant_id_api, restaurant_name_api) VALUES 
-                  ('${orderer_id}', '${order_session_id}', '${food_id_api}', '${food_name_api}',
-                   '${price}', '${qty}', '${restaurant_id_api}', '${restaurant_name_api}') 
-                   RETURNING "order_id"`;
+  let sql = format(`INSERT INTO %I(%s, %s, %s, %s, %s, %s, %s, %s) VALUES ('${orderer_id}', \
+                   '${order_session_id}', '${food_id_api}', '${food_name_api}', '${price}', \
+                   '${qty}', '${restaurant_id_api}', '${restaurant_name_api}') RETURNING %s`,
+                   "BOC_Orders", 'orderer_id', 'order_session_id', 'food_id_api', 'food_name_api',
+                   'price', 'qty', 'restaurant_id_api', 'restaurant_name_api', 'order_id');
 
-  return pool.query(queryStr)
+  return pool.query(sql)
     .then(res => {
       return JSON.stringify(res.rows, null, 2);
     })
@@ -144,10 +122,10 @@ const addOrder = function (obj_param) {
 const updateOrder = function (obj_param) {
   let { qty, order_id } = obj_param;
 
-  let queryStr = `UPDATE "BOC_Orders" SET qty = '${qty}'
-  WHERE (order_id = '${ order_id }');`;
+  let sql = format(`UPDATE %I SET %s = '${qty}' WHERE (%s = '${order_id}' )`, "BOC_Orders", 
+                    'qty', 'order_id');
 
-  return pool.query(queryStr)
+  return pool.query(sql)
     .then(res => {
       return 'success';
     })
@@ -160,9 +138,9 @@ const updateOrder = function (obj_param) {
 const removeOrder = function (obj_param) {
   let { order_id } = obj_param;
 
-  let queryStr = `DELETE FROM "BOC_Orders" WHERE (order_id = ${order_id})`;
+  let sql = format(`DELETE FROM %I WHERE (%s = '${order_id}')`, "BOC_Orders", 'order_id');
 
-  return pool.query(queryStr)
+  return pool.query(sql)
     .then(res => {
       return 'success';
     })

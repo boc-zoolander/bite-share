@@ -1,14 +1,12 @@
 const { Pool } = require('pg');
-const ENV = require('./env');
-
 
 const pool = new Pool({
-  user: ENV.USER,
+  user: process.env.USER,
   // name of the EC2 server IP
-  host: ENV.HOST, 
-  database: ENV.DATABASE_NAME,
-  password: ENV.PASSWORD,
-  port: ENV.PORT,
+  host: process.env.HOST,
+  database: process.env.DATABASE_NAME,
+  password: process.env.PASSWORD,
+  port: process.env.PORT,
 });
 
 pool.connect();
