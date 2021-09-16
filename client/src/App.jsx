@@ -17,7 +17,6 @@ class App extends React.Component {
       totalCost: 0,
       sessionComplete: false,
       splitMechanism: 'by Item',
-      restaurantZipCode: null,
       host: { name: 'host', order: [] }
     };
     this.setTopLevelState = this.setTopLevelState.bind(this);
@@ -42,7 +41,7 @@ class App extends React.Component {
             <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
           </Route>
           <Route path="/split-bill">
-            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} zipCode= {this.state.restaurantZipCode} />
+            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} restaurantInfo= {this.state.restaurant} />
           </Route>
           <Route path="/">
             <Login setTopLevelState={this.setTopLevelState} />

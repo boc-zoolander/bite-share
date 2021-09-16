@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SplitList from './SplitList.jsx';
 
 class BillSummaryPage extends React.Component {
@@ -8,8 +8,7 @@ class BillSummaryPage extends React.Component {
     this.state = {
       split: 'by Item',
       tipPercentage: 0,
-      //???? does it need to be a number
-      zipCode: Number(this.props.zipCode),
+      zipCode: Number(this.props.restaurantInfo.address.postal_code),
       guests: this.props.guests
     };
 
@@ -35,24 +34,24 @@ class BillSummaryPage extends React.Component {
   }
 
   changeTipPercentage (event) {
-    const value = event.target.value
+    const value = event.target.value;
     this.setState({
-      tipPercentage : value
-    })
+      tipPercentage: value
+    });
   }
 
   splitEvenly () {
     this.setState({
       split: 'Evenly'
     });
-    this.props.setTopLevelState('splitMechanism', 'Evenly')
+    this.props.setTopLevelState('splitMechanism', 'Evenly');
   }
 
   splitByItem () {
     this.setState({
       split: 'by Item'
     });
-    this.props.setTopLevelState('splitMechanism', 'by Item')
+    this.props.setTopLevelState('splitMechanism', 'by Item');
   }
 
   render () {
