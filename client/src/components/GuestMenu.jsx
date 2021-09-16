@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import ThankYou from './ThankYou.jsx';
 import Menu from '../../../server/user_db_routes/testgetrestaurant_1.js';
 import io from 'socket.io-client';
 
 const url = 'http://localhost:8080';
 const socket = io(url);
-const userName = 'User ' + parseInt(Math.random() * 10);
 // Needs to get menu from server
 // Needs to render menu
 // Local hook for this guest's order
@@ -15,6 +15,7 @@ const userName = 'User ' + parseInt(Math.random() * 10);
 const GuestMenu = ({ joinName }) => {
   // state declare here
   const [currentOrder, setCurrentOrder] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
 
   // Map Menu (prop or import for now) items
   const menuItems = Menu.result.menus[0].menu_sections.map((section, i) => {
@@ -56,10 +57,13 @@ const GuestMenu = ({ joinName }) => {
 
   const submitOrder = () => {
     socket.emit('orderSubmitted', { guestName: joinName, order: currentOrder });
+    setSubmitted(true);
   };
 
   return (
-    <div>
+    submitted
+      ? <ThankYou />
+      : <div>
       <h2>Current Items for {joinName}</h2>
         {currentItems}
       <div>
