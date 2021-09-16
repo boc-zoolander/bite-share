@@ -1,7 +1,7 @@
 import React from 'react';
 import AddGuests from './components/AddGuests.jsx';
 import SelectFood from './components/SelectFood.jsx';
-import BillSummaryPage from './components/billSummaryPage.jsx';
+import BillSummaryPage from './components/BillSummaryPage.jsx';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login.jsx';
 import Search from './components/Search.jsx';
@@ -20,7 +20,8 @@ class App extends React.Component {
       joinName: '',
       totalCost: 0,
       sessionComplete: false,
-      splitMechanism: '',
+      splitMechanism: 'by Item',
+      restaurantZipCode: null,
       host: { name: 'host', order: [] }
     };
     this.setTopLevelState = this.setTopLevelState.bind(this);
@@ -54,7 +55,7 @@ class App extends React.Component {
             <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
           </Route>
           <Route path="/split-bill">
-            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
+            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} zipCode= {this.state.restaurantZipCode} />
           </Route>
           <Route path="/">
             <Login setTopLevelState={this.setTopLevelState} />
