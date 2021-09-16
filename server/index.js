@@ -11,8 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 io.on('connection', socket => {
-  console.log('connection made yo!');
-
   socket.on('orderSubmitted', payload => {
     console.log('name and order received on server: ', payload);
     io.emit('orderSubmitted', payload);

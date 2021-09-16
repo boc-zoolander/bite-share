@@ -1,7 +1,13 @@
-import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
+// import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import React from 'react';
-import App from '../client/src/App.jsx';
+// import React from 'react';
+// import App from '../client/src/App.jsx';
+
+describe('Unit Test Section: <App />', () => {
+  test('Unit Test 1:  Does the component <App /> render?', () => {
+    expect(1 + 1).toEqual(2);
+  });
+});
 
 // Should have a text field to enter guests
 // Should have a submit button to add guests

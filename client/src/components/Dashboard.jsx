@@ -11,14 +11,12 @@ const Dashboard = () => {
 
   useEffect(() => {
     socket.on('onJoin', payload => {
-      console.log('name: ', payload);
       setjoinedNames([...joinedNames, payload]);
     });
   });
 
   useEffect(() => {
     socket.on('orderSubmitted', payload => {
-      console.log('name submitted: ', payload);
       const names = [...joinedNames];
       for (let i = 0; i < names.length; i++) {
         if (names[i].name === payload.guestName) {
@@ -29,12 +27,13 @@ const Dashboard = () => {
     });
   });
 
-  // maping function
+  // mapping function
   const whoJoined = joinedNames.map((item, index) => {
     return (
       item.submitted ? <li key={index}>{item.name} Completed Order </li> : <li key={index}>{item.name} joined the session and is ordering food </li>
     );
   });
+
   return (
     <div>
       <h1>This is a dashboard</h1>

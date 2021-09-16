@@ -10,20 +10,14 @@ const socket = io(url);
 const HostMenu = ({ guests, menu, setTopLevelState }) => {
   const [currentName, setCurrentName] = useState('');
 
-  // functions here
-
   useEffect(() => {
     socket.on('orderSubmitted', payload => {
       console.log('Orders: ', payload);
-      // define current guests as var
-      // Add guest object with order and name from payload to variable (check for duplicates once ID is part of this)
       const guestArray = [...guests, payload];
-      // set top level guests state
       setTopLevelState('guests', guestArray);
     });
   });
 
-  // EVENT HANDLERS
   const onChange = (event) => {
     setCurrentName(event.target.value);
     onCloseClick();
@@ -95,9 +89,7 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
         </div>
       </div>
       <h2> Dashboard </h2>
-      {/* RENDER GUESTS WHO HAVE JOINED AND STATUS */}
-      <Dashboard />
-
+        <Dashboard />
       <h2>Current Items for {currentName}</h2>
         {currentItems}
       <div>
