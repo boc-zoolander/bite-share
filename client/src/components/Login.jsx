@@ -6,8 +6,8 @@ class Login extends React.Component {
     super(props);
 
     this.state = {
-      hostName: null,
-      zipCode: null,
+      hostName: '',
+      zipCode: '',
       hostNameError: false,
       zipCodeError: false,
       formIsValid: false
@@ -26,11 +26,11 @@ class Login extends React.Component {
     };
 
     const success = (pos) => {
-      const hostLatLon = {
+      const hostGeo = {
         lat: pos.coords.latitude,
         lon: pos.coords.longitude
       };
-      this.props.setTopLevelState('hostLatLon', hostLatLon);
+      this.props.setTopLevelState('hostGeo', hostGeo);
     };
 
     const error = (err) => {
@@ -53,13 +53,13 @@ class Login extends React.Component {
       this.setState({ hostNameError: false });
     }
 
-    if (!this.props.hostLatLon && !this.state.zipCode) {
+    if (!this.props.hostGeo && !this.state.zipCode) {
       this.setState({ zipCodeError: true });
     } else {
       this.setState({ zipCodeError: false });
     }
 
-    if (this.state.hostName && (this.props.hostLatLon || this.state.zipCode)) {
+    if (this.state.hostName && (this.props.hostGeo || this.state.zipCode)) {
       this.setState({ hostNameError: false });
       this.setState({ zipCodeError: false });
       this.saveHost();
@@ -97,9 +97,10 @@ class Login extends React.Component {
           <label htmlFor="zipCode">Zip Code:</label>
           <input type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
           {this.state.zipCodeError && <p className="error">Zip Code is required.</p>}
+
+          <button type="button" onClick={this.checkFormCompletion}>Next</button>
         </form>
 
-        <button type="button" onClick={this.checkFormCompletion}>Next</button>
       </div>
     );
   }
