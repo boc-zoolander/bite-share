@@ -89,6 +89,7 @@ class CreateSession extends React.Component {
     return (
       <div>
         <h2>Create Session</h2>
+        <h4>Name your session and select a restaurant to get started.</h4>
           {!this.state.sessionNameSaved
           ? <form>
               <label htmlFor="sessionName">Session Name:</label>
