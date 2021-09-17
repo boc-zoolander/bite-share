@@ -28,11 +28,16 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
     const guestArray = [...guests];
     for (let i = 0; i < guestArray.length; i++) {
       if (guestArray[i].guestName === currentName) {
-        if (guestArray[i].order.find(menuItem => menuItem.name === item.name)) {
-          alert('Item already added');
-          return;
+        const guestOrder = guestArray[i].order;
+        for (let j = 0; j < guestOrder.length; j++) {
+          if (guestOrder[j].name === item.name) {
+            guestOrder[j].qty += 1;
+            setTopLevelState('guests', guestArray);
+            return;
+          }
         }
-        guestArray[i].order.push(item);
+        item.qty = 1;
+        guestOrder.push(item);
         setTopLevelState('guests', guestArray);
         return;
       }
@@ -70,7 +75,7 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
 
   const currentObj = guests.find(element => element.guestName === currentName) || { order: [] };
   const currentItems = currentObj.order.map((item, i) => {
-    return <span key={i}> {item.name} </span>;
+    return <span key={i}> {item.name} {item.qty} </span>;
   }) || '';
 
   const guestNames = guests.map((item, i) => {
