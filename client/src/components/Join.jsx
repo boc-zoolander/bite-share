@@ -12,12 +12,9 @@ const Join = ({ setTopLevelState }) => {
     setName(event.target.value);
   };
 
-  // Event handlers would need to ..
   const joinSesson = () => {
     setTopLevelState('joinName', name);
-    // Communicates to host & DB that this guest is part of this session
     socket.emit('onJoin', { name, submitted: false });
-    //    Send name (userName) to server to store in DB for that session data
   };
 
   return (

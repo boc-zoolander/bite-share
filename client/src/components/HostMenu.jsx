@@ -12,9 +12,7 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
 
   useEffect(() => {
     socket.on('orderSubmitted', payload => {
-      console.log('Orders: ', payload);
-      const guestArray = [...guests, payload];
-      setTopLevelState('guests', guestArray);
+      setTopLevelState('guests', [...guests, payload]);
     });
   });
 
@@ -53,7 +51,7 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
           return (
             <li key={j}>
               {item.name} ${item.price}
-              <button type='button' onClick={() => { addItem(item); }}> + </button>
+              <button type='button' onClick={() => addItem(item) }> + </button>
             </li>
           );
         })}
@@ -74,15 +72,9 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
   };
 
   const currentObj = guests.find(element => element.guestName === currentName) || { order: [] };
-  const currentItems = currentObj.order.map((item, i) => {
-    return <span key={i}> {item.name} {item.qty} </span>;
-  }) || '';
+  const currentItems = currentObj.order.map((item, i) => <span key={i}> {item.name} {item.qty} </span>);
 
-  const guestNames = guests.map((item, i) => {
-    return (
-      <button key={i} type='button' className='link' value={item.guestName} onClick={onChange}> {item.guestName} </button>
-    );
-  });
+  const guestNames = guests.map((item, i) => <button key={i} type='button' className='link' value={item.guestName} onClick={onChange}> {item.guestName} </button>);
 
   return (
     <div>

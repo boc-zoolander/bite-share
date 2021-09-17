@@ -24,7 +24,6 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
       setName('');
       setNameError('');
     }
-
     event.preventDefault();
   };
 
