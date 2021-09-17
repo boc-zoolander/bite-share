@@ -13,10 +13,12 @@ class CreateSession extends React.Component {
       searchQuery: '',
       sessionName: '',
       restaurants: [],
-      showSuggested: true
+      showSuggested: true,
+      sessionNameSaved: false
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.saveSessionName = this.saveSessionName.bind(this);
     this.getRestaurants = this.getRestaurants.bind(this);
     this.selectRestaurant = this.selectRestaurant.bind(this);
   }
@@ -45,15 +47,14 @@ class CreateSession extends React.Component {
   }
 
   handleChange (e) {
-    const searchQuery = e.target.value;
-    this.setState({ searchQuery });
+    const value = e.target.value;
+    const name = e.target.name;
+    this.setState({ [name]: value });
   }
 
   saveSessionName (e) {
     e.preventDefault();
-
-    const sessionName = e.target.value;
-    this.setState({ sessionName });
+    this.setState({ sessionNameSaved: true });
   }
 
   async getRestaurants (e) {
@@ -88,38 +89,34 @@ class CreateSession extends React.Component {
     return (
       <div>
         <h2>Create Session</h2>
-        <form>
-          <label htmlFor="sessionName">Session Name:</label>
-          {!this.state.sessionName &&
-            <div>
+          {!this.state.sessionNameSaved
+          ? <form>
+              <label htmlFor="sessionName">Session Name:</label>
               <input type="text" inputMode="text" name="sessionName" value={this.state.sessionName} onChange={this.handleChange} />
               <input type="submit" value="Save" onClick={this.saveSessionName} />
+            </form>
+
+          : <div>
+              <span>Session Name: {this.state.sessionName}</span>
+              <form>
+                <label htmlFor="searchQuery">Search restaurants by name:</label>
+                <input type="text" inputMode="search" name="searchQuery" value={this.state.searchQuery} onChange={this.handleChange} />
+                <input type="submit" value="Search" onClick={this.getRestaurants} />
+              </form>
+
+              {this.state.showSuggested ? 'Suggested Restaurants Nearby:' : 'Search Results:'}
+              <ul>
+                {this.state.restaurants.map(restaurant =>
+                  <li key={restaurant.restaurant_id}>
+                    <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
+                    <Link to='/add-guests' >
+                      <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
+                    </Link>
+                  </li>
+                )}
+              </ul>
             </div>
           }
-
-          {this.state.sessionName &&
-            <div>
-              <p>{this.state.sessionName}</p>
-              <label htmlFor="searchRestaurants">Search restaurants by name:</label>
-              <input type="text" inputMode="search" name="searchRestaurants" value={this.state.searchQuery} onChange={this.handleChange} />
-              <input type="submit" value="Search" onClick={this.getRestaurants} />
-            </div>
-          }
-        </form>
-
-        <div>
-        {this.state.showSuggested ? 'Suggested Restaurants Nearby:' : 'Search Results:'}
-            <ul>
-              {this.state.restaurants.map(restaurant =>
-                <li key={restaurant.restaurant_id}>
-                  <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
-                  <Link to='/add-guests' >
-                    <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
-                  </Link>
-                </li>
-              )}
-            </ul>
-        </div>
       </div>
     );
   }
