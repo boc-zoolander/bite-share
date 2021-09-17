@@ -27,11 +27,6 @@ io.on('connection', socket => {
 // the router for the users API
 app.use('/users', users);
 
-// OLD LISTEN
-// app.listen(PORT, () => {
-//   console.log(`listening on port ${PORT}`);
-// });
-
 httpServer.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}`);
 });
