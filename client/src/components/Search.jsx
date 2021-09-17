@@ -10,13 +10,37 @@ class Search extends React.Component {
     super(props);
 
     this.state = {
-      searchQuery: null,
-      restaurants: []
+      searchQuery: '',
+      restaurants: [],
+      showSuggested: true
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.getRestaurants = this.getRestaurants.bind(this);
     this.selectRestaurant = this.selectRestaurant.bind(this);
+  }
+
+  async componentDidMount () {
+    // Code to query API once we sunset use of dummy JS file
+    // let url;
+    // const hostGeo = this.props.hostGeo;
+    // hostGeo
+    //   ? url = `https://api.documenu.com/v2/restaurants/search/geo?lat=${hostGeo.lat}&lon=${hostGeo.lon}&distance=5&size=10`
+    //   : url = `https://api.documenu.com/v2/restaurants/zip_code/${this.props.hostZipCode}?size=10`;
+
+    // const config = {
+    //   method: 'get',
+    //   url,
+    //   headers: {
+    //     'X-API-KEY': process.env.DM_API_KEY
+    //   }
+    // };
+    // const response = await axios(config);
+
+    // Temporary response variable while we use dummy JS file
+    const response = await axios('http://localhost:8080/users/testGeo');
+    const restaurants = response.data.data;
+    this.setState({ restaurants });
   }
 
   handleChange (e) {
@@ -39,7 +63,10 @@ class Search extends React.Component {
     // Temporary response variable while we use dummy JS file
     const response = await axios('http://localhost:8080/users/testzip');
     const restaurants = response.data.data;
-    this.setState({ restaurants });
+    this.setState({
+      restaurants,
+      showSuggested: false
+    });
   }
 
   async selectRestaurant (restaurant) {
@@ -60,7 +87,7 @@ class Search extends React.Component {
         </form>
 
         <div>
-          Search Results:
+          {this.state.showSuggested ? 'Suggested Restaurants Nearby:' : 'Search Results:'}
             <ul>
               {this.state.restaurants.map(restaurant =>
                 <li key={restaurant.restaurant_id}>

@@ -24,7 +24,6 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
       setName('');
       setNameError('');
     }
-
     event.preventDefault();
   };
 
@@ -39,8 +38,10 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
         <input type='submit' value='Submit'/>
       </form>
       <GuestList guests={guests} setTopLevelState={setTopLevelState} />
-      <Link to='/select-food'>
-        <button type='button'>Make Your Order</button>
+      <p>Send this link to friends to join</p>
+      <p>http://localhost:8080/#/join</p>
+      <Link to='/host-menu' >
+        <button type='button'> Next Page </button>
       </Link>
     </div>
   );
