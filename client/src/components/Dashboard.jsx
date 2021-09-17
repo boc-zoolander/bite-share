@@ -4,8 +4,6 @@ import io from 'socket.io-client';
 const url = 'http://localhost:8080';
 const socket = io(url);
 
-// state to hold the linked guests
-
 const Dashboard = () => {
   const [joinedNames, setjoinedNames] = useState([]);
 
@@ -27,7 +25,6 @@ const Dashboard = () => {
     });
   });
 
-  // mapping function
   const whoJoined = joinedNames.map((item, index) => {
     return (
       item.submitted ? <li key={index}>{item.name} Completed Order </li> : <li key={index}>{item.name} joined the session and is ordering food </li>
