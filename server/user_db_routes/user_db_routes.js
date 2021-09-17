@@ -8,7 +8,6 @@ const testRestaurantsByZip = require('./testRestaurantsByZip_1');
 const testRestaurantsByGeo = require('./testRestaurantsByGeo');
 const testSession = require('./getSession');
 
-
 // router.get('/getRestaurantData', (req, res) => {
 //   axios.get('https://api.documenu.com/v2/restaurant/4072702673999819?key=2b62ef416cee7e4987bb65756c54e031')
 //     .then((response) => {
