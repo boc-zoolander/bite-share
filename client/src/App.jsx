@@ -20,9 +20,9 @@ class App extends React.Component {
       joinName: '',
       totalCost: 0,
       sessionComplete: false,
-      splitMechanism: 'by Item',
-      restaurantZipCode: null,
-      host: { name: 'host', order: [] }
+      splitMechanism: '',
+      hostZipCode: null,
+      hostGeo: null
     };
     this.setTopLevelState = this.setTopLevelState.bind(this);
   }
@@ -37,7 +37,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path="/find-restaurant">
-            <Search setTopLevelState={this.setTopLevelState} />
+            <Search setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} />
           </Route>
           <Route path="/add-guests">
             <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
@@ -58,7 +58,7 @@ class App extends React.Component {
             <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} zipCode= {this.state.restaurantZipCode} />
           </Route>
           <Route path="/">
-            <Login setTopLevelState={this.setTopLevelState} />
+            <Login setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} />
           </Route>
         </Switch>
       </Router>
