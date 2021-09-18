@@ -49,9 +49,18 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
         ]
       }
     ];
+
+    const restaurantProps = { restaurant_name: 'Bakeri', restaurant_phone: '(718) 388-8037', restaurant_website: '', hours: 'Daily: 8am-7pm', price_range: '$', price_range_num: 1, restaurant_id: 4072005273960112, cuisines: ['Bakery & Pastries', 'Coffee & Tea', 'Sandwiches'], address: { city: 'Brooklyn', state: 'NY', postal_code: '11211', street: '150 Wythe Ave', formatted: '150 Wythe Ave Brooklyn, NY 11211' }, geo: { lat: 40.720052, lon: -73.960112 }, menus: [], last_updated: '2021-01-05T07:36:14.169Z' };
+
+    const finalTotalsProps = { paymentsOwed: { Sara: '33.19', Milo: '33.19', Mike: '33.19' }, preliminaryTotal: '77.25', tipAmount: '15.45', tax: '6.86', finalTotal: '99.56' };
+
+    const tipPercentageProps = 20;
+
+    const splitMethodProps = 'by Item';
+
     render(
       <BrowserRouter>
-        <BillSummaryPage guests = {guestsProps}/>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps}/>
       </BrowserRouter>
     );
   });
@@ -84,7 +93,20 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
         ]
       }
     ];
-    render(<BrowserRouter><BillSummaryPage guests = {guestsProps}/></BrowserRouter>);
+
+    const restaurantProps = { restaurant_name: 'Bakeri', restaurant_phone: '(718) 388-8037', restaurant_website: '', hours: 'Daily: 8am-7pm', price_range: '$', price_range_num: 1, restaurant_id: 4072005273960112, cuisines: ['Bakery & Pastries', 'Coffee & Tea', 'Sandwiches'], address: { city: 'Brooklyn', state: 'NY', postal_code: '11211', street: '150 Wythe Ave', formatted: '150 Wythe Ave Brooklyn, NY 11211' }, geo: { lat: 40.720052, lon: -73.960112 }, menus: [], last_updated: '2021-01-05T07:36:14.169Z' };
+
+    const finalTotalsProps = { paymentsOwed: { Sara: '33.19', Milo: '33.19', Mike: '33.19' }, preliminaryTotal: '77.25', tipAmount: '15.45', tax: '6.86', finalTotal: '99.56' };
+
+    const tipPercentageProps = 20;
+
+    const splitMethodProps = 'by Item';
+
+    render(
+      <BrowserRouter>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps}/>
+      </BrowserRouter>
+    );
     expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
   });
 
@@ -116,7 +138,20 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
         ]
       }
     ];
-    render(<BrowserRouter><BillSummaryPage guests = {guestsProps}/></BrowserRouter>);
+
+    const restaurantProps = { restaurant_name: 'Bakeri', restaurant_phone: '(718) 388-8037', restaurant_website: '', hours: 'Daily: 8am-7pm', price_range: '$', price_range_num: 1, restaurant_id: 4072005273960112, cuisines: ['Bakery & Pastries', 'Coffee & Tea', 'Sandwiches'], address: { city: 'Brooklyn', state: 'NY', postal_code: '11211', street: '150 Wythe Ave', formatted: '150 Wythe Ave Brooklyn, NY 11211' }, geo: { lat: 40.720052, lon: -73.960112 }, menus: [], last_updated: '2021-01-05T07:36:14.169Z' };
+
+    const finalTotalsProps = { paymentsOwed: { Sara: '33.19', Milo: '33.19', Mike: '33.19' }, preliminaryTotal: '77.25', tipAmount: '15.45', tax: '6.86', finalTotal: '99.56' };
+
+    const tipPercentageProps = 20;
+
+    const splitMethodProps = 'by Item';
+
+    render(
+      <BrowserRouter>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps}/>
+      </BrowserRouter>
+    );
     expect(screen.getByText(/Preliminary Total/)).toBeInTheDocument();
     expect(screen.getByText(/Tip Amount/)).toBeInTheDocument();
     expect(screen.getByText(/Tax/)).toBeInTheDocument();
