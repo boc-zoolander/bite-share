@@ -12,22 +12,28 @@ export default function Session ({ setTopLevelState }) {
   };
 
   const handleJoinSession = async () => {
-    // set loading to true
     setLoadingSession(true);
-    // make axios call for session object
+
     const sessionResponse = await axios('/users/getSession');
-    // update host in state
-    // update guests in state
     const allGuests = [
       sessionResponse.data.host,
       ...sessionResponse.data.guests
     ];
     setTopLevelState('guests', allGuests);
+
     // load restaurant data via restaurant api
-    // update restaurant in state
-    // set loading to false
+    // In the future, will be a query that only returns a single restaurant by search query
+    // Search query will use session data from the db
+    const restaurantResponse = await axios('/users/testzip');
+    setTopLevelState('restaurant', restaurantResponse.data.data[1]);
+
+    // load restaurant menu via restaurant api
+    // In the future, will be a query that only returns a single restaurant's menu by search query
+    // Search query will use session data from the db
+    const menuResponse = await axios('users/testgetRestaurant_1');
+    setTopLevelState('menu', menuResponse.data.result.menus[0]);
+
     setLoadingSession(false);
-    // redirect to next page
     history.push('/select-food');
   };
 
