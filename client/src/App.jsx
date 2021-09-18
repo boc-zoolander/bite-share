@@ -30,6 +30,7 @@ class App extends React.Component {
       hostGeo: null,
       isLoggedIn: false,
     };
+
     this.setTopLevelState = this.setTopLevelState.bind(this);
   }
 

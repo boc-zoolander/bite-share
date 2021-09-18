@@ -41,7 +41,7 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
       <p>Send this link to friends to join</p>
       <p>http://localhost:8080/#/join</p>
       <Link to='/host-menu' >
-        <button type='button'> Next Page </button>
+        <button type='button'>Make Your Order</button>
       </Link>
     </div>
   );

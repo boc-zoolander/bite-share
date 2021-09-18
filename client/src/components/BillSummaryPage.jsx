@@ -64,8 +64,11 @@ class BillSummaryPage extends React.Component {
           Tip Percentage (%):
           <input type="number" id="tipPercentage" name="tipPercentage" min="0" max="1000" value={this.state.tipPercentage} onChange={this.changeTipPercentage}/><br/>
         </form>
+        <button onClick={this.splitEvenly}>Split Evenly</button>
+        <button onClick={this.splitByItem}>Split by Item</button>
+        <br/>
         <Link to = "/select-food">
-          <button>Back</button>
+          <button>Modify Order</button>
         </Link>
         {this.state.guests.length <= 1
           ? <div>

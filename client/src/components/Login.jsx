@@ -17,6 +17,7 @@ class Login extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.checkFormCompletion = this.checkFormCompletion.bind(this);
     this.saveHost = this.saveHost.bind(this);
     this.validateUser = this.validateUser.bind(this);
@@ -70,7 +71,7 @@ class Login extends React.Component {
     this.setState({ [name]: value });
   }
 
-  checkFormCompletion () {
+  handleSubmit () {
     if (!this.state.hostName) {
       this.setState({ hostNameError: true });
     } else {
@@ -116,7 +117,7 @@ class Login extends React.Component {
 
     return (
       <div>
-        <h2>Login</h2>
+        <h2>Bite Share</h2>
         <form>
 
           <label htmlFor="hostName">User Name:</label>
@@ -137,6 +138,7 @@ class Login extends React.Component {
           {this.state.zipCodeError && <p className="error">Zip Code is required.</p>}
 
           <button type="button" onClick={this.checkFormCompletion}>Next</button> */}
+          <button type="button">Start Session</button>
         </form>
 
       </div>
