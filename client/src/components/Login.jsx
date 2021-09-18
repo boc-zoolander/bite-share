@@ -28,7 +28,6 @@ class Login extends React.Component {
     const validationPath = `http://localhost:8080/users/login?hostname=${this.state.hostName}&password=${this.state.password}`;
     axios.get(validationPath)
       .then(res => {
-        // user successfully logged & need to setstate of the user id to the returned id 
         // console.log('logged in: ', res.data[0]);
         const hostDetails = {
           id: res.data[0].user_id,
