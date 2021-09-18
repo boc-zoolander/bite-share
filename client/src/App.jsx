@@ -25,10 +25,18 @@ class App extends React.Component {
       sessionId: null,
       sessionName: '',
       sessionComplete: false,
-      splitMechanism: '',
+      splitMechanism: 'by Item',
+      tipPercentage: 0,
+      finalTotals: {
+        paymentsOwed: {},
+        preliminaryTotal: 0.00,
+        tipAmount: 0.00,
+        tax: 0.00,
+        finalTotal: 0.00
+      },
       hostZipCode: null,
       hostGeo: null,
-      isLoggedIn: false,
+      isLoggedIn: false
     };
 
     this.setTopLevelState = this.setTopLevelState.bind(this);
@@ -71,7 +79,7 @@ class App extends React.Component {
             <Session setTopLevelState={this.setTopLevelState} />
           </Route>
           <Route path="/split-bill">
-            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} zipCode= {this.state.restaurantZipCode} />
+            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} restaurantInfo= {this.state.restaurant} finalTotals = {this.state.finalTotals} tipPercentage = {this.state.tipPercentage} splitMethod = {this.state.splitMechanism}/>
           </Route>
           <Route exact path="/">
             <Login setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} isLoggedIn={this.state.isLoggedIn}/>
