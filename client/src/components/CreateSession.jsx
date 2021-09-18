@@ -106,32 +106,32 @@ class CreateSession extends React.Component {
         <h2>Create Session</h2>
         <h4>Name your session and select a restaurant to get started.</h4>
           {!this.state.sessionNameSaved
-          ? <form>
-              <label htmlFor="sessionName">Session Name:</label>
-              <input type="text" inputMode="text" name="sessionName" value={this.state.sessionName} onChange={this.handleChange} />
-              <input type="submit" value="Save" onClick={this.saveSessionName} />
-            </form>
-
-          : <div>
-              <span>Session Name: {this.state.sessionName}</span>
-              <form>
-                <label htmlFor="searchQuery">Search restaurants by name:</label>
-                <input type="text" inputMode="search" name="searchQuery" value={this.state.searchQuery} onChange={this.handleChange} />
-                <input type="submit" value="Search" onClick={this.getRestaurants} />
+            ? <form>
+                <label htmlFor="sessionName">Session Name:</label>
+                <input type="text" inputMode="text" name="sessionName" value={this.state.sessionName} onChange={this.handleChange} />
+                <input type="submit" value="Save" onClick={this.saveSessionName} />
               </form>
 
-              {this.state.showSuggested ? 'Suggested Restaurants Nearby:' : 'Search Results:'}
-              <ul>
-                {this.state.restaurants.map(restaurant =>
-                  <li key={restaurant.restaurant_id}>
-                    <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
-                    <Link to='/add-guests' >
-                      <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </div>
+            : <div>
+                <span>Session Name: {this.state.sessionName}</span>
+                <form>
+                  <label htmlFor="searchQuery">Search restaurants by name:</label>
+                  <input type="text" inputMode="search" name="searchQuery" value={this.state.searchQuery} onChange={this.handleChange} />
+                  <input type="submit" value="Search" onClick={this.getRestaurants} />
+                </form>
+
+                {this.state.showSuggested ? 'Suggested Restaurants Nearby:' : 'Search Results:'}
+                <ul>
+                  {this.state.restaurants.map(restaurant =>
+                    <li key={restaurant.restaurant_id}>
+                      <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
+                      <Link to='/add-guests' >
+                        <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+              </div>
           }
       </div>
     );
