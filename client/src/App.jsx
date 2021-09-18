@@ -4,7 +4,7 @@ import SelectFood from './components/SelectFood.jsx';
 import BillSummaryPage from './components/BillSummaryPage.jsx';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login.jsx';
-import Search from './components/Search.jsx';
+import CreateSession from './components/CreateSession.jsx';
 import Join from './components/Join.jsx';
 import GuestMenu from './components/GuestMenu.jsx';
 import HostMenu from './components/HostMenu.jsx';
@@ -37,7 +37,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path="/find-restaurant">
-            <Search setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} />
+            <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} />
           </Route>
           <Route path="/add-guests">
             <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} />

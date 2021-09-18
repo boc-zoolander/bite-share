@@ -1,4 +1,3 @@
-
 const restaurantsByGeo = {
   "totalResults": 2395,
   "page": 1,
