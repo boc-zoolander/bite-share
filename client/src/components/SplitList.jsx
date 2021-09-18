@@ -13,26 +13,27 @@ const SplitList = (props) => {
   const billWithTip = billTotalWithoutTipOrTax + tipAmount;
   // API CALL FOR TIP PERCENTAGE
   let taxPercentage;
-  const [taxDecimal, setTaxDecimal] = useState(0);
+  // const [taxDecimal, setTaxDecimal] = useState(0);
+  const taxDecimal = 0.07;
 
-  useEffect(() => {
-    console.log('💸 💸 💸 💸 💸 SPENT A PENNY 💸 💸 💸 💸 💸 💸 💸 ');
-    const options = {
-      method: 'GET',
-      url: `https://u-s-a-sales-taxes-per-zip-code.p.rapidapi.com/${props.zipCode}`,
-      headers: {
-        'x-rapidapi-host': process.env.TAXAPIHOST,
-        'x-rapidapi-key': process.env.TAXAPIKEY
-      }
-    };
+  // useEffect(() => {
+  //   console.log('💸 💸 💸 💸 💸 SPENT A PENNY 💸 💸 💸 💸 💸 💸 💸 ');
+  //   const options = {
+  //     method: 'GET',
+  //     url: `https://u-s-a-sales-taxes-per-zip-code.p.rapidapi.com/${props.zipCode}`,
+  //     headers: {
+  //       'x-rapidapi-host': process.env.TAXAPIHOST,
+  //       'x-rapidapi-key': process.env.TAXAPIKEY
+  //     }
+  //   };
 
-    axios.request(options).then(function (response) {
-      setTaxDecimal(response.data.estimated_combined_rate);
-    }).catch(function (error) {
-      console.error('GET TAX ERROR', error);
-      return null;
-    });
-  }, [props.zipCode]);
+  //   axios.request(options).then(function (response) {
+  //     setTaxDecimal(response.data.estimated_combined_rate);
+  //   }).catch(function (error) {
+  //     console.error('GET TAX ERROR', error);
+  //     return null;
+  //   });
+  // }, [props.zipCode]);
 
   useEffect(() => {
     taxPercentage = taxDecimal * 100;
