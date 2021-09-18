@@ -110,7 +110,15 @@ class CreateSession extends React.Component {
           {!this.state.sessionNameSaved
             ? <form>
                 <label htmlFor="sessionName">Session Name:</label>
-                <input type="text" inputMode="text" name="sessionName" value={this.state.sessionName} onChange={this.handleChange} />
+                <input
+                  id="session-name"
+                  type="text"
+                  inputMode="text"
+                  name="sessionName"
+                  value={this.state.sessionName}
+                  onChange={this.handleChange}
+                  data-testid="session-name-input"
+                />
                 <input type="submit" value="Save" onClick={this.saveSessionName} />
               </form>
 
@@ -118,7 +126,15 @@ class CreateSession extends React.Component {
                 <span>Session Name: {this.state.sessionName}</span>
                 <form>
                   <label htmlFor="searchQuery">Search restaurants by name:</label>
-                  <input type="text" inputMode="search" name="searchQuery" value={this.state.searchQuery} onChange={this.handleChange} />
+                  <input
+                    id="restaurant-search"
+                    type="text"
+                    inputMode="search"
+                    name="searchQuery"
+                    value={this.state.searchQuery}
+                    onChange={this.handleChange}
+                    data-testid="restaurant-search-input"
+                  />
                   <input type="submit" value="Search" onClick={this.getRestaurants} />
                 </form>
 
