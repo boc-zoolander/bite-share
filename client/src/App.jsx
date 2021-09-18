@@ -20,6 +20,7 @@ class App extends React.Component {
       joinName: '',
       totalCost: 0,
       sessionId: null,
+      sessionName: '',
       sessionComplete: false,
       splitMechanism: '',
       hostZipCode: null,

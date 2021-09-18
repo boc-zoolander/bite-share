@@ -97,6 +97,7 @@ class CreateSession extends React.Component {
     }});
     const sessionId = response.data[0].session_id;
     this.props.setTopLevelState('sessionId', sessionId);
+    this.props.setTopLevelState('sessionName', this.state.sessionName);
   }
 
   render () {
