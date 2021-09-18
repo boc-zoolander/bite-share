@@ -18,7 +18,7 @@ class Login extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.checkFormCompletion = this.checkFormCompletion.bind(this);
+    //this.checkFormCompletion = this.checkFormCompletion.bind(this);
     this.saveHost = this.saveHost.bind(this);
     this.validateUser = this.validateUser.bind(this);
   }
