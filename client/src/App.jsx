@@ -4,7 +4,11 @@ import SelectFood from './components/SelectFood.jsx';
 import BillSummaryPage from './components/BillSummaryPage.jsx';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login.jsx';
-import Search from './components/Search.jsx';
+import CreateSession from './components/CreateSession.jsx';
+import Join from './components/Join.jsx';
+import GuestMenu from './components/GuestMenu.jsx';
+import HostMenu from './components/HostMenu.jsx';
+import Session from './components/Session.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -14,9 +18,14 @@ class App extends React.Component {
       restaurant: {},
       menu: [],
       guests: [],
+      joinName: '',
       totalCost: 0,
+      sessionId: null,
+      sessionName: '',
       sessionComplete: false,
-      splitMechanism: ''
+      splitMechanism: '',
+      hostZipCode: null,
+      hostGeo: null
     };
 
     this.setTopLevelState = this.setTopLevelState.bind(this);
@@ -32,19 +41,31 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path="/find-restaurant">
-            <Search setTopLevelState={this.setTopLevelState} />
+            <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} restaurant={this.state.restaurant} />
           </Route>
           <Route path="/add-guests">
             <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
           </Route>
+          <Route path="/guest-menu">
+            <GuestMenu joinName={this.state.joinName}/>
+          </Route>
+          <Route path="/join">
+            <Join setTopLevelState={this.setTopLevelState}/>
+          </Route>
+          <Route path="/host-menu">
+            <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
+          </Route>
           <Route path="/select-food">
             <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
           </Route>
+          <Route path="/session">
+            <Session setTopLevelState={this.setTopLevelState} />
+          </Route>
           <Route path="/split-bill">
-            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
+            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} zipCode= {this.state.restaurantZipCode} />
           </Route>
           <Route path="/">
-            <Login setTopLevelState={this.setTopLevelState} />
+            <Login setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} />
           </Route>
         </Switch>
       </Router>
