@@ -8,7 +8,7 @@ import CreateSession from './components/CreateSession.jsx';
 import Join from './components/Join.jsx';
 import GuestMenu from './components/GuestMenu.jsx';
 import HostMenu from './components/HostMenu.jsx';
-import RegisterUser from './components/registerUser.jsx';
+import RegisterUser from './components/RegisterUser.jsx';
 import LoggedIn from './components/LoggedIn.jsx';
 import Session from './components/Session.jsx';
 
