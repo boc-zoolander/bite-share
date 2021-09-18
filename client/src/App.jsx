@@ -8,6 +8,7 @@ import CreateSession from './components/CreateSession.jsx';
 import Join from './components/Join.jsx';
 import GuestMenu from './components/GuestMenu.jsx';
 import HostMenu from './components/HostMenu.jsx';
+import RegisterUser from './components/registerUser.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -36,6 +37,9 @@ class App extends React.Component {
       <div>
       <Router>
         <Switch>
+          <Route path="/register-new-user">
+            <RegisterUser setTopLevelState={this.setTopLevelState}/>
+          </Route>
           <Route path="/find-restaurant">
             <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} />
           </Route>
