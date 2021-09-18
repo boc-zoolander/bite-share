@@ -3,4 +3,4 @@ const mockGeolocation = {
   watchPosition: jest.fn()
 };
 
-global.navigator.geolocation = mockGeolocation;
+global.navigator = { geolocation: mockGeolocation };
