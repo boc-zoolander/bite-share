@@ -83,7 +83,7 @@ class Login extends React.Component {
 
   render () {
     if (this.state.formIsValid) {
-      return <Redirect to='/find-restaurant' />;
+      return <Redirect to='/session' />;
     }
 
     return (

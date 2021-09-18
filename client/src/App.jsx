@@ -8,6 +8,7 @@ import CreateSession from './components/CreateSession.jsx';
 import Join from './components/Join.jsx';
 import GuestMenu from './components/GuestMenu.jsx';
 import HostMenu from './components/HostMenu.jsx';
+import Session from './components/Session.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -44,17 +45,20 @@ class App extends React.Component {
           <Route path="/add-guests">
             <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
           </Route>
-          <Route path="/join">
-            <Join setTopLevelState={this.setTopLevelState}/>
-          </Route>
           <Route path="/guest-menu">
             <GuestMenu joinName={this.state.joinName}/>
+          </Route>
+          <Route path="/join">
+            <Join setTopLevelState={this.setTopLevelState}/>
           </Route>
           <Route path="/host-menu">
             <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
           </Route>
           <Route path="/select-food">
             <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
+          </Route>
+          <Route path="/session">
+            <Session setTopLevelState={this.setTopLevelState} />
           </Route>
           <Route path="/split-bill">
             <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} zipCode= {this.state.restaurantZipCode} />
