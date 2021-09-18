@@ -58,9 +58,13 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
 
     const splitMethodProps = 'by Item';
 
+    const setTopLevelStateProps = (a, b) => {
+      console.log(a, b);
+    };
+
     render(
       <BrowserRouter>
-        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps}/>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState={setTopLevelStateProps}/>
       </BrowserRouter>
     );
   });
@@ -102,9 +106,13 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
 
     const splitMethodProps = 'by Item';
 
+    const setTopLevelStateProps = (a, b) => {
+      console.log(a, b);
+    };
+
     render(
       <BrowserRouter>
-        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps}/>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState = {setTopLevelStateProps}/>
       </BrowserRouter>
     );
     expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
@@ -147,9 +155,13 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
 
     const splitMethodProps = 'by Item';
 
+    const setTopLevelStateProps = (a, b) => {
+      console.log(a, b);
+    };
+
     render(
       <BrowserRouter>
-        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps}/>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState={setTopLevelStateProps}/>
       </BrowserRouter>
     );
     expect(screen.getByText(/Preliminary Total/)).toBeInTheDocument();
