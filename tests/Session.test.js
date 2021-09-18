@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { createMemoryHistory } from 'history';
 import React from 'react';
@@ -8,6 +8,7 @@ import Session from '../client/src/components/Session.jsx';
 
 jest.mock('axios');
 
+// Used to handle setTopLevelState function with no App.js
 const setTopLevelState = (a, b) => {
   console.log(a, b);
 };
