@@ -132,13 +132,11 @@ class Login extends React.Component {
           {/* <label htmlFor="hostName">Host Name:</label>
           <input type="text" inputMode="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} /> */}
           {/* {this.state.hostNameError && <p className="error">Host Name is required.</p>}
-
           <label htmlFor="zipCode">Zip Code:</label>
           <input type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
           {this.state.zipCodeError && <p className="error">Zip Code is required.</p>}
-
           <button type="button" onClick={this.checkFormCompletion}>Next</button> */}
-          <button type="button">Start Session</button>
+          {/* <button type="button">Start Session</button> */}
         </form>
 
       </div>
