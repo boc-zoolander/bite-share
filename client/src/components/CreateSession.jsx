@@ -5,17 +5,20 @@ const axios = require('axios');
 // Commented out for now due to webpack errors
 // require('dotenv').config();
 
-class Search extends React.Component {
+class CreateSession extends React.Component {
   constructor (props) {
     super(props);
 
     this.state = {
       searchQuery: '',
+      sessionName: '',
       restaurants: [],
-      showSuggested: true
+      showSuggested: true,
+      sessionNameSaved: false
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.saveSessionName = this.saveSessionName.bind(this);
     this.getRestaurants = this.getRestaurants.bind(this);
     this.selectRestaurant = this.selectRestaurant.bind(this);
   }
@@ -44,8 +47,14 @@ class Search extends React.Component {
   }
 
   handleChange (e) {
-    const searchQuery = e.target.value;
-    this.setState({ searchQuery });
+    const value = e.target.value;
+    const name = e.target.name;
+    this.setState({ [name]: value });
+  }
+
+  saveSessionName (e) {
+    e.preventDefault();
+    this.setState({ sessionNameSaved: true });
   }
 
   async getRestaurants (e) {
@@ -79,29 +88,39 @@ class Search extends React.Component {
   render () {
     return (
       <div>
-        <h2>Search</h2>
-        <form>
-          <label htmlFor="searchRestaurants">Search restaurants by name:</label>
-          <input type="text" inputMode="search" name="searchRestaurants" value={this.state.searchQuery} onChange={this.handleChange} />
-          <input type="submit" value="Search" onClick={this.getRestaurants} />
-        </form>
+        <h2>Create Session</h2>
+        <h4>Name your session and select a restaurant to get started.</h4>
+          {!this.state.sessionNameSaved
+          ? <form>
+              <label htmlFor="sessionName">Session Name:</label>
+              <input type="text" inputMode="text" name="sessionName" value={this.state.sessionName} onChange={this.handleChange} />
+              <input type="submit" value="Save" onClick={this.saveSessionName} />
+            </form>
 
-        <div>
-          {this.state.showSuggested ? 'Suggested Restaurants Nearby:' : 'Search Results:'}
-            <ul>
-              {this.state.restaurants.map(restaurant =>
-                <li key={restaurant.restaurant_id}>
-                  <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
-                  <Link to='/add-guests' >
-                    <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
-                  </Link>
-                </li>
-              )}
-            </ul>
-        </div>
+          : <div>
+              <span>Session Name: {this.state.sessionName}</span>
+              <form>
+                <label htmlFor="searchQuery">Search restaurants by name:</label>
+                <input type="text" inputMode="search" name="searchQuery" value={this.state.searchQuery} onChange={this.handleChange} />
+                <input type="submit" value="Search" onClick={this.getRestaurants} />
+              </form>
+
+              {this.state.showSuggested ? 'Suggested Restaurants Nearby:' : 'Search Results:'}
+              <ul>
+                {this.state.restaurants.map(restaurant =>
+                  <li key={restaurant.restaurant_id}>
+                    <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
+                    <Link to='/add-guests' >
+                      <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </div>
+          }
       </div>
     );
   }
 }
 
-export default Search;
+export default CreateSession;
