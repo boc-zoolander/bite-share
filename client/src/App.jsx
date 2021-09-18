@@ -20,6 +20,8 @@ class App extends React.Component {
       guests: [],
       joinName: '',
       totalCost: 0,
+      sessionId: null,
+      sessionName: '',
       sessionComplete: false,
       splitMechanism: '',
       hostZipCode: null,
@@ -38,7 +40,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path="/find-restaurant">
-            <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} />
+            <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} restaurant={this.state.restaurant} />
           </Route>
           <Route path="/add-guests">
             <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
