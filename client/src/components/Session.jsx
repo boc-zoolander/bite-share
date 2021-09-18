@@ -53,9 +53,11 @@ export default function Session ({ setTopLevelState }) {
             <label htmlFor="session-id">Enter an Existing Session</label>
             <input
               type="number"
+              id="session-id"
               name="session-id"
               value={sessionId}
               onChange={handleSessionIdChange}
+              data-testid="session-id-input"
             />
             <button type="button" onClick={handleJoinSession}>Submit</button>
           </form>
