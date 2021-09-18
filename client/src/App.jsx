@@ -43,7 +43,7 @@ class App extends React.Component {
             <LoggedIn setTopLevelState={this.setTopLevelState} guests={this.state.guests}/>
           </Route>
           <Route path="/register-new-user">
-            <RegisterUser setTopLevelState={this.setTopLevelState}/>
+            <RegisterUser setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
           </Route>
           <Route path="/find-restaurant">
             <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} />
@@ -66,7 +66,7 @@ class App extends React.Component {
           <Route path="/split-bill">
             <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} zipCode= {this.state.restaurantZipCode} />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Login setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} isLoggedIn={this.state.isLoggedIn}/>
           </Route>
         </Switch>

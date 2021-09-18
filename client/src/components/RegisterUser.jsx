@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 class RegisterUser extends React.Component {
@@ -23,14 +24,11 @@ class RegisterUser extends React.Component {
     this.setState({ [name]: value });
   }
 
-  registerNewUser (e) {
-    const validationPath = `http://localhost:8080/users/createNewUser?first_name=${this.state.first_name}\
-                            &last_name=${this.state.last_name}&email=${this.state.email}&password=${this.state.password}`;
-    console.log('path:', validationPath);
-    axios.get(validationPath)
+  async registerNewUser (e) {
+    const validationPath = `http://localhost:8080/users/createNewUser?first_name=${this.state.first_name}&last_name=${this.state.last_name}&email=${this.state.email}&password=${this.state.password}`;
+    // console.log('pre axios call:', validationPath);
+    await axios.get(validationPath)
       .then(res => {
-        console.log(`new user registered with these data: ${this.state.first_name},  ${this.state.last_name},  ${this.state.email},  ${this.state.password}`);
-
         const hostDetails = {
           id: res.data[0].user_id,
           guestName: `${this.state.first_name} ${this.state.last_name}`,
@@ -54,7 +52,6 @@ class RegisterUser extends React.Component {
   }
 
   render () {
-
     if (this.props.isLoggedIn) {
       return <Redirect to='/user-logged-in' />;
     }
@@ -77,8 +74,8 @@ class RegisterUser extends React.Component {
           <input type="text" inputMode="text" name="password" value={this.state.password} onChange={this.handleChange} />
 
 
-          <button onClick={this.registerNewUser}>
-            Register
+          <button type="button" onClick={this.registerNewUser}>
+            Register New User
           </button>
 
         </form>
