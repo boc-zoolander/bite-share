@@ -66,11 +66,12 @@ describe('Session', () => {
       setTimeout(() => {
         resolve({
           data: {
-            // For session info
+            // Dummy session info
             host: {},
             guests: [{}],
-            // For restaurant info
+            // Dummy restaurant info
             data: [0, 1],
+            // Dummy menu info
             result: {
               menus: [0]
             }
