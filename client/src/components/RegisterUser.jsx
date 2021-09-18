@@ -30,6 +30,14 @@ class RegisterUser extends React.Component {
     axios.get(validationPath)
       .then(res => {
         console.log(`new user registered with these data: ${this.state.first_name},  ${this.state.last_name},  ${this.state.email},  ${this.state.password}`);
+
+        const hostDetails = {
+          id: res.data[0].user_id,
+          guestName: `${this.state.first_name} ${this.state.last_name}`,
+          order: []
+        };
+        this.props.setTopLevelState('guests', [hostDetails]);
+        this.props.setTopLevelState('isLoggedIn', true);
       })
       .catch(err => {
         console.log('user registration failed: ', err);
@@ -46,6 +54,11 @@ class RegisterUser extends React.Component {
   }
 
   render () {
+
+    if (this.props.isLoggedIn) {
+      return <Redirect to='/user-logged-in' />;
+    }
+
     return (
       <div>
         <h2>Register a new User</h2>

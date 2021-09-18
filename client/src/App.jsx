@@ -26,8 +26,6 @@ class App extends React.Component {
       hostZipCode: null,
       hostGeo: null,
       isLoggedIn: false,
-      host_first_name: '',
-      host_last_name: ''
     };
     this.setTopLevelState = this.setTopLevelState.bind(this);
   }
@@ -42,7 +40,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path="/user-logged-in">
-            <LoggedIn setTopLevelState={this.setTopLevelState} host_last_name={this.state.host_last_name} host_first_name={this.state.host_first_name}/>
+            <LoggedIn setTopLevelState={this.setTopLevelState} guests={this.state.guests}/>
           </Route>
           <Route path="/register-new-user">
             <RegisterUser setTopLevelState={this.setTopLevelState}/>

@@ -30,10 +30,12 @@ class LoggedIn extends React.Component {
   }
 
   render () {
-    let username = `${this.props.host_first_name} ${this.props.host_last_name}`;
+    // console.log(this.props.guests);
+    const username = `${this.props.guests[0].guestName} user_id: ${this.props.guests[0].id}`;
+
     return (
       <div>
-        <h2>Welcome {username} </h2>
+        <h3>Welcome {username} </h3>
         <form>
           <label htmlFor="zipCode">Zip Code:</label>
           <input type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />

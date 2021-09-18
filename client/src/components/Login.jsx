@@ -28,10 +28,14 @@ class Login extends React.Component {
     axios.get(validationPath)
       .then(res => {
         // user successfully logged & need to setstate of the user id to the returned id 
-        console.log('logged in: ', res.data[0]);
+        // console.log('logged in: ', res.data[0]);
+        const hostDetails = {
+          id: res.data[0].user_id,
+          guestName: `${res.data[0].first_name} ${res.data[0].last_name}`,
+          order: []
+        };
+        this.props.setTopLevelState('guests', [hostDetails]);
         this.props.setTopLevelState('isLoggedIn', true);
-        this.props.setTopLevelState('host_first_name', res.data[0].first_name);
-        this.props.setTopLevelState('host_last_name', res.data[0].last_name);
       })
       .catch(err => {
         console.log('failure', err);
@@ -126,13 +130,13 @@ class Login extends React.Component {
 
           {/* <label htmlFor="hostName">Host Name:</label>
           <input type="text" inputMode="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} /> */}
-          {this.state.hostNameError && <p className="error">Host Name is required.</p>}
+          {/* {this.state.hostNameError && <p className="error">Host Name is required.</p>}
 
           <label htmlFor="zipCode">Zip Code:</label>
           <input type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
           {this.state.zipCodeError && <p className="error">Zip Code is required.</p>}
 
-          <button type="button" onClick={this.checkFormCompletion}>Next</button>
+          <button type="button" onClick={this.checkFormCompletion}>Next</button> */}
         </form>
 
       </div>
