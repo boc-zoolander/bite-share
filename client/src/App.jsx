@@ -9,6 +9,7 @@ import Join from './components/Join.jsx';
 import GuestMenu from './components/GuestMenu.jsx';
 import HostMenu from './components/HostMenu.jsx';
 import RegisterUser from './components/registerUser.jsx';
+import LoggedIn from './components/LoggedIn.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -23,7 +24,10 @@ class App extends React.Component {
       sessionComplete: false,
       splitMechanism: '',
       hostZipCode: null,
-      hostGeo: null
+      hostGeo: null,
+      isLoggedIn: false,
+      host_first_name: '',
+      host_last_name: ''
     };
     this.setTopLevelState = this.setTopLevelState.bind(this);
   }
@@ -37,6 +41,9 @@ class App extends React.Component {
       <div>
       <Router>
         <Switch>
+          <Route path="/user-logged-in">
+            <LoggedIn setTopLevelState={this.setTopLevelState} host_last_name={this.state.host_last_name} host_first_name={this.state.host_first_name}/>
+          </Route>
           <Route path="/register-new-user">
             <RegisterUser setTopLevelState={this.setTopLevelState}/>
           </Route>
@@ -62,7 +69,7 @@ class App extends React.Component {
             <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} zipCode= {this.state.restaurantZipCode} />
           </Route>
           <Route path="/">
-            <Login setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} />
+            <Login setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} isLoggedIn={this.state.isLoggedIn}/>
           </Route>
         </Switch>
       </Router>

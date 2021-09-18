@@ -1,5 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor (props) {
@@ -10,12 +12,30 @@ class Login extends React.Component {
       zipCode: '',
       hostNameError: false,
       zipCodeError: false,
-      formIsValid: false
+      formIsValid: false,
+      password: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.checkFormCompletion = this.checkFormCompletion.bind(this);
     this.saveHost = this.saveHost.bind(this);
+    this.validateUser = this.validateUser.bind(this);
+  }
+
+  validateUser (e) {
+    e.preventDefault();
+    const validationPath = `http://localhost:8080/users/login?hostname=${this.state.hostName}&password=${this.state.password}`;
+    axios.get(validationPath)
+      .then(res => {
+        // user successfully logged & need to setstate of the user id to the returned id 
+        console.log('logged in: ', res.data[0]);
+        this.props.setTopLevelState('isLoggedIn', true);
+        this.props.setTopLevelState('host_first_name', res.data[0].first_name);
+        this.props.setTopLevelState('host_last_name', res.data[0].last_name);
+      })
+      .catch(err => {
+        console.log('failure', err);
+      });
   }
 
   componentDidMount () {
@@ -86,12 +106,26 @@ class Login extends React.Component {
       return <Redirect to='/find-restaurant' />;
     }
 
+    if (this.props.isLoggedIn) {
+      return <Redirect to='/user-logged-in' />;
+    }
+
     return (
       <div>
         <h2>Login</h2>
         <form>
-          <label htmlFor="hostName">Host Name:</label>
+
+          <label htmlFor="hostName">User Name:</label>
           <input type="text" inputMode="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} />
+          <label htmlFor="password">Password:</label>
+          <input type="text" inputMode="text" name="password" value={this.state.password} onChange={this.handleChange} />
+          <button onClick={this.validateUser}>Login</button>
+          <Link to="/register-new-user">
+            <p>New to Bite Share?  Register Here!</p>
+          </Link>
+
+          {/* <label htmlFor="hostName">Host Name:</label>
+          <input type="text" inputMode="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} /> */}
           {this.state.hostNameError && <p className="error">Host Name is required.</p>}
 
           <label htmlFor="zipCode">Zip Code:</label>
