@@ -46,6 +46,25 @@ router.get('/testGeo', (req, res) => {
   res.status(200).send(JSON.stringify(testRestaurantsByGeo, null, 2));
 });
 
+// login route to test
+router.get('/login', (req, res) => {
+  // gets the user password to check for validation from here
+  let obj_params = {
+    email: req.query.hostname,
+    password: req.query.password
+  };
+
+  db.login(obj_params)
+    .then(result => {
+      res.header('Content-Type', 'application/json');
+      // the result of this should return the created session id.
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      res.status(400).send('login failure!');
+    });
+});
+
 // FOR INTERNAL USAGE ONLY
 
 router.get('/getUsers', (req, res) => {

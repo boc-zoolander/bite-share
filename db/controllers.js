@@ -14,6 +14,19 @@ const getUsers = function() {
     });
 };
 
+// controller login route
+const login = function(obj_param) {
+  let { email } = obj_param;
+  let queryStr = `SELECT user_id, first_name, last_name, email FROM "BOC_Users" WHERE email = '${ email }'`;
+  return pool.query(queryStr)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    });
+}
+
 // this function creates a user session for the user and inserts it into the BOC session db
 const createNewSession = function (obj_param) {
   let { session_name, restaurant_name, restaurant_id_api, host_id } = obj_param;
@@ -153,6 +166,7 @@ module.exports = {
   getUsers,
   // getAllSessions,  DEPRECATED
   // getUserSession,  DEPRECATED
+  login,
   createNewSession,
   updateRestaurant,
   createNewUser,
