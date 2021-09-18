@@ -27,6 +27,7 @@ class App extends React.Component {
       hostZipCode: null,
       hostGeo: null
     };
+
     this.setTopLevelState = this.setTopLevelState.bind(this);
   }
 
