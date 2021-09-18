@@ -21,6 +21,7 @@ class CreateSession extends React.Component {
     this.saveSessionName = this.saveSessionName.bind(this);
     this.getRestaurants = this.getRestaurants.bind(this);
     this.selectRestaurant = this.selectRestaurant.bind(this);
+    this.createSession = this.createSession.bind(this);
   }
 
   async componentDidMount () {
@@ -84,6 +85,10 @@ class CreateSession extends React.Component {
     const menu = response.data.result.menus[0];
     this.props.setTopLevelState('menu', menu);
   };
+
+  async createSession () {
+
+  }
 
   render () {
     return (
