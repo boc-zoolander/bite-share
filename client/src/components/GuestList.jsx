@@ -6,7 +6,6 @@ const GuestList = ({ guests, setTopLevelState }) => {
     const guestArray = [...guests];
     const updated = guestArray.filter(guest => guest.guestName !== name);
     setTopLevelState('guests', updated);
-
     event.preventDefault();
   };
 
