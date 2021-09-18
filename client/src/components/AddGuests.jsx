@@ -17,14 +17,13 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
     if (!name) {
       setNameError('Please enter a guest name.');
     } else if (guestArray.find(element => element.guestName === name)) {
-      setnameError('This guest is already present in your list.');
+      setNameError('This guest is already present in your list.');
     } else {
       guestArray.push({ guestName: name, order: [] });
       setTopLevelState('guests', guestArray);
       setName('');
       setNameError('');
     }
-
     event.preventDefault();
   };
 
@@ -39,7 +38,9 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
         <input type='submit' value='Submit'/>
       </form>
       <GuestList guests={guests} setTopLevelState={setTopLevelState} />
-      <Link to='/select-food' >
+      <p>Send this link to friends to join</p>
+      <p>http://localhost:8080/#/join</p>
+      <Link to='/host-menu' >
         <button type='button'> Next Page </button>
       </Link>
     </div>
