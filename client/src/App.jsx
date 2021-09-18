@@ -31,7 +31,6 @@ class App extends React.Component {
         tax: 0.00,
         finalTotal: 0.00
       },
-      host: { name: 'host', order: [] },
       hostZipCode: null,
       hostGeo: null
     };
