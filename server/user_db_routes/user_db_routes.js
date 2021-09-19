@@ -56,12 +56,17 @@ router.get('/login', (req, res) => {
 
   db.login(obj_params)
     .then(result => {
-      if (result.user_id) {
+      console.log('user_bd result: ', result);
+      let parsedResult = JSON.parse(result);
+      console.log(parsedResult);
+      if (parsedResult[0].user_id) {
         res.header('Content-Type', 'application/json');
         // the result of this should return the created session id.
         res.status(200).send(result);
+      } else {
+        console.log('going to failure');
+        res.status(400).send('login failure!');
       }
-      res.status(400).send('login failure!');
     })
     .catch(err => {
       res.status(400).send('login failure!');

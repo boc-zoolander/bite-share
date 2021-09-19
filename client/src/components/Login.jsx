@@ -10,7 +10,7 @@ class Login extends React.Component {
     this.state = {
       hostName: '',
       password: '',
-      login_failure: false,
+      loginFailure: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,7 +33,7 @@ class Login extends React.Component {
       })
       .catch(err => {
         console.log('failure', err);
-        this.setState({login_failure: true});
+        this.setState({ loginFailure: true });
       });
   }
 
@@ -51,10 +51,10 @@ class Login extends React.Component {
       return <Redirect to='/user-logged-in' />;
     }
 
-    let login_failure_message = <p id="login-failure">  Login Failure: your credentials could not be validated </p>;
+    let loginFailureMessage = <p id="login-failure">  Login Failure: your credentials could not be validated </p>;
 
-    if (!this.state.login_failure) {
-      login_failure_message = <br></br>;
+    if (!this.state.loginFailure) {
+      loginFailureMessage = <br></br>;
     }
 
     return (
@@ -70,7 +70,7 @@ class Login extends React.Component {
             <p>New to Bite Share?  Register Here!</p>
           </Link>
         </form>
-        {login_failure_message}
+        { loginFailureMessage }
       </div>
     );
   }

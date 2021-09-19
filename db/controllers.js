@@ -17,9 +17,11 @@ const getUsers = function() {
 // controller login route
 const login = function(obj_param) {
   let { email, password } = obj_param;
-  let queryStr = `SELECT user_id, first_name, last_name, email FROM "BOC_Users" WHERE email = '${ email }' AND password = '${password}'`;
+  let queryStr = `SELECT user_id, first_name, last_name, email FROM "BOC_Users" WHERE email = '${ email }' AND password = '${ password }'`;
+  console.log('controllers.js INPUTTED QUERY: ', queryStr)
   return pool.query(queryStr)
     .then(res => {
+      console.log('this is the res: ', res);
       return JSON.stringify(res.rows, null, 2);
     })
     .catch(err => {
