@@ -55,7 +55,7 @@ class Login extends React.Component {
           <label htmlFor="hostName">User Name:</label>
           <input type="text" inputMode="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} />
           <label htmlFor="password">Password:</label>
-          <input type="text" inputMode="text" name="password" value={this.state.password} onChange={this.handleChange} />
+          <input type="password" inputMode="text" name="password" value={this.state.password} onChange={this.handleChange} />
           <button onClick={this.validateUser}>Login</button>
           <Link to="/register-new-user">
             <p>New to Bite Share?  Register Here!</p>
