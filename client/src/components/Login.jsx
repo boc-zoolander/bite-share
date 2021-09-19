@@ -9,7 +9,8 @@ class Login extends React.Component {
 
     this.state = {
       hostName: '',
-      password: ''
+      password: '',
+      login_failure: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,6 +22,7 @@ class Login extends React.Component {
     const validationPath = `http://localhost:8080/users/login?hostname=${this.state.hostName}&password=${this.state.password}`;
     axios.get(validationPath)
       .then(res => {
+        console.log(res);
         const hostDetails = {
           id: res.data[0].user_id,
           guestName: `${res.data[0].first_name} ${res.data[0].last_name}`,
@@ -31,6 +33,7 @@ class Login extends React.Component {
       })
       .catch(err => {
         console.log('failure', err);
+        this.setState({login_failure: true});
       });
   }
 
@@ -48,6 +51,12 @@ class Login extends React.Component {
       return <Redirect to='/user-logged-in' />;
     }
 
+    let login_failure_message = <p id="login-failure">  Login Failure: your credentials could not be validated </p>;
+
+    if (!this.state.login_failure) {
+      login_failure_message = <br></br>;
+    }
+
     return (
       <div>
         <h2>Bite Share</h2>
@@ -61,6 +70,7 @@ class Login extends React.Component {
             <p>New to Bite Share?  Register Here!</p>
           </Link>
         </form>
+        {login_failure_message}
       </div>
     );
   }
