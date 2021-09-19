@@ -56,9 +56,7 @@ router.get('/login', (req, res) => {
 
   db.login(obj_params)
     .then(result => {
-      console.log('user_bd result: ', result);
       let parsedResult = JSON.parse(result);
-      console.log(parsedResult);
       if (parsedResult[0].user_id) {
         res.header('Content-Type', 'application/json');
         // the result of this should return the created session id.
