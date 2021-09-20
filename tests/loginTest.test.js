@@ -26,15 +26,23 @@ describe('Unit Test Section: <App />', () => {
   afterEach(() => {
   });
 
-  test('Unit Test 0: Does the Login Component Render?', async () => {
+  test('Login.jsx Test 1/2, Unit Test', () => {
+    render(
+      <BrowserRouter>
+        <Login isLoggedIn={true} />
+      </BrowserRouter>
+    );
+  });
+
+  test('Login.jsx Test 2/2, Integration Test', async () => {
     let state = {
       guest: [],
       isLoggedIn: false
-    }
+    };
 
     let setTopLevelState = function (name, value) {
       state[name] = value;
-    }
+    };
 
     act (() => {
       render(
@@ -49,7 +57,7 @@ describe('Unit Test Section: <App />', () => {
     expect(screen.getByText(/User Name:/)).toBeInTheDocument();
     expect(screen.getByText(/Password/)).toBeInTheDocument();
     expect(link).toBeInTheDocument();
-    
+
     let pass = screen.getByLabelText('Password:');
     let email = screen.getByLabelText('User Name:');
     let button = screen.getByRole('button', {value:'Login'});
@@ -67,19 +75,16 @@ describe('Unit Test Section: <App />', () => {
     });
 
     console.log(button);
-});
+  });
 
-test ('unit test 0', () => {
-  render(
-    <BrowserRouter>
-      <Login isLoggedIn={true} />
-    </BrowserRouter>
-  );
-});
+  test('RegisterUser.jsx Test 1/2, Unit Test', () => {
+    render(<BrowserRouter>
+      <RegisterUser isLoggedIn={true} />
+    </BrowserRouter>);
+  });
 
-  test('Unit Test 1: Does the RegisterUser Component Render? ', async () => {
-
-    act (() => {
+  test('RegisterUser.jsx Test 2/2, Integration Test', async () => {
+    act(() => {
       render(<BrowserRouter>
         <RegisterUser isLoggedIn={false} />
       </BrowserRouter>);
@@ -100,26 +105,19 @@ test ('unit test 0', () => {
     expect(button).toBeInTheDocument();
 
     //await waitFor (() => {
-    fireEvent.click(newFirstName);
-    fireEvent.change(newFirstName, { target: { value: 'Warren' } });
-    fireEvent.click(newLastName);
-    fireEvent.change(newLastName, { target: { value: 'Worthington' } });
-    fireEvent.click(newEmail);
-    fireEvent.change(newEmail, { target: { value: 'IalsoheartjeangreyandamArchangel@gmail.com' } });
-    fireEvent.click(newPassword);
-    fireEvent.change(newPassword, { target: { value: '33333' } });
-    fireEvent.click(button);
+    await fireEvent.click(newFirstName);
+    await fireEvent.change(newFirstName, { target: { value: 'Warren' } });
+    await fireEvent.click(newLastName);
+    await fireEvent.change(newLastName, { target: { value: 'Worthington' } });
+    await fireEvent.click(newEmail);
+    await fireEvent.change(newEmail, { target: { value: 'IalsoheartjeangreyandamArchangel@gmail.com' } });
+    await fireEvent.click(newPassword);
+    await fireEvent.change(newPassword, { target: { value: '33333' } });
+    await fireEvent.click(button);
     //});
   });
 
-  test('Unit Test 1: Does the RegisterUser Component Render? true', () => {
-    render(<BrowserRouter>
-      <RegisterUser isLoggedIn={true} />
-    </BrowserRouter>);
-  });
-
-
-  test('Unit Test 2: Does the LoggedIn Component Render?', () => {
+  test('LoggedIn.jsx Test 1/2, Unit Test', () => {
     let mockedLoggedIn = [{ 
       id: 3,
       guestName: 'Charles Xavier'
@@ -131,5 +129,21 @@ test ('unit test 0', () => {
     );
 
     expect(screen.getByText(/Welcome Charles Xavier/)).toBeInTheDocument();
+  });
+
+  test('LoggedIn.jsx Test 2/2, Unit Test', async () => {
+    let mockedLoggedIn = [{ 
+      id: 3,
+      guestName: 'Charles Xavier'
+    }];
+
+    render(<BrowserRouter>
+      <LoggedIn guests={mockedLoggedIn}/>
+    </BrowserRouter>
+    );
+
+    let zipCode = screen.getByLabelText('Zip Code:');
+
+    await fireEvent.change(zipCode, { target: { value: '11111' } });
   });
 });
