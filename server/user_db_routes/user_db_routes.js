@@ -62,7 +62,6 @@ router.get('/login', (req, res) => {
         // the result of this should return the created session id.
         res.status(200).send(result);
       } else {
-        console.log('going to failure');
         res.status(400).send('login failure!');
       }
     })
