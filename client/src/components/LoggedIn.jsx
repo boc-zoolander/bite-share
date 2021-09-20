@@ -40,7 +40,7 @@ class LoggedIn extends React.Component {
           <label htmlFor="zipCode">Zip Code:</label>
           <input type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
 
-          <Link to="/find-restaurant" onClick={this.saveHost}>
+          <Link to="/find-restaurant" >
             <input type="submit" value="Next" />
           </Link>
         </form>
