@@ -74,7 +74,6 @@ describe('Unit Test Section: <App />', () => {
       fireEvent.click(button);
     });
 
-    console.log(button);
   });
 
   test('RegisterUser.jsx Test 1/2, Unit Test', () => {
@@ -95,8 +94,6 @@ describe('Unit Test Section: <App />', () => {
     let newEmail = screen.getByLabelText('New email:');
     let newPassword = screen.getByLabelText('New password:');
     let button = screen.getByRole('button', {value:'Register New User'});
-
-    console.log(newFirstName);
 
     expect(newFirstName).toBeInTheDocument();
     expect(newLastName).toBeInTheDocument();
