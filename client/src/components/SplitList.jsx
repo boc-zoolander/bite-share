@@ -54,8 +54,7 @@ const SplitList = (props) => {
         const currentGuestOrders = guestArray[i].order;
         for (let j = 0; j < currentGuestOrders.length; j++) {
           const orderItemCost = currentGuestOrders[j].price;
-          const howManyOrdered = 1;
-          // const howManyOrdered = currentGuestOrders[j].qty;
+          const howManyOrdered = currentGuestOrders[j].qty;
           const itemTotal = orderItemCost * howManyOrdered;
           totals[currentGuestID] += itemTotal;
         }
