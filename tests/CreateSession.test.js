@@ -72,7 +72,7 @@ describe('<CreateSession />', () => {
     expect(restaurant).toBeInTheDocument();
   });
 
-  it('should load new restaurants after clicking Search', async () => {
+  it('should load new restaurants after clicking "Search"', async () => {
     const restaurantDataZip = testRestaurantsByZip;
     axios.get.mockImplementation(() => new Promise((resolve, reject) => {
       resolve({
