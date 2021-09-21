@@ -59,7 +59,7 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
     const splitMethodProps = 'by Item';
 
     const setTopLevelStateProps = (a, b) => {
-      console.log(a, b);
+      // console.log(a, b);
     };
 
     render(
@@ -107,7 +107,7 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
     const splitMethodProps = 'by Item';
 
     const setTopLevelStateProps = (a, b) => {
-      console.log(a, b);
+      // console.log(a, b);
     };
 
     render(
@@ -156,7 +156,7 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
     const splitMethodProps = 'by Item';
 
     const setTopLevelStateProps = (a, b) => {
-      console.log(a, b);
+      // console.log(a, b);
     };
 
     render(
