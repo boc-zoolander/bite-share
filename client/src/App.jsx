@@ -64,14 +64,14 @@ class App extends React.Component {
             <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
           </Route>
           <Route path="/guest-menu">
-            <GuestMenu joinName={this.state.joinName}/>
+            <GuestMenu joinName={this.state.joinName} sessionId={this.state.sessionId} guests={this.state.guests} menu={this.state.menu}/>
           </Route>
           <Route path="/join">
             <Join setTopLevelState={this.setTopLevelState}/>
           </Route>
-          <Route path="/host-menu">
+          {/* <Route path="/host-menu">
             <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
-          </Route>
+          </Route> */}
           <Route path="/select-food">
             <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
           </Route>

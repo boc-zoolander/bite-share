@@ -1,8 +1,6 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-
 class Login extends React.Component {
   constructor (props) {
     super(props);
@@ -10,7 +8,7 @@ class Login extends React.Component {
     this.state = {
       hostName: '',
       password: '',
-      loginFailure: false,
+      loginFailure: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,7 +20,6 @@ class Login extends React.Component {
     const validationPath = `http://localhost:8080/users/login?hostname=${this.state.hostName}&password=${this.state.password}`;
     axios.get(validationPath)
       .then(res => {
-     
         const hostDetails = {
           id: res.data[0].user_id,
           guestName: `${res.data[0].first_name} ${res.data[0].last_name}`,
@@ -32,12 +29,9 @@ class Login extends React.Component {
         this.props.setTopLevelState('isLoggedIn', true);
       })
       .catch(err => {
-     
         this.setState({ loginFailure: true });
+        console.log(err);
       });
-  }
-
-  componentDidMount () {
   }
 
   handleChange (e) {
@@ -48,7 +42,7 @@ class Login extends React.Component {
 
   render () {
     if (this.props.isLoggedIn) {
-      return <Redirect to='/user-logged-in' />;
+      return <Redirect to='/session' />;
     }
 
     let loginFailureMessage = <p id="login-failure">  Login Failure: your credentials could not be validated </p>;
