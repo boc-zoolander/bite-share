@@ -1,14 +1,22 @@
 /* Variables */
 
+/* Colors */
 :root {
-  --link: #1EAEDB;
-  --link-hover: #0FA0CE;
-
-  --button-bg: #33C3F0;
-  --button-bg-hover: #1EAEDB;
-
+  --blue: #1EAEDB;
+  --blue-light: #0FA0CE;
   --red: #FF1421;
+  --red-light: #ff8990;
   --yellow: #FEB200;
+  --yellow-light: #ffd97f;
+}
+
+/* Elements */
+:root {
+  --link: var(--blue-light);
+  --link-hover: var(--blue);
+
+  --button-bg: var(--yellow-light);
+  --button-bg-hover: var(--yellow);
 }
 
 /* Styles */
