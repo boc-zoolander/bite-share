@@ -42,7 +42,7 @@ class CreateSession extends React.Component {
     // const response = await axios(config);
 
     // Temporary response variable while we use dummy JS file
-    const response = await axios('http://localhost:8080/users/testGeo');
+    const response = await axios.get('http://localhost:8080/users/testGeo');
     const restaurants = response.data.data;
     this.setState({ restaurants });
   }
@@ -71,7 +71,7 @@ class CreateSession extends React.Component {
     // const response = await axios(config);
 
     // Temporary response variable while we use dummy JS file
-    const response = await axios('http://localhost:8080/users/testzip');
+    const response = await axios.get('http://localhost:8080/users/testzip');
     const restaurants = response.data.data;
     this.setState({
       restaurants,
