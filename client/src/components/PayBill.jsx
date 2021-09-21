@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 import $ from 'jquery';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import ThankYou from './ThankYou.jsx';
 
 const payeeEmail = 'sb-dmus17722352@personal.example.com';
