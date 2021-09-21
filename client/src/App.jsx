@@ -42,7 +42,7 @@ class App extends React.Component {
   }
 
   setTopLevelState (name, value) {
-    this.setState({ [name]: value }, () => { console.log(this.state.sessionId); });
+    this.setState({ [name]: value });
   }
 
   render () {
