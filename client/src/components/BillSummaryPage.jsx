@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SplitList from './SplitList.jsx';
 
 class BillSummaryPage extends React.Component {
@@ -7,9 +7,7 @@ class BillSummaryPage extends React.Component {
     super(props);
     this.state = {
       split: 'by Item',
-      tipPercentage: 0,
-      //???? does it need to be a number
-      zipCode: Number(this.props.zipCode),
+      zipCode: this.props.restaurantInfo.address.postal_code,
       guests: this.props.guests
     };
 
@@ -25,8 +23,7 @@ class BillSummaryPage extends React.Component {
       const currentGuestOrders = guestArray[i].order;
       for (let j = 0; j < currentGuestOrders.length; j++) {
         const orderItemCost = currentGuestOrders[j].price;
-        const howManyOrdered = 1;
-        // const howManyOrdered = currentGuestOrders[j].qty;
+        const howManyOrdered = currentGuestOrders[j].qty;
         const itemTotal = orderItemCost * howManyOrdered;
         billTotal += itemTotal;
       }
@@ -35,39 +32,38 @@ class BillSummaryPage extends React.Component {
   }
 
   changeTipPercentage (event) {
-    const value = event.target.value
-    this.setState({
-      tipPercentage : value
-    })
+    const value = Number(event.target.value);
+    this.props.setTopLevelState('tipPercentage', value);
   }
 
   splitEvenly () {
     this.setState({
       split: 'Evenly'
     });
-    this.props.setTopLevelState('splitMechanism', 'Evenly')
+    this.props.setTopLevelState('splitMechanism', 'Evenly');
   }
 
   splitByItem () {
     this.setState({
       split: 'by Item'
     });
-    this.props.setTopLevelState('splitMechanism', 'by Item')
+    this.props.setTopLevelState('splitMechanism', 'by Item');
   }
 
   render () {
     return (
       <div>
         <h3>Final Bill Split {this.state.split}</h3>
-        <SplitList guests={this.state.guests} totalCost={this.getBillTotalWithoutTipOrTax(this.state.guests)} tipPercentage = {this.state.tipPercentage} split={this.state.split} zipCode = {this.state.zipCode}/>
+        <SplitList guests={this.state.guests} totalCost={this.getBillTotalWithoutTipOrTax(this.state.guests)} tipPercentage = {this.props.tipPercentage} split={this.props.splitMethod} zipCode = {this.state.zipCode} setTopLevelState = {this.props.setTopLevelState} finalTotals= {this.props.finalTotals}/>
         <form>
           Tip Percentage (%):
-          <input type="number" id="tipPercentage" name="tipPercentage" min="0" max="1000" value={this.state.tipPercentage} onChange={this.changeTipPercentage}/><br/>
+          <input type="number" id="tipPercentage" name="tipPercentage" min="0" max="1000" value={this.props.tipPercentage} onChange={this.changeTipPercentage}/><br/>
         </form>
+        <br/>
         <Link to = "/select-food">
-          <button>Back</button>
+          <button>Modify Order</button>
         </Link>
-        {this.state.guests.length <= 1
+        {this.state.guests.length > 1
           ? <div>
             <button onClick={this.splitEvenly}>Split Evenly</button>
             <button onClick={this.splitByItem}>Split by Item</button>

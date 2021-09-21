@@ -10,7 +10,7 @@ jest.mock('axios');
 
 // Used to handle setTopLevelState function with no App.js
 const setTopLevelState = (a, b) => {
-  console.log(a, b);
+  // console.log(a, b);
 };
 
 describe('Session', () => {
@@ -90,6 +90,5 @@ describe('Session', () => {
     expect(loading).toBeInTheDocument();
     const nextPage = await screen.findByText('Existing Session Test');
     expect(nextPage).toBeInTheDocument();
-    screen.debug();
   });
 });
