@@ -82,7 +82,7 @@ class CreateSession extends React.Component {
   async selectRestaurant (restaurant) {
     this.props.setTopLevelState('restaurant', restaurant);
     const response = await axios('http://localhost:8080/users/testgetRestaurant_1');
-    const menu = response.data.result.menus[0];
+    const menu = response.data.result.menus[0].menu_sections;
     this.props.setTopLevelState('menu', menu);
     this.createSession();
   };

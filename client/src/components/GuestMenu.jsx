@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ThankYou from './ThankYou.jsx';
-import Menu from '../../../server/user_db_routes/testgetrestaurant_1.js';
 import io from 'socket.io-client';
 
 const url = 'http://localhost:8080';
@@ -12,13 +11,12 @@ const socket = io(url);
 //    Should inform host using socket.io
 // For now just pass menu in as prop
 
-const GuestMenu = ({ joinName }) => {
+const GuestMenu = ({ guests, joinName, menu, sessionId }) => {
   // state declare here
   const [currentOrder, setCurrentOrder] = useState([]);
   const [submitted, setSubmitted] = useState(false);
 
-  // Map Menu (prop or import for now) items
-  const menuItems = Menu.result.menus[0].menu_sections.map((section, i) => {
+  const menuItems = menu.map((section, i) => {
     return (
       <details key={i}>
         <summary> {section.section_name} </summary>
@@ -36,7 +34,6 @@ const GuestMenu = ({ joinName }) => {
     );
   });
 
-  // Map currentOrder
   const currentItems = currentOrder.map((item, i) => {
     return <span key={i}> {item.name} {item.qty}</span>;
   }) || null;
@@ -56,7 +53,7 @@ const GuestMenu = ({ joinName }) => {
   };
 
   const submitOrder = () => {
-    socket.emit('orderSubmitted', { guestName: joinName, order: currentOrder });
+    socket.emit('orderSubmitted', { id: guests[0].id, guestName: guests[0].guestName, order: currentOrder });
     setSubmitted(true);
   };
 
@@ -64,7 +61,7 @@ const GuestMenu = ({ joinName }) => {
     submitted
       ? <ThankYou />
       : <div>
-      <h2>Current Items for {joinName}</h2>
+      <h2>Current Items for {guests[0].guestName}</h2>
         {currentItems}
       <div>
         {menuItems}
