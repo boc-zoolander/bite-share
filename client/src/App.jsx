@@ -61,7 +61,7 @@ class App extends React.Component {
             <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} restaurant={this.state.restaurant} />
           </Route>
           <Route path="/add-guests">
-            <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
+            <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} sessionId={this.state.sessionId}/>
           </Route>
           <Route path="/guest-menu">
             <GuestMenu joinName={this.state.joinName} sessionId={this.state.sessionId} guests={this.state.guests} menu={this.state.menu}/>
@@ -69,12 +69,12 @@ class App extends React.Component {
           <Route path="/join">
             <Join setTopLevelState={this.setTopLevelState}/>
           </Route>
-          {/* <Route path="/host-menu">
+          <Route path="/host-menu">
             <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
-          </Route> */}
-          <Route path="/select-food">
-            <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
           </Route>
+          {/* <Route path="/select-food">
+            <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
+          </Route> */}
           <Route path="/session">
             <Session setTopLevelState={this.setTopLevelState} />
           </Route>

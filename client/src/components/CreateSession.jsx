@@ -82,7 +82,7 @@ class CreateSession extends React.Component {
   async selectRestaurant (restaurant) {
     this.props.setTopLevelState('restaurant', restaurant);
     const response = await axios('http://localhost:8080/users/testgetRestaurant_1');
-    const menu = response.data.result.menus[0];
+    const menu = response.data.result.menus[0].menu_sections;
     this.props.setTopLevelState('menu', menu);
     this.createSession();
   };
@@ -106,13 +106,13 @@ class CreateSession extends React.Component {
         <h2>Create Session</h2>
         <h4>Name your session and select a restaurant to get started.</h4>
           {!this.state.sessionNameSaved
-          ? <form>
+            ? <form>
               <label htmlFor="sessionName">Session Name:</label>
               <input type="text" inputMode="text" name="sessionName" value={this.state.sessionName} onChange={this.handleChange} />
               <input type="submit" value="Save" onClick={this.saveSessionName} />
             </form>
 
-          : <div>
+            : <div>
               <span>Session Name: {this.state.sessionName}</span>
               <form>
                 <label htmlFor="searchQuery">Search restaurants by name:</label>
