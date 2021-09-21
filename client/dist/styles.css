@@ -1,3 +1,18 @@
+/* Variables */
+
+:root {
+  --link: #1EAEDB;
+  --link-hover: #0FA0CE;
+
+  --button-bg: #33C3F0;
+  --button-bg-hover: #1EAEDB;
+
+  --red: #FF1421;
+  --yellow: #FEB200;
+}
+
+/* Styles */
+
 body {
   font-family: Helvetica, sans-serif;
   margin: auto;
