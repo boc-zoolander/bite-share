@@ -22,7 +22,7 @@ class Login extends React.Component {
     const validationPath = `http://localhost:8080/users/login?hostname=${this.state.hostName}&password=${this.state.password}`;
     axios.get(validationPath)
       .then(res => {
-        console.log(res);
+     
         const hostDetails = {
           id: res.data[0].user_id,
           guestName: `${res.data[0].first_name} ${res.data[0].last_name}`,
@@ -32,7 +32,7 @@ class Login extends React.Component {
         this.props.setTopLevelState('isLoggedIn', true);
       })
       .catch(err => {
-        console.log('failure', err);
+     
         this.setState({ loginFailure: true });
       });
   }

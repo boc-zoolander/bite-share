@@ -30,7 +30,6 @@ class LoggedIn extends React.Component {
   }
 
   render () {
-    // console.log(this.props.guests);
     const username = `${this.props.guests[0].guestName} user_id: ${this.props.guests[0].id}`;
 
     return (

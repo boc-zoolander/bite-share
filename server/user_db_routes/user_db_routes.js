@@ -19,6 +19,29 @@ const testSession = require('./getSession');
 //     })
 // })
 
+// getSession (based on db pull) version 1
+router.get('/getSession2', (req, res) => {
+  // gets the user password to check for validation from here
+  let obj_params = {
+    session_id: req.query.session_id,
+  };
+
+  db.login(obj_params)
+    .then(result => {
+      let parsedResult = JSON.parse(result);
+      if (parsedResult[0].user_id) {
+        res.header('Content-Type', 'application/json');
+        // the result of this should return the created session id.
+        res.status(200).send(result);
+      } else {
+        res.status(400).send('login failure!');
+      }
+    })
+    .catch(err => {
+      res.status(400).send('get session failure: ', err);
+    });
+});
+
 // TEST ROUTES FOR PRELIMINARY USAGE
 
 router.get('/getSession', (req, res) => {
@@ -71,9 +94,30 @@ router.get('/login', (req, res) => {
 });
 
 // FOR INTERNAL USAGE ONLY
-
 router.get('/getUsers', (req, res) => {
   db.getUsers()
+    .then(result => {
+      res.header('Content-Type', 'application/json');
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    });
+});
+
+router.get('/getAllGuestsInSessions', (req, res) => {
+  db.getAllGuestsInSessions()
+    .then(result => {
+      res.header('Content-Type', 'application/json');
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    });
+});
+
+router.get('/getAllOrders', (req, res) => {
+  db.getAllOrders()
     .then(result => {
       res.header('Content-Type', 'application/json');
       res.status(200).send(result);
@@ -93,6 +137,7 @@ router.get('/getAllSessions', (req, res) => {
       res.status(400).send(err);
     });
 });
+
 
 router.get('/getUserSession', (req, res) => {
   db.getUserSession({ host_id: 1 })
