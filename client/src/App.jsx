@@ -49,44 +49,41 @@ class App extends React.Component {
   render () {
     return (
       <div>
-      <Router>
-        <Switch>
-          <Route path="/user-logged-in">
-            <LoggedIn setTopLevelState={this.setTopLevelState} guests={this.state.guests}/>
-          </Route>
-          <Route path="/register-new-user">
-            <RegisterUser setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
-          </Route>
-          <Route path="/find-restaurant">
-            <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} restaurant={this.state.restaurant} />
-          </Route>
-          <Route path="/add-guests">
-            <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
-          </Route>
-          <Route path="/guest-menu">
-            <GuestMenu joinName={this.state.joinName}/>
-          </Route>
-          <Route path="/join">
-            <Join setTopLevelState={this.setTopLevelState}/>
-          </Route>
-          <Route path="/host-menu">
-            <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
-          </Route>
-          <Route path="/select-food">
-            <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
-          </Route>
-          <Route path="/session">
-            <Session setTopLevelState={this.setTopLevelState} />
-          </Route>
-          <Route path="/split-bill">
-            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} restaurantInfo= {this.state.restaurant} finalTotals = {this.state.finalTotals} tipPercentage = {this.state.tipPercentage} splitMethod = {this.state.splitMechanism}/>
-          </Route>
-          <Route exact path="/">
-            <Login setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+        <Router>
+          <Switch>
+            <Route path="/register-new-user">
+              <RegisterUser setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
+            </Route>
+            <Route path="/find-restaurant">
+              <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} restaurant={this.state.restaurant} />
+            </Route>
+            <Route path="/add-guests">
+              <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} />
+            </Route>
+            <Route path="/guest-menu">
+              <GuestMenu joinName={this.state.joinName}/>
+            </Route>
+            <Route path="/join">
+              <Join setTopLevelState={this.setTopLevelState}/>
+            </Route>
+            <Route path="/host-menu">
+              <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
+            </Route>
+            <Route path="/select-food">
+              <SelectFood setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
+            </Route>
+            <Route path="/session">
+              <Session setTopLevelState={this.setTopLevelState} />
+            </Route>
+            <Route path="/split-bill">
+              <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} restaurantInfo= {this.state.restaurant} finalTotals = {this.state.finalTotals} tipPercentage = {this.state.tipPercentage} splitMethod = {this.state.splitMechanism}/>
+            </Route>
+            <Route exact path="/">
+              <Login setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
+            </Route>
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }

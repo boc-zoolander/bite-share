@@ -43,7 +43,7 @@ class RegisterUser extends React.Component {
 
   render () {
     if (this.props.isLoggedIn) {
-      return <Redirect to='/user-logged-in' />;
+      return <Redirect to='/session' />;
     }
 
     return (
