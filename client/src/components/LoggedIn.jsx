@@ -7,7 +7,7 @@ class LoggedIn extends React.Component {
 
     this.state = {
       hostName: '',
-      zipCode: '',
+      zipCode: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -30,20 +30,19 @@ class LoggedIn extends React.Component {
   }
 
   render () {
-    // console.log(this.props.guests);
     const username = `${this.props.guests[0].guestName} user_id: ${this.props.guests[0].id}`;
 
     return (
       <div>
         <h3>Welcome {username} </h3>
         <form>
-          <label htmlFor="zipCode">Zip Code:</label>
-          <input type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
+          <label id="zip-label" htmlFor="zipCode">Zip Code:</label>
+          <input aria-labelledby="zip-label" type="number" inputMode="numeric" name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
 
           <Link to="/find-restaurant" onClick={this.saveHost}>
             <input type="submit" value="Next" />
           </Link>
-        </form>
+        </form> 
       </div>
     );
   }

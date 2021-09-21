@@ -1,26 +1,20 @@
-import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
+
 import '@testing-library/jest-dom';
-import React from 'react';
-import { configure, shallow, mount } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import App from '../client/src/App.jsx';
 import axios from 'axios';
 
 /* --- Use this mock adapter if you want to make mock server calls --- */
-
-
-//var MockAdapter = require("axios-mock-adapter");
+var MockAdapter = require("axios-mock-adapter");
 
 // This sets the mock adapter on the default instance
-//var mock = new MockAdapter(axios);
+var mock = new MockAdapter(axios);
 
 // Mock any GET request to /users
 // arguments for reply are (status, data, headers)
 
-// // mock for unit test 1
-// mock.onGet("/createNewSession").reply(200, {
-//   users: [{ id: 1, name: "John Smith" }],
-// });
+let mockCreateNewSessionResult = [{ session_id: 1 }];
+
+// mock for unit test 1
+mock.onPost("/createNewSession").reply(200, mockCreateNewSessionResult);
 
 // // mock for unit test 2
 // mock.onGet("/updateRestaurant").reply(200, {
@@ -58,24 +52,12 @@ import axios from 'axios';
 // });
 
 describe('Unit Test Section: <App />', () => {
-  // set up for each test
-  beforeEach(() => {
-  });
-
-  // clean up for each test
-  afterEach(() => {
-  });
-
   test('Unit Test 1: Route /createNewSession:', async () => {
-
-    // let testRoute = 'http://localhost:8080/users/createNewSession?host_id=1&restaurant_name=TEST_RESTAURANT_1&restaurant_id_api=8289152022&session_name=TEST_SESSION_1';
-    // await waitFor (() => axios.post(testRoute));
-
-    // console.log(result.rows);
-      
+    //let testRoute = '/createNewSession?host_id=1&restaurant_name=TEST_RESTAURANT_1&restaurant_id_api=8289152022&session_name=TEST_SESSION_1';
+    let result = await axios.post('/createNewSession');
+    expect(result.data[0].session_id).toBeTruthy();
   });
   
-
   // test('Unit Test 2: Route /updateRestaurant:', () => {
     
   // });

@@ -293,3 +293,9 @@ button.link {
   background: none;
   border: none;
 }
+
+/* password login failure color */
+#login-failure {
+  color: red;
+}
+

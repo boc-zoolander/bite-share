@@ -9,7 +9,8 @@ class Login extends React.Component {
 
     this.state = {
       hostName: '',
-      password: ''
+      password: '',
+      loginFailure: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,6 +22,7 @@ class Login extends React.Component {
     const validationPath = `http://localhost:8080/users/login?hostname=${this.state.hostName}&password=${this.state.password}`;
     axios.get(validationPath)
       .then(res => {
+     
         const hostDetails = {
           id: res.data[0].user_id,
           guestName: `${res.data[0].first_name} ${res.data[0].last_name}`,
@@ -30,7 +32,8 @@ class Login extends React.Component {
         this.props.setTopLevelState('isLoggedIn', true);
       })
       .catch(err => {
-        console.log('failure', err);
+     
+        this.setState({ loginFailure: true });
       });
   }
 
@@ -48,19 +51,26 @@ class Login extends React.Component {
       return <Redirect to='/user-logged-in' />;
     }
 
+    let loginFailureMessage = <p id="login-failure">  Login Failure: your credentials could not be validated </p>;
+
+    if (!this.state.loginFailure) {
+      loginFailureMessage = <br></br>;
+    }
+
     return (
       <div>
         <h2>Bite Share</h2>
         <form>
-          <label htmlFor="hostName">User Name:</label>
-          <input type="text" inputMode="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} />
-          <label htmlFor="password">Password:</label>
-          <input type="text" inputMode="text" name="password" value={this.state.password} onChange={this.handleChange} />
+          <label htmlFor="hostName" id="email-label">User Name:</label>
+          <input aria-labelledby="email-label" type="text" inputMode="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} />
+          <label htmlFor="password" id="password-label">Password:</label>
+          <input aria-labelledby="password-label" type="password" inputMode="text" name="password" value={this.state.password} onChange={this.handleChange} />
           <button onClick={this.validateUser}>Login</button>
           <Link to="/register-new-user">
             <p>New to Bite Share?  Register Here!</p>
           </Link>
         </form>
+        { loginFailureMessage }
       </div>
     );
   }

@@ -4,8 +4,57 @@ var format = require('pg-format');
 // database interaction to get all the users in the users table.
 const getUsers = function() {
   let sql = format('SELECT * FROM %I ', "BOC_Users");
-
   return pool.query(sql)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+// database interaction to get all the users in the users table.
+const getAllSessions = function() {
+  let sql = format('SELECT * FROM %I ', "BOC_Sessions");
+  return pool.query(sql)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+// database interaction to get all the users in the users table.
+const getAllGuestsInSessions = function() {
+  let sql = format('SELECT * FROM %I ', "BOC_User-Session-jt");
+  return pool.query(sql)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+// database interaction to get all the users in the users table.
+const getAllOrders = function() {
+  let sql = format('SELECT * FROM %I ', "BOC_Orders");
+  return pool.query(sql)
+    .then(res => {
+      return JSON.stringify(res.rows, null, 2);
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+// Get Session 2 (db pull)
+const getSession2 = function(obj_param) {
+  let { session_id } = obj_param;
+  let queryStr = `SELECT user_id, first_name, last_name, email FROM "BOC_Users" WHERE email = '${ email }' AND password = '${ password }'`;
+  
+  return pool.query(queryStr)
     .then(res => {
       return JSON.stringify(res.rows, null, 2);
     })
@@ -16,8 +65,9 @@ const getUsers = function() {
 
 // controller login route
 const login = function(obj_param) {
-  let { email } = obj_param;
-  let queryStr = `SELECT user_id, first_name, last_name, email FROM "BOC_Users" WHERE email = '${ email }'`;
+  let { email, password } = obj_param;
+  let queryStr = `SELECT user_id, first_name, last_name, email FROM "BOC_Users" WHERE email = '${ email }' AND password = '${ password }'`;
+  
   return pool.query(queryStr)
     .then(res => {
       return JSON.stringify(res.rows, null, 2);
@@ -25,7 +75,7 @@ const login = function(obj_param) {
     .catch(err => {
       return err;
     });
-}
+};
 
 // this function creates a user session for the user and inserts it into the BOC session db
 const createNewSession = function (obj_param) {
@@ -51,7 +101,7 @@ const updateRestaurant = function (obj_param) {
   let {restaurant_id_api, restaurant_name, session_id} = obj_param;
 
   let sql = format(`UPDATE %I SET %s = '${restaurant_id_api}', %s = '${restaurant_name}' \
-                    WHERE (%s = '${session_id}')`, "BOC_Sessions", 'restaurant_id_api', 
+                    WHERE (%s = '${session_id}')`, "BOC_Sessions", 'restaurant_id_api',
                     'restaurant_name', 'session_id');
 
   return pool.query(sql)
@@ -68,7 +118,7 @@ const createNewUser = function (obj_param) {
   let { first_name, last_name, email, password } = obj_param;
 
   let sql = format(`INSERT INTO %I(%s, %s, %s, %s) VALUES ('${first_name}', '${last_name}', \
-                    '${email}', '${password}') RETURNING "user_id"`, "BOC_Users", 'first_name', 
+                    '${email}', '${password}') RETURNING "user_id"`, "BOC_Users", 'first_name',
                     'last_name', 'email', 'password');
 
   return pool.query(sql)
@@ -100,7 +150,7 @@ const addGuest = function (obj_param) {
 const removeGuest = function (obj_param) {
   let {session_id, user_id} = obj_param;
 
-  let sql = format(`DELETE FROM %I WHERE (%s = '${session_id}' AND %s = '${user_id}')`, 
+  let sql = format(`DELETE FROM %I WHERE (%s = '${session_id}' AND %s = '${user_id}')`,
                    "BOC_User-Session-jt", 'session_id', 'user_id');
 
   return pool.query(sql)
@@ -164,8 +214,11 @@ const removeOrder = function (obj_param) {
 
 module.exports = {
   getUsers,
-  // getAllSessions,  DEPRECATED
+  getAllSessions,
+  getAllGuestsInSessions,
+  getAllOrders,
   // getUserSession,  DEPRECATED
+  getSession2,
   login,
   createNewSession,
   updateRestaurant,
