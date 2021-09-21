@@ -24,7 +24,7 @@ describe('Session', () => {
         <Route path="/find-restaurant">
           <p>New Session Test</p>
         </Route>
-        <Route path="/select-food">
+        <Route path="/guest-menu">
           <p>Existing Session Test</p>
         </Route>
         <Route exact path="/">
