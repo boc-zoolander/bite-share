@@ -26,25 +26,25 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
         id: 0,
         guestName: 'Sara',
         order: [
-          { name: 'Regular Coffee', description: '', pricing: [{ price: 2.25, currency: 'USD', priceString: '$2.25' }], price: 2.25 },
-          { name: 'Flap Jacks', description: '', pricing: [{ price: 7.75, currency: 'USD', priceString: '$7.75' }], price: 7.75 },
-          { name: 'El Cuban Reuben Panini', description: 'Roast pork, Swiss cheese, braised red cabbage and mustard on ciabatta.', pricing: [{ price: 14.75, currency: 'USD', priceString: '$14.75' }], price: 14.75 }
+          { name: 'Regular Coffee', description: '', pricing: [{ price: 2.25, currency: 'USD', priceString: '$2.25' }], price: 2.25, qty: 1 },
+          { name: 'Flap Jacks', description: '', pricing: [{ price: 7.75, currency: 'USD', priceString: '$7.75' }], price: 7.75, qty: 1 },
+          { name: 'El Cuban Reuben Panini', description: 'Roast pork, Swiss cheese, braised red cabbage and mustard on ciabatta.', pricing: [{ price: 14.75, currency: 'USD', priceString: '$14.75' }], price: 14.75, qty: 1 }
         ]
       },
       {
         guestName: 'Milo',
         order: [
-          { name: 'Regular Coffee', description: '', pricing: [{ price: 2.25, currency: 'USD', priceString: '$2.25' }], price: 2.25 },
-          { name: 'Flap Jacks', description: '', pricing: [{ price: 7.75, currency: 'USD', priceString: '$7.75' }], price: 7.75 },
-          { name: 'El Cuban Reuben Panini', description: 'Roast pork, Swiss cheese, braised red cabbage and mustard on ciabatta.', pricing: [{ price: 14.75, currency: 'USD', priceString: '$14.75' }], price: 14.75 }
+          { name: 'Regular Coffee', description: '', pricing: [{ price: 2.25, currency: 'USD', priceString: '$2.25' }], price: 2.2, qty: 1 },
+          { name: 'Flap Jacks', description: '', pricing: [{ price: 7.75, currency: 'USD', priceString: '$7.75' }], price: 7.7, qty: 1 },
+          { name: 'El Cuban Reuben Panini', description: 'Roast pork, Swiss cheese, braised red cabbage and mustard on ciabatta.', pricing: [{ price: 14.75, currency: 'USD', priceString: '$14.75' }], price: 14.7, qty: 1 }
         ]
       },
       {
         guestName: 'Mike',
         order: [
-          { name: 'Regular Coffee', description: '', pricing: [{ price: 2.25, currency: 'USD', priceString: '$2.25' }], price: 2.25 },
-          { name: 'Flap Jacks', description: '', pricing: [{ price: 7.75, currency: 'USD', priceString: '$7.75' }], price: 7.75 },
-          { name: 'El Cuban Reuben Panini', description: 'Roast pork, Swiss cheese, braised red cabbage and mustard on ciabatta.', pricing: [{ price: 14.75, currency: 'USD', priceString: '$14.75' }], price: 14.75 }
+          { name: 'Regular Coffee', description: '', pricing: [{ price: 2.25, currency: 'USD', priceString: '$2.25' }], price: 2.2, qty: 1 },
+          { name: 'Flap Jacks', description: '', pricing: [{ price: 7.75, currency: 'USD', priceString: '$7.75' }], price: 7.7, qty: 1 },
+          { name: 'El Cuban Reuben Panini', description: 'Roast pork, Swiss cheese, braised red cabbage and mustard on ciabatta.', pricing: [{ price: 14.75, currency: 'USD', priceString: '$14.75' }], price: 14.7, qty: 1 }
         ]
       }
     ];
@@ -78,6 +78,20 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
     );
     expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
   });
+
+  // test('Does the component <BillSummaryPage /> allow user to enter tip?', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState = {setTopLevelStateProps}/>
+  //     </BrowserRouter>
+  //   );
+  //   const input = screen.getByTestId('tip-percentage-input');
+  //   fireEvent.focus(input);
+  //   fireEvent.change(input, { target: { value: 50 } });
+  //   const newTipAmount = screen.getByTestId('tip-amount-id');
+  //   expect(newTipAmount).toBeInTheDocument();
+  //   screen.debug();
+  // });
 
   test('Does the component <BillSummaryPage /> contain the split options when there is more than one guest?', () => {
     render(
@@ -122,9 +136,9 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
         id: 0,
         guestName: 'Sara',
         order: [
-          { name: 'Regular Coffee', description: '', pricing: [{ price: 2.25, currency: 'USD', priceString: '$2.25' }], price: 2.25 },
-          { name: 'Flap Jacks', description: '', pricing: [{ price: 7.75, currency: 'USD', priceString: '$7.75' }], price: 7.75 },
-          { name: 'El Cuban Reuben Panini', description: 'Roast pork, Swiss cheese, braised red cabbage and mustard on ciabatta.', pricing: [{ price: 14.75, currency: 'USD', priceString: '$14.75' }], price: 14.75 }
+          { name: 'Regular Coffee', description: '', pricing: [{ price: 2.25, currency: 'USD', priceString: '$2.25' }], price: 2.25, qty: 1 },
+          { name: 'Flap Jacks', description: '', pricing: [{ price: 7.75, currency: 'USD', priceString: '$7.75' }], price: 7.75, qty: 1 },
+          { name: 'El Cuban Reuben Panini', description: 'Roast pork, Swiss cheese, braised red cabbage and mustard on ciabatta.', pricing: [{ price: 14.75, currency: 'USD', priceString: '$14.75' }], price: 14.75, qty: 1 }
         ]
       }
     ];
@@ -163,10 +177,22 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
     expect(screen.getByText(/Final Total/)).toBeInTheDocument();
   });
 
-  // test('Unit Test 5:  Does the component <SplitList /> render?', () => {
+  // test('Does the component <SplitList /> properly split the total by item?', () => {
   //   render(
   //     <BrowserRouter>
-  //       <SplitList guests={guestsProps} totalCost={finalTotalsProps.preliminaryTotal} tipPercentage = {tipPercentageProps} split={splitMethodProps} zipCode = {restaurantProps.address.postal_code} setTopLevelState = {setTopLevelStateProps} finalTotals= {finalTotalsProps}/>
+  //       <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState={setTopLevelStateProps}/>
+  //     </BrowserRouter>
+  //   );
+  //   expect(screen.getByText(/Preliminary Total/)).toBeInTheDocument();
+  //   expect(screen.getByText(/Tip Amount/)).toBeInTheDocument();
+  //   expect(screen.getByText(/Tax/)).toBeInTheDocument();
+  //   expect(screen.getByText(/Final Total/)).toBeInTheDocument();
+  // });
+
+  // test('Does the component <SplitList /> properly split the total evenly?', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState={setTopLevelStateProps}/>
   //     </BrowserRouter>
   //   );
   //   expect(screen.getByText(/Preliminary Total/)).toBeInTheDocument();

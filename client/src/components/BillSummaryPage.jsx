@@ -4,9 +4,11 @@ import SplitList from './SplitList.jsx';
 
 class BillSummaryPage extends React.Component {
   constructor (props) {
+    console.log('PROPS', props);
     super(props);
     this.state = {
       split: 'by Item',
+      tipPercentage: 0,
       zipCode: this.props.restaurantInfo.address.postal_code,
       guests: this.props.guests
     };
@@ -33,7 +35,7 @@ class BillSummaryPage extends React.Component {
 
   changeTipPercentage (event) {
     const value = Number(event.target.value);
-    this.props.setTopLevelState('tipPercentage', value);
+    this.setState({ tipPercentage: value });
   }
 
   splitEvenly () {
@@ -54,10 +56,10 @@ class BillSummaryPage extends React.Component {
     return (
       <div>
         <h3>Final Bill Split {this.state.split}</h3>
-        <SplitList guests={this.state.guests} totalCost={this.getBillTotalWithoutTipOrTax(this.state.guests)} tipPercentage = {this.props.tipPercentage} split={this.props.splitMethod} zipCode = {this.state.zipCode} setTopLevelState = {this.props.setTopLevelState} finalTotals= {this.props.finalTotals}/>
+        <SplitList guests={this.state.guests} totalCost={this.getBillTotalWithoutTipOrTax(this.state.guests)} tipPercentage = {this.state.tipPercentage} split={this.props.splitMethod} zipCode = {this.state.zipCode} setTopLevelState = {this.props.setTopLevelState} finalTotals= {this.props.finalTotals}/>
         <form>
-          Tip Percentage (%):
-          <input type="number" id="tipPercentage" name="tipPercentage" min="0" max="1000" value={this.props.tipPercentage} onChange={this.changeTipPercentage}/><br/>
+          <label htmlFor='tipPercentage'>Tip Percentage (%):</label>
+          <input type="number" id="tipPercentage" name="tipPercentage" min="0" max="100" defaultValue={this.state.tipPercentage} value = {this.state.tipPercentage} onChange={this.changeTipPercentage} data-testid="tip-percentage-input"/><br/>
         </form>
         <br/>
         <Link to = "/select-food">
