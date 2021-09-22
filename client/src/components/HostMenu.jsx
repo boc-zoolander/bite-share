@@ -7,13 +7,17 @@ import Dashboard from './Dashboard.jsx';
 const url = 'http://localhost:8080';
 const socket = io(url);
 
-const HostMenu = ({ guests, menu, setTopLevelState }) => {
+const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
   const [currentName, setCurrentName] = useState('');
 
   useEffect(() => {
     socket.on('orderSubmitted', payload => {
       setTopLevelState('guests', [...guests, payload]);
     });
+  });
+
+  useEffect(() => {
+    socket.emit('joinRoom', { sessionId });
   });
 
   const onChange = (event) => {
@@ -86,7 +90,7 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
         </div>
       </div>
       <h2> Dashboard </h2>
-        <Dashboard />
+        <Dashboard sessionId={sessionId} />
       <h2>Current Items for {currentName}</h2>
         {currentItems}
       <div>

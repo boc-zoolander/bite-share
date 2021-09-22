@@ -89,14 +89,17 @@ class CreateSession extends React.Component {
 
   async createSession () {
     const restaurant = this.props.restaurant;
-    const response = await axios.post('/users/createNewSession', null, { params: {
-      host_id: 1,
-      restaurant_name: restaurant.restaurant_name,
-      restaurant_id_api: restaurant.restaurant_id,
-      session_name: this.state.sessionName
-    }});
+    const response = await axios.post('/users/createNewSession', null, {
+      params: {
+        host_id: 1,
+        restaurant_name: restaurant.restaurant_name,
+        restaurant_id_api: restaurant.restaurant_id,
+        session_name: this.state.sessionName
+      }
+    });
     const sessionId = response.data[0].session_id;
-    this.props.setTopLevelState('sessionId', sessionId);
+    this.props.setTopLevelState('sessionId', sessionId.toString());
+    console.log('this is the sessinID Type: ', typeof sessionId);
     this.props.setTopLevelState('sessionName', this.state.sessionName);
   }
 

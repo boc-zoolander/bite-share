@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 const url = 'http://localhost:8080';
 const socket = io(url);
 
-const Dashboard = () => {
+const Dashboard = ({ sessionId }) => {
   const [joinedNames, setjoinedNames] = useState([]);
 
   useEffect(() => {
@@ -14,10 +14,14 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
+    socket.emit('joinRoom', { sessionId });
+  });
+
+  useEffect(() => {
     socket.on('orderSubmitted', payload => {
       const names = [...joinedNames];
       for (let i = 0; i < names.length; i++) {
-        if (names[i].name === payload.guestName) {
+        if (names[i].guestName === payload.guestName) {
           names[i].submitted = true;
           setjoinedNames(names);
         }
@@ -27,7 +31,7 @@ const Dashboard = () => {
 
   const whoJoined = joinedNames.map((item, index) => {
     return (
-      item.submitted ? <li key={index}>{item.name} Completed Order </li> : <li key={index}>{item.name} joined the session and is ordering food </li>
+      item.submitted ? <li key={index}>{item.guestName} Completed Order </li> : <li key={index}>{item.guestName} joined the session and is ordering food </li>
     );
   });
 

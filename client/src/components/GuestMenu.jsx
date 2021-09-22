@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ThankYou from './ThankYou.jsx';
 import io from 'socket.io-client';
 
@@ -15,6 +15,14 @@ const GuestMenu = ({ guests, joinName, menu, sessionId }) => {
   // state declare here
   const [currentOrder, setCurrentOrder] = useState([]);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    socket.emit('joinRoom', { sessionId });
+  });
+
+  useEffect(() => {
+    socket.emit('onJoin', { guestName: guests[0].guestName, submitted: false, sessionId });
+  }, [sessionId]);
 
   const menuItems = menu.map((section, i) => {
     return (
@@ -53,7 +61,7 @@ const GuestMenu = ({ guests, joinName, menu, sessionId }) => {
   };
 
   const submitOrder = () => {
-    socket.emit('orderSubmitted', { id: guests[0].id, guestName: guests[0].guestName, order: currentOrder });
+    socket.emit('orderSubmitted', { id: guests[0].id, guestName: guests[0].guestName, order: currentOrder, sessionId: sessionId });
     setSubmitted(true);
   };
 

@@ -13,14 +13,28 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 io.on('connection', socket => {
+  socket.on('joinRoom', payload => {
+    console.log('User is joining this room', payload.sessionId);
+    socket.room = payload.sessionId;
+    socket.join(payload.sessionId);
+    console.log('User ID joinRoom: ', socket.id);
+    console.log('The real user room should be this: ', socket.room);
+  });
+
   socket.on('orderSubmitted', payload => {
     console.log('name and order received on server: ', payload);
-    io.emit('orderSubmitted', payload);
+    io.to(payload.sessionId).emit('orderSubmitted', payload);
   });
 
   socket.on('onJoin', payload => {
     console.log('Remote Name received on server: ', payload);
-    io.emit('onJoin', payload);
+    console.log('User ID join session: ', socket.id);
+    console.log('The real user room should be this: ', socket.room);
+    io.to(payload.sessionId).emit('onJoin', payload);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
   });
 });
 
