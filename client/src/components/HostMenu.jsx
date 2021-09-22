@@ -42,7 +42,7 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
     }
   };
 
-  const menuItems = menu.menu_sections.map((section, i) => {
+  const menuItems = menu.map((section, i) => {
     return (
       <details key={i}>
         <summary> {section.section_name} </summary>
