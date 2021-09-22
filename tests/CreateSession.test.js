@@ -7,6 +7,7 @@ import { createMemoryHistory } from 'history';
 import CreateSession from '../client/src/components/CreateSession.jsx';
 const testRestaurantsByGeo = require('../server/user_db_routes/testRestaurantsByGeo');
 const testRestaurantsByZip = require('../server/user_db_routes/testRestaurantsByZip_1');
+const testMenu = require('../server/user_db_routes/testgetrestaurant_1');
 
 jest.mock('axios');
 
@@ -19,6 +20,22 @@ describe('<CreateSession />', () => {
   }));
 
   beforeEach(() => {
+    const mockGeolocation = {
+      getCurrentPosition: jest.fn()
+        .mockImplementationOnce((success) => Promise.resolve(success({
+          coords: {
+            latitude: 51.1,
+            longitude: 45.3
+          }
+        })))
+    };
+    global.navigator.geolocation = mockGeolocation;
+
+    const restaurant = {
+      restaurant_name: 'test restaurant',
+      restaurant_id: 'test id'
+    };
+
     const history = createMemoryHistory();
     render(
       <Router history={history}>
@@ -26,7 +43,7 @@ describe('<CreateSession />', () => {
           <p>Create your guest list</p>
         </Route>
         <Route exact path="/">
-          <CreateSession />
+          <CreateSession setTopLevelState={() => null} restaurant={restaurant}/>
         </Route>
       </Router>
     );
@@ -64,7 +81,7 @@ describe('<CreateSession />', () => {
     fireEvent.change(sessionNameInput, { target: { value: 'Portland Dinner' } });
     const saveSessionNameButton = screen.getByText('Save');
     fireEvent.click(saveSessionNameButton, { button: 0 });
-    const searchButton = screen.getByText('Search');
+    const searchButton = await screen.findByText('Search');
     expect(searchButton).toBeInTheDocument();
     const restaurant = await screen.findByText('Overlook Family Restaurant - 1332 N Skidmore St Portland, OR 97217');
     expect(restaurant).toBeInTheDocument();
@@ -82,7 +99,7 @@ describe('<CreateSession />', () => {
     fireEvent.change(sessionNameInput, { target: { value: 'Portland Dinner' } });
     const saveSessionNameButton = screen.getByText('Save');
     fireEvent.click(saveSessionNameButton, { button: 0 });
-    const searchInput = screen.getByTestId('restaurant-search-input');
+    const searchInput = await screen.findByTestId('restaurant-search-input');
     fireEvent.change(searchInput, { target: { value: 'Bakeri' } });
     const searchButton = screen.getByText('Search');
     fireEvent.click(searchButton, { button: 0 });
@@ -92,10 +109,16 @@ describe('<CreateSession />', () => {
   });
 
   it('should load the next component after selecting a restaurant', async () => {
-    const restaurantDataZip = testRestaurantsByZip;
+    const restaurantMenu = testMenu;
     axios.get.mockImplementation(() => new Promise((resolve, reject) => {
       resolve({
-        data: restaurantDataZip
+        data: restaurantMenu
+      });
+    }));
+
+    axios.post.mockImplementation(() => new Promise((resolve, reject) => {
+      resolve({
+        data: [{ session_id: 1 }]
       });
     }));
 
@@ -103,15 +126,14 @@ describe('<CreateSession />', () => {
     fireEvent.change(sessionNameInput, { target: { value: 'Portland Dinner' } });
     const saveSessionNameButton = screen.getByText('Save');
     fireEvent.click(saveSessionNameButton, { button: 0 });
-    const searchInput = screen.getByTestId('restaurant-search-input');
+    const searchInput = await screen.findByTestId('restaurant-search-input');
     fireEvent.change(searchInput, { target: { value: 'Bakeri' } });
     const searchButton = screen.getByText('Search');
     fireEvent.click(searchButton, { button: 0 });
-    expect(axios.get).toHaveBeenCalled();
-
     const selectButtonsArray = screen.getAllByText('Select');
     const selectButton = selectButtonsArray[0];
     fireEvent.click(selectButton, { button: 0 });
+    expect(axios.get).toHaveBeenCalled();
     const text = screen.getByText('Create your guest list');
     expect(text).toBeInTheDocument();
   });
