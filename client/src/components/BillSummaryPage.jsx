@@ -4,7 +4,6 @@ import SplitList from './SplitList.jsx';
 
 class BillSummaryPage extends React.Component {
   constructor (props) {
-    console.log('PROPS', props);
     super(props);
     this.state = {
       split: 'by Item',
@@ -35,7 +34,9 @@ class BillSummaryPage extends React.Component {
 
   changeTipPercentage (event) {
     const value = Number(event.target.value);
-    this.setState({ tipPercentage: value });
+    this.setState({ tipPercentage: value }, () => {
+      console.log('This was called');
+    });
   }
 
   splitEvenly () {
@@ -57,7 +58,7 @@ class BillSummaryPage extends React.Component {
         <SplitList guests={this.state.guests} totalCost={this.getBillTotalWithoutTipOrTax(this.state.guests)} tipPercentage = {this.state.tipPercentage} split={this.state.split} zipCode = {this.state.zipCode} setTopLevelState = {this.props.setTopLevelState} finalTotals= {this.props.finalTotals}/>
         <form>
           <label htmlFor='tipPercentage'>Tip Percentage (%):</label>
-          <input type="number" id="tipPercentage" name="tipPercentage" min="0" max="100" defaultValue={this.state.tipPercentage} value = {this.state.tipPercentage} onChange={this.changeTipPercentage} data-testid="tip-percentage-input"/><br/>
+          <input type="number" id="tipPercentage" name="tipPercentage" defaultValue={this.state.tipPercentage} onChange={this.changeTipPercentage} data-testid="tip-percentage-input"/><br/>
         </form>
         <br/>
         <Link to = "/select-food">

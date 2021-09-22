@@ -10,9 +10,9 @@ import { configure, shallow, mount } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import BillSummaryPage from '../client/src/components/BillSummaryPage.jsx';
 import SplitList from '../client/src/components/SplitList.jsx';
-// import IndividualOwes from '../client/src/components/individualOwes.jsx';
+import IndividualOwes from '../client/src/components/individualOwes.jsx';
 
-describe('Unit Test Section: <BillSummaryPage />', () => {
+describe('Unit Test Section: <BillSummaryPage /> and children', () => {
   let guestsProps;
   let restaurantProps;
   let finalTotalsProps;
@@ -75,18 +75,15 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
     expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
   });
 
-  // test('Does the component <BillSummaryPage /> allow user to enter tip?', () => {
+  // test('Does the component <BillSummaryPage /> allow user to enter tip?', async () => {
   //   render(
   //     <BrowserRouter>
-  //       <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState = {setTopLevelStateProps}/>
+  //       <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} setTopLevelState = {setTopLevelStateProps}/>
   //     </BrowserRouter>
   //   );
   //   const input = screen.getByTestId('tip-percentage-input');
-  //   fireEvent.focus(input);
   //   fireEvent.change(input, { target: { value: 50 } });
-  //   input.dispatchEvent(new Event('change', { bubbles: true }));
-  //   const newTipAmount = screen.getByText(/Tip Amount: \$38\.62/);
-  //   expect(newTipAmount).toBeInTheDocument();
+  //   await waitFor(() => screen.getByText(/Tip Amount: \$38\.62/));
   //   screen.debug();
   // });
 
@@ -197,4 +194,39 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
   //   expect(screen.getByText(/Tax/)).toBeInTheDocument();
   //   expect(screen.getByText(/Final Total/)).toBeInTheDocument();
   // });
+
+  test('Does the component <IndividualOwes/> properly render all guests?', () => {
+    render(
+      <BrowserRouter>
+        {guestsProps.map((guest, i) =>
+          <IndividualOwes key = {i} guestName = {guest.guestName} paymentOwed = {finalTotalsProps.paymentsOwed[guest.guestName]} />
+        )}
+      </BrowserRouter>
+    );
+    expect(screen.getByText(/Sara/)).toBeInTheDocument();
+    expect(screen.getByText(/Milo/)).toBeInTheDocument();
+    expect(screen.getByText(/Mike/)).toBeInTheDocument();
+  });
+
+  test('Does the component <IndividualOwes/> properly render all individual totals?', () => {
+    render(
+      <BrowserRouter>
+        {guestsProps.map((guest, i) =>
+          <IndividualOwes key = {i} guestName = {guest.guestName} paymentOwed = {finalTotalsProps.paymentsOwed[guest.guestName]} />
+        )}
+      </BrowserRouter>
+    );
+    expect(screen.getByText(/Sara \$33\.19/)).toBeInTheDocument();
+    expect(screen.getByText(/Milo \$33\.19/)).toBeInTheDocument();
+    expect(screen.getByText(/Mike \$33\.19/)).toBeInTheDocument();
+  });
+
+  test('Does the component <IndividualOwes/> display Loading ... when user total abscent?', () => {
+    render(
+      <BrowserRouter>
+        <IndividualOwes key = {0} guestName = {'Suzie Queue'} />
+      </BrowserRouter>
+    );
+    expect(screen.getByText(/Loading .../)).toBeInTheDocument();
+  });
 });
