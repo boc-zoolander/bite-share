@@ -30,7 +30,8 @@ io.on('connection', socket => {
   });
 
   socket.on('hostJoined', payload => {
-    io.to(payload.sessionId).emit('updateDash', socketHistory[payload.sessionId]);
+    const guests = socketHistory[payload.sessionId] || [];
+    io.to(payload.sessionId).emit('updateDash', guests);
   });
 
   socket.on('disconnect', () => {
