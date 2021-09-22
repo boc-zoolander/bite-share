@@ -18,6 +18,12 @@ const Dashboard = ({ sessionId }) => {
   });
 
   useEffect(() => {
+    socket.on('updateDash', payload => {
+      setjoinedNames(payload);
+    });
+  });
+
+  useEffect(() => {
     socket.on('orderSubmitted', payload => {
       const names = [...joinedNames];
       for (let i = 0; i < names.length; i++) {

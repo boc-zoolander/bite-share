@@ -12,6 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
+const socketHistory = {};
+
 io.on('connection', socket => {
   socket.on('joinRoom', payload => {
     socket.room = payload.sessionId;
@@ -24,6 +26,11 @@ io.on('connection', socket => {
 
   socket.on('onJoin', payload => {
     io.to(payload.sessionId).emit('onJoin', payload);
+    socketHistory[payload.sessionId] = socketHistory[payload.sessionId] ? [payload, ...socketHistory[payload.sessionId]] : [payload];
+  });
+
+  socket.on('hostJoined', payload => {
+    io.to(payload.sessionId).emit('updateDash', socketHistory[payload.sessionId]);
   });
 
   socket.on('disconnect', () => {
