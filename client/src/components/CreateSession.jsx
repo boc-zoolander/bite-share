@@ -99,7 +99,6 @@ class CreateSession extends React.Component {
     });
     const sessionId = response.data[0].session_id;
     this.props.setTopLevelState('sessionId', sessionId.toString());
-    console.log('this is the sessinID Type: ', typeof sessionId);
     this.props.setTopLevelState('sessionName', this.state.sessionName);
   }
 
