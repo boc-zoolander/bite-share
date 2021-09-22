@@ -76,9 +76,9 @@ class CreateSession extends React.Component {
         lon: pos.coords.longitude
       };
       this.props.setTopLevelState('hostGeo', hostGeo);
-      this.setState({ geolocationProcessComplete: true });
     } catch (err) {
       console.error(err);
+    } finally {
       this.setState({ geolocationProcessComplete: true });
     }
   }
@@ -159,7 +159,7 @@ class CreateSession extends React.Component {
             ? <form>
                 <label htmlFor="sessionName">Session Name:</label>
                 <input
-                  id="session-name"
+                  id="sessionName"
                   type="text"
                   inputMode="text"
                   name="sessionName"
@@ -179,7 +179,7 @@ class CreateSession extends React.Component {
                     <form>
                       <label htmlFor="searchQuery">Restaurant Name:</label>
                       <input
-                        id="restaurant-search"
+                        id="searchQuery"
                         type="text"
                         inputMode="search"
                         name="searchQuery"
@@ -191,7 +191,7 @@ class CreateSession extends React.Component {
                       <label htmlFor="zipCode">Zip Code:</label>
                       {this.props.hostGeo
                         ? <input
-                            id="zip-code"
+                            id="zipCode"
                             type="number"
                             inputMode="numeric"
                             name="zipCode"
@@ -200,7 +200,7 @@ class CreateSession extends React.Component {
                             data-testid="zip-code-input"
                           />
                         : <input
-                            id="zip-code"
+                            id="zipCode"
                             type="number"
                             inputMode="numeric"
                             name="zipCode"
