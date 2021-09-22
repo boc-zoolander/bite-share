@@ -20,11 +20,9 @@ class App extends React.Component {
       menu: [],
       guests: [],
       joinName: '',
-      totalCost: 0,
       sessionId: null,
       sessionName: '',
       sessionComplete: false,
-      splitMechanism: 'by Item',
       finalTotals: {
         paymentsOwed: {},
         preliminaryTotal: 0.00,
@@ -74,7 +72,7 @@ class App extends React.Component {
             <Session setTopLevelState={this.setTopLevelState} />
           </Route>
           <Route path="/split-bill">
-            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} restaurantInfo= {this.state.restaurant} finalTotals = {this.state.finalTotals} splitMethod = {this.state.splitMechanism}/>
+            <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} restaurantInfo= {this.state.restaurant} finalTotals = {this.state.finalTotals}/>
           </Route>
           <Route exact path="/">
             <Login setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>

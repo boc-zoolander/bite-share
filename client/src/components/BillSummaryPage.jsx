@@ -42,21 +42,19 @@ class BillSummaryPage extends React.Component {
     this.setState({
       split: 'Evenly'
     });
-    this.props.setTopLevelState('splitMechanism', 'Evenly');
   }
 
   splitByItem () {
     this.setState({
       split: 'by Item'
     });
-    this.props.setTopLevelState('splitMechanism', 'by Item');
   }
 
   render () {
     return (
       <div>
         <h3>Final Bill Split {this.state.split}</h3>
-        <SplitList guests={this.state.guests} totalCost={this.getBillTotalWithoutTipOrTax(this.state.guests)} tipPercentage = {this.state.tipPercentage} split={this.props.splitMethod} zipCode = {this.state.zipCode} setTopLevelState = {this.props.setTopLevelState} finalTotals= {this.props.finalTotals}/>
+        <SplitList guests={this.state.guests} totalCost={this.getBillTotalWithoutTipOrTax(this.state.guests)} tipPercentage = {this.state.tipPercentage} split={this.state.split} zipCode = {this.state.zipCode} setTopLevelState = {this.props.setTopLevelState} finalTotals= {this.props.finalTotals}/>
         <form>
           <label htmlFor='tipPercentage'>Tip Percentage (%):</label>
           <input type="number" id="tipPercentage" name="tipPercentage" min="0" max="100" defaultValue={this.state.tipPercentage} value = {this.state.tipPercentage} onChange={this.changeTipPercentage} data-testid="tip-percentage-input"/><br/>

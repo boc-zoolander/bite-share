@@ -53,10 +53,6 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
 
     finalTotalsProps = { paymentsOwed: { Sara: 33.19, Milo: 33.19, Mike: 33.19 }, preliminaryTotal: 77.25, tipAmount: 15.45, tax: 6.86, finalTotal: 99.56 };
 
-    tipPercentageProps = 20;
-
-    splitMethodProps = 'by Item';
-
     setTopLevelStateProps = (a, b) => {
       console.log(a, b);
     };
@@ -65,7 +61,7 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
   test('Does the component <BillSummaryPage /> render?', () => {
     render(
       <BrowserRouter>
-        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState={setTopLevelStateProps}/>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} setTopLevelState={setTopLevelStateProps}/>
       </BrowserRouter>
     );
   });
@@ -73,7 +69,7 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
   test('Does the component <BillSummaryPage /> contain the header Final Bill?', () => {
     render(
       <BrowserRouter>
-        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState = {setTopLevelStateProps}/>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} setTopLevelState = {setTopLevelStateProps}/>
       </BrowserRouter>
     );
     expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
@@ -88,7 +84,8 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
   //   const input = screen.getByTestId('tip-percentage-input');
   //   fireEvent.focus(input);
   //   fireEvent.change(input, { target: { value: 50 } });
-  //   const newTipAmount = screen.getByTestId('tip-amount-id');
+  //   input.dispatchEvent(new Event('change', { bubbles: true }));
+  //   const newTipAmount = screen.getByText(/Tip Amount: \$38\.62/);
   //   expect(newTipAmount).toBeInTheDocument();
   //   screen.debug();
   // });
@@ -96,7 +93,7 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
   test('Does the component <BillSummaryPage /> contain the split options when there is more than one guest?', () => {
     render(
       <BrowserRouter>
-        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState = {setTopLevelStateProps}/>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} setTopLevelState = {setTopLevelStateProps}/>
       </BrowserRouter>
     );
     const splitByItemButton = screen.getByRole('button', {
@@ -112,7 +109,7 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
   test('Does the component <BillSummaryPage /> change on click of Split Evenly and Split by Item?', () => {
     render(
       <BrowserRouter>
-        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState = {setTopLevelStateProps}/>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} setTopLevelState = {setTopLevelStateProps}/>
       </BrowserRouter>
     );
 
@@ -144,7 +141,7 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
     ];
     render(
       <BrowserRouter>
-        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState = {setTopLevelStateProps}/>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} setTopLevelState = {setTopLevelStateProps}/>
       </BrowserRouter>
     );
     const splitByItemButton = screen.queryByRole('button', {
@@ -160,7 +157,7 @@ describe('Unit Test Section: <BillSummaryPage />', () => {
   test('Does the component <SplitList /> render?', () => {
     render(
       <BrowserRouter>
-        <SplitList guests={guestsProps} totalCost={finalTotalsProps.preliminaryTotal} tipPercentage = {tipPercentageProps} split={splitMethodProps} zipCode = {restaurantProps.address.postal_code} setTopLevelState = {setTopLevelStateProps} finalTotals= {finalTotalsProps}/>
+        <SplitList guests={guestsProps} totalCost={finalTotalsProps.preliminaryTotal} tipPercentage = {0} split={'by Item'} zipCode = {restaurantProps.address.postal_code} setTopLevelState = {setTopLevelStateProps} finalTotals= {finalTotalsProps}/>
       </BrowserRouter>
     );
   });
