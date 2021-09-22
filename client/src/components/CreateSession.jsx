@@ -15,10 +15,13 @@ class CreateSession extends React.Component {
       hostZipCode: '',
       restaurants: [],
       showSuggested: true,
-      sessionNameSaved: false
+      sessionNameSaved: false,
+      geolocationProcessComplete: false
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.getPosition = this.getPosition.bind(this);
+    this.getUserLocation = this.getUserLocation.bind(this);
     this.saveSessionName = this.saveSessionName.bind(this);
     this.getRestaurants = this.getRestaurants.bind(this);
     this.selectRestaurant = this.selectRestaurant.bind(this);
@@ -42,13 +45,41 @@ class CreateSession extends React.Component {
     // };
     // const response = await axios(config);
 
-    // Temporary response variable while we use dummy JS file
     try {
+      this.getUserLocation();
+      // Temporary response variable while we use dummy JS file
       const response = await axios.get('http://localhost:8080/users/testGeo');
       const restaurants = response.data.data;
       this.setState({ restaurants });
     } catch (err) {
       console.error(err);
+    }
+  }
+
+  getPosition (options) {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    });
+  }
+
+  async getUserLocation () {
+    const options = {
+      enableHighAccuracy: false,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    try {
+      const pos = await this.getPosition(options);
+      const hostGeo = {
+        lat: pos.coords.latitude,
+        lon: pos.coords.longitude
+      };
+      this.props.setTopLevelState('hostGeo', hostGeo);
+      this.setState({ geolocationProcessComplete: true });
+    } catch (err) {
+      console.error(err);
+      this.setState({ geolocationProcessComplete: true });
     }
   }
 
@@ -75,8 +106,8 @@ class CreateSession extends React.Component {
     // };
     // const response = await axios(config);
 
-    // Temporary response variable while we use dummy JS file
     try {
+      // Temporary response variable while we use dummy JS file
       const response = await axios.get('http://localhost:8080/users/testzip');
       const restaurants = response.data.data;
       this.setState({
@@ -141,31 +172,60 @@ class CreateSession extends React.Component {
 
             : <div>
                 <span>Session Name: {this.state.sessionName}</span>
-                <form>
-                  <label htmlFor="searchQuery">Search restaurants by name:</label>
-                  <input
-                    id="restaurant-search"
-                    type="text"
-                    inputMode="search"
-                    name="searchQuery"
-                    value={this.state.searchQuery}
-                    onChange={this.handleChange}
-                    data-testid="restaurant-search-input"
-                  />
-                  <input type="submit" value="Search" onClick={this.getRestaurants} />
-                </form>
+                {!this.state.geolocationProcessComplete && <div>Loading...</div>}
 
-                {this.state.showSuggested ? 'Suggested Restaurants Nearby:' : 'Search Results:'}
-                <ul>
-                  {this.state.restaurants.map(restaurant =>
-                    <li key={restaurant.restaurant_id}>
-                      <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
-                      <Link to='/add-guests' >
-                        <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
-                      </Link>
-                    </li>
-                  )}
-                </ul>
+                {this.state.geolocationProcessComplete &&
+                  <div>
+                    <form>
+                      <label htmlFor="searchQuery">Restaurant Name:</label>
+                      <input
+                        id="restaurant-search"
+                        type="text"
+                        inputMode="search"
+                        name="searchQuery"
+                        value={this.state.searchQuery}
+                        onChange={this.handleChange}
+                        data-testid="restaurant-search-input"
+                      />
+
+                      <label htmlFor="zipCode">Zip Code:</label>
+                      {this.props.hostGeo
+                        ? <input
+                            id="zip-code"
+                            type="number"
+                            inputMode="numeric"
+                            name="zipCode"
+                            value={this.state.zipCode}
+                            onChange={this.handleChange}
+                            data-testid="zip-code-input"
+                          />
+                        : <input
+                            id="zip-code"
+                            type="number"
+                            inputMode="numeric"
+                            name="zipCode"
+                            value={this.state.zipCode}
+                            onChange={this.handleChange}
+                            data-testid="zip-code-input"
+                            required="required"
+                          />
+                      }
+                      <input type="submit" value="Search" onClick={this.getRestaurants} />
+                    </form>
+
+                    {this.state.showSuggested ? 'Suggested Restaurants Nearby:' : 'Search Results:'}
+                    <ul>
+                      {this.state.restaurants.map(restaurant =>
+                        <li key={restaurant.restaurant_id}>
+                          <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
+                          <Link to='/add-guests' >
+                            <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
+                          </Link>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                }
               </div>
           }
       </div>
