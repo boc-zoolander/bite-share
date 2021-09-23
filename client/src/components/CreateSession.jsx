@@ -217,7 +217,10 @@ class CreateSession extends React.Component {
                     <ul>
                       {this.state.restaurants.map(restaurant =>
                         <li key={restaurant.restaurant_id}>
-                          <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
+                          <div className="restaurant__details">
+                            <p className="restaurant__name">{restaurant.restaurant_name}</p>
+                            <p className="restaurant__address">{restaurant.address.formatted}</p>
+                          </div>
                           <Link to='/add-guests' className="button-link">
                             <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
                           </Link>
