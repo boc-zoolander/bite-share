@@ -1,7 +1,14 @@
-/* Variables */
+/* || Font Imports */
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* || Variables */
 
 /* Colors */
 :root {
+  --black: #222;
+  --white: #F1F1F1;
+
   --blue: #1EAEDB;
   --blue-light: #0FA0CE;
   --red: #FF1421;
@@ -19,10 +26,10 @@
   --button-bg-hover: var(--yellow);
 }
 
-/* Styles */
+/* || Base Element Styles */
 
 body {
-  font-family: Helvetica, sans-serif;
+  font-family: 'Work Sans', Helvetica, sans-serif;
   margin: auto;
   max-width: 800px;
   padding: 2rem;
@@ -31,6 +38,44 @@ body {
 h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
+
+form > * + * {
+  margin-top: 1rem;
+}
+
+input {
+  width: 100%;
+}
+
+input[type="submit"],
+button {
+  background-color: var(--yellow);
+  border: var(--yellow-light);
+  color: var(--black);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all .3s ease-out;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  background-color: var(--yellow-light);
+  color: var(--black);
+}
+
+/* || Branding */
+
+h1 {
+  color: var(--red);
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* || Components */
 
 /* Modal for guest selection */
 .modal {
