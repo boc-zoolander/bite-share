@@ -21,7 +21,6 @@ const testSession = require('./getSession');
 
 // getSession (based on db pull) version 1
 router.get('/getSession2', (req, res) => {
-  // gets the user password to check for validation from here
   let obj_params = {
     session_id: req.query.session_id,
   };
@@ -131,7 +130,6 @@ router.get('/getAllSessions', (req, res) => {
       res.status(400).send(err);
     });
 });
-
 
 router.get('/getUserSession', (req, res) => {
   db.getUserSession({ host_id: 1 })
