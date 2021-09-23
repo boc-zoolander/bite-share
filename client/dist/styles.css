@@ -104,6 +104,19 @@ li button {
   flex-wrap: wrap;
 }
 
+.menu-item__details > * {
+  margin-bottom: 0;
+}
+
+.menu-item__name {
+  font-weight: bold;
+}
+
+.menu-item__add {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
 /* || Branding */
 
 h1 {
