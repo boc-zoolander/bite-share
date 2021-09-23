@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import GuestList from './GuestList.jsx';
 
-const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
+const AddGuests = ({ setTopLevelState, guests, deleteGuest, sessionId }) => {
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState('');
 
@@ -39,8 +39,8 @@ const AddGuests = ({ setTopLevelState, guests, deleteGuest }) => {
       </form>
       <GuestList guests={guests} setTopLevelState={setTopLevelState} />
       <p>Send this link to friends to join</p>
-      <p>http://localhost:8080/#/join</p>
-      <Link to='/host-menu' >
+      <p>{`http://localhost:8080/#/${sessionId}/join`}</p>
+      <Link to='/host-menu' className="button-link">
         <button type='button'>Make Your Order</button>
       </Link>
     </div>

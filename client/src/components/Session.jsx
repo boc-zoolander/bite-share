@@ -14,12 +14,7 @@ export default function Session ({ setTopLevelState }) {
   const handleJoinSession = async () => {
     setLoadingSession(true);
 
-    const sessionResponse = await axios.get('/users/getSession');
-    const allGuests = [
-      sessionResponse.data.host,
-      ...sessionResponse.data.guests
-    ];
-    setTopLevelState('guests', allGuests);
+    setTopLevelState('sessionId', sessionId);
 
     // load restaurant data via restaurant api
     // In the future, will be a query that only returns a single restaurant by search query
@@ -31,10 +26,10 @@ export default function Session ({ setTopLevelState }) {
     // In the future, will be a query that only returns a single restaurant's menu by search query
     // Search query will use session data from the db
     const menuResponse = await axios.get('users/testgetRestaurant_1');
-    setTopLevelState('menu', menuResponse.data.result.menus[0]);
+    setTopLevelState('menu', menuResponse.data.result.menus[0].menu_sections);
 
     setLoadingSession(false);
-    history.push('/select-food');
+    history.push('/guest-menu');
   };
 
   const content = () => {
@@ -46,7 +41,7 @@ export default function Session ({ setTopLevelState }) {
       return (
         <>
           {/* Will eventually go to "Host a Session" component */}
-          <Link to="/find-restaurant">
+          <Link to="/find-restaurant" className="button-link">
             <button type="button">Start a New Session</button>
           </Link>
           <form>

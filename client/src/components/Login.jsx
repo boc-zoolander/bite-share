@@ -9,7 +9,7 @@ class Login extends React.Component {
     this.state = {
       hostName: '',
       password: '',
-      loginFailure: false,
+      loginFailure: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,7 +21,6 @@ class Login extends React.Component {
     const validationPath = `http://localhost:8080/users/login?hostname=${this.state.hostName}&password=${this.state.password}`;
     axios.get(validationPath)
       .then(res => {
-
         const hostDetails = {
           id: res.data[0].user_id,
           guestName: `${res.data[0].first_name} ${res.data[0].last_name}`,
@@ -32,12 +31,13 @@ class Login extends React.Component {
         this.props.setTopLevelState('isLoggedIn', true);
       })
       .catch(err => {
-
         this.setState({ loginFailure: true });
+        console.log(err);
       });
   }
 
-  handleChange(e) {
+
+  handleChange (e) {
     const value = e.target.value;
     const name = e.target.name;
     this.setState({ [name]: value });
@@ -63,7 +63,7 @@ class Login extends React.Component {
           <label htmlFor="password" id="password-label">Password:</label>
           <input aria-labelledby="password-label" type="password" inputMode="text" name="password" value={this.state.password} onChange={this.handleChange} />
           <button onClick={this.validateUser}>Login</button>
-          <Link to="/register-new-user">
+          <Link to="/register-new-user" className="button-link">
             <p>New to Bite Share?  Register Here!</p>
           </Link>
         </form>
