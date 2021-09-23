@@ -167,7 +167,6 @@ router.post('/createNewSession', (req, res) => {
 
 // creates a new Session for a given Schema
 router.get('/createNewSession', (req, res) => {
-
   let obj_params = {
     session_name: req.query.session_name,
     restaurant_name: req.query.restaurant_name,
@@ -177,9 +176,21 @@ router.get('/createNewSession', (req, res) => {
 
   db.createNewSession(obj_params)
     .then(result => {
-      res.header('Content-Type', 'application/json');
-      // the result of this should return the created session id.
-      res.status(200).send(result);
+      // once we get the session_id back we have to add to the guestlist
+      let parsedResult = JSON.parse(result);
+      let addHostToGuestListParam = {
+        session_id: parsedResult[0].session_id,
+        user_id: req.query.host_id
+      };
+
+      return db.addGuest(addHostToGuestListParam)
+        .then(resOfAddHost => {
+          res.header('Content-Type', 'application/json');
+          res.status(200).send(result);
+        })
+        .catch(error => {
+          console.log('error adding host to guestlist', error);
+        });
     })
     .catch(err => {
       res.status(400).send(err);

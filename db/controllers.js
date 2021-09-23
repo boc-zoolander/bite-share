@@ -65,9 +65,8 @@ const getSession2 = function(obj_param) {
 
   return pool.query(queryStr)
     .then(res => {
-      // parsedReturnObj = parse.parseSession(res);
       //return JSON.stringify(res.rows, null, 4);
-      return JSON.stringify(parse.parseSession(res.rows), null, 4);
+      return JSON.stringify(parse.parseSession(res.rows), null, 2);
 
     })
     .catch(err => {
