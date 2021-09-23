@@ -35,7 +35,7 @@ class BillSummaryPage extends React.Component {
   changeTipPercentage (event) {
     const value = Number(event.target.value);
     this.setState({ tipPercentage: value }, () => {
-      console.log('This was called');
+      console.log('👻', this.state.tipPercentage);
     });
   }
 

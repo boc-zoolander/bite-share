@@ -54,7 +54,7 @@ describe('Unit Test Section: <BillSummaryPage /> and children', () => {
     finalTotalsProps = { paymentsOwed: { Sara: 33.19, Milo: 33.19, Mike: 33.19 }, preliminaryTotal: 77.25, tipAmount: 15.45, tax: 6.86, finalTotal: 99.56 };
 
     setTopLevelStateProps = (a, b) => {
-      console.log(a, b);
+      return (a, b);
     };
   });
 
@@ -75,17 +75,17 @@ describe('Unit Test Section: <BillSummaryPage /> and children', () => {
     expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
   });
 
-  // test('Does the component <BillSummaryPage /> allow user to enter tip?', async () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} setTopLevelState = {setTopLevelStateProps}/>
-  //     </BrowserRouter>
-  //   );
-  //   const input = screen.getByTestId('tip-percentage-input');
-  //   fireEvent.change(input, { target: { value: 50 } });
-  //   await waitFor(() => screen.getByText(/Tip Amount: \$38\.62/));
-  //   screen.debug();
-  // });
+  // rework to show rerender of page ?
+  test('Does the component <BillSummaryPage /> allow user to enter tip?', () => {
+    render(
+      <BrowserRouter>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} setTopLevelState = {setTopLevelStateProps}/>
+      </BrowserRouter>
+    );
+    const input = screen.getByTestId('tip-percentage-input');
+    fireEvent.change(input, { target: { value: 50 } });
+    expect(input.value).toBe('50');
+  });
 
   test('Does the component <BillSummaryPage /> contain the split options when there is more than one guest?', () => {
     render(
@@ -171,29 +171,19 @@ describe('Unit Test Section: <BillSummaryPage /> and children', () => {
     expect(screen.getByText(/Final Total/)).toBeInTheDocument();
   });
 
-  // test('Does the component <SplitList /> properly split the total by item?', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState={setTopLevelStateProps}/>
-  //     </BrowserRouter>
-  //   );
-  //   expect(screen.getByText(/Preliminary Total/)).toBeInTheDocument();
-  //   expect(screen.getByText(/Tip Amount/)).toBeInTheDocument();
-  //   expect(screen.getByText(/Tax/)).toBeInTheDocument();
-  //   expect(screen.getByText(/Final Total/)).toBeInTheDocument();
-  // });
-
-  // test('Does the component <SplitList /> properly split the total evenly?', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {splitMethodProps} setTopLevelState={setTopLevelStateProps}/>
-  //     </BrowserRouter>
-  //   );
-  //   expect(screen.getByText(/Preliminary Total/)).toBeInTheDocument();
-  //   expect(screen.getByText(/Tip Amount/)).toBeInTheDocument();
-  //   expect(screen.getByText(/Tax/)).toBeInTheDocument();
-  //   expect(screen.getByText(/Final Total/)).toBeInTheDocument();
-  // });
+  test('Does the component <SplitList /> properly split the total evenly?', () => {
+    render(
+      <BrowserRouter>
+        <BillSummaryPage guests = {guestsProps} restaurantInfo = {restaurantProps} finalTotals = {finalTotalsProps} tipPercentage = {tipPercentageProps} splitMethod = {'Evenly'} setTopLevelState={setTopLevelStateProps}/>
+      </BrowserRouter>
+    );
+    const saraTotal = screen.getByText(/Sara \$/);
+    const miloTotal = screen.getByText(/Milo \$/);
+    const mikeTotal = screen.getByText(/Mike \$/);
+    expect(saraTotal).toHaveTextContent(/33\.19/);
+    expect(miloTotal).toHaveTextContent(/33\.19/);
+    expect(mikeTotal).toHaveTextContent(/33\.19/);
+  });
 
   test('Does the component <IndividualOwes/> properly render all guests?', () => {
     render(
