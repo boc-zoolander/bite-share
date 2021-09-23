@@ -8,20 +8,28 @@ const Dashboard = ({ sessionId }) => {
   const [joinedNames, setjoinedNames] = useState([]);
 
   useEffect(() => {
-    socket.on('onJoin', payload => {
-      setjoinedNames([...joinedNames, payload]);
-    });
-  });
-
-  useEffect(() => {
+    console.log('Dashboard 1st useEffect (join room) fired');
     socket.emit('joinRoom', { sessionId });
   });
 
   useEffect(() => {
-    socket.on('updateDash', payload => {
-      setjoinedNames(payload);
+    console.log('Dashboard 2nd useEffect (on join outside the socket) fired');
+    socket.on('onDash', payload => {
+      console.log('Dashboard (onJoin inside the socket.on) fired', payload);
+      console.log('joinedNames', joinedNames);
+      setjoinedNames([...joinedNames, payload]);
     });
   });
+
+  socket.on('onJoin', payload => {
+    setjoinedNames([...joinedNames, payload]);
+  });
+
+  // useEffect(() => {
+  //   socket.on('updateDash', payload => {
+  //     setjoinedNames(payload);
+  //   });
+  // });
 
   useEffect(() => {
     socket.on('orderSubmitted', payload => {

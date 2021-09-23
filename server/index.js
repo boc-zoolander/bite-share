@@ -25,7 +25,8 @@ io.on('connection', socket => {
   });
 
   socket.on('onJoin', payload => {
-    io.to(payload.sessionId).emit('onJoin', payload);
+    console.log('This is on the server onJoin: ', payload);
+    io.emit('onDash', payload);
     socketHistory[payload.sessionId] = socketHistory[payload.sessionId] ? [payload, ...socketHistory[payload.sessionId]] : [payload];
   });
 
