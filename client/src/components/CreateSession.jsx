@@ -136,7 +136,7 @@ class CreateSession extends React.Component {
     try {
       const response = await axios.post('/users/createNewSession', null, {
         params: {
-          host_id: 1,
+          host_id: this.props.guests[0].id,
           restaurant_name: restaurant.restaurant_name,
           restaurant_id_api: restaurant.restaurant_id,
           session_name: this.state.sessionName
