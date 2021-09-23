@@ -20,14 +20,6 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
     socket.emit('hostJoined', { sessionId });
   }, []);
 
-  useEffect(() => {
-    console.log('Host useEffect for orderSubmitted fired');
-    socket.on('orderSubmitted', payload => {
-      console.log('Host orderSubmitted listener fired');
-      setTopLevelState('guests', [...guests, payload]);
-    });
-  }, []);
-
   const onChange = (event) => {
     setCurrentName(event.target.value);
     onCloseClick();
@@ -98,7 +90,7 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
         </div>
       </div>
       <h2> Dashboard </h2>
-        <Dashboard sessionId={sessionId} />
+        <Dashboard guests={guests} sessionId={sessionId} setTopLevelState={setTopLevelState} />
       <h2>Current Items for {currentName}</h2>
         {currentItems}
       <div>

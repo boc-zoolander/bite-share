@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 const url = 'http://localhost:8080';
 const socket = io(url);
 
-const Dashboard = ({ sessionId }) => {
+const Dashboard = ({ guests, sessionId, setTopLevelState }) => {
   const [joinedNames, setjoinedNames] = useState([]);
 
   useEffect(() => {
@@ -32,6 +32,7 @@ const Dashboard = ({ sessionId }) => {
     console.log('Dashboard useEffect for orderSubmitted fired');
     socket.on('orderSubmitted', payload => {
       console.log('Dashboard orderSubmitted listener fired', payload);
+      setTopLevelState('guests', [...guests, payload]);
       const names = [...joinedNames];
       console.log('Current joined names: ', names);
       for (let i = 0; i < names.length; i++) {

@@ -24,6 +24,7 @@ io.on('connection', socket => {
 
   socket.on('submitOrder', payload => {
     const room = payload.sessionId.toString();
+    // NEED TO UPDATE SOCKET HISTORY?
     io.to(room).emit('orderSubmitted', payload);
   });
 
