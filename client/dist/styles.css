@@ -64,6 +64,10 @@ button:hover {
   color: var(--black);
 }
 
+a.button-link {
+  text-decoration: none;
+}
+
 /* || Branding */
 
 h1 {

@@ -92,7 +92,7 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
       <div>
         {menuItems}
       </div>
-      <Link to="/split-bill">
+      <Link to="/split-bill" className="button-link">
         <input type="submit" value="Next" />
       </Link>
     </div>

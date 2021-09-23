@@ -81,10 +81,10 @@ const SelectFood = ({ guests, menu, setTopLevelState }) => {
       <div>
         {menuItems}
       </div>
-      <Link to="/add-guests">
+      <Link to="/add-guests" className="button-link">
         <button type="button">Go Back</button>
       </Link>
-      <Link to="/split-bill">
+      <Link to="/split-bill" className="button-link">
         <button type="button">Finish Ordering</button>
       </Link>
     </div>

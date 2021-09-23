@@ -60,7 +60,7 @@ class Login extends React.Component {
           <label htmlFor="password" id="password-label">Password:</label>
           <input aria-labelledby="password-label" type="password" inputMode="text" name="password" value={this.state.password} onChange={this.handleChange} />
           <button onClick={this.validateUser}>Login</button>
-          <Link to="/register-new-user">
+          <Link to="/register-new-user" className="button-link">
             <p>New to Bite Share?  Register Here!</p>
           </Link>
         </form>
