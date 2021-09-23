@@ -21,15 +21,11 @@ const Dashboard = ({ sessionId }) => {
     });
   });
 
-  socket.on('onJoin', payload => {
-    setjoinedNames([...joinedNames, payload]);
+  useEffect(() => {
+    socket.on('updateDash', payload => {
+      setjoinedNames(payload);
+    });
   });
-
-  // useEffect(() => {
-  //   socket.on('updateDash', payload => {
-  //     setjoinedNames(payload);
-  //   });
-  // });
 
   useEffect(() => {
     socket.on('orderSubmitted', payload => {

@@ -20,9 +20,9 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
     socket.emit('joinRoom', { sessionId });
   });
 
-  // useEffect(() => {
-  //   socket.emit('hostJoined', { sessionId });
-  // });
+  useEffect(() => {
+    socket.emit('hostJoined', { sessionId });
+  });
 
   const onChange = (event) => {
     setCurrentName(event.target.value);
