@@ -17,24 +17,26 @@ const Dashboard = ({ sessionId }) => {
     socket.on('updateDash', payload => {
       setjoinedNames(payload);
     });
-  });
+  }, []);
 
   useEffect(() => {
     console.log('Dashboard 2nd useEffect (on join outside the socket) fired');
     socket.on('onDash', payload => {
       console.log('Dashboard (onDash inside the socket.on) fired', payload);
       console.log('joinedNames', joinedNames);
-      setjoinedNames([...joinedNames, payload]);
+      setjoinedNames(payload);
     });
-  });
+  }, []);
 
   useEffect(() => {
     console.log('Dashboard useEffect for orderSubmitted fired');
     socket.on('orderSubmitted', payload => {
-      console.log('Dashboard orderSubmitted listener fired');
+      console.log('Dashboard orderSubmitted listener fired', payload);
       const names = [...joinedNames];
+      console.log('Current joined names: ', names);
       for (let i = 0; i < names.length; i++) {
-        if (names[i].guestName === payload.guestName) {
+        if (names[i].id === payload.id) {
+          console.log('match in loop');
           names[i].submitted = true;
           setjoinedNames(names);
         }
@@ -43,6 +45,7 @@ const Dashboard = ({ sessionId }) => {
   });
 
   const whoJoined = joinedNames.map((item, index) => {
+    console.log('whoJoined mapping: ', item.submitted);
     return (
       item.submitted ? <li key={index}>{item.guestName} Completed Order </li> : <li key={index}>{item.guestName} joined the session and is ordering food </li>
     );

@@ -11,14 +11,14 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
   const [currentName, setCurrentName] = useState('');
 
   useEffect(() => {
-    console.log('Host useEffect for joinRoom fired');
+    // console.log('Host useEffect for joinRoom fired');
     socket.emit('joinRoom', { sessionId });
-  });
+  }, []);
 
   useEffect(() => {
-    console.log('Host useEffect for hostJoined fired');
+    // console.log('Host useEffect for hostJoined fired');
     socket.emit('hostJoined', { sessionId });
-  });
+  }, []);
 
   useEffect(() => {
     console.log('Host useEffect for orderSubmitted fired');
@@ -26,7 +26,7 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
       console.log('Host orderSubmitted listener fired');
       setTopLevelState('guests', [...guests, payload]);
     });
-  });
+  }, []);
 
   const onChange = (event) => {
     setCurrentName(event.target.value);
@@ -98,7 +98,7 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
         </div>
       </div>
       <h2> Dashboard </h2>
-        {guests.length > 1 ? <Dashboard sessionId={sessionId} /> : <p> No remote guests have joined </p>}
+        <Dashboard sessionId={sessionId} />
       <h2>Current Items for {currentName}</h2>
         {currentItems}
       <div>

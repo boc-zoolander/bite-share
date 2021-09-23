@@ -28,14 +28,14 @@ io.on('connection', socket => {
   });
 
   socket.on('joinSession', payload => {
-    console.log('joinSession: ', payload);
+    // console.log('joinSession payload: ', payload);
     const room = payload.sessionId.toString();
-    io.to(room).emit('onDash', payload);
     socketHistory[room] = socketHistory[room] ? [payload, ...socketHistory[room]] : [payload];
+    console.log(socketHistory[room]);
+    io.to(room).emit('onDash', socketHistory[room]);
   });
 
   socket.on('hostJoined', payload => {
-    console.log('Host joined');
     const room = payload.sessionId.toString();
     const guests = socketHistory[room] || [];
     io.to(room).emit('updateDash', guests);
