@@ -43,7 +43,7 @@ describe('<CreateSession />', () => {
           <p>Create your guest list</p>
         </Route>
         <Route exact path="/">
-          <CreateSession setTopLevelState={() => null} restaurant={restaurant}/>
+          <CreateSession setTopLevelState={() => null} restaurant={restaurant} guests={[{ id: 1 }]}/>
         </Route>
       </Router>
     );
