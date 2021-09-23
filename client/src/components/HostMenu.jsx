@@ -51,9 +51,12 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
         <ul>
         {section.menu_items.map((item, j) => {
           return (
-            <li key={j}>
-              {item.name} ${item.price}
-              <button type='button' onClick={() => addItem(item) }> + </button>
+            <li className="menu-item" key={j}>
+              <div className="menu-item__details">
+                <p className="menu-item__name">{item.name}</p>
+                <p className="menu-item__price">${item.price}</p>
+              </div>
+              <button type='button' className="menu-item__add" onClick={() => { addItem(item); }}> + </button>
             </li>
           );
         })}
@@ -94,7 +97,7 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
       <div>
         {menuItems}
       </div>
-      <Link to="/split-bill">
+      <Link to="/split-bill" className="button-link">
         <input type="submit" value="Next" />
       </Link>
     </div>

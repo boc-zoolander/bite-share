@@ -136,7 +136,7 @@ class CreateSession extends React.Component {
     try {
       const response = await axios.post('/users/createNewSession', null, {
         params: {
-          host_id: 1,
+          host_id: this.props.guests[0].id,
           restaurant_name: restaurant.restaurant_name,
           restaurant_id_api: restaurant.restaurant_id,
           session_name: this.state.sessionName
@@ -217,8 +217,11 @@ class CreateSession extends React.Component {
                     <ul>
                       {this.state.restaurants.map(restaurant =>
                         <li key={restaurant.restaurant_id}>
-                          <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
-                          <Link to='/add-guests' >
+                          <div className="restaurant__details">
+                            <p className="restaurant__name">{restaurant.restaurant_name}</p>
+                            <p className="restaurant__address">{restaurant.address.formatted}</p>
+                          </div>
+                          <Link to='/add-guests' className="button-link">
                             <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
                           </Link>
                         </li>

@@ -11,9 +11,9 @@ const GuestList = ({ guests, setTopLevelState }) => {
 
   const list = guests.map((item, i) => {
     return (
-      <li key={i}>
-        <span>{item.guestName}</span>
-        <input type='submit' value='Delete' onClick={() => deleteName(item.guestName)} />
+      <li className="guest-list__guest" key={i}>
+        <span className="guest__name">{item.guestName}</span>
+        <button type='button' onClick={() => deleteName(item.guestName)}>Delete</button>
       </li>
     );
   });

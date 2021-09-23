@@ -65,14 +65,14 @@ class Search extends React.Component {
               {this.state.restaurants.map(restaurant =>
                 <li key={restaurant.restaurant_id}>
                   <span>{restaurant.restaurant_name} - {restaurant.address.formatted}</span>
-                  <Link to='/add-guests' >
+                  <Link to='/add-guests' className="button-link">
                     <button onClick={() => this.selectRestaurant(restaurant)}>Select</button>
                   </Link>
                 </li>
               )}
             </ul>
         </div>
-        <Link to="/">
+        <Link to="/" className="button-link">
           <button type="button">Start Over</button>
         </Link>
       </div>

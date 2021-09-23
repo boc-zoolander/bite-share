@@ -43,7 +43,7 @@ describe('<CreateSession />', () => {
           <p>Create your guest list</p>
         </Route>
         <Route exact path="/">
-          <CreateSession setTopLevelState={() => null} restaurant={restaurant}/>
+          <CreateSession setTopLevelState={() => null} restaurant={restaurant} guests={[{ id: 1 }]}/>
         </Route>
       </Router>
     );
@@ -83,8 +83,10 @@ describe('<CreateSession />', () => {
     fireEvent.click(saveSessionNameButton, { button: 0 });
     const searchButton = await screen.findByText('Search');
     expect(searchButton).toBeInTheDocument();
-    const restaurant = await screen.findByText('Overlook Family Restaurant - 1332 N Skidmore St Portland, OR 97217');
-    expect(restaurant).toBeInTheDocument();
+    const restaurantName = await screen.findByText('Overlook Family Restaurant');
+    const restaurantAddress = await screen.findByText('1332 N Skidmore St Portland, OR 97217');
+    expect(restaurantName).toBeInTheDocument();
+    expect(restaurantAddress).toBeInTheDocument();
   });
 
   it('should load new restaurants after clicking "Search"', async () => {
@@ -104,8 +106,10 @@ describe('<CreateSession />', () => {
     const searchButton = screen.getByText('Search');
     fireEvent.click(searchButton, { button: 0 });
     expect(axios.get).toHaveBeenCalled();
-    const restaurant = await screen.findByText('Bakeri - 150 Wythe Ave Brooklyn, NY 11211');
-    expect(restaurant).toBeInTheDocument();
+    const restaurantName = await screen.findByText('Bakeri');
+    const restaurantAddress = await screen.findByText('150 Wythe Ave Brooklyn, NY 11211');
+    expect(restaurantName).toBeInTheDocument();
+    expect(restaurantAddress).toBeInTheDocument();
   });
 
   it('should load the next component after selecting a restaurant', async () => {

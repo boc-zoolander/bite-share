@@ -40,7 +40,7 @@ const AddGuests = ({ setTopLevelState, guests, sessionId }) => {
       <GuestList guests={guests} setTopLevelState={setTopLevelState} />
       <p>Send this link to friends to join</p>
       <p>{`http://localhost:8080/#/${sessionId}/join`}</p>
-      <Link to='/host-menu' >
+      <Link to='/host-menu' className="button-link">
         <button type='button'>Make Your Order</button>
       </Link>
     </div>
