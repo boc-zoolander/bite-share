@@ -23,8 +23,7 @@ class BillSummaryPage extends React.Component {
       const currentGuestOrders = guestArray[i].order;
       for (let j = 0; j < currentGuestOrders.length; j++) {
         const orderItemCost = currentGuestOrders[j].price;
-        const howManyOrdered = 1;
-        // const howManyOrdered = currentGuestOrders[j].qty;
+        const howManyOrdered = currentGuestOrders[j].qty;
         const itemTotal = orderItemCost * howManyOrdered;
         billTotal += itemTotal;
       }
@@ -60,8 +59,6 @@ class BillSummaryPage extends React.Component {
           Tip Percentage (%):
           <input type="number" id="tipPercentage" name="tipPercentage" min="0" max="1000" value={this.props.tipPercentage} onChange={this.changeTipPercentage}/><br/>
         </form>
-        <button onClick={this.splitEvenly}>Split Evenly</button>
-        <button onClick={this.splitByItem}>Split by Item</button>
         <br/>
         <Link to = "/select-food">
           <button>Modify Order</button>

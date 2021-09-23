@@ -1,3 +1,26 @@
+/* Variables */
+
+/* Colors */
+:root {
+  --blue: #1EAEDB;
+  --blue-light: #0FA0CE;
+  --red: #FF1421;
+  --red-light: #ff8990;
+  --yellow: #FEB200;
+  --yellow-light: #ffd97f;
+}
+
+/* Elements */
+:root {
+  --link: var(--blue-light);
+  --link-hover: var(--blue);
+
+  --button-bg: var(--yellow-light);
+  --button-bg-hover: var(--yellow);
+}
+
+/* Styles */
+
 body {
   font-family: Helvetica, sans-serif;
   margin: auto;
@@ -5,249 +28,8 @@ body {
   padding: 2rem;
 }
 
-:root {
-  --dark-blue-1: #0E74BF;
-  --dark-blue-2: #2E94DF;
-  --light-blue-1: #5EA3EC;
-  --light-blue-2: #7EC3FF;
-
-  --dark-black: #1a1a1a;
-  --black: #222;
-  --light-black: #333;
-  --dark-gray: #6a6a6a;
-  --light-gray: #9a9a9a;
-  --dark-white: #e0e0e0;
-  --white: #f7f7f7;
-  --light-white: #fff;
-}
-
-:root {
-  --red: #FF668C;
-  --orange: #fc9867;
-  --yellow: #ffd866;
-  --green: #a9dc76;
-  --blue: #78dce8;
-  --purple: #ab9df2;
-}
-
-:root {
-  --background-alt: var(--light-white);
-  --background: var(--white);
-  --background-off: var(--dark-white);
-  --text: var(--light-black);
-  --text-off: var(--dark-gray);
-  --anchor: var(--dark-blue-1);
-  --anchor-hover: var(--dark-blue-2);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-alt: var(--dark-black);
-    --background: var(--black);
-    --background-off: var(--light-black);
-    --text: var(--dark-white);
-    --text-off: var(--light-gray);
-    --anchor: var(--light-blue-1);
-    --anchor-hover: var(--light-blue-2);
-  }
-}
-
-html {
-  font-family: sans-serif;
-  font-size: 16px;
-  line-height: 1.25;
-}
-
-body {
-  background-color: var(--background);
-  color: var(--text);
-  margin: auto;
-  max-width: 40rem;
-  overflow-wrap: break-word;
-  padding: 2rem;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: .5em 0;
+h1, h2, h3, h4, h5, h6 {
   text-align: center;
-}
-
-h1 {
-  font-size: 3.16rem;
-  text-align: center;
-}
-
-h2 {
-  font-size: 2.37rem;
-}
-
-h3 {
-  font-size: 1.778rem;
-}
-
-h4 {
-  font-size: 1.333rem;
-}
-
-h5 {
-  font-size: 1rem;
-}
-
-h6 {
-  font-size: 0.75rem;
-}
-
-/* Mobile typography */
-@media screen and (max-width: 768px) {
-  body {
-    padding: 1rem;
-  }
-
-  h1 {
-    font-size: 2.44rem;
-  }
-
-  h2 {
-    font-size: 1.95rem;
-  }
-
-  h3 {
-    font-size: 1.56rem;
-  }
-
-  h4 {
-    font-size: 1.25rem;
-  }
-
-  h5 {
-    font-size: 1rem;
-  }
-
-  h6 {
-    font-size: 0.8rem;
-  }
-}
-
-a {
-  color: var(--anchor);
-  text-decoration: none;
-  transition: all .2s ease;
-}
-
-a:hover {
-  color: var(--anchor-hover);
-}
-
-main [target="_blank"]::after {
-  content: "↗️";
-  display: inline-block;
-  font-size: .75rem;
-  height: 1rem;
-  margin-left: .25rem;
-  vertical-align: super;
-  width: 1rem;
-}
-
-code,
-pre {
-  background-color: var(--light-black);
-  border-radius: 4px;
-  color: var(--white);
-  font-family: monospace;
-  padding: 1rem;
-}
-
-code {
-  font-size: 0.9em;
-  padding: 0.1rem 0.25rem;
-}
-
-pre {
-  overflow: auto;
-}
-
-pre code {
-  margin-left: -0.25rem;
-}
-
-@media screen and (max-width: 768px) {
-  pre {
-    font-size: 12px
-  }
-}
-
-ul, ol {
-  list-style-type: none;
-  padding: 0;
-}
-
-ul li,
-ol li {
-  margin: 0;
-}
-
-ul li > * + *,
-ol li > * + * {
-  margin-left: 0.5rem;
-}
-
-ul input[type="checkbox"],
-ol input[type="checkbox"] {
-  margin-left: -1rem;
-}
-
-blockquote {
-  color: var(--text-off);
-  font-style: italic;
-  line-height: 1.65;
-  padding: 0.25rem 0;
-  position: relative;
-}
-
-blockquote::before {
-  border-left: 3px solid var(--text-off);
-  content: '';
-  height: 100%;
-  left: -1.25rem;
-  position: absolute;
-  top: 0;
-}
-
-img {
-  display: block;
-  height: auto;
-  margin: auto;
-  max-width: 100%;
-}
-
-hr {
-  color: var(--text-off);
-}
-
-form {
-  display: grid;
-}
-
-form > * + *  {
-  margin-top: 1rem;
-}
-
-input[type="submit"],
-form button {
-  margin-left: auto;
-  margin-right: auto;
-  width: min-content;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 /* Modal for guest selection */
