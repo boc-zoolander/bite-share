@@ -14,7 +14,6 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
   }, []);
 
   useEffect(() => {
-    // console.log('GuestMenu useEffect for joinSession: ', { guestName: guests[0].guestName, submitted: false, sessionId });
     socket.emit('joinSession', { id: guests[0].id, guestName: guests[0].guestName, submitted: false, sessionId });
   }, []);
 
@@ -55,7 +54,6 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
   };
 
   const submitOrder = () => {
-    console.log('Guest submitted order');
     socket.emit('submitOrder', { id: guests[0].id, guestName: guests[0].guestName, order: currentOrder, sessionId: sessionId });
     setSubmitted(true);
   };

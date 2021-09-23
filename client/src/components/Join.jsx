@@ -19,10 +19,10 @@ const Join = ({ setTopLevelState }) => {
 
   return (
     <form>
-      <label forHtml='login'> Login As A Guest </label>
+      <label forHtml='login'>Login As A Guest</label>
       <input type='text' name='login' value={name} onChange={onChange}/>
       <Link to='/guest-menu' >
-        <button type='submit' onClick={joinSesson}> Join session </button>
+        <button type='submit' onClick={joinSesson}>Join session</button>
       </Link>
     </form>
   );

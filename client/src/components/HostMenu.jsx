@@ -11,12 +11,10 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
   const [currentName, setCurrentName] = useState('');
 
   useEffect(() => {
-    // console.log('Host useEffect for joinRoom fired');
     socket.emit('joinRoom', { sessionId });
   }, []);
 
   useEffect(() => {
-    // console.log('Host useEffect for hostJoined fired');
     socket.emit('hostJoined', { sessionId });
   }, []);
 
