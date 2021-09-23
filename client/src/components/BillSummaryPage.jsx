@@ -60,7 +60,7 @@ class BillSummaryPage extends React.Component {
           <input type="number" id="tipPercentage" name="tipPercentage" min="0" max="1000" value={this.props.tipPercentage} onChange={this.changeTipPercentage}/><br/>
         </form>
         <br/>
-        <Link to = "/select-food">
+        <Link to="/select-food" className="button-link">
           <button>Modify Order</button>
         </Link>
         {this.state.guests.length > 1
@@ -70,7 +70,7 @@ class BillSummaryPage extends React.Component {
             </div>
           : <></>
         }
-        <Link to = "/">
+        <Link to="/" className="button-link">
           <button>Complete Session</button>
         </Link>
       </div>

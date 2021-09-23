@@ -1,7 +1,15 @@
-/* Variables */
+/* || Font Imports */
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* || Variables */
 
 /* Colors */
 :root {
+  --black: #222;
+  --gray: #EEECEC;
+  --white: #F1F1F1;
+
   --blue: #1EAEDB;
   --blue-light: #0FA0CE;
   --red: #FF1421;
@@ -19,10 +27,10 @@
   --button-bg-hover: var(--yellow);
 }
 
-/* Styles */
+/* || Base Element Styles */
 
 body {
-  font-family: Helvetica, sans-serif;
+  font-family: 'Work Sans', Helvetica, sans-serif;
   margin: auto;
   max-width: 800px;
   padding: 2rem;
@@ -31,6 +39,96 @@ body {
 h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
+
+form > * + * {
+  margin-top: 1rem;
+}
+
+input {
+  width: 100%;
+}
+
+input[type="submit"],
+button {
+  background-color: var(--yellow);
+  border: var(--yellow-light);
+  color: var(--black);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all .3s ease-out;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  background-color: var(--yellow-light);
+  color: var(--black);
+}
+
+a.button-link {
+  text-decoration: none;
+}
+
+ul {
+  background-color: var(--gray);
+  padding: 2rem;
+}
+
+li {
+  align-items: center;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+li + li {
+  border-top: 1px solid var(--black);
+  padding-top: 1rem;
+}
+
+li button {
+  display: inline-block;
+  margin-right: 0;
+}
+
+.restaurant__details > * {
+  margin-bottom: 0;
+}
+
+.restaurant__name {
+  font-weight: bold;
+}
+
+.guest-list__guest {
+  flex-wrap: wrap;
+}
+
+.menu-item__details > * {
+  margin-bottom: 0;
+}
+
+.menu-item__name {
+  font-weight: bold;
+}
+
+.menu-item__add {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+/* || Branding */
+
+h1 {
+  color: var(--red);
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* || Components */
 
 /* Modal for guest selection */
 .modal {
