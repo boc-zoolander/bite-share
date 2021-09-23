@@ -8,27 +8,30 @@ const Dashboard = ({ sessionId }) => {
   const [joinedNames, setjoinedNames] = useState([]);
 
   useEffect(() => {
-    console.log('Dashboard 1st useEffect (join room) fired');
+    console.log('Dashboard useEffect for joinRoom fired');
     socket.emit('joinRoom', { sessionId });
   });
 
   useEffect(() => {
-    console.log('Dashboard 2nd useEffect (on join outside the socket) fired');
-    socket.on('onDash', payload => {
-      console.log('Dashboard (onJoin inside the socket.on) fired', payload);
-      console.log('joinedNames', joinedNames);
-      setjoinedNames([...joinedNames, payload]);
-    });
-  });
-
-  useEffect(() => {
+    console.log('Dashboard useEffect for updateDash fired');
     socket.on('updateDash', payload => {
       setjoinedNames(payload);
     });
   });
 
   useEffect(() => {
+    console.log('Dashboard 2nd useEffect (on join outside the socket) fired');
+    socket.on('onDash', payload => {
+      console.log('Dashboard (onDash inside the socket.on) fired', payload);
+      console.log('joinedNames', joinedNames);
+      setjoinedNames([...joinedNames, payload]);
+    });
+  });
+
+  useEffect(() => {
+    console.log('Dashboard useEffect for orderSubmitted fired');
     socket.on('orderSubmitted', payload => {
+      console.log('Dashboard orderSubmitted listener fired');
       const names = [...joinedNames];
       for (let i = 0; i < names.length; i++) {
         if (names[i].guestName === payload.guestName) {
@@ -47,7 +50,6 @@ const Dashboard = ({ sessionId }) => {
 
   return (
     <div>
-      <h1>This is a dashboard</h1>
       <ul>
         {whoJoined}
       </ul>

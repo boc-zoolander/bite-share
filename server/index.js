@@ -16,23 +16,29 @@ const socketHistory = {};
 
 io.on('connection', socket => {
   socket.on('joinRoom', payload => {
-    socket.room = payload.sessionId;
-    socket.join(payload.sessionId);
+    const room = payload.sessionId.toString();
+    socket.room = room;
+    socket.join(room);
+    console.log('User joined room ', payload.sessionId);
   });
 
-  socket.on('orderSubmitted', payload => {
-    io.to(payload.sessionId).emit('orderSubmitted', payload);
+  socket.on('submitOrder', payload => {
+    const room = payload.sessionId.toString();
+    io.to(room).emit('orderSubmitted', payload);
   });
 
-  socket.on('onJoin', payload => {
-    console.log('This is on the server onJoin: ', payload);
-    io.emit('onDash', payload);
-    socketHistory[payload.sessionId] = socketHistory[payload.sessionId] ? [payload, ...socketHistory[payload.sessionId]] : [payload];
+  socket.on('joinSession', payload => {
+    console.log('joinSession: ', payload);
+    const room = payload.sessionId.toString();
+    io.to(room).emit('onDash', payload);
+    socketHistory[room] = socketHistory[room] ? [payload, ...socketHistory[room]] : [payload];
   });
 
   socket.on('hostJoined', payload => {
-    const guests = socketHistory[payload.sessionId] || [];
-    io.to(payload.sessionId).emit('updateDash', guests);
+    console.log('Host joined');
+    const room = payload.sessionId.toString();
+    const guests = socketHistory[room] || [];
+    io.to(room).emit('updateDash', guests);
   });
 
   socket.on('disconnect', () => {

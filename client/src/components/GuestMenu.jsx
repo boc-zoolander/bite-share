@@ -18,11 +18,11 @@ const GuestMenu = ({ guests, joinName, menu, sessionId }) => {
 
   useEffect(() => {
     socket.emit('joinRoom', { sessionId });
-  }, []);
+  });
 
   useEffect(() => {
-    console.log('This is the GUest Menu onJoin: ', { guestName: guests[0].guestName, submitted: false, sessionId });
-    socket.emit('onJoin', { guestName: guests[0].guestName, submitted: false, sessionId });
+    console.log('GuestMenu useEffect for joinSession: ', { guestName: guests[0].guestName, submitted: false, sessionId });
+    socket.emit('joinSession', { guestName: guests[0].guestName, submitted: false, sessionId });
   }, []);
 
   const menuItems = menu.map((section, i) => {
@@ -62,7 +62,8 @@ const GuestMenu = ({ guests, joinName, menu, sessionId }) => {
   };
 
   const submitOrder = () => {
-    socket.emit('orderSubmitted', { id: guests[0].id, guestName: guests[0].guestName, order: currentOrder, sessionId: sessionId });
+    console.log('Guest submitted order');
+    socket.emit('submitOrder', { id: guests[0].id, guestName: guests[0].guestName, order: currentOrder, sessionId: sessionId });
     setSubmitted(true);
   };
 
