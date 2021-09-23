@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ThankYou from './ThankYou.jsx';
 import io from 'socket.io-client';
 
 const url = 'http://localhost:8080';
 const socket = io(url);
-// Needs to get menu from server
-// Needs to render menu
-// Local hook for this guest's order
-// submit button to send order to server
-//    Should inform host using socket.io
-// For now just pass menu in as prop
 
-const GuestMenu = ({ guests, joinName, menu, sessionId }) => {
-  // state declare here
+const GuestMenu = ({ guests, menu, sessionId }) => {
   const [currentOrder, setCurrentOrder] = useState([]);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    socket.emit('joinRoom', { sessionId });
+  }, []);
+
+  useEffect(() => {
+    socket.emit('joinSession', { id: guests[0].id, guestName: guests[0].guestName, submitted: false, sessionId });
+  }, []);
 
   const menuItems = menu.map((section, i) => {
     return (
@@ -53,7 +54,7 @@ const GuestMenu = ({ guests, joinName, menu, sessionId }) => {
   };
 
   const submitOrder = () => {
-    socket.emit('orderSubmitted', { id: guests[0].id, guestName: guests[0].guestName, order: currentOrder });
+    socket.emit('submitOrder', { id: guests[0].id, guestName: guests[0].guestName, order: currentOrder, sessionId: sessionId });
     setSubmitted(true);
   };
 

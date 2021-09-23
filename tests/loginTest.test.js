@@ -115,7 +115,7 @@ describe('Unit Test Section: <App />', () => {
   });
 
   test('LoggedIn.jsx Test 1/2, Unit Test', () => {
-    let mockedLoggedIn = [{ 
+    let mockedLoggedIn = [{
       id: 3,
       guestName: 'Charles Xavier'
     }];
@@ -129,7 +129,7 @@ describe('Unit Test Section: <App />', () => {
   });
 
   test('LoggedIn.jsx Test 2/2, Unit Test', async () => {
-    let mockedLoggedIn = [{ 
+    let mockedLoggedIn = [{
       id: 3,
       guestName: 'Charles Xavier'
     }];

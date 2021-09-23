@@ -119,19 +119,21 @@ const SplitList = (props) => {
   }, [props.tipPercentage, props.split]);
 
   return (
-    <ul>
-      {props.guests.map((guest, i) =>
-        <IndividualOwes key = {i} guestName = {guest.guestName} paymentOwed = {props.finalTotals.paymentsOwed[guest.guestName]} />
-      )}
+    <div>
+      <ul>
+        {props.guests.map((guest, i) =>
+          <IndividualOwes key = {i} guestName = {guest.guestName} paymentOwed = {props.finalTotals.paymentsOwed[guest.guestName]} />
+        )}
+      </ul>
       <div>
         <hr />
         <div> Preliminary Total: ${props.finalTotals.preliminaryTotal} </div>
-        <div> Tip Amount: ${props.finalTotals.tipAmount} </div>
+        <div data-testid = 'tip-amount-id'> Tip Amount: ${props.finalTotals.tipAmount} </div>
         <div> Tax: ${props.finalTotals.tax} </div>
         <div> Final Total: ${props.finalTotals.finalTotal} </div>
         <hr />
       </div>
-    </ul>
+    </div>
   );
 };
 

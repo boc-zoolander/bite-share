@@ -82,7 +82,7 @@ describe('Session', () => {
     }));
 
     const input = screen.getByTestId('session-id-input');
-    fireEvent.change(input, { target: { value: '123' }});
+    fireEvent.change(input, { target: { value: '123' } });
     const submitButton = screen.getByText('Submit');
     const leftClick = { button: 0 };
     fireEvent.click(submitButton, leftClick);

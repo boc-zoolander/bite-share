@@ -41,7 +41,7 @@ export default function Session ({ setTopLevelState }) {
       return (
         <>
           {/* Will eventually go to "Host a Session" component */}
-          <Link to="/find-restaurant">
+          <Link to="/find-restaurant" className="button-link">
             <button type="button">Start a New Session</button>
           </Link>
           <form>

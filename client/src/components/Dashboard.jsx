@@ -4,20 +4,31 @@ import io from 'socket.io-client';
 const url = 'http://localhost:8080';
 const socket = io(url);
 
-const Dashboard = () => {
+const Dashboard = ({ guests, sessionId, setTopLevelState }) => {
   const [joinedNames, setjoinedNames] = useState([]);
 
   useEffect(() => {
-    socket.on('onJoin', payload => {
-      setjoinedNames([...joinedNames, payload]);
+    socket.emit('joinRoom', { sessionId });
+  }, []);
+
+  useEffect(() => {
+    socket.on('updateDash', payload => {
+      setjoinedNames(payload);
     });
-  });
+  }, []);
+
+  useEffect(() => {
+    socket.on('onDash', payload => {
+      setjoinedNames(payload);
+    });
+  }, []);
 
   useEffect(() => {
     socket.on('orderSubmitted', payload => {
+      setTopLevelState('guests', [...guests, payload]);
       const names = [...joinedNames];
       for (let i = 0; i < names.length; i++) {
-        if (names[i].name === payload.guestName) {
+        if (names[i].id === payload.id) {
           names[i].submitted = true;
           setjoinedNames(names);
         }
@@ -27,13 +38,12 @@ const Dashboard = () => {
 
   const whoJoined = joinedNames.map((item, index) => {
     return (
-      item.submitted ? <li key={index}>{item.name} Completed Order </li> : <li key={index}>{item.name} joined the session and is ordering food </li>
+      item.submitted ? <li key={index}>{item.guestName} Completed Order </li> : <li key={index}>{item.guestName} joined the session and is ordering food </li>
     );
   });
 
   return (
     <div>
-      <h1>This is a dashboard</h1>
       <ul>
         {whoJoined}
       </ul>

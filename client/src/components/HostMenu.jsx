@@ -7,14 +7,16 @@ import Dashboard from './Dashboard.jsx';
 const url = 'http://localhost:8080';
 const socket = io(url);
 
-const HostMenu = ({ guests, menu, setTopLevelState }) => {
+const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
   const [currentName, setCurrentName] = useState('');
 
   useEffect(() => {
-    socket.on('orderSubmitted', payload => {
-      setTopLevelState('guests', [...guests, payload]);
-    });
-  });
+    socket.emit('joinRoom', { sessionId });
+  }, []);
+
+  useEffect(() => {
+    socket.emit('hostJoined', { sessionId });
+  }, []);
 
   const onChange = (event) => {
     setCurrentName(event.target.value);
@@ -49,9 +51,12 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
         <ul>
         {section.menu_items.map((item, j) => {
           return (
-            <li key={j}>
-              {item.name} ${item.price}
-              <button type='button' onClick={() => addItem(item) }> + </button>
+            <li className="menu-item" key={j}>
+              <div className="menu-item__details">
+                <p className="menu-item__name">{item.name}</p>
+                <p className="menu-item__price">${item.price}</p>
+              </div>
+              <button type='button' className="menu-item__add" onClick={() => { addItem(item); }}> + </button>
             </li>
           );
         })}
@@ -86,13 +91,13 @@ const HostMenu = ({ guests, menu, setTopLevelState }) => {
         </div>
       </div>
       <h2> Dashboard </h2>
-        <Dashboard />
+        <Dashboard guests={guests} sessionId={sessionId} setTopLevelState={setTopLevelState} />
       <h2>Current Items for {currentName}</h2>
         {currentItems}
       <div>
         {menuItems}
       </div>
-      <Link to="/split-bill">
+      <Link to="/split-bill" className="button-link">
         <input type="submit" value="Next" />
       </Link>
     </div>
