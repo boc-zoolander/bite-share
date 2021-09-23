@@ -10,7 +10,7 @@ const Dashboard = ({ guests, sessionId, setTopLevelState }) => {
   useEffect(() => {
     console.log('Dashboard useEffect for joinRoom fired');
     socket.emit('joinRoom', { sessionId });
-  });
+  }, []);
 
   useEffect(() => {
     console.log('Dashboard useEffect for updateDash fired');

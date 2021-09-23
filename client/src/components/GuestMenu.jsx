@@ -11,7 +11,7 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
 
   useEffect(() => {
     socket.emit('joinRoom', { sessionId });
-  });
+  }, []);
 
   useEffect(() => {
     // console.log('GuestMenu useEffect for joinSession: ', { guestName: guests[0].guestName, submitted: false, sessionId });
