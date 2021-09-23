@@ -20,7 +20,6 @@ io.on('connection', socket => {
     const room = payload.sessionId.toString();
     socket.room = room;
     socket.join(room);
-    console.log('User joined room ', payload.sessionId);
   });
 
   socket.on('submitOrder', payload => {
@@ -30,10 +29,8 @@ io.on('connection', socket => {
   });
 
   socket.on('joinSession', payload => {
-    // console.log('joinSession payload: ', payload);
     const room = payload.sessionId.toString();
     socketHistory[room] = socketHistory[room] ? [payload, ...socketHistory[room]] : [payload];
-    console.log(socketHistory[room]);
     io.to(room).emit('onDash', socketHistory[room]);
   });
 
