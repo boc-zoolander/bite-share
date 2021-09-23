@@ -1,8 +1,9 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
+
 class Login extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -15,7 +16,7 @@ class Login extends React.Component {
     this.validateUser = this.validateUser.bind(this);
   }
 
-  validateUser (e) {
+  validateUser(e) {
     e.preventDefault();
     const validationPath = `http://localhost:8080/users/login?hostname=${this.state.hostName}&password=${this.state.password}`;
     axios.get(validationPath)
@@ -23,6 +24,7 @@ class Login extends React.Component {
         const hostDetails = {
           id: res.data[0].user_id,
           guestName: `${res.data[0].first_name} ${res.data[0].last_name}`,
+          email: res.data[0].email,
           order: []
         };
         this.props.setTopLevelState('guests', [hostDetails]);
@@ -34,13 +36,14 @@ class Login extends React.Component {
       });
   }
 
+
   handleChange (e) {
     const value = e.target.value;
     const name = e.target.name;
     this.setState({ [name]: value });
   }
 
-  render () {
+  render() {
     if (this.props.isLoggedIn) {
       return <Redirect to='/session' />;
     }
@@ -64,7 +67,7 @@ class Login extends React.Component {
             <p>New to Bite Share?  Register Here!</p>
           </Link>
         </form>
-        { loginFailureMessage }
+        {loginFailureMessage}
       </div>
     );
   }

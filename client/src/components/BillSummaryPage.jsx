@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SplitList from './SplitList.jsx';
 
 class BillSummaryPage extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       split: 'by Item',
@@ -18,7 +18,7 @@ class BillSummaryPage extends React.Component {
     this.splitByItem = this.splitByItem.bind(this);
   }
 
-  getBillTotalWithoutTipOrTax (guestArray) {
+  getBillTotalWithoutTipOrTax(guestArray) {
     let billTotal = 0;
     for (let i = 0; i < guestArray.length; i++) {
       const currentGuestOrders = guestArray[i].order;
@@ -32,26 +32,26 @@ class BillSummaryPage extends React.Component {
     return billTotal;
   }
 
-  changeTipPercentage (event) {
+  changeTipPercentage(event) {
     const value = Number(event.target.value);
     this.setState({ tipPercentage: value }, () => {
       console.log('👻', this.state.tipPercentage);
     });
   }
 
-  splitEvenly () {
+  splitEvenly() {
     this.setState({
       split: 'Evenly'
     });
   }
 
-  splitByItem () {
+  splitByItem() {
     this.setState({
       split: 'by Item'
     });
   }
 
-  render () {
+  render() {
     return (
       <div>
         <h3>Final Bill Split {this.state.split}</h3>
@@ -68,10 +68,10 @@ class BillSummaryPage extends React.Component {
           ? <div>
             <button onClick={this.splitEvenly}>Split Evenly</button>
             <button onClick={this.splitByItem}>Split by Item</button>
-            </div>
+          </div>
           : <></>
         }
-        <Link to="/" className="button-link">
+        <Link to="/pay-bill" className="button-link">
           <button>Complete Session</button>
         </Link>
       </div>
