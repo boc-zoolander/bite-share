@@ -80,7 +80,7 @@ class App extends React.Component {
               <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} restaurantInfo={this.state.restaurant} finalTotals={this.state.finalTotals} tipPercentage={this.state.tipPercentage} splitMethod={this.state.splitMechanism} />
             </Route>
             <Route path="/pay-bill">
-              <PayBill />
+              <PayBill finalTotals={this.state.finalTotals} hostInfo={this.state.guests[0]} />
             </Route>
             <Route exact path="/">
               <Login setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn} />

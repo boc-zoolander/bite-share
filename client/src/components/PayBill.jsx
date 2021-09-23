@@ -2,30 +2,49 @@ import React, { useRef, useEffect, useState } from 'react';
 import $ from 'jquery';
 import ThankYou from './ThankYou.jsx';
 
-const payeeEmail = 'sb-dmus17722352@personal.example.com';
-const hostName = 'Milo';
-const billInfo = [
-  {
-    name: 'Milo',
-    order: [
-      { reference_id: 1, description: 'Milo"s order', amount: { currency_code: 'USD', value: 135.3 } }]
-  },
-  {
-    name: 'Sara',
-    order: [
-      { reference_id: 4, description: 'Sara"s order', amount: { currency_code: 'USD', value: 25.3 } }]
-  },
-  {
-    name: 'Tom',
-    order: [
-      { reference_id: 6, description: 'Tom"s order', amount: { currency_code: 'USD', value: 52.3 } }]
-  },
-  {
-    name: 'Jorge',
-    order: [
-      { reference_id: 5, description: 'Jorge"s order', amount: { currency_code: 'USD', value: 15.3 } }]
+// const payeeEmail = 'sb-dmus17722352@personal.example.com';
+// const hostName = 'Milo';
+// const billInfo = [
+//   {
+//     name: 'Milo',
+//     order: [
+//       { reference_id: 1, description: 'Milo"s order', amount: { currency_code: 'USD', value: 135.3 } }]
+//   },
+//   {
+//     name: 'Sara',
+//     order: [
+//       { reference_id: 4, description: 'Sara"s order', amount: { currency_code: 'USD', value: 25.3 } }]
+//   },
+//   {
+//     name: 'Tom',
+//     order: [
+//       { reference_id: 6, description: 'Tom"s order', amount: { currency_code: 'USD', value: 52.3 } }]
+//   },
+//   {
+//     name: 'Jorge',
+//     order: [
+//       { reference_id: 5, description: 'Jorge"s order', amount: { currency_code: 'USD', value: 15.3 } }]
+//   }
+// ];
+
+const billInfoGenerator = (paymentsOwed) => {
+  let billInfo = [];
+  let i = 0;
+  for (let key in paymentsOwed) {
+    let result = {};
+    let order = {
+      reference_id: i + Date.now(),
+      description: key + '"s order',
+      amount: { currency_code: 'USD', value: Number(paymentsOwed[key]) }
+    };
+    result.name = key;
+    result.order = [];
+    result.order.push(order);
+    billInfo.push(result);
+    i++;
   }
-];
+  return billInfo;
+}
 
 const BillCard = (props) => (
   <div className='card bill-card' >
@@ -35,6 +54,13 @@ const BillCard = (props) => (
 );
 
 const PayBill = (props) => {
+
+  const hostName = props.hostInfo.guestName;
+  console.log(hostName);
+  console.log(props.hostInfo);
+  const payeeEmail = props.hostInfo.email;
+  const billInfo = billInfoGenerator(props.finalTotals.paymentsOwed);
+  console.log(billInfo);
   const [submit, setSubmit] = useState(false);
   const billInfoPay = billInfo.filter(info => info.name !== hostName);
 
@@ -72,8 +98,6 @@ const PayBill = (props) => {
               console.log('success:' + data);
             }
           });
-          // const orderID = handleRequest(orderToPay, payeeEmail);
-          console.log(order);
           setSubmit(true);
         },
         onError: (error) => {

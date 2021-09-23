@@ -38,7 +38,6 @@ const paypal = async (orderToTransfer, payeeEmail, cb) => {
     orderToTransferWithPayee.push(result);
   });
 
-  console.log(orderToTransferWithPayee);
 
   const orderRequestBody = {
     sender_batch_header: {
@@ -48,7 +47,6 @@ const paypal = async (orderToTransfer, payeeEmail, cb) => {
     },
     items: orderToTransferWithPayee
   };
-  console.log('orderRequestBody:', orderRequestBody);
 
   // Call PayPal to get the token for transacation
 
@@ -78,7 +76,6 @@ const paypal = async (orderToTransfer, payeeEmail, cb) => {
       data: orderRequestBody
     });
   }).then(response => {
-    console.log('Successfully payout,', response.data);
     cb(null);
   })
     .catch(err => {
