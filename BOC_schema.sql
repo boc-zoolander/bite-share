@@ -216,3 +216,37 @@ INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Remy', 
 INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Anna', 'MarieRogue', 'iheartgambit@gmail.com', '1234');
 INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Hank', 'McCoy', 'iheartscience@gmail.com', '1234');
 INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Charles', 'Xavier', 'iheartmutantkind@gmail.com', '1234');
+
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Destiny', 'of the Endless', 'destiny@sandman.com', '0001');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Dream', 'of the Endless', 'dream@sandman.com', '0002');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Death', 'of the Endless', 'death@sandman.com', '0003');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Destruction', 'of the Endless', 'destruction@sandman.com', '0004');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Delight', 'of the Endless', 'delight@sandman.com', '0005');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Desire', 'of the Endless', 'desire@sandman.com', '0006');
+INSERT INTO "BOC_Users"(first_name, last_name, email, password) VALUES ('Despair', 'of the Endless', 'despair@sandman.com', '0007');
+
+INSERT INTO "BOC_Sessions"(host_id, session_name, host_firstname, host_lastname, restaurant_name, restaurant_id_api) VALUES (276, 'The Gathering of the Endless', 'Destiny', 'of the Endless', 'The Table of Destiny', 888888);
+
+INSERT INTO "BOC_User-Session-jt"(session_id, user_id, user_done_ordering) VALUES (93, 276, false);
+INSERT INTO "BOC_User-Session-jt"(session_id, user_id, user_done_ordering) VALUES (93, 277, false);
+INSERT INTO "BOC_User-Session-jt"(session_id, user_id, user_done_ordering) VALUES (93, 278, false);
+INSERT INTO "BOC_User-Session-jt"(session_id, user_id, user_done_ordering) VALUES (93, 279, false);
+INSERT INTO "BOC_User-Session-jt"(session_id, user_id, user_done_ordering) VALUES (93, 280, false);
+INSERT INTO "BOC_User-Session-jt"(session_id, user_id, user_done_ordering) VALUES (93, 281, false);
+INSERT INTO "BOC_User-Session-jt"(session_id, user_id, user_done_ordering) VALUES (93, 282, false);
+
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (276, 93, 'steak and potatos', 7676, 49.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (277, 93, 'steak and brie', 7677, 59.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (278, 93, 'steak and cheddar soup', 7678, 69.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (279, 93, 'steak and broccoli', 7679, 79.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (280, 93, 'steak and scallop', 7680, 89.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (281, 93, 'steak and shrimp', 7681, 99.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (282, 93, 'steak and lobster', 7682, 109.99, 1);
+
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (276, 93, 'Dream Wine', 8000, 9.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (277, 93, 'Dream Wine', 8000, 9.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (278, 93, 'Dream Wine', 8000, 9.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (279, 93, 'Dream Wine', 8000, 9.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (280, 93, 'Dream Wine', 8000, 9.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (281, 93, 'Dream Wine', 8000, 9.99, 1);
+INSERT INTO "BOC_Orders"(orderer_id, order_session_id, food_name_api, food_id_api, price, qty) VALUES (282, 93, 'Dream Wine', 8000, 9.99, 1);

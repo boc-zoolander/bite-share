@@ -1,5 +1,6 @@
 const pool = require('./models.js');
 var format = require('pg-format');
+const parse = require('../server/user_db_routes/parseFunctions/parseFunctions');
 
 // database interaction to get all the users in the users table.
 const getUsers = function() {
@@ -51,12 +52,23 @@ const getAllOrders = function() {
 
 // Get Session 2 (db pull)
 const getSession2 = function(obj_param) {
+  // NO ORDER SELECTOR BECAUSE A USER MIGHT NOT HAVE ORDERS YET!!!!!
   let { session_id } = obj_param;
-  let queryStr = `SELECT user_id, first_name, last_name, email FROM "BOC_Users" WHERE email = '${ email }' AND password = '${ password }'`;
-  
+
+  let queryStr = `SELECT "BOC_Sessions".session_id, "BOC_Sessions".session_name, "BOC_Sessions".host_id,
+  "BOC_Sessions".host_firstname,  "BOC_Sessions".host_lastname,  "BOC_Users".user_id, "BOC_Users".first_name, "BOC_Users".last_name, 
+  "BOC_Orders".order_id, "BOC_Orders".food_name_api, "BOC_Orders".price, "BOC_Orders".qty FROM "BOC_Sessions"
+  LEFT OUTER JOIN "BOC_User-Session-jt" on "BOC_Sessions".session_id = "BOC_User-Session-jt".session_id 
+  LEFT OUTER JOIN "BOC_Users" on "BOC_User-Session-jt".user_id = "BOC_Users".user_id
+  LEFT OUTER JOIN "BOC_Orders" on "BOC_User-Session-jt".user_id = "BOC_Orders".orderer_id
+  WHERE ("BOC_Sessions".session_id = ${session_id})`;
+
   return pool.query(queryStr)
     .then(res => {
-      return JSON.stringify(res.rows, null, 2);
+      // parsedReturnObj = parse.parseSession(res);
+      //return JSON.stringify(res.rows, null, 4);
+      return JSON.stringify(parse.parseSession(res.rows), null, 4);
+
     })
     .catch(err => {
       return err;
