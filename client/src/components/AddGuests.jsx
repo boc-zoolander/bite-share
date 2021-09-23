@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import GuestList from './GuestList.jsx';
 
-const AddGuests = ({ setTopLevelState, guests, deleteGuest, sessionId }) => {
+const AddGuests = ({ setTopLevelState, guests, sessionId }) => {
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState('');
 

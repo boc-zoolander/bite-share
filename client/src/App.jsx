@@ -21,6 +21,7 @@ class App extends React.Component {
       menu: [],
       guests: [],
       joinName: '',
+      totalCost: 0,
       sessionId: null,
       sessionName: '',
       sessionComplete: false,
@@ -41,8 +42,8 @@ class App extends React.Component {
 
 
   setTopLevelState (name, value) {
-    this.setState({ [name]: value }, () => { console.log(this.state.sessionId); });
-  }
+    this.setState({ [name]: value }, () => { console.log('App guests: ', this.state.guests); });
+  };
 
   render() {
     return (
@@ -68,7 +69,7 @@ class App extends React.Component {
             <Join setTopLevelState={this.setTopLevelState}/>
           </Route>
           <Route path="/host-menu">
-            <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} />
+            <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} sessionId={this.state.sessionId} />
           </Route>
           <Route path="/session">
             <Session setTopLevelState={this.setTopLevelState} />

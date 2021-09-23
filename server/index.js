@@ -13,15 +13,35 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
+const socketHistory = {};
+
 io.on('connection', socket => {
-  socket.on('orderSubmitted', payload => {
-    console.log('name and order received on server: ', payload);
-    io.emit('orderSubmitted', payload);
+  socket.on('joinRoom', payload => {
+    const room = payload.sessionId.toString();
+    socket.room = room;
+    socket.join(room);
   });
 
-  socket.on('onJoin', payload => {
-    console.log('Remote Name received on server: ', payload);
-    io.emit('onJoin', payload);
+  socket.on('submitOrder', payload => {
+    const room = payload.sessionId.toString();
+    // NEED TO UPDATE SOCKET HISTORY?
+    io.to(room).emit('orderSubmitted', payload);
+  });
+
+  socket.on('joinSession', payload => {
+    const room = payload.sessionId.toString();
+    socketHistory[room] = socketHistory[room] ? [payload, ...socketHistory[room]] : [payload];
+    io.to(room).emit('onDash', socketHistory[room]);
+  });
+
+  socket.on('hostJoined', payload => {
+    const room = payload.sessionId.toString();
+    const guests = socketHistory[room] || [];
+    io.to(room).emit('updateDash', guests);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
   });
 });
 
