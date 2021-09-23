@@ -10,7 +10,7 @@ import { configure, shallow, mount } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import BillSummaryPage from '../client/src/components/BillSummaryPage.jsx';
 import SplitList from '../client/src/components/SplitList.jsx';
-import IndividualOwes from '../client/src/components/individualOwes.jsx';
+import IndividualOwes from '../client/src/components/IndividualOwes.jsx';
 
 describe('Unit Test Section: <BillSummaryPage /> and children', () => {
   let guestsProps;
