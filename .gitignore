@@ -3,3 +3,4 @@ coverage
 .env
 client/dist/bundle.js
 client/dist/bundle.js.LICENSE.txt
+**/.DS_Store

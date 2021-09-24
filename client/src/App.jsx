@@ -4,13 +4,13 @@ import BillSummaryPage from './components/BillSummaryPage.jsx';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login.jsx';
 import CreateSession from './components/CreateSession.jsx';
-import Join from './components/Join.jsx';
 import GuestMenu from './components/GuestMenu.jsx';
 import HostMenu from './components/HostMenu.jsx';
 import RegisterUser from './components/RegisterUser.jsx';
 import LoggedIn from './components/LoggedIn.jsx';
 import Session from './components/Session.jsx';
 import PayBill from './components/PayBill.jsx';
+import InviteGuests from './components/InviteGuests.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -40,9 +40,8 @@ class App extends React.Component {
     this.setTopLevelState = this.setTopLevelState.bind(this);
   }
 
-
   setTopLevelState (name, value) {
-    this.setState({ [name]: value }, () => { console.log('App guests: ', this.state.guests); });
+    this.setState({ [name]: value });
   };
 
   render() {
@@ -60,13 +59,10 @@ class App extends React.Component {
             <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} restaurant={this.state.restaurant} guests={this.state.guests} />
           </Route>
           <Route path="/add-guests">
-            <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} sessionId={this.state.sessionId}/>
+            <InviteGuests sessionId={this.state.sessionId}/>
           </Route>
           <Route path="/guest-menu">
             <GuestMenu joinName={this.state.joinName} sessionId={this.state.sessionId} guests={this.state.guests} menu={this.state.menu}/>
-          </Route>
-          <Route path="/join">
-            <Join setTopLevelState={this.setTopLevelState}/>
           </Route>
           <Route path="/host-menu">
             <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} sessionId={this.state.sessionId} />
@@ -79,13 +75,13 @@ class App extends React.Component {
           </Route>
           <Route path="/pay-bill">
               <PayBill finalTotals={this.state.finalTotals} hostInfo={this.state.guests[0]} />
-            </Route>
+          </Route>
           <Route exact path="/">
             <Login setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
           </Route>
-        </Switch>
-      </Router>
-    </div>
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }
