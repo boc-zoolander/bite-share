@@ -28,6 +28,17 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
     event.preventDefault();
   };
 
+  const onModalClick = (event) => {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'block';
+    event.preventDefault();
+  };
+
+  const onCloseClick = () => {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+  };
+
   const addItem = (item) => {
     const guestArray = [...guests];
     for (let i = 0; i < guestArray.length; i++) {
@@ -44,6 +55,26 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
         guestOrder.push(item);
         setTopLevelState('guests', guestArray);
         return;
+      }
+    }
+  };
+
+  const deleteItem = (item) => {
+    const guestArray = [...guests]; // entire guest array (array of objs)
+    for (let i = 0; i < guestArray.length; i++) {
+      if (guestArray[i].guestName === currentName) {
+        const guestOrder = guestArray[i].order; // order array for selected person
+        for (let j = 0; j < guestOrder.length; j++) {
+          if (guestOrder[j].name === item.name) {
+            if (guestOrder[j].qty === 1) {
+              guestOrder.splice(j, 1);
+            } else {
+              guestOrder[j].qty -= 1;
+            }
+            guestArray[i].order = guestOrder;
+            setTopLevelState('guests', guestArray);
+          }
+        }
       }
     }
   };
@@ -69,20 +100,8 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
     );
   });
 
-  const onModalClick = (event) => {
-    const modal = document.getElementById('myModal');
-    modal.style.display = 'block';
-    event.preventDefault();
-  };
-
-  const onCloseClick = () => {
-    const modal = document.getElementById('myModal');
-    modal.style.display = 'none';
-  };
-
   const currentObj = guests.find(element => element.guestName === currentName) || { order: [] };
-  const currentItems = currentObj.order.map((item, i) => <li key={i}> {item.name} ({item.qty}) </li>);
-
+  const currentItems = currentObj.order.map((item, i) => <li key={i}> {item.name} ({item.qty}) <button type='button' onClick={() => { deleteItem(item); }}> − </button></li>);
   const guestNames = guests.map((item, i) => <button key={i} type='button' className='link' value={item.guestName} onClick={onChange}> {item.guestName} </button>);
 
   return (
