@@ -31,7 +31,7 @@ describe('Unit Test Section: <BillSummaryPage /> and children', () => {
           { name: 'El Cuban Reuben Panini', description: 'Roast pork, Swiss cheese, braised red cabbage and mustard on ciabatta.', pricing: [{ price: 14.75, currency: 'USD', priceString: '$14.75' }], price: 14.75, qty: 1 }
         ]
       },
-      {
+      { id: 1,
         guestName: 'Milo',
         order: [
           { name: 'Regular Coffee', description: '', pricing: [{ price: 2.25, currency: 'USD', priceString: '$2.25' }], price: 2.2, qty: 1 },
@@ -39,7 +39,7 @@ describe('Unit Test Section: <BillSummaryPage /> and children', () => {
           { name: 'El Cuban Reuben Panini', description: 'Roast pork, Swiss cheese, braised red cabbage and mustard on ciabatta.', pricing: [{ price: 14.75, currency: 'USD', priceString: '$14.75' }], price: 14.7, qty: 1 }
         ]
       },
-      {
+      { id: 2,
         guestName: 'Mike',
         order: [
           { name: 'Regular Coffee', description: '', pricing: [{ price: 2.25, currency: 'USD', priceString: '$2.25' }], price: 2.2, qty: 1 },
@@ -51,7 +51,7 @@ describe('Unit Test Section: <BillSummaryPage /> and children', () => {
 
     restaurantProps = { restaurant_name: 'Bakeri', restaurant_phone: '(718) 388-8037', restaurant_website: '', hours: 'Daily: 8am-7pm', price_range: '$', price_range_num: 1, restaurant_id: 4072005273960112, cuisines: ['Bakery & Pastries', 'Coffee & Tea', 'Sandwiches'], address: { city: 'Brooklyn', state: 'NY', postal_code: '11211', street: '150 Wythe Ave', formatted: '150 Wythe Ave Brooklyn, NY 11211' }, geo: { lat: 40.720052, lon: -73.960112 }, menus: [], last_updated: '2021-01-05T07:36:14.169Z' };
 
-    finalTotalsProps = { paymentsOwed: { Sara: 33.19, Milo: 33.19, Mike: 33.19 }, preliminaryTotal: 77.25, tipAmount: 15.45, tax: 6.86, finalTotal: 99.56 };
+    finalTotalsProps = { paymentsOwed: { 0: 33.19, 1: 33.19, 2: 33.19 }, preliminaryTotal: 77.25, tipAmount: 15.45, tax: 6.86, finalTotal: 99.56 };
 
     setTopLevelStateProps = (a, b) => {
       return (a, b);
@@ -75,7 +75,6 @@ describe('Unit Test Section: <BillSummaryPage /> and children', () => {
     expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
   });
 
-  // rework to show rerender of page ?
   test('Does the component <BillSummaryPage /> allow user to enter tip?', () => {
     render(
       <BrowserRouter>
@@ -202,7 +201,7 @@ describe('Unit Test Section: <BillSummaryPage /> and children', () => {
     render(
       <BrowserRouter>
         {guestsProps.map((guest, i) =>
-          <IndividualOwes key = {i} guestName = {guest.guestName} paymentOwed = {finalTotalsProps.paymentsOwed[guest.guestName]} />
+          <IndividualOwes key = {i} guestName = {guest.guestName} paymentOwed = {finalTotalsProps.paymentsOwed[guest.id]} />
         )}
       </BrowserRouter>
     );
