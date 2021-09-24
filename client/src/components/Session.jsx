@@ -42,10 +42,10 @@ export default function Session ({ setTopLevelState }) {
         <>
           {/* Will eventually go to "Host a Session" component */}
           <Link to="/find-restaurant" className="button-link">
-            <button type="button">Start a New Session</button>
+            <button id="start-new-session-button" type="button">Start a New Session</button>
           </Link>
           <form>
-            <label htmlFor="session-id">Enter an Existing Session</label>
+            <label htmlFor="session-id">Join an Existing Session</label>
             <input
               type="number"
               id="session-id"
@@ -63,6 +63,7 @@ export default function Session ({ setTopLevelState }) {
 
   return (
     <div>
+      <h1>Bite Share</h1>
       <h2>Session</h2>
       {content()}
     </div>

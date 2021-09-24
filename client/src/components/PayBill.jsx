@@ -109,6 +109,7 @@ const PayBill = (props) => {
 
   return (
     <div>
+      <h1>Bite Share</h1>
       {!submit &&
         <div>
           <div className="btn-group-vertical bill-card" role="group" aria-label="Basic checkbox toggle button group">

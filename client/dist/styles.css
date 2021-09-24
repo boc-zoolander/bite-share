@@ -130,6 +130,12 @@ summary {
 
 h1 {
   color: var(--red);
+  font-family: Work Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 40px;
+  letter-spacing: -0.02em;
 }
 
 h2 {
@@ -138,6 +144,36 @@ h2 {
 }
 
 /* || Components */
+
+/* Login Component */
+#register-link {
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* Session Component */
+#start-new-session-button {
+  margin-bottom: 2.5rem;
+}
+
+/* CreateSession Component */
+#saved-session-name {
+  margin-bottom: 8px;
+}
+
+#restaurant-results {
+  margin-top: 8px;
+}
+
+/* HostMenu Component */
+
+#selectGuestButton {
+  margin-bottom: 2.5rem;
+}
+
+#summary-split-button {
+  margin-top: 2.5rem;
+}
 
 /* Modal for guest selection */
 .modal {

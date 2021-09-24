@@ -50,13 +50,13 @@ describe('Unit Test Section: <App />', () => {
 
     let link = screen.getByText(/New to Bite Share/);
 
-    expect(screen.getByText(/User Name:/)).toBeInTheDocument();
+    expect(screen.getByText(/Email Address:/)).toBeInTheDocument();
     expect(screen.getByText(/Password/)).toBeInTheDocument();
     expect(link).toBeInTheDocument();
 
     let pass = screen.getByLabelText('Password:');
-    let email = screen.getByLabelText('User Name:');
-    let button = screen.getByRole('button', {value:'Login'});
+    let email = screen.getByLabelText('Email Address:');
+    let button = screen.getByRole('button', {value:'Log In'});
 
     expect(email).toBeInTheDocument();
     expect(pass).toBeInTheDocument();
@@ -85,10 +85,10 @@ describe('Unit Test Section: <App />', () => {
       </BrowserRouter>);
     });
 
-    let newFirstName = screen.getByLabelText('New First Name:');
-    let newLastName = screen.getByLabelText('New Last Name:');
-    let newEmail = screen.getByLabelText('New email:');
-    let newPassword = screen.getByLabelText('New password:');
+    let newFirstName = screen.getByLabelText('First Name:');
+    let newLastName = screen.getByLabelText('Last Name:');
+    let newEmail = screen.getByLabelText('Email Address:');
+    let newPassword = screen.getByLabelText('Password:');
     let button = screen.getByRole('button', {value:'Register New User'});
 
     expect(newFirstName).toBeInTheDocument();
