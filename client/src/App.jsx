@@ -4,7 +4,6 @@ import BillSummaryPage from './components/BillSummaryPage.jsx';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login.jsx';
 import CreateSession from './components/CreateSession.jsx';
-import Join from './components/Join.jsx';
 import GuestMenu from './components/GuestMenu.jsx';
 import HostMenu from './components/HostMenu.jsx';
 import RegisterUser from './components/RegisterUser.jsx';
@@ -64,9 +63,6 @@ class App extends React.Component {
           </Route>
           <Route path="/guest-menu">
             <GuestMenu joinName={this.state.joinName} sessionId={this.state.sessionId} guests={this.state.guests} menu={this.state.menu}/>
-          </Route>
-          <Route path="/join">
-            <Join setTopLevelState={this.setTopLevelState}/>
           </Route>
           <Route path="/host-menu">
             <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} sessionId={this.state.sessionId} />
