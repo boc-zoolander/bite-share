@@ -1,5 +1,5 @@
 import React from 'react';
-import AddGuests from './components/AddGuests.jsx';
+//import AddGuests from './components/AddGuests.jsx';
 import BillSummaryPage from './components/BillSummaryPage.jsx';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login.jsx';
