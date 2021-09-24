@@ -75,7 +75,6 @@ describe('Unit Test Section: <BillSummaryPage /> and children', () => {
     expect(screen.getByText(/Final Bill/)).toBeInTheDocument();
   });
 
-  // rework to show rerender of page ?
   test('Does the component <BillSummaryPage /> allow user to enter tip?', () => {
     render(
       <BrowserRouter>

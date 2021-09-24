@@ -47,7 +47,6 @@ const SplitList = (props) => {
       const guestArray = guests;
       const guestIDs = [];
       for (let i = 0; i < guestArray.length; i++) {
-        //const currentGuestID = guestArray[i].guestName;
         const currentGuestID = guestArray[i].id;
         guestIDs.push(currentGuestID);
         totals[currentGuestID] = 0;
@@ -74,7 +73,6 @@ const SplitList = (props) => {
       const guestArray = guests;
       const guestIDs = [];
       for (let i = 0; i < guestArray.length; i++) {
-        //const currentGuestID = guestArray[i].guestName;
         const currentGuestID = guestArray[i].id;
         guestIDs.push(currentGuestID);
         const evenTotal = (billWithTipAndTax / numberOfGuests).toFixed(2);
