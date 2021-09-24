@@ -66,3 +66,20 @@ menus.slice(1).forEach((menu, i) => {
   })
 })
 
+describe('HostMenu', () => {
+  beforeEach(() => {
+    render(<Routed children={hostmenu} /> );
+  });
+
+  it('should be able to delete items', async () => {
+
+    let addButtons = screen.getAllByRole('button');
+    await fireEvent.click(addButtons[1]);
+    addButtons = screen.getAllByRole('button');
+    await fireEvent.click(addButtons[2]);
+    await fireEvent.click(addButtons[1]);
+
+  });
+
+})
+
