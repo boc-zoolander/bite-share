@@ -21,21 +21,14 @@ const testSession = require('./getSession');
 
 // getSession (based on db pull) version 1
 router.get('/getSession2', (req, res) => {
-  // gets the user password to check for validation from here
   let obj_params = {
     session_id: req.query.session_id,
   };
 
-  db.login(obj_params)
+  db.getSession2(obj_params)
     .then(result => {
-      let parsedResult = JSON.parse(result);
-      if (parsedResult[0].user_id) {
-        res.header('Content-Type', 'application/json');
-        // the result of this should return the created session id.
-        res.status(200).send(result);
-      } else {
-        res.status(400).send('login failure!');
-      }
+      res.header('Content-Type', 'application/json');
+      res.status(200).send(result);
     })
     .catch(err => {
       res.status(400).send('get session failure: ', err);
@@ -138,7 +131,6 @@ router.get('/getAllSessions', (req, res) => {
     });
 });
 
-
 router.get('/getUserSession', (req, res) => {
   db.getUserSession({ host_id: 1 })
     .then(result => {
@@ -148,26 +140,6 @@ router.get('/getUserSession', (req, res) => {
     .catch(err => {
       res.status(400).send(err);
     });
-});
-
-// FOR FRONT END USAGE
-
-router.get('/getSession2', (req, res) => {
-
-  // TO DO:  CREATE an index from "BOC_User-Session-jt"
-  // we want to get all the users for a particular session
-  // then we want to get all the orders for a particular session.
-  // however the order session information contains the relevant users as well.
-
-  // select JOIN session_id on the join table
-  // JOIN session and users
-
-  // sort
-  // format
-  // return data
-
-  // res.header('Content-Type', 'application/json');
-  // res.status(200).send(JSON.stringify(stuff, null, 2));
 });
 
 // creates a new Session for a given Schema
@@ -193,7 +165,6 @@ router.post('/createNewSession', (req, res) => {
 
 // creates a new Session for a given Schema
 router.get('/createNewSession', (req, res) => {
-
   let obj_params = {
     session_name: req.query.session_name,
     restaurant_name: req.query.restaurant_name,
@@ -203,9 +174,21 @@ router.get('/createNewSession', (req, res) => {
 
   db.createNewSession(obj_params)
     .then(result => {
-      res.header('Content-Type', 'application/json');
-      // the result of this should return the created session id.
-      res.status(200).send(result);
+      // once we get the session_id back we have to add to the guestlist
+      let parsedResult = JSON.parse(result);
+      let addHostToGuestListParam = {
+        session_id: parsedResult[0].session_id,
+        user_id: req.query.host_id
+      };
+
+      return db.addGuest(addHostToGuestListParam)
+        .then(resOfAddHost => {
+          res.header('Content-Type', 'application/json');
+          res.status(200).send(result);
+        })
+        .catch(error => {
+          console.log('error adding host to guestlist', error);
+        });
     })
     .catch(err => {
       res.status(400).send(err);
