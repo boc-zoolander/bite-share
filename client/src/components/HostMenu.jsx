@@ -18,6 +18,10 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
     socket.emit('hostJoined', { sessionId });
   }, []);
 
+  useEffect(() => {
+    setCurrentName(guests[0].guestName);
+  }, []);
+
   const onChange = (event) => {
     setCurrentName(event.target.value);
     onCloseClick();

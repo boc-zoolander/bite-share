@@ -36,7 +36,7 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
   });
 
   const currentItems = currentOrder.map((item, i) => {
-    return <span key={i}> {item.name} {item.qty}</span>;
+    return <span key={i}> {item.name} ({item.qty}) </span>;
   }) || null;
 
   const addItem = (item) => {

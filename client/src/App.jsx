@@ -11,6 +11,7 @@ import RegisterUser from './components/RegisterUser.jsx';
 import LoggedIn from './components/LoggedIn.jsx';
 import Session from './components/Session.jsx';
 import PayBill from './components/PayBill.jsx';
+import InviteGuests from './components/InviteGuests.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class App extends React.Component {
 
 
   setTopLevelState (name, value) {
-    this.setState({ [name]: value }, () => { console.log('App guests: ', this.state.guests); });
+    this.setState({ [name]: value });
   };
 
   render() {
@@ -60,7 +61,7 @@ class App extends React.Component {
             <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} restaurant={this.state.restaurant} guests={this.state.guests} />
           </Route>
           <Route path="/add-guests">
-            <AddGuests setTopLevelState={this.setTopLevelState} guests={this.state.guests} sessionId={this.state.sessionId}/>
+            <InviteGuests sessionId={this.state.sessionId}/>
           </Route>
           <Route path="/guest-menu">
             <GuestMenu joinName={this.state.joinName} sessionId={this.state.sessionId} guests={this.state.guests} menu={this.state.menu}/>
