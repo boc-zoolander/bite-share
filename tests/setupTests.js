@@ -9,3 +9,5 @@ const mockGeolocation = {
 };
 
 global.navigator.geolocation = mockGeolocation;
+
+global.setImmediate = global.setTimeout;
