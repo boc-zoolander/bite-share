@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Dashboard from '../client/src/components/Dashboard.jsx'
 import HostMenu from '../client/src/components/HostMenu.jsx'
 import GuestMenu from '../client/src/components/GuestMenu.jsx'
-import mockRestaurantMenu from '../server/user_db_routes/testgetrestaurant_1.js';
+import mockRestaurantMenu from '../server/user_db_routes/testgetrestaurant_2.js';
 
 const host = {
   id: 1,
@@ -34,5 +34,25 @@ menus.forEach((menu, i) => {
       );
     })
   });
+})
+
+describe('GuestMenu', () => {
+
+  beforeEach(() => {
+    render(<Routed children={guestmenu} /> );
+  });
+
+  it('should have buttons to add/delete items', async () => {
+    let addButtons = screen.getAllByRole('button');
+    addButtons.forEach(button => {
+      expect(button).toBeInTheDocument();
+    })
+    await fireEvent.click(addButtons[0]);
+    await fireEvent.click(addButtons[0]);
+    addButtons = screen.getAllByRole('button');
+    await fireEvent.click(addButtons[0]);
+    await fireEvent.click(addButtons[0]);
+  })
+
 })
 
