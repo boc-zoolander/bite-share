@@ -86,11 +86,11 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
       ? <ThankYou />
       : <div>
       <h2>Current Items for {guests[0].guestName}</h2>
-        <div className='user-order'>
-          <ul>
-           {currentItems}
-          </ul>
-        </div>
+      <div className='user-order'>
+        <ul>
+         {currentItems}
+        </ul>
+      </div>
       <div>
         {menuItems}
       </div>

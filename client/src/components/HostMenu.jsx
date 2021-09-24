@@ -116,7 +116,7 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
       <h2> Active Guests </h2>
         <Dashboard guests={guests} sessionId={sessionId} setTopLevelState={setTopLevelState} />
       <h2>Current Items for {currentName}</h2>
-        <div className='user-order'><ul>{currentItems}</ul></div>
+      <div className='user-order'><ul>{currentItems}</ul></div>
       <div>
         {menuItems}
       </div>
