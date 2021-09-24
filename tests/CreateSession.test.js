@@ -49,11 +49,11 @@ describe('<CreateSession />', () => {
     );
   });
 
-  it('should render header elements', () => {
+  it('should render a header element', () => {
     const h2 = screen.getByRole('heading', { level: 2 });
     expect(h2).toBeInTheDocument();
-    const h4 = screen.getByRole('heading', { level: 4 });
-    expect(h4).toBeInTheDocument();
+    // const h4 = screen.getByRole('heading', { level: 4 });
+    // expect(h4).toBeInTheDocument();
   });
 
   it('should render a form to name the session', () => {

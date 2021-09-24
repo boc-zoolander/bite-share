@@ -48,9 +48,6 @@ class App extends React.Component {
       <div>
       <Router>
         <Switch>
-          <Route path="/user-logged-in">
-            <LoggedIn setTopLevelState={this.setTopLevelState} guests={this.state.guests}/>
-          </Route>
           <Route path="/register-new-user">
             <RegisterUser setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
           </Route>

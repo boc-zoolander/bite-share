@@ -54,7 +54,8 @@ class BillSummaryPage extends React.Component {
   render() {
     return (
       <div>
-        <h3>Final Bill Split {this.state.split}</h3>
+        <h1>Bite Share</h1>
+        <h2>Final Bill Split {this.state.split}</h2>
         <SplitList guests={this.state.guests} totalCost={this.getBillTotalWithoutTipOrTax(this.state.guests)} tipPercentage = {this.state.tipPercentage} split={this.state.split} zipCode = {this.state.zipCode} setTopLevelState = {this.props.setTopLevelState} finalTotals= {this.props.finalTotals}/>
         <form>
           <label htmlFor='tipPercentage'>Tip Percentage (%):</label>
