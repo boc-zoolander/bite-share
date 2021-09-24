@@ -18,12 +18,16 @@ const menu = [];
 const sessionId = '123';
 const setTopLevelState = jest.fn();
 
+const Routed = ({children}) => <BrowserRouter> {children} </BrowserRouter>;
+const dashboard = <Dashboard  guests={guests} setTopLevelState={setTopLevelState} sessionId={sessionId}/>;
+const hostmenu = <HostMenu  guests={guests} menu={menu} setTopLevelState={setTopLevelState} sessionId={sessionId}/>;
+const guestmenu = <GuestMenu  guests={guests} menu={menu} sessionId={sessionId}/>;
+// const menus = [dashboard, hostmenu, guestmenu]
+
 describe('Dashboard', () => {
   test('Should render Dashboard component', () => {
     render(
-      <BrowserRouter>
-        <Dashboard  guests={guests} setTopLevelState={setTopLevelState} sessionId={sessionId}/>
-      </BrowserRouter>
+      <Routed children={dashboard}/>
     );
   })
 });
@@ -31,9 +35,7 @@ describe('Dashboard', () => {
 describe('HostMenu', () => {
   test('Should render HostMenu component', () => {
     render(
-      <BrowserRouter>
-        <HostMenu  guests={guests} menu={menu} setTopLevelState={setTopLevelState} sessionId={sessionId}/>
-      </BrowserRouter>
+      <Routed children={hostmenu}/>
     );
   })
 });
@@ -41,9 +43,7 @@ describe('HostMenu', () => {
 describe('GuestMenu', () => {
   test('Should render GuestMenu component', () => {
     render(
-      <BrowserRouter>
-        <GuestMenu  guests={guests} menu={menu} sessionId={sessionId}/>
-      </BrowserRouter>
+      <Routed children={guestmenu}/>
     );
   })
 });
