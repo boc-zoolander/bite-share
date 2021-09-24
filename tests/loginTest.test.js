@@ -1,21 +1,17 @@
 import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
-import { configure, shallow, mount } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import App from '../client/src/App.jsx';
 import axios from 'axios';
-
 import Login from '../client/src/components/Login.jsx';
 import RegisterUser from '../client/src/components/RegisterUser.jsx';
 import LoggedIn from '../client/src/components/LoggedIn.jsx';
 import { BrowserRouter } from 'react-router-dom';
-
 import { act } from "react-dom/test-utils";
-import { debug } from 'webpack';
-import e from 'cors';
 
 // ********************  TEST INITIALIZATION BEGIN  ********************
+
+const setTopLevelState = (a, b) => {};
 
 describe('Unit Test Section: <App />', () => {
   // set up for each test
@@ -29,7 +25,7 @@ describe('Unit Test Section: <App />', () => {
   test('Login.jsx Test 1/2, Unit Test', () => {
     render(
       <BrowserRouter>
-        <Login isLoggedIn={true} />
+        <Login setTopLevelState={setTopLevelState} isLoggedIn={true} />
       </BrowserRouter>
     );
   });
@@ -78,14 +74,14 @@ describe('Unit Test Section: <App />', () => {
 
   test('RegisterUser.jsx Test 1/2, Unit Test', () => {
     render(<BrowserRouter>
-      <RegisterUser isLoggedIn={true} />
+      <RegisterUser setTopLevelState={setTopLevelState} isLoggedIn={true} />
     </BrowserRouter>);
   });
 
   test('RegisterUser.jsx Test 2/2, Integration Test', async () => {
     act(() => {
       render(<BrowserRouter>
-        <RegisterUser isLoggedIn={false} />
+        <RegisterUser setTopLevelState={setTopLevelState} isLoggedIn={false} />
       </BrowserRouter>);
     });
 
@@ -101,17 +97,15 @@ describe('Unit Test Section: <App />', () => {
     expect(newPassword).toBeInTheDocument();
     expect(button).toBeInTheDocument();
 
-    //await waitFor (() => {
-    await fireEvent.click(newFirstName);
-    await fireEvent.change(newFirstName, { target: { value: 'Warren' } });
-    await fireEvent.click(newLastName);
-    await fireEvent.change(newLastName, { target: { value: 'Worthington' } });
-    await fireEvent.click(newEmail);
-    await fireEvent.change(newEmail, { target: { value: 'IalsoheartjeangreyandamArchangel@gmail.com' } });
-    await fireEvent.click(newPassword);
-    await fireEvent.change(newPassword, { target: { value: '33333' } });
-    await fireEvent.click(button);
-    //});
+    fireEvent.click(newFirstName);
+    fireEvent.change(newFirstName, { target: { value: 'Warren' } });
+    fireEvent.click(newLastName);
+    fireEvent.change(newLastName, { target: { value: 'Worthington' } });
+    fireEvent.click(newEmail);
+    fireEvent.change(newEmail, { target: { value: 'IalsoheartjeangreyandamArchangel@gmail.com' } });
+    fireEvent.click(newPassword);
+    fireEvent.change(newPassword, { target: { value: '33333' } });
+    fireEvent.click(button);
   });
 
   test('LoggedIn.jsx Test 1/2, Unit Test', () => {
@@ -121,7 +115,7 @@ describe('Unit Test Section: <App />', () => {
     }];
 
     render(<BrowserRouter>
-      <LoggedIn guests={mockedLoggedIn}/>
+      <LoggedIn setTopLevelState={setTopLevelState} guests={mockedLoggedIn}/>
     </BrowserRouter>
     );
 
@@ -135,7 +129,7 @@ describe('Unit Test Section: <App />', () => {
     }];
 
     render(<BrowserRouter>
-      <LoggedIn guests={mockedLoggedIn}/>
+      <LoggedIn setTopLevelState={setTopLevelState} guests={mockedLoggedIn}/>
     </BrowserRouter>
     );
 
