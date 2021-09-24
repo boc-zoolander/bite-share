@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Dashboard from '../client/src/components/Dashboard.jsx'
 import HostMenu from '../client/src/components/HostMenu.jsx'
 import GuestMenu from '../client/src/components/GuestMenu.jsx'
+import mockRestaurantMenu from '../server/user_db_routes/testgetrestaurant_1.js';
 
 const host = {
   id: 1,
@@ -14,7 +15,7 @@ const host = {
   order: []
 };
 const guests = [host];
-const menu = [];
+const menu = mockRestaurantMenu.result.menus[0].menu_sections;
 const sessionId = '123';
 const setTopLevelState = jest.fn();
 
