@@ -18,10 +18,25 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
     socket.emit('hostJoined', { sessionId });
   }, []);
 
+  useEffect(() => {
+    setCurrentName(guests[0].guestName);
+  }, []);
+
   const onChange = (event) => {
     setCurrentName(event.target.value);
     onCloseClick();
     event.preventDefault();
+  };
+
+  const onModalClick = (event) => {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'block';
+    event.preventDefault();
+  };
+
+  const onCloseClick = () => {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'none';
   };
 
   const addItem = (item) => {
@@ -40,6 +55,26 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
         guestOrder.push(item);
         setTopLevelState('guests', guestArray);
         return;
+      }
+    }
+  };
+
+  const deleteItem = (item) => {
+    const guestArray = [...guests]; // entire guest array (array of objs)
+    for (let i = 0; i < guestArray.length; i++) {
+      if (guestArray[i].guestName === currentName) {
+        const guestOrder = guestArray[i].order; // order array for selected person
+        for (let j = 0; j < guestOrder.length; j++) {
+          if (guestOrder[j].name === item.name) {
+            if (guestOrder[j].qty === 1) {
+              guestOrder.splice(j, 1);
+            } else {
+              guestOrder[j].qty -= 1;
+            }
+            guestArray[i].order = guestOrder;
+            setTopLevelState('guests', guestArray);
+          }
+        }
       }
     }
   };
@@ -65,40 +100,28 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
     );
   });
 
-  const onModalClick = (event) => {
-    const modal = document.getElementById('myModal');
-    modal.style.display = 'block';
-    event.preventDefault();
-  };
-
-  const onCloseClick = () => {
-    const modal = document.getElementById('myModal');
-    modal.style.display = 'none';
-  };
-
   const currentObj = guests.find(element => element.guestName === currentName) || { order: [] };
-  const currentItems = currentObj.order.map((item, i) => <span key={i}> {item.name} {item.qty} </span>);
-
+  const currentItems = currentObj.order.map((item, i) => <li key={i}> {item.name} ({item.qty}) <button type='button' onClick={() => { deleteItem(item); }}> − </button></li>);
   const guestNames = guests.map((item, i) => <button key={i} type='button' className='link' value={item.guestName} onClick={onChange}> {item.guestName} </button>);
 
   return (
     <div>
-      <button id='selectGuestButton' onClick={onModalClick}> Select a guest and add item </button>
+      <button id='selectGuestButton' onClick={onModalClick}> Modify Submitted Orders </button>
       <div id='myModal' className='modal'>
         <div className='modal-content'>
           <span className='close' onClick={onCloseClick}>&times;</span>
           {guestNames}
         </div>
       </div>
-      <h2> Dashboard </h2>
+      <h2> Active Guests </h2>
         <Dashboard guests={guests} sessionId={sessionId} setTopLevelState={setTopLevelState} />
       <h2>Current Items for {currentName}</h2>
-        {currentItems}
+        <div className='user-order'><ul>{currentItems}</ul></div>
       <div>
         {menuItems}
       </div>
       <Link to="/split-bill" className="button-link">
-        <input type="submit" value="Next" />
+        <input type="submit" value="See Summary and Split Bill" />
       </Link>
     </div>
   );
