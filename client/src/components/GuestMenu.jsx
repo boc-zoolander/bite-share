@@ -88,7 +88,7 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
       <h2>Current Items for {guests[0].guestName}</h2>
       <div className='user-order'>
         <ul>
-          {currentItems}
+         {currentItems}
         </ul>
       </div>
       <div>
