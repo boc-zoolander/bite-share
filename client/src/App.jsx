@@ -41,7 +41,6 @@ class App extends React.Component {
     this.setTopLevelState = this.setTopLevelState.bind(this);
   }
 
-
   setTopLevelState (name, value) {
     this.setState({ [name]: value });
   };
@@ -80,13 +79,13 @@ class App extends React.Component {
           </Route>
           <Route path="/pay-bill">
               <PayBill finalTotals={this.state.finalTotals} hostInfo={this.state.guests[0]} />
-            </Route>
+          </Route>
           <Route exact path="/">
             <Login setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
           </Route>
-        </Switch>
-      </Router>
-    </div>
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }
