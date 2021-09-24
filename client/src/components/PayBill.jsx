@@ -121,7 +121,7 @@ const PayBill = (props) => {
               return (<BillCard info={info} index={index} onClick={onChange} />);
             })}
           </div>
-          <div ref={paypal} />
+          <div ref={paypal} id="paypal-btn" />
         </div>
       }
       {submit && <ThankYou />}
