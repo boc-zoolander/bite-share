@@ -15,6 +15,16 @@ import { act } from "react-dom/test-utils";
 import { debug } from 'webpack';
 import e from 'cors';
 
+import Dashboard from '../client/src/components/Dashboard.jsx';
+import GuestList from '../client/src/components/GuestList.jsx';
+import GuestMenu from '../client/src/components/GuestMenu.jsx';
+import HostMenu from '../client/src/components/HostMenu.jsx';
+import AddGuests from '../client/src/components/AddGuests.jsx';
+import PayBill from '../client/src/components/PayBill.jsx';
+import ThankYou from '../client/src/components/Thankyou.jsx';
+import testSessionData from '../server/user_db_routes/getSession.js';
+import mockRestaurantMenu from '../server/user_db_routes/testgetrestaurant_1.js';
+
 // ********************  TEST INITIALIZATION BEGIN  ********************
 
 describe('Unit Test Section: <App />', () => {
@@ -25,6 +35,92 @@ describe('Unit Test Section: <App />', () => {
   // clean up for each test
   afterEach(() => {
   });
+
+  // test('App.jsx Test 1/1, Unit Test', () => {
+  //   render(
+  //     <App/>
+  //   );
+  // });
+
+  // test('AddGuests.jsx Unit Test 1/1, Unit Test', () => {
+
+  //   let state = {
+  //     guest: testSessionData.guests,
+  //     isLoggedIn: false
+  //   };
+
+  //   let setTopLevelState = function (name, value) {
+  //     state[name] = value;
+  //   };
+
+  //   render(
+  //     <BrowserRouter>
+  //       <AddGuests guests={state.guest} setTopLevelState={setTopLevelState} sessionId={12345}/>
+  //     </BrowserRouter>
+  //   );
+  // });
+
+
+  // test('Dashboard.jsx Unit Test 1/1, Unit Test', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <Dashboard />
+  //     </BrowserRouter>
+  //   );
+  // });
+
+  // test('GuestList.jsx Unit Test 1/1, Unit Test', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <GuestList guests={testSessionData.guests} setTopLevelState={() => {}}/>
+  //     </BrowserRouter>
+  //   );
+  // });
+
+  // test('GuestMenu.jsx Unit Test 1/1, Unit Test', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <GuestMenu guests={testSessionData.guests} sessionId={12345} menu={mockRestaurantMenu.result.menus}/>
+  //     </BrowserRouter>
+  //   );
+  // });
+
+  // test('HostMenu.jsx Unit Test 1/1, Unit Test', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <HostMenu guests={testSessionData.guests} sessionId={12345} menu={testMenuData} />
+  //     </BrowserRouter>
+  //   );
+  // });
+
+  // test('Paybill.jsx Unit Test 1/1, Unit Test', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <PayBill />
+  //     </BrowserRouter>
+  //   );
+  // });
+
+  // test('Join.jsx Unit Test 1/1, Unit Test', () => {
+  //   let state = {
+  //     guest: [],
+  //     isLoggedIn: false
+  //   };
+
+  //   let setTopLevelState = function (name, value) {
+  //     state[name] = value;
+  //   };
+
+  //   render(
+  //       <Join setTopLevelState={setTopLevelState}/>
+  //   );
+  // });
+
+  // test('ThankYou.jsx Unit Test 1/1, Unit Test', () => {
+  //   render(
+  //       <ThankYou />
+  //   );
+  // });
 
   test('Login.jsx Test 1/2, Unit Test', () => {
     render(
