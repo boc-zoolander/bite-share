@@ -92,6 +92,11 @@ li button {
   margin-right: 0;
 }
 
+details,
+summary {
+  display: revert;
+}
+
 .restaurant__details > * {
   margin-bottom: 0;
 }
@@ -102,6 +107,10 @@ li button {
 
 .guest-list__guest {
   flex-wrap: wrap;
+}
+
+.menu-items {
+  margin-bottom: 3rem;
 }
 
 .menu-item__details > * {
