@@ -6,7 +6,6 @@ import CreateSession from './components/CreateSession.jsx';
 import GuestMenu from './components/GuestMenu.jsx';
 import HostMenu from './components/HostMenu.jsx';
 import RegisterUser from './components/RegisterUser.jsx';
-import LoggedIn from './components/LoggedIn.jsx';
 import Session from './components/Session.jsx';
 import PayBill from './components/PayBill.jsx';
 import InviteGuests from './components/InviteGuests.jsx';

@@ -5,7 +5,6 @@ import App from '../client/src/App.jsx';
 import axios from 'axios';
 import Login from '../client/src/components/Login.jsx';
 import RegisterUser from '../client/src/components/RegisterUser.jsx';
-import LoggedIn from '../client/src/components/LoggedIn.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { act } from "react-dom/test-utils";
 
@@ -106,35 +105,5 @@ describe('Unit Test Section: <App />', () => {
     fireEvent.click(newPassword);
     fireEvent.change(newPassword, { target: { value: '33333' } });
     fireEvent.click(button);
-  });
-
-  test('LoggedIn.jsx Test 1/2, Unit Test', () => {
-    let mockedLoggedIn = [{
-      id: 3,
-      guestName: 'Charles Xavier'
-    }];
-
-    render(<BrowserRouter>
-      <LoggedIn setTopLevelState={setTopLevelState} guests={mockedLoggedIn}/>
-    </BrowserRouter>
-    );
-
-    expect(screen.getByText(/Welcome Charles Xavier/)).toBeInTheDocument();
-  });
-
-  test('LoggedIn.jsx Test 2/2, Unit Test', async () => {
-    let mockedLoggedIn = [{
-      id: 3,
-      guestName: 'Charles Xavier'
-    }];
-
-    render(<BrowserRouter>
-      <LoggedIn setTopLevelState={setTopLevelState} guests={mockedLoggedIn}/>
-    </BrowserRouter>
-    );
-
-    let zipCode = screen.getByLabelText('Zip Code:');
-
-    await fireEvent.change(zipCode, { target: { value: '11111' } });
   });
 });
