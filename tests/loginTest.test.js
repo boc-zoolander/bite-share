@@ -1,8 +1,6 @@
 import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
-import { configure, shallow, mount } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import App from '../client/src/App.jsx';
 import axios from 'axios';
 
@@ -12,8 +10,6 @@ import LoggedIn from '../client/src/components/LoggedIn.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
 import { act } from "react-dom/test-utils";
-import { debug } from 'webpack';
-import e from 'cors';
 
 // ********************  TEST INITIALIZATION BEGIN  ********************
 

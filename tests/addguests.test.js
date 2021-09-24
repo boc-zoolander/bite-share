@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 // import React from 'react';
 // import App from '../client/src/App.jsx';
 
-describe('Unit Test Section: <App />', () => {
+xdescribe('Unit Test Section: <App />', () => {
   test('Unit Test 1:  Does the component <App /> render?', () => {
     expect(1 + 1).toEqual(2);
   });

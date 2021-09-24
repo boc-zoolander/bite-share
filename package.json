@@ -65,6 +65,7 @@
   "jest": {
     "setupFiles": [
       "./tests/setupTests.js"
-    ]
+    ],
+    "verbose": true
   }
 }
