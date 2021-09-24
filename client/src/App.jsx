@@ -47,6 +47,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+<<<<<<< HEAD
       <Router>
         <Switch>
           <Route path="/user-logged-in">
@@ -79,6 +80,43 @@ class App extends React.Component {
           <Route exact path="/">
             <Login setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
           </Route>
+=======
+        <Router>
+          <Switch>
+            <Route path="/user-logged-in">
+              <LoggedIn setTopLevelState={this.setTopLevelState} guests={this.state.guests}/>
+            </Route>
+            <Route path="/register-new-user">
+              <RegisterUser setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
+            </Route>
+            <Route path="/find-restaurant">
+              <CreateSession setTopLevelState={this.setTopLevelState} hostGeo={this.state.hostGeo} hostZipCode={this.state.hostZipCode} restaurant={this.state.restaurant} guests={this.state.guests} />
+            </Route>
+            <Route path="/add-guests">
+            <InviteGuests sessionId={this.state.sessionId}/>
+            </Route>
+            <Route path="/guest-menu">
+              <GuestMenu joinName={this.state.joinName} sessionId={this.state.sessionId} guests={this.state.guests} menu={this.state.menu}/>
+            </Route>
+            <Route path="/join">
+              <Join setTopLevelState={this.setTopLevelState}/>
+            </Route>
+            <Route path="/host-menu">
+              <HostMenu setTopLevelState={this.setTopLevelState} guests={this.state.guests} menu={this.state.menu} sessionId={this.state.sessionId} />
+            </Route>
+            <Route path="/session">
+              <Session setTopLevelState={this.setTopLevelState} />
+            </Route>
+            <Route path="/split-bill">
+              <BillSummaryPage setTopLevelState={this.setTopLevelState} guests={this.state.guests} restaurantInfo= {this.state.restaurant} finalTotals = {this.state.finalTotals}/>
+            </Route>
+            <Route path="/pay-bill">
+                <PayBill finalTotals={this.state.finalTotals} hostInfo={this.state.guests[0]} />
+              </Route>
+            <Route exact path="/">
+              <Login setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
+            </Route>
+>>>>>>> c7ff6610ce4a6939fe04fa5aaf36987068a54ba9
           </Switch>
         </Router>
       </div>
