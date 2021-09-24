@@ -36,23 +36,33 @@ menus.forEach((menu, i) => {
   });
 })
 
-describe('GuestMenu', () => {
+menus.slice(1).forEach((menu, i) => {
 
-  beforeEach(() => {
-    render(<Routed children={guestmenu} /> );
-  });
+  const num = menuNames[i + 1] === 'guestmenu' ? 0 : 1;
 
-  it('should have buttons to add/delete items', async () => {
-    let addButtons = screen.getAllByRole('button');
-    addButtons.forEach(button => {
-      expect(button).toBeInTheDocument();
+  describe(`${menuNames[i + 1]}`, () => {
+
+    beforeEach(() => {
+      render(<Routed children={menu} /> );
+    });
+
+    it('should have buttons to add/delete items', async () => {
+      let addButtons = screen.getAllByRole('button');
+      addButtons.forEach(button => {
+        expect(button).toBeInTheDocument();
+      })
+      // Click 'addItem' twice
+      await fireEvent.click(addButtons[num]);
+      await fireEvent.click(addButtons[num]);
+      // Reset buttons, first non-modal is now delete
+      addButtons = screen.getAllByRole('button');
+      await fireEvent.click(addButtons[num]);
+      await fireEvent.click(addButtons[num]);
+
+      // Modal click for HostMenu
+      await fireEvent.click(addButtons[0]);
     })
-    await fireEvent.click(addButtons[0]);
-    await fireEvent.click(addButtons[0]);
-    addButtons = screen.getAllByRole('button');
-    await fireEvent.click(addButtons[0]);
-    await fireEvent.click(addButtons[0]);
-  })
 
+  })
 })
 
