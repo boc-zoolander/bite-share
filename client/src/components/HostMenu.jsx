@@ -81,28 +81,28 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
   };
 
   const currentObj = guests.find(element => element.guestName === currentName) || { order: [] };
-  const currentItems = currentObj.order.map((item, i) => <span key={i}> {item.name} {item.qty} </span>);
+  const currentItems = currentObj.order.map((item, i) => <li key={i}> {item.name} ({item.qty}) </li>);
 
   const guestNames = guests.map((item, i) => <button key={i} type='button' className='link' value={item.guestName} onClick={onChange}> {item.guestName} </button>);
 
   return (
     <div>
-      <button id='selectGuestButton' onClick={onModalClick}> Select a guest and add item </button>
+      <button id='selectGuestButton' onClick={onModalClick}> Modify Submitted Orders </button>
       <div id='myModal' className='modal'>
         <div className='modal-content'>
           <span className='close' onClick={onCloseClick}>&times;</span>
           {guestNames}
         </div>
       </div>
-      <h2> Dashboard </h2>
+      <h2> Active Guests </h2>
         <Dashboard guests={guests} sessionId={sessionId} setTopLevelState={setTopLevelState} />
       <h2>Current Items for {currentName}</h2>
-        {currentItems}
+        <div className='user-order'><ul>{currentItems}</ul></div>
       <div>
         {menuItems}
       </div>
       <Link to="/split-bill" className="button-link">
-        <input type="submit" value="Next" />
+        <input type="submit" value="See Summary and Split Bill" />
       </Link>
     </div>
   );
