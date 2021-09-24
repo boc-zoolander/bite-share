@@ -47,8 +47,7 @@ const SplitList = (props) => {
       const guestArray = guests;
       const guestIDs = [];
       for (let i = 0; i < guestArray.length; i++) {
-        const currentGuestID = guestArray[i].guestName;
-        // const currentGuestID = guestArray[i].guest_id;
+        const currentGuestID = guestArray[i].id;
         guestIDs.push(currentGuestID);
         totals[currentGuestID] = 0;
         const currentGuestOrders = guestArray[i].order;
@@ -74,8 +73,7 @@ const SplitList = (props) => {
       const guestArray = guests;
       const guestIDs = [];
       for (let i = 0; i < guestArray.length; i++) {
-        const currentGuestID = guestArray[i].guestName;
-        // const currentGuestID = guestArray[i].guest_id;
+        const currentGuestID = guestArray[i].id;
         guestIDs.push(currentGuestID);
         const evenTotal = (billWithTipAndTax / numberOfGuests).toFixed(2);
         totals[currentGuestID] = evenTotal;
@@ -122,7 +120,7 @@ const SplitList = (props) => {
     <div>
       <ul>
         {props.guests.map((guest, i) =>
-          <IndividualOwes key = {i} guestName = {guest.guestName} paymentOwed = {props.finalTotals.paymentsOwed[guest.guestName]} />
+          <IndividualOwes key = {i} guestName = {guest.guestName} paymentOwed = {props.finalTotals.paymentsOwed[guest.id]} />
         )}
       </ul>
       <div>
