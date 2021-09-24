@@ -22,28 +22,16 @@ const Routed = ({children}) => <BrowserRouter> {children} </BrowserRouter>;
 const dashboard = <Dashboard  guests={guests} setTopLevelState={setTopLevelState} sessionId={sessionId}/>;
 const hostmenu = <HostMenu  guests={guests} menu={menu} setTopLevelState={setTopLevelState} sessionId={sessionId}/>;
 const guestmenu = <GuestMenu  guests={guests} menu={menu} sessionId={sessionId}/>;
-// const menus = [dashboard, hostmenu, guestmenu]
+const menus = [dashboard, hostmenu, guestmenu];
+const menuNames = ['dashboard', 'hostmenu', 'guestmenu'];
 
-describe('Dashboard', () => {
-  test('Should render Dashboard component', () => {
-    render(
-      <Routed children={dashboard}/>
-    );
-  })
-});
+menus.forEach((menu, i) => {
+  describe(`${menuNames[i]}`, () => {
+    test('component should render', () => {
+      render(
+        <Routed children={menu}/>
+      );
+    })
+  });
+})
 
-describe('HostMenu', () => {
-  test('Should render HostMenu component', () => {
-    render(
-      <Routed children={hostmenu}/>
-    );
-  })
-});
-
-describe('GuestMenu', () => {
-  test('Should render GuestMenu component', () => {
-    render(
-      <Routed children={guestmenu}/>
-    );
-  })
-});
