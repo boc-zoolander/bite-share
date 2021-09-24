@@ -5,6 +5,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 // import { act } from "react-dom/test-utils";
 import InviteGuests from '../client/src/components/InviteGuests.jsx'
+import ThankYou from '../client/src/components/ThankYou.jsx'
 
 describe('InviteGuests', () => {
   test('Should render InviteGuests component', () => {
@@ -14,8 +15,15 @@ describe('InviteGuests', () => {
         <InviteGuests  sessionId={sessionId}/>
       </BrowserRouter>
     );
-
-    // screen.debug();
   })
+});
 
+describe('ThankYou', () => {
+  test('Should render ThankYou component', () => {
+    render(
+      <BrowserRouter>
+        <ThankYou />
+      </BrowserRouter>
+    );
+  })
 });
