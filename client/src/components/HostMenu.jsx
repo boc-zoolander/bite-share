@@ -106,7 +106,7 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
 
   return (
     <div>
-      <button id='selectGuestButton' onClick={onModalClick}> Modify Submitted Orders </button>
+      <h1>Bite Share</h1>
       <div id='myModal' className='modal'>
         <div className='modal-content'>
           <span className='close' onClick={onCloseClick}>&times;</span>
@@ -115,13 +115,14 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
       </div>
       <h2> Active Guests </h2>
         <Dashboard guests={guests} sessionId={sessionId} setTopLevelState={setTopLevelState} />
+      <button id='selectGuestButton' onClick={onModalClick}> Modify Submitted Orders </button>
       <h2>Current Items for {currentName}</h2>
       <div className='user-order'><ul>{currentItems}</ul></div>
       <div>
         {menuItems}
       </div>
       <Link to="/split-bill" className="button-link">
-        <input type="submit" value="See Summary and Split Bill" />
+        <input id="summary-split-button" type="submit" value="See Summary and Split Bill" />
       </Link>
     </div>
   );

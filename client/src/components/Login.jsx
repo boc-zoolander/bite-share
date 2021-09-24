@@ -56,15 +56,15 @@ class Login extends React.Component {
 
     return (
       <div>
-        <h2>Bite Share</h2>
+        <h1>Bite Share</h1>
         <form>
-          <label htmlFor="hostName" id="email-label">User Name:</label>
+          <label htmlFor="hostName" id="email-label">Email Address:</label>
           <input aria-labelledby="email-label" type="text" inputMode="text" name="hostName" value={this.state.hostName} onChange={this.handleChange} />
           <label htmlFor="password" id="password-label">Password:</label>
           <input aria-labelledby="password-label" type="password" inputMode="text" name="password" value={this.state.password} onChange={this.handleChange} />
-          <button onClick={this.validateUser}>Login</button>
+          <button onClick={this.validateUser}>Log In</button>
           <Link to="/register-new-user" className="button-link">
-            <p>New to Bite Share?  Register Here!</p>
+            <p id="register-link">New to Bite Share? Register Here!</p>
           </Link>
         </form>
         {loginFailureMessage}

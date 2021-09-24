@@ -85,6 +85,7 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
     submitted
       ? <ThankYou />
       : <div>
+      <h1>Bite Share</h1>
       <h2>Current Items for {guests[0].guestName}</h2>
       <div className='user-order'>
         <ul>

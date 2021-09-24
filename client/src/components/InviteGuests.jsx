@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom';
 const InviteGuests = ({ sessionId }) => {
   return (
     <div>
-      <h2>Invite your friends</h2>
+      <h1>Bite Share</h1>
+      <h2>Invite Your Friends</h2>
         {sessionId}
       <Link to='/host-menu' className="button-link">
-        <button type='button'>Make Your Order</button>
+        <button type='button'>Start Your Order</button>
       </Link>
     </div>
   );

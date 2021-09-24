@@ -48,19 +48,20 @@ class RegisterUser extends React.Component {
 
     return (
       <div>
-        <h2>Register a new User</h2>
+        <h1>Bite Share</h1>
+        <h2>Register a New User</h2>
         <form>
 
-          <label id="newfirstname-label" htmlFor="first_name">New First Name:</label>
+          <label id="newfirstname-label" htmlFor="first_name">First Name:</label>
           <input aria-labelledby="newfirstname-label" type="text" inputMode="text" name="first_name" value={this.state.first_name} onChange={this.handleChange} />
 
-          <label id="newlastname-label" htmlFor="last_name">New Last Name:</label>
+          <label id="newlastname-label" htmlFor="last_name">Last Name:</label>
           <input aria-labelledby="newlastname-label" type="text" inputMode="text" name="last_name" value={this.state.last_name} onChange={this.handleChange} />
 
-          <label id="newemail-label" htmlFor="email">New email:</label>
+          <label id="newemail-label" htmlFor="email">Email Address:</label>
           <input aria-labelledby="newemail-label" type="text" inputMode="text" name="email" value={this.state.email} onChange={this.handleChange} />
 
-          <label id="newpassword-label" htmlFor="password">New password:</label>
+          <label id="newpassword-label" htmlFor="password">Password:</label>
           <input aria-labelledby="newpassword-label" type="text" inputMode="text" name="password" value={this.state.password} onChange={this.handleChange} />
 
 

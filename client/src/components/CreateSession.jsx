@@ -153,8 +153,9 @@ class CreateSession extends React.Component {
   render () {
     return (
       <div>
+        <h1>Bite Share</h1>
         <h2>Create Session</h2>
-        <h4>Name your session and select a restaurant to get started.</h4>
+        <p>Name your session and select a restaurant to get started.</p>
           {!this.state.sessionNameSaved
             ? <form>
                 <label htmlFor="sessionName">Session Name:</label>
@@ -171,7 +172,7 @@ class CreateSession extends React.Component {
               </form>
 
             : <div>
-                <span>Session Name: {this.state.sessionName}</span>
+                <p id="saved-session-name">Session Name: {this.state.sessionName}</p>
                 {!this.state.geolocationProcessComplete && <div>Loading...</div>}
 
                 {this.state.geolocationProcessComplete &&
@@ -214,7 +215,7 @@ class CreateSession extends React.Component {
                     </form>
 
                     {this.state.showSuggested ? 'Suggested Restaurants Nearby:' : 'Search Results:'}
-                    <ul>
+                    <ul id="restaurant-results">
                       {this.state.restaurants.map(restaurant =>
                         <li key={restaurant.restaurant_id}>
                           <div className="restaurant__details">

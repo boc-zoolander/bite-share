@@ -37,7 +37,7 @@ describe('Session', () => {
   afterEach(() => {});
 
   it('should render header element', () => {
-    const heading = screen.getByRole('heading');
+    const heading = screen.getByRole('heading', { level: 2 });
     expect(heading).toBeInTheDocument();
   });
 
@@ -47,7 +47,7 @@ describe('Session', () => {
   });
 
   it('should render a form to join a new session', () => {
-    const label = screen.getByLabelText('Enter an Existing Session');
+    const label = screen.getByLabelText('Join an Existing Session');
     expect(label).toBeInTheDocument();
     const input = screen.getByTestId('session-id-input');
     expect(input).toBeInTheDocument();

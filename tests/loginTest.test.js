@@ -5,7 +5,6 @@ import App from '../client/src/App.jsx';
 import axios from 'axios';
 import Login from '../client/src/components/Login.jsx';
 import RegisterUser from '../client/src/components/RegisterUser.jsx';
-import LoggedIn from '../client/src/components/LoggedIn.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { act } from "react-dom/test-utils";
 
@@ -146,13 +145,13 @@ describe('Unit Test Section: <App />', () => {
 
     let link = screen.getByText(/New to Bite Share/);
 
-    expect(screen.getByText(/User Name:/)).toBeInTheDocument();
+    expect(screen.getByText(/Email Address:/)).toBeInTheDocument();
     expect(screen.getByText(/Password/)).toBeInTheDocument();
     expect(link).toBeInTheDocument();
 
     let pass = screen.getByLabelText('Password:');
-    let email = screen.getByLabelText('User Name:');
-    let button = screen.getByRole('button', {value:'Login'});
+    let email = screen.getByLabelText('Email Address:');
+    let button = screen.getByRole('button', {value:'Log In'});
 
     expect(email).toBeInTheDocument();
     expect(pass).toBeInTheDocument();
@@ -181,10 +180,10 @@ describe('Unit Test Section: <App />', () => {
       </BrowserRouter>);
     });
 
-    let newFirstName = screen.getByLabelText('New First Name:');
-    let newLastName = screen.getByLabelText('New Last Name:');
-    let newEmail = screen.getByLabelText('New email:');
-    let newPassword = screen.getByLabelText('New password:');
+    let newFirstName = screen.getByLabelText('First Name:');
+    let newLastName = screen.getByLabelText('Last Name:');
+    let newEmail = screen.getByLabelText('Email Address:');
+    let newPassword = screen.getByLabelText('Password:');
     let button = screen.getByRole('button', {value:'Register New User'});
 
     expect(newFirstName).toBeInTheDocument();
@@ -202,35 +201,5 @@ describe('Unit Test Section: <App />', () => {
     fireEvent.click(newPassword);
     fireEvent.change(newPassword, { target: { value: '33333' } });
     fireEvent.click(button);
-  });
-
-  test('LoggedIn.jsx Test 1/2, Unit Test', () => {
-    let mockedLoggedIn = [{
-      id: 3,
-      guestName: 'Charles Xavier'
-    }];
-
-    render(<BrowserRouter>
-      <LoggedIn setTopLevelState={setTopLevelState} guests={mockedLoggedIn}/>
-    </BrowserRouter>
-    );
-
-    expect(screen.getByText(/Welcome Charles Xavier/)).toBeInTheDocument();
-  });
-
-  test('LoggedIn.jsx Test 2/2, Unit Test', async () => {
-    let mockedLoggedIn = [{
-      id: 3,
-      guestName: 'Charles Xavier'
-    }];
-
-    render(<BrowserRouter>
-      <LoggedIn setTopLevelState={setTopLevelState} guests={mockedLoggedIn}/>
-    </BrowserRouter>
-    );
-
-    let zipCode = screen.getByLabelText('Zip Code:');
-
-    await fireEvent.change(zipCode, { target: { value: '11111' } });
   });
 });

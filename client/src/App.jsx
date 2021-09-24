@@ -1,5 +1,4 @@
 import React from 'react';
-import AddGuests from './components/AddGuests.jsx';
 import BillSummaryPage from './components/BillSummaryPage.jsx';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login.jsx';
@@ -7,7 +6,6 @@ import CreateSession from './components/CreateSession.jsx';
 import GuestMenu from './components/GuestMenu.jsx';
 import HostMenu from './components/HostMenu.jsx';
 import RegisterUser from './components/RegisterUser.jsx';
-import LoggedIn from './components/LoggedIn.jsx';
 import Session from './components/Session.jsx';
 import PayBill from './components/PayBill.jsx';
 import InviteGuests from './components/InviteGuests.jsx';
@@ -49,9 +47,6 @@ class App extends React.Component {
       <div>
       <Router>
         <Switch>
-          <Route path="/user-logged-in">
-            <LoggedIn setTopLevelState={this.setTopLevelState} guests={this.state.guests}/>
-          </Route>
           <Route path="/register-new-user">
             <RegisterUser setTopLevelState={this.setTopLevelState} isLoggedIn={this.state.isLoggedIn}/>
           </Route>
