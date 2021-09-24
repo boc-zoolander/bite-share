@@ -36,7 +36,7 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
   });
 
   const currentItems = currentOrder.map((item, i) => {
-    return <span key={i}> {item.name} {item.qty}</span>;
+    return <li key={i}> {item.name} ({item.qty}) <button type='button' onClick={() => { deleteItem(item); }}> − </button> </li>;
   }) || null;
 
   const addItem = (item) => {
@@ -53,6 +53,29 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
     setCurrentOrder(order);
   };
 
+  const deleteItem = (item) => {
+    const order = [...currentOrder]
+    //loop over the oder
+    for (let i = 0; i < order.length; i++) {
+     //if the currernt order item === the item
+     if (order[i].name === item.name) {
+       //if the order item quanity === 1
+       if (order[i].qty === 1) {
+         //splice at i
+         order.splice(i, 1);
+         //otherwise
+        } else {
+           // order item quanity - 1
+           order[i].qty -= 1
+        }
+          //set the state again
+          setCurrentOrder(order);
+     }
+
+    }
+
+  };
+
   const submitOrder = () => {
     socket.emit('submitOrder', { id: guests[0].id, guestName: guests[0].guestName, order: currentOrder, sessionId: sessionId });
     setSubmitted(true);
@@ -63,8 +86,12 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
       ? <ThankYou />
       : <div>
       <h2>Current Items for {guests[0].guestName}</h2>
-        {currentItems}
-      <div className="menu-items">
+      <div className='user-order'>
+        <ul>
+         {currentItems}
+        </ul>
+      </div>
+      <div>
         {menuItems}
       </div>
       <button type='submit' onClick={submitOrder}> Submit final order </button>

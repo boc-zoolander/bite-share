@@ -61,7 +61,7 @@ class BillSummaryPage extends React.Component {
           <input type="number" id="tipPercentage" name="tipPercentage" defaultValue={this.state.tipPercentage} onChange={this.changeTipPercentage} data-testid="tip-percentage-input"/><br/>
         </form>
         <br/>
-        <Link to="/select-food" className="button-link">
+        <Link to="/host-menu" className="button-link">
           <button>Modify Order</button>
         </Link>
         {this.state.guests.length > 1
