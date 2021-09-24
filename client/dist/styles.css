@@ -109,6 +109,10 @@ summary {
   flex-wrap: wrap;
 }
 
+.menu-items {
+  margin-bottom: 3rem;
+}
+
 .menu-item__details > * {
   margin-bottom: 0;
 }

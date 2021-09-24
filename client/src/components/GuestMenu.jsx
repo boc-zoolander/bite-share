@@ -64,7 +64,7 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
       : <div>
       <h2>Current Items for {guests[0].guestName}</h2>
         {currentItems}
-      <div>
+      <div className="menu-items">
         {menuItems}
       </div>
       <button type='submit' onClick={submitOrder}> Submit final order </button>

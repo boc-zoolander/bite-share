@@ -94,7 +94,7 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
         <Dashboard guests={guests} sessionId={sessionId} setTopLevelState={setTopLevelState} />
       <h2>Current Items for {currentName}</h2>
         {currentItems}
-      <div>
+      <div className="menu-items">
         {menuItems}
       </div>
       <Link to="/split-bill" className="button-link">
