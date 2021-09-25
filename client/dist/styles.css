@@ -121,7 +121,7 @@ summary {
   font-weight: bold;
 }
 
-.menu-item__add {
+.menu-item__add, .menu-item__minus {
   font-size: 3rem;
   font-weight: bold;
 }
