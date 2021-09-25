@@ -1,7 +1,14 @@
 # bite-share
 
 ### Catchy headline / cool graphic
-### Who are the contributors (names should link to their github or portfolio page)
+### Contributors
+* Jorge Brake [Jorge's Github](https://github.com/jabrake)
+* Chris Floyd [Chris' Github](https://github.com/milofultz)
+* Milo Fultz [Milo's Github](https://github.com/pplexed)
+* Tom Ho [Tom's Github](https://github.com/TomHo521)
+* Sara Landis [Sara's Github](https://github.com/saralandis)
+* Ming Ma [Ming's Github](https://github.com/MingHacker)
+
 ### Introduction
 This was a month long project where our team completed an MVP full stack application for an external user (Jane Doe)
 
