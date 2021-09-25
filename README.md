@@ -1,7 +1,7 @@
 # bite-share
 ![GitHub Logo](https://drive.google.com/uc?export=view&id=1v3i0H4FXavDUyJsgGL-tfBST0Vqo2W6h)
 
-### Catchy headline / cool graphic
+### Bill Splitting Made Easy
 ### Contributors
 * Jorge Brake [Jorge's Github](https://github.com/jabrake)
 * Michael Duckworth [Mike's Github](https://github.com/dworthm)
@@ -12,14 +12,12 @@
 * Ming Ma [Ming's Github](https://github.com/MingHacker)
 
 ### Introduction
-This was a month long project where our team completed an MVP full stack application for an external user (Jane Doe)
+This was a month long student project where our team completed an MVP full stack application requested by a "client".
 
-Add any additional content here pertaining to the timeline, any personal goals, etc.
-What does the app do?
-* What problem does it solve? Who uses it?
-* Why was it built?
-* User Inputs and Outputs
-*
+Time to pay up. The meal has ended and the waiter/waitress asks "separate or together?" obviously hoping for the ladder. With Bite Share, the answer can confidently be "together" with no worried thoughts about the aftermath. No more tracking everyone down, pulling out calculators, or passing bills around to make proper change.
+
+Bite Share allows its users to select their favorite restaurant, invite their friends or colleagues to a meal session, have everyone enter their order, total the bill, add tip, calculate tax, split evenly or by item, and route to payment all in one app.
+
 ### Tech stack ( you can include logos)
 ### Technical Challenges and research that you anticipated
 * Why, what was the plan to overcome those challenges?
