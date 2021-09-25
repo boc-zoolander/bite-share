@@ -25,10 +25,8 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
   }, []);
 
   const onChange = (event) => {
-    setCurrentName(event.target.innerText);
+    setCurrentName(event.target.textContent);
     setCurrentId(Number(event.target.value));
-    console.log('Person ID type from onChange', typeof event.target.value);
-    console.log('Guest (props): ', guests);
     onCloseClick();
     event.preventDefault();
   };
@@ -96,7 +94,7 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
                 <p className="menu-item__name">{item.name}</p>
                 <p className="menu-item__price">${item.price}</p>
               </div>
-              <button type='button' className="menu-item__add" onClick={() => { addItem(item); }}> + </button>
+              <button type='button' className='menu-item__add' onClick={() => { addItem(item); }}> + </button>
             </li>
           );
         })}
@@ -106,7 +104,7 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
   });
 
   const currentObj = guests.find(element => element.id === currentId) || { order: [] };
-  const currentItems = currentObj.order.map((item, i) => <li key={i}> {item.name} ({item.qty}) <button type='button' onClick={() => { deleteItem(item); }}> − </button></li>);
+  const currentItems = currentObj.order.map((item, i) => <li key={i}> {item.name} ({item.qty}) <button type='button' className='menu-item__minus' onClick={() => { deleteItem(item); }}> − </button></li>);
   const guestNames = guests.map((item, i) => <button key={i} type='button' className='link' value={item.id} onClick={onChange}> {item.guestName} </button>);
 
   return (

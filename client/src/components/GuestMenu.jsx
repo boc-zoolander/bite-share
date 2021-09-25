@@ -26,7 +26,7 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
           return (
             <li key={j}>
               {item.name} ${item.price}
-              <button type='button' onClick={() => { addItem(item); }}> + </button>
+              <button type='button' className='menu-item__add' onClick={() => { addItem(item); }}> + </button>
             </li>
           );
         })}
@@ -36,7 +36,7 @@ const GuestMenu = ({ guests, menu, sessionId }) => {
   });
 
   const currentItems = currentOrder.map((item, i) => {
-    return <li key={i}> {item.name} ({item.qty}) <button type='button' onClick={() => { deleteItem(item); }}> − </button> </li>;
+    return <li key={i}> {item.name} ({item.qty}) <button type='button' className='menu-item__minus' onClick={() => { deleteItem(item); }}> − </button> </li>;
   }) || null;
 
   const addItem = (item) => {
