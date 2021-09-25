@@ -34,6 +34,9 @@ What does the app do?
 ### Technical Challenges and research that you anticipated
 * Why, what was the plan to overcome those challenges?
 * What did you learn?
+* Real time app notification
+  * Trying to find a technology that allowed for two-way interactive communication without the use of GET requests.
+  * I learned about socket.io. This allowed for real time app interactions between users without the need for refreshing a page. I learned that data, notifications, almost anything can be shared or initiated by using socket.io’s listening and emit features. Additionally, with the use of a rooms feature you can limit the audience by a unique room identifier.  
 ### Challenges that were unexpected
 * Why was it a challenge
 * What did you learn?
