@@ -9,6 +9,7 @@ const socket = io(url);
 
 const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
   const [currentName, setCurrentName] = useState('');
+  const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {
     socket.emit('joinRoom', { sessionId });
@@ -20,10 +21,14 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
 
   useEffect(() => {
     setCurrentName(guests[0].guestName);
+    setCurrentId(guests[0].id);
   }, []);
 
   const onChange = (event) => {
-    setCurrentName(event.target.value);
+    setCurrentName(event.target.innerText);
+    setCurrentId(Number(event.target.value));
+    console.log('Person ID type from onChange', typeof event.target.value);
+    console.log('Guest (props): ', guests);
     onCloseClick();
     event.preventDefault();
   };
@@ -42,7 +47,7 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
   const addItem = (item) => {
     const guestArray = [...guests];
     for (let i = 0; i < guestArray.length; i++) {
-      if (guestArray[i].guestName === currentName) {
+      if (guestArray[i].id === currentId) {
         const guestOrder = guestArray[i].order;
         for (let j = 0; j < guestOrder.length; j++) {
           if (guestOrder[j].name === item.name) {
@@ -62,7 +67,7 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
   const deleteItem = (item) => {
     const guestArray = [...guests]; // entire guest array (array of objs)
     for (let i = 0; i < guestArray.length; i++) {
-      if (guestArray[i].guestName === currentName) {
+      if (guestArray[i].id === currentId) {
         const guestOrder = guestArray[i].order; // order array for selected person
         for (let j = 0; j < guestOrder.length; j++) {
           if (guestOrder[j].name === item.name) {
@@ -100,9 +105,9 @@ const HostMenu = ({ guests, menu, setTopLevelState, sessionId }) => {
     );
   });
 
-  const currentObj = guests.find(element => element.guestName === currentName) || { order: [] };
+  const currentObj = guests.find(element => element.id === currentId) || { order: [] };
   const currentItems = currentObj.order.map((item, i) => <li key={i}> {item.name} ({item.qty}) <button type='button' onClick={() => { deleteItem(item); }}> − </button></li>);
-  const guestNames = guests.map((item, i) => <button key={i} type='button' className='link' value={item.guestName} onClick={onChange}> {item.guestName} </button>);
+  const guestNames = guests.map((item, i) => <button key={i} type='button' className='link' value={item.id} onClick={onChange}> {item.guestName} </button>);
 
   return (
     <div>
