@@ -4,6 +4,7 @@
 ### Catchy headline / cool graphic
 ### Contributors
 * Jorge Brake [Jorge's Github](https://github.com/jabrake)
+* Michael Duckworth [Mike's Github](https://github.com/dworthm)
 * Chris Floyd [Chris' Github](https://github.com/milofultz)
 * Milo Fultz [Milo's Github](https://github.com/pplexed)
 * Tom Ho [Tom's Github](https://github.com/TomHo521)
