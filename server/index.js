@@ -24,7 +24,12 @@ io.on('connection', socket => {
 
   socket.on('submitOrder', payload => {
     const room = payload.sessionId.toString();
-    // NEED TO UPDATE SOCKET HISTORY?
+    const guests = socketHistory[room]; // array of objects
+    for (let i = 0; i < guests.length; i++) {
+      if (guests[i].id === payload.id) {
+        guests[i].submitted = true;
+      }
+    }
     io.to(room).emit('orderSubmitted', payload);
   });
 
