@@ -21,6 +21,16 @@ What does the app do?
 * User Inputs and Outputs
 *
 ### Tech stack ( you can include logos)
+* React + React Router
+* Bootstrap, Normalize CSS + Skeleton CSS
+* JQuery
+* Axios
+* Express
+* PostgreSQL
+* Socket.io
+* Jest, React Testing Library + Enzyme
+* APIs: Documenu, Tax + and Paypal
+
 ### Technical Challenges and research that you anticipated
 * Why, what was the plan to overcome those challenges?
 * What did you learn?
