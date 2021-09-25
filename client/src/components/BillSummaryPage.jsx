@@ -57,7 +57,7 @@ class BillSummaryPage extends React.Component {
         <h1>Bite Share</h1>
         <h2>Final Bill Split {this.state.split}</h2>
         <SplitList guests={this.state.guests} totalCost={this.getBillTotalWithoutTipOrTax(this.state.guests)} tipPercentage = {this.state.tipPercentage} split={this.state.split} zipCode = {this.state.zipCode} setTopLevelState = {this.props.setTopLevelState} finalTotals= {this.props.finalTotals}/>
-        <form>
+        <form onSubmit = {(event) => event.preventDefault()}>
           <label htmlFor='tipPercentage'>Tip Percentage (%):</label>
           <input type="number" id="tipPercentage" name="tipPercentage" defaultValue={this.state.tipPercentage} onChange={this.changeTipPercentage} data-testid="tip-percentage-input"/><br/>
         </form>
