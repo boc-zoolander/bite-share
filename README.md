@@ -51,26 +51,26 @@ What does the app do?
 ### What research was required?
 
 ### Workflow and Key Lessons
-## Git Workflow
+#### Git Workflow
 * After creating the initial skeleton of the app, everyone pulled down the repo and completed their work in separate branches
 * Commit as often as possible, and make a pull request when the functionality being worked on works as expected locally
 * Request 2 code reviewers for every PR - after both approve, the branch should be merged with the main branch and deleted
 * When changes are requested, the person who made the pull request should make the changes, discuss with reviewer(s) and decide when the branch can be merged
 
-## Tests
+#### Tests
 * We primarily leveraged Jest + React Testing Library to test our application
 * Our goal was to follow a test-driven development approach, but we weren't always able to keep up a rigid workflow around that
 * We had some basic tests written which were tested with every push to the repo via CircleCI
 
-## Key Takeaways
+#### Key Takeaways
 * Getting more tests written early on: we sacrificed writing tests early to quickly develop an MVP to reach client goals
 * Establishing more clear guidelines around time expectations for code reviews
 * Improve our time estimates for tickets, and better managaement of tickets as they change status
 * Look into Github Actions for continuous integration to be used instead of CircleCI
 * Consistent and honest code reviews to keep our code clean and DRY (remove console.logs, comments, and make code as re-usable and readable as possible)
 
-## Project Board
-* View our tickets here
+#### Project Board
+* View our tickets [here](https://github.com/orgs/boc-zoolander/projects/1)
 
 ### Any non-MVP tickets (optional)
 ### Code refactorings
