@@ -54,13 +54,16 @@ const BillCard = (props) => (
 );
 
 const PayBill = (props) => {
-
-  const hostName = props.hostInfo.guestName;
-  console.log(hostName);
-  console.log(props.hostInfo);
-  const payeeEmail = props.hostInfo.email;
-  const billInfo = billInfoGenerator(props.finalTotals.paymentsOwed);
-  console.log(billInfo);
+  const hostInfo = props.guests[0];
+  const hostName = hostInfo.guestName;
+  const payeeEmail = hostInfo.email;
+  const paymentsList = {};
+  for (const key in props.finalTotals.paymentsOwed) {
+    let name = props.guests.find(item => item.id.toString() === key).guestName;
+    paymentsList[name] = props.finalTotals.paymentsOwed[key];
+  }
+  console.log(paymentsList);
+  const billInfo = billInfoGenerator(paymentsList);
   const [submit, setSubmit] = useState(false);
   const billInfoPay = billInfo.filter(info => info.name !== hostName);
 
