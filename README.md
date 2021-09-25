@@ -18,6 +18,8 @@ Time to pay up. The meal has ended and the waiter/waitress asks "separate or tog
 
 Bite Share allows its users to select their favorite restaurant, invite their friends or colleagues to a meal session, have everyone enter their order, total the bill, add tip, calculate tax, split evenly or by item, and route to payment all in one app.
 
+Enjoy the food. Enjoy the company. End the meal on a high note with Bite Share.
+
 ### Tech stack ( you can include logos)
 ### Technical Challenges and research that you anticipated
 * Why, what was the plan to overcome those challenges?
