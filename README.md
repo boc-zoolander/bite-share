@@ -1,5 +1,5 @@
 # bite-share
-![GitHub Logo](https://drive.google.com/uc?export=view&id=1F-RY6pCDP7dRZ9HtIqKrio-REMIcjD4O)
+![GitHub Logo](https://drive.google.com/uc?export=view&id=1v3i0H4FXavDUyJsgGL-tfBST0Vqo2W6h)
 
 ### Catchy headline / cool graphic
 ### Contributors
