@@ -22,8 +22,6 @@ Bite Share allows its users to select their favorite restaurant, invite their fr
 
 Enjoy the food. Enjoy the company. End the meal on a high note with Bite Share.
 
-Add any additional content here pertaining to the timeline, any personal goals, etc.
-
 ### Tech stack
 
 * React + React Router
@@ -42,14 +40,27 @@ Add any additional content here pertaining to the timeline, any personal goals, 
 * Why, what was the plan to overcome those challenges?
 * What did you learn?
 
+* Designing the database
+* Handling multiple users from multiple devices (socket.io)
+* Adding functionality for payments via Paypal
+* Testing asynchronous elements within the application
+
 ### Challenges that were unexpected
 
 * Why was it a challenge
 * What did you learn?
 
+* Setting a larger scale plan for the project and holding to it
+	* Starting (UI, architecture, assigning components)
+	* Development/Testing
+	* Deployment
+	* Meeting all deadlines
+* Dealing with package conflicts before realizing it was NVM
+* Handling server requests and using React Router on the same server
+
 ### Video Demo / Screen shot walkthrough of the app
 
-* What were the user stories /  what was MVP (mention Minimal Viable Product)
+* What were the user stories / what was MVP (mention Minimal Viable Product)
 
 ### How does the app work?
 
@@ -59,6 +70,10 @@ Add any additional content here pertaining to the timeline, any personal goals, 
 * How does the tech stack come together?
 
 ### What research was required?
+
+To get our testing framework together, a lot of research was needed to get Jest and React Testing Library to fully test functionality for asynchronous calls, full user interaction with the DOM, and with React Router. The most difficult of these was learning how to get the DOM interaction together, as the documentation for React Testing Library is not very thorough in the way their API is laid out. Lots of trial and error, trawling through Stack Overflow, and asking peers for help was needed to get our test suite to where it is now.
+
+* Socket.io
 
 ### Workflow and Key Lessons
 
@@ -87,7 +102,12 @@ Add any additional content here pertaining to the timeline, any personal goals, 
 
 * View our tickets [here](https://github.com/orgs/boc-zoolander/projects/1)
 
-### Any non-MVP tickets (optional)
+### Future Improvements
+
+* Users can have a friends list and can create sessions more easily by choosing from it.
+* Hosts can send payments directly to the restaurants.
+* Sessions can end and then rollover into another with the same host and guests.
+
 ### Code refactorings
 ### Performance Optimizations
 ### Additional features
