@@ -75,7 +75,7 @@ Enjoy the food. Enjoy the company. End the meal on a high note with Bite Share.
 
 	Another challenge was both deciding upon the exact contours of the API that front end would work with and to prepare both them and myself--what would be the "contract" between frontend and backend?
 
-	In the case of API design, initial routes were built based on dummy test data, prior to implementation and schema design.  At a second phase, basic routes were built up concerning addGuest, createNewSession, updateSession, etc.  These would serve to be the routes to be consumed by the front end.  To ensure clarity in how to use the API produced by backend, API documentation was written for the team to use.  As work progressed, any API changes could be therefore be relayed in a central location as needed.
+	In the case of API design, initial routes were built based on dummy test data, prior to implementation and schema design.  At a second phase, basic routes were built up concerning addGuest, createNewSession, updateSession, etc.  These would serve to be the routes to be consumed by the front end.  To ensure clarity in how to use the API produced by backend, API documentation was written for the team to use [here](https://docs.google.com/document/d/1uqIeurxrtRHw3tjLxye6Z5iTNQ_HdpIbb39qgyfjFJg/edit).  As work progressed, any API changes could be therefore be relayed in a central location as needed.  
 	
 	Finally in the third phase, all information any front end dev could use would be available in a single route: /getSession2 would in a single API call, provide all relevant data with respect to a given session, ensuring that front end would avoid any situation requiring multiple API calls.
 
