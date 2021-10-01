@@ -35,20 +35,9 @@ Enjoy the food. Enjoy the company. End the meal on a high note with Bite Share.
 * CircleCI
 * APIs: Documenu, Tax + and Paypal
 
-### Technical Challenges and research that you anticipated
 
-* Why, what was the plan to overcome those challenges?
-* What did you learn?
-
-* Designing the database
-* Handling multiple users from multiple devices (socket.io)
-* Adding functionality for payments via Paypal
-* Testing asynchronous elements within the application
 
 ### Challenges that were unexpected
-
-* Why was it a challenge
-* What did you learn?
 
 * Setting a larger scale plan for the project and holding to it
 	* Starting (UI, architecture, assigning components)
@@ -82,22 +71,11 @@ Enjoy the food. Enjoy the company. End the meal on a high note with Bite Share.
 	Although I understand that it was Hack Reactor's intention that each team member should "own" a particular page, including both the front end and back end, our particular team structure nevertheless produced its own set of challenges and learning experiences.  It pushed the team into a social contract between front end and backend, and led to an iterative design/implementation process which allowed robust progress even in the face of and separation of concerns between front and backend, and moving and as yet-to-be-determined design decisions. 
 
 
-### Video Demo / Screen shot walkthrough of the app
-
-* What were the user stories / what was MVP (mention Minimal Viable Product)
-
-### How does the app work?
-
-* What happens behind the scenes when the user interacts with it?
-* OR What are all the places the data travels?  What happens to that data?
-* Optionally include a diagram
-* How does the tech stack come together?
-
 ### What research was required?
 
 To get our testing framework together, a lot of research was needed to get Jest and React Testing Library to fully test functionality for asynchronous calls, full user interaction with the DOM, and with React Router. The most difficult of these was learning how to get the DOM interaction together, as the documentation for React Testing Library is not very thorough in the way their API is laid out. Lots of trial and error, trawling through Stack Overflow, and asking peers for help was needed to get our test suite to where it is now.
 
-* Socket.io
+* Socket.io - bi directional web technologies
 
 ### Workflow and Key Lessons
 
@@ -138,14 +116,8 @@ To get our testing framework together, a lot of research was needed to get Jest 
  
 * Refactored the database model to properly use environmental variables.
 
-### Performance Optimizations
-### Additional features
-####etc
-### Notes from your Sprint Retro
 ### What additional features do you plan to add, how do you plan to implement those features?
-* Future refactoring?
-* Additional dev ops considerations?
-* UI/UX additions?
+
 * Backend (Server and DB)
 	* Create Routes and populate tables in DB schema to allow for split-session rollovers
 	* Create Routes and populate tables to enable to storage of user chats
