@@ -57,6 +57,30 @@ Enjoy the food. Enjoy the company. End the meal on a high note with Bite Share.
 	* Meeting all deadlines
 * Dealing with package conflicts before realizing it was NVM
 * Handling server requests and using React Router on the same server
+* Backend unexpected challenges:
+
+	Backend entailed database design & deployment, API design and implementation, and API documentation.  
+
+	At the design and technical implementation level my task was extremely open-ended.  For example, in the early part of the work, it was not fully clear yet what the flow of the App would be, what data would be used by which team member, and how I could make life as simple as possible for them.  
+
+	This begged the question, how to build the design when the exact contours of what we were going to build was not fully fleshed out?  How to do this in a manner that could serve the needs of Front End that could make their lives as simple as possible, while being flexible and scalable to future changes to the front end flow?
+
+	In the schema design for example, there was no way to know for instance whether the team would eventually choose to implement the rolling session price.  However, for purposes of the backend, the MVP schema needed to be designed to accomodate a multi-session rollout, should that be the future design decision by front end.
+
+	To meet that challenge, I decided upon a core functionality of four major tables.  These would meet MVP.  Additional tables such as a multi-session table was built into the schema in the form of a BOC_Rollover session table, where the primary key of BOC_Sessions was a foreign key.  This functionality was deactivated for our MVP, and ready to be activated had front end moved in that direction.
+
+	Moreover, I found myself making design decisions on behalf of Front End.  This was not intentional on my part so much work on backend design would end up commiting frontend to design their work flow in a particular manner. 
+
+	For instance, there was initial ambiguity on "creating a session" vs "joining a session", "logging in a user" vs "registering a new user" in the front end flow.   However on the backend, the logical separation of those concepts into different tables, would affect front end to distingush between a user login from a user registration.  On this point, it was advantageous that Milo served as a point of contact as project manager because overarching UI flow decisions could be relayed to the rest of the team.
+
+	Another challenge was both deciding upon the exact contours of the API that front end would work with and to prepare both them and myself--what would be the "contract" between frontend and backend?
+
+	In the case of API design, initial routes were built based on dummy test data, prior to implementation and schema design.  At a second phase, basic routes were built up concerning addGuest, createNewSession, updateSession, etc.  These would serve to be the routes to be consumed by the front end.  To ensure clarity in how to use the API produced by backend, API documentation was written for the team to use [here](https://docs.google.com/document/d/1uqIeurxrtRHw3tjLxye6Z5iTNQ_HdpIbb39qgyfjFJg/edit).  As work progressed, any API changes could be therefore be relayed in a central location as needed.  
+	
+	Finally in the third phase, all information any front end dev could use would be available in a single route: /getSession2 would in a single API call, provide all relevant data with respect to a given session, ensuring that front end would avoid any situation requiring multiple API calls.
+
+	Although I understand that it was Hack Reactor's intention that each team member should "own" a particular page, including both the front end and back end, our particular team structure nevertheless produced its own set of challenges and learning experiences.  It pushed the team into a social contract between front end and backend, and led to an iterative design/implementation process which allowed robust progress even in the face of and separation of concerns between front and backend, and moving and as yet-to-be-determined design decisions. 
+
 
 ### Video Demo / Screen shot walkthrough of the app
 
@@ -109,6 +133,11 @@ To get our testing framework together, a lot of research was needed to get Jest 
 * Sessions can end and then rollover into another with the same host and guests.
 
 ### Code refactorings
+
+* Refactored SQL strings within the controller to use pg-format, a library which uses C language style delimeters in constructing SQL query strings to thwart SQL injection attacks.
+ 
+* Refactored the database model to properly use environmental variables.
+
 ### Performance Optimizations
 ### Additional features
 ####etc
@@ -117,3 +146,7 @@ To get our testing framework together, a lot of research was needed to get Jest 
 * Future refactoring?
 * Additional dev ops considerations?
 * UI/UX additions?
+* Backend (Server and DB)
+	* Create Routes and populate tables in DB schema to allow for split-session rollovers
+	* Create Routes and populate tables to enable to storage of user chats
+	* Optimize backend routes to store repeatedly called restaurant API route data in Redis
