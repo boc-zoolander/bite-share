@@ -13,7 +13,6 @@ import GuestList from '../client/src/components/GuestList.jsx';
 import GuestMenu from '../client/src/components/GuestMenu.jsx';
 import HostMenu from '../client/src/components/HostMenu.jsx';
 import PayBill from '../client/src/components/PayBill.jsx';
-import ThankYou from '../client/src/components/Thankyou.jsx';
 import testSessionData from '../server/user_db_routes/getSession.js';
 import mockRestaurantMenu from '../server/user_db_routes/testgetrestaurant_1.js';
 
