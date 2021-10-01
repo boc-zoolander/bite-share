@@ -12,7 +12,6 @@ import Dashboard from '../client/src/components/Dashboard.jsx';
 import GuestList from '../client/src/components/GuestList.jsx';
 import GuestMenu from '../client/src/components/GuestMenu.jsx';
 import HostMenu from '../client/src/components/HostMenu.jsx';
-import AddGuests from '../client/src/components/AddGuests.jsx';
 import PayBill from '../client/src/components/PayBill.jsx';
 import ThankYou from '../client/src/components/Thankyou.jsx';
 import testSessionData from '../server/user_db_routes/getSession.js';
